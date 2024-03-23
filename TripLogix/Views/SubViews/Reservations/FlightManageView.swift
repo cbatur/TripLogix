@@ -16,6 +16,7 @@ struct FlightManageView: View {
     @State private var airportType: AirportType = .departure
     
     @State private var showDatePicker: Bool = false
+    @State private var isClearCacheVerified: Bool = false
 
     init(destination: Destination) {
         _destination = Bindable(wrappedValue: destination)
@@ -155,20 +156,62 @@ struct FlightManageView: View {
             
             VStack {
                 HStack {
-                    Text("Recent Searches".uppercased())
-                        .font(.custom("Gilroy-Medium", size: 14))
-                        .foregroundColor(.gray)
-                    Spacer()
-                    Text("Clear")
-                        .font(.custom("Gilroy-Medium", size: 14))
-                        .foregroundColor(.accentColor)
-                        .onTapGesture {
-                            aviationEdgeViewmodel.clearCachedFlightSearches()
+                    if isClearCacheVerified {
+                        HStack {
+                            Button{
+                                aviationEdgeViewmodel.clearCachedFlightSearches()
+                                isClearCacheVerified = false
+                            } label: {
+                                Text("Clear Search History?".uppercased())
+                                    .font(.subheadline).bold()
+                                    .foregroundColor(.white)
+                                    .padding(6)
+                                    .padding(.leading, 5)
+                                    .padding(.trailing, 5)
+                                    .cardStyle(.red)
+                            }
+                            
+                            Button {
+                                isClearCacheVerified = false
+                            } label: {
+                                Image(systemName: "xmark.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 23, height: 23)
+                                    .foregroundColor(.gray)
+                            }
                         }
+                        .isHidden(aviationEdgeViewmodel.cachedFlights.count == 0)
+
+                    } else {
+                        
+                        Text("Recent Searches".uppercased())
+                            .font(.custom("Gilroy-Medium", size: 14))
+                            .foregroundColor(.gray)
+                        Spacer()
+                        
+                        Text("Clear")
+                            .font(.custom("Gilroy-Medium", size: 14))
+                            .foregroundColor(.accentColor)
+                            .onTapGesture {
+                                isClearCacheVerified = true
+                            }
+                            .isHidden(aviationEdgeViewmodel.cachedFlights.count == 0)
+                    }
                 }
+                
                 Divider()
 
                 VStack {
+                    HStack {
+                        Text("No recorded flight searches...")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                        
+                        Spacer()
+                    }
+                    .isHidden(!aviationEdgeViewmodel.cachedFlights.isEmpty)
+                    
                     ForEach(aviationEdgeViewmodel.cachedFlights) { f in
                         HStack {
                             VStack(alignment: .leading) {
