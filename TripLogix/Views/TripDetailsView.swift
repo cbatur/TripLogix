@@ -29,7 +29,7 @@ struct TripDetailsView: View {
                             showingImage = true // Animate to full size when appearing
                         }
                     }
-                    .onChange(of: chatAPIViewModel.imageData) { _ in
+                    .onChange(of: chatAPIViewModel.imageData) { _, _ in
                         // Reset the animation state when the image changes
                         //withAnimation(.easeOut(duration: 0.1)) {
                             showingImage = false

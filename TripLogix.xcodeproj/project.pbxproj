@@ -754,9 +754,9 @@
 		7E85E6FC2BAE985100432BA9 /* Reservations */ = {
 			isa = PBXGroup;
 			children = (
-				7E85E6F92BAE985100432BA9 /* FlightCardsView.swift */,
 				7E85E6FA2BAE985100432BA9 /* FlightManageView.swift */,
 				7E85E6FB2BAE985100432BA9 /* SelectFlightsResultsView.swift */,
+				7E85E6F92BAE985100432BA9 /* FlightCardsView.swift */,
 			);
 			path = Reservations;
 			sourceTree = "<group>";

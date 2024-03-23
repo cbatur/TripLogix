@@ -14,7 +14,8 @@ struct FlightManageView: View {
     @State private var departureCity: AEAirport.AECity?
     @State private var arrivalCity: AEAirport.AECity?
     @State private var airportType: AirportType = .departure
-    @State private var cachedFlights: [FlightChecklist] = []
+    
+    @State private var showDatePicker: Bool = false
 
     init(destination: Destination) {
         _destination = Bindable(wrappedValue: destination)
@@ -31,15 +32,43 @@ struct FlightManageView: View {
                 .padding()
                 .padding(.top, 10)
                 
-                  DatePicker(flightDate <= Date() ? "SELECT A FUTURE DATE ➔" : "FLIGHT DATE", selection: $flightDate, in: Date()..., displayedComponents: .date)
-                    .font(.custom("Satoshi-Bold", size: 15))
-                    .padding(.leading, 15)
-                    .foregroundColor(flightDate <= Date() ? .red : .gray)
-                    .background(Color.white)
-                    .cornerRadius(9)
-                
                 VStack {
                     VStack {
+                        VStack {
+                            if showDatePicker {
+                                DatePicker(flightDate <= Date() ? "SELECT A FUTURE DATE" : "✔", selection: $flightDate, in: Date()..., displayedComponents: .date)
+                                    .onChange(of: flightDate) { _, selectedDate in
+                                        self.showDatePicker = false
+                                        self.flightDate = selectedDate
+                                    }
+                                    .datePickerStyle(CompactDatePickerStyle())
+                                    .font(.custom("Satoshi-Bold", size: flightDate <= Date() ? 13 : 23))
+                                    .padding(.leading, 15)
+                                    .foregroundColor(flightDate <= Date() ? .red : .green)
+                                    .background(Color.white)
+                                    .cornerRadius(9)
+                                    .onAppear {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                            self.showDatePicker = true
+                                        }
+                                    }
+                                
+                            } else {
+                                
+                                Button(action: {
+                                    self.showDatePicker.toggle()
+                                }) {
+                                    DatePicker(flightDate <= Date() ? "SELECT A FUTURE DATE" : "", selection: $flightDate, in: Date()..., displayedComponents: .date)
+                                        .onAppear {
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                self.showDatePicker = true
+                                            }
+                                        }
+                                }
+                            }
+                        }
+                        
+                        Divider()
                         HStack {
                             Button {
                                 launchSearchAirport = true
@@ -55,7 +84,7 @@ struct FlightManageView: View {
                                     
                                     VStack {
                                         Text(departureStatus().0.uppercased())
-                                            .font(.custom("Gilroy-Bold", size: 18))
+                                            .font(.custom("Gilroy-Bold", size: 16))
                                             .foregroundColor(Color.black.opacity(0.7))
                                             .frame(maxWidth: .infinity, alignment: .leading)
                                     }
@@ -86,7 +115,7 @@ struct FlightManageView: View {
                                     
                                     VStack {
                                         Text(arrivalStatus().0.uppercased())
-                                            .font(.custom("Gilroy-Bold", size: 18))
+                                            .font(.custom("Gilroy-Bold", size: 16))
                                             .foregroundColor(Color.black.opacity(0.7))
                                             .frame(maxWidth: .infinity, alignment: .leading)
                                         
