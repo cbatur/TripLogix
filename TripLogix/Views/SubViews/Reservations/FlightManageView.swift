@@ -403,28 +403,6 @@ extension FlightManageView {
     private func dismiss() {
         presentationMode.wrappedValue.dismiss()
     }
-    
-    private func airportCodesHeader() -> String {
-        guard let d = departureCity, let a = arrivalCity else {
-            return ""
-        }
-        
-        return d.codeIataCity.uppercased() + " - " + a.codeIataCity.uppercased()
-    }
-    
-    func formatDateParameter(_ date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.string(from: date)
-    }
-
-}
-
-// User this function to format Dates
-public func formatDateDisplay(_ date: Date) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
-    return dateFormatter.string(from: date)
 }
 
 struct SearchAirportPopover: View {

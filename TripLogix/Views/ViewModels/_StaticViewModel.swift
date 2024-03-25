@@ -55,52 +55,10 @@ final class StaticViewModel: ObservableObject {
         .eraseToAnyPublisher()
     }
     
-//    private func fetchAutocomplete(_ query: String) -> AnyPublisher<[AirlineBasic], Error> {
-//        let urlString = "https://maps.domain.com/maps/api/place/autocomplete/json?inpu"
-//        
-//        guard let url = URL(string: urlString) else {
-//            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
-//        }
-//        
-//        return URLSession.shared.dataTaskPublisher(for: url)
-//            .map(\.data)
-//            .decode(type: [AirlineBasic].self, decoder: JSONDecoder())
-//            .map { response in
-//                response.map { $0 }
-//            }
-//            .receive(on: DispatchQueue.main)
-//            .eraseToAnyPublisher()
-//    }
-    
     func selectSuggestion(_ suggestion: String) {
         self.queryAirlines = suggestion
         self.airlines = []
     }
-    
-//    func searchLocalAirlines(_ keyword: String) -> AnyPublisher<[AirlineBasic], Error> {
-//        if let fileURL = Bundle.main.url(forResource: "AirlineCodes", withExtension: "json") {
-//            do {
-//                let data = try Data(contentsOf: fileURL)
-//                    .map(\.data)
-//                    .decode(type: [AirlineBasic].self, decoder: JSONDecoder())
-//                    .map { response in
-//                        response.map { $0 }
-//                    }
-//                    .receive(on: DispatchQueue.main)
-//                    .eraseToAnyPublisher()
-//                
-////                let airlines = try JSONDecoder().decode([AirlineBasic].self, from: data)
-////                self.airlines = Array(airlines.filter {
-////                    $0.airlineCode.contains(queryAirlines) || $0.name.contains(queryAirlines)
-////                }.prefix(20))
-//                
-//            } catch {
-//                print("Error reading or parsing AE_FlightStatus.JSON: \(error.localizedDescription)")
-//            }
-//        } else {
-//            print("JSON file not found.")
-//        }
-//    }
     
     func resetSearch() {
         self.queryAirlines = ""
