@@ -180,6 +180,7 @@
 		7E85E7DC2BAE985100432BA9 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7362BAE985100432BA9 /* Configuration.swift */; };
 		7E85E7DE2BAE98D100432BA9 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7E85E7DD2BAE98D100432BA9 /* CryptoSwift */; };
 		7E85E7E02BAE991000432BA9 /* AnimationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7DF2BAE991000432BA9 /* AnimationsView.swift */; };
+		7EA98D0B2BB149DE00AE39A9 /* ImageToFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -374,6 +375,7 @@
 		7E85E7342BAE985100432BA9 /* TripGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripGroup.swift; sourceTree = "<group>"; };
 		7E85E7362BAE985100432BA9 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		7E85E7DF2BAE991000432BA9 /* AnimationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationsView.swift; sourceTree = "<group>"; };
+		7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToFlightView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -752,6 +754,7 @@
 		7E85E6FC2BAE985100432BA9 /* Reservations */ = {
 			isa = PBXGroup;
 			children = (
+				7EA98D072BB1489700AE39A9 /* Add Flight By image */,
 				7E85E6FA2BAE985100432BA9 /* FlightManageView.swift */,
 				7E85E6FB2BAE985100432BA9 /* SelectFlightsResultsView.swift */,
 				7E5913302BAF99DD00529823 /* FlightListView.swift */,
@@ -878,6 +881,14 @@
 				7E85E7362BAE985100432BA9 /* Configuration.swift */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		7EA98D072BB1489700AE39A9 /* Add Flight By image */ = {
+			isa = PBXGroup;
+			children = (
+				7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */,
+			);
+			path = "Add Flight By image";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1123,6 +1134,7 @@
 				7E85E7BC2BAE985100432BA9 /* _AviationEdgeViewModel.swift in Sources */,
 				7E85E7A32BAE985100432BA9 /* String+DateUtilities.swift in Sources */,
 				7E85E7392BAE985100432BA9 /* AE+Autocomplete.swift in Sources */,
+				7EA98D0B2BB149DE00AE39A9 /* ImageToFlightView.swift in Sources */,
 				7E85E7AB2BAE985100432BA9 /* AddDestinationButton.swift in Sources */,
 				7E85E7AF2BAE985100432BA9 /* LoadingItineraryView.swift in Sources */,
 				7E85E7382BAE985100432BA9 /* ColorKit.swift in Sources */,

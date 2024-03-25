@@ -17,7 +17,7 @@ struct FlightManageView: View {
     
     @State private var showDatePicker: Bool = false
     @State private var isClearCacheVerified: Bool = false
-
+    
     init(destination: Destination) {
         _destination = Bindable(wrappedValue: destination)
     }

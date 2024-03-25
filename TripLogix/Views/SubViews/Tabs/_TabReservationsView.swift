@@ -1,5 +1,6 @@
 
 import SwiftUI
+import Popovers
 
 struct _TabReservationsView: View {
     @Bindable var destination: Destination
@@ -7,6 +8,8 @@ struct _TabReservationsView: View {
     @State private var flightManageViewDisplay = false
     @State private var deleteFlight = false
     @State private var flightToDelete: DSelectedFlight?
+    @State var flightTypesButtonDisabled = true
+    @State var launchImageToFlightView = false
 
     init(destination: Destination) {
         _destination = Bindable(wrappedValue: destination)
@@ -69,15 +72,26 @@ struct _TabReservationsView: View {
                             }
     
                             HStack {
-                                Button {
-                                    flightManageViewDisplay = true
-                                } label: {
-                                    Text("FLIGHTS")
-                                        .font(.custom("Satoshi-Bold", size: 15))
-                                        .padding(10)
-                                        .foregroundColor(.white)
-                                        .cornerRadius(5)
-                                        .cardStyle(.black.opacity(0.5))
+                                Templates.Menu {
+                                    Templates.MenuButton(title: "Add Manually", systemImage: "rectangle.and.text.magnifyingglass") {
+                                        flightManageViewDisplay = true
+                                    }
+                                    Templates.MenuButton(title: "Add From Image", systemImage: "photo") {
+                                        launchImageToFlightView = true
+                                    }
+                                    Templates.MenuButton(title: "Email Reservation", systemImage: "at") { }
+                                    .disabled(flightTypesButtonDisabled)
+                                    
+                                } label: { fade in
+                                    VStack {
+                                        Text("FLIGHTS")
+                                            .font(.custom("Satoshi-Bold", size: 15))
+                                            .padding(10)
+                                            .foregroundColor(.white)
+                                            .cornerRadius(5)
+                                            .cardStyle(.black.opacity(0.5))
+                                    }
+                                    .opacity(fade ? 0.5 : 1)
                                 }
                                 
                                 Button {
@@ -114,6 +128,9 @@ struct _TabReservationsView: View {
         }
         .sheet(isPresented: $flightManageViewDisplay) {
             FlightManageView(destination: destination)
+        }
+        .sheet(isPresented: $launchImageToFlightView) {
+            ImageToFlightView()
         }
         .onChange(of: self.flightToDelete) { _, flight in
             guard let _ = flight else { return }
