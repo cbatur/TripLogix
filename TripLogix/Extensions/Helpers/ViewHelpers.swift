@@ -82,3 +82,44 @@ struct NavigationBarColor: ViewModifier {
             .foregroundColor(.white)
     }
 }
+
+struct CustomActionSheetModifier<SheetContent: View>: ViewModifier {
+    @Binding var isPresented: Bool
+    let sheetContent: () -> SheetContent
+
+    func body(content: Content) -> some View {
+        ZStack {
+            content // This is the content that we're applying the modifier to
+
+            if isPresented {
+                // The semi-transparent background that dims the rest of the screen
+                Color.black.opacity(0.4)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        withAnimation {
+                            isPresented = false
+                        }
+                    }
+
+                // Your custom action sheet content
+                sheetContent()
+                    .transition(.move(edge: .bottom))
+                    .frame(maxWidth: 300, maxHeight: 200)
+                    .background(Color.white)
+                    .cornerRadius(20)
+                    .shadow(radius: 20)
+                    .padding()
+            }
+        }
+        .animation(.default, value: isPresented)
+    }
+}
+
+extension View {
+    func customActionSheet<SheetContent: View>(
+        isPresented: Binding<Bool>,
+        @ViewBuilder sheetContent: @escaping () -> SheetContent
+    ) -> some View {
+        self.modifier(CustomActionSheetModifier(isPresented: isPresented, sheetContent: sheetContent))
+    }
+}

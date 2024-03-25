@@ -7,13 +7,16 @@ struct SelectFlightResultsView: View {
     @State private var futureFlightsParams: AEFutureFlightParams
     @State private var flightCheckList: FlightChecklist
     @State private var isRotating = false
+    var actionPassFlight: (SelectedFlight) -> Void
 
     init(
         flightCheckList: FlightChecklist,
-        futureFlightsParams: AEFutureFlightParams
+        futureFlightsParams: AEFutureFlightParams,
+        actionPassFlight: @escaping (SelectedFlight) -> Void
     ) {
         self.flightCheckList = flightCheckList
         self.futureFlightsParams = futureFlightsParams
+        self.actionPassFlight = actionPassFlight
     }
     
     var body: some View {
@@ -55,14 +58,14 @@ struct SelectFlightResultsView: View {
                             self.isRotating = true
                         }
                     
-                } else if aviationEdgeViewmodel.travelData.items.isEmpty {
+                } else if aviationEdgeViewmodel.futureFlights.isEmpty {
                     
                     VStack {
                         Image("empty_screen_airport")
                             .resizable()
                             .scaledToFit()
                             .background(Color.clear)
-                        Text("No flights found for \n\(aviationEdgeViewmodel.travelData.title)")
+                        Text("No flights found for \n\(formatDateDisplay(flightCheckList.flightDate ?? Date()))")
                             .font(.custom("Gilroy-Medium", size: 25))
                             .foregroundColor(Color.wbPinkMediumAlt)
                     }
@@ -71,7 +74,11 @@ struct SelectFlightResultsView: View {
                     .frame(alignment: .center)
                     
                 } else {
-                    ReservationsView(aviationEdgeViewmodel.travelData)
+                    FlightListView(
+                        futureFlights: aviationEdgeViewmodel.futureFlights,
+                        actionPassFlight: passSelectedFlight,
+                        flightDate: flightCheckList.flightDate ?? Date()
+                    )
                 }
             }
             
@@ -86,6 +93,11 @@ struct SelectFlightResultsView: View {
 
 // SelectFlightResultsView Methods
 extension SelectFlightResultsView {
+    
+    func passSelectedFlight(_ selectedFlight: SelectedFlight) {
+        actionPassFlight(selectedFlight)
+        dismiss()
+    }
     
     func searchFutureFlights() {
         self.aviationEdgeViewmodel.resetSearchFlights()

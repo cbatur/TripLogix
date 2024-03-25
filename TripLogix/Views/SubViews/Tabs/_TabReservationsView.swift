@@ -12,9 +12,19 @@ struct _TabReservationsView: View {
     
     var body: some View {
         VStack {
-            Text("Reservations")
-                .cardStyle(.gray)
-            //ReservationsView()
+            Form {
+                ForEach(destination.flights, id: \.self) { f in
+                    Section(header: Text("\(formatDateDisplay(f.date))")) {
+                        D_FlightResultCard(f)
+                    }
+                }
+            }
+            .background(Color.gray.edgesIgnoringSafeArea(.all))
+            .clipShape(RoundedRectangle(cornerRadius: 13))
+            .frame(maxWidth: .infinity)
+            .isHidden(destination.flights.count == 0)
+            
+            Spacer()
             
             VStack {
                 VStack {
@@ -58,19 +68,8 @@ struct _TabReservationsView: View {
                                         .foregroundColor(.wbPinkMedium)
                                         .cornerRadius(5)
                                 }
-                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 40, alignment: .center)
+                                .frame(maxWidth: .infinity)
     
-                                Button {
-                                    //self.launchAllEvents = true
-                                } label: {
-                                    Text("PERSONALIZE")
-                                        .font(.custom("Satoshi-Bold", size: 15))
-                                        .padding(7)
-                                        .background(.white)
-                                        .foregroundColor(.wbPinkMedium)
-                                        .cornerRadius(5)
-                                }
-                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 40, alignment: .center)
                             }
                         }
                         .animation(.easeInOut(duration: 0.3), value: displayBottomToolbar)

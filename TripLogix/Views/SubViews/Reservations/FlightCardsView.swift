@@ -77,6 +77,6 @@ struct AirportCardBasic: View {
         }
         .padding()
         .cardStyle(.white)
-        //.frame(maxWidth: .infinity)
     }
 }
+

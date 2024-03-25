@@ -4,7 +4,7 @@ import Combine
 final class AviationEdgeViewmodel: ObservableObject {
 
     @Published var loading: Bool = false
-    @Published var travelData = TravelSection(title: "", items: [])
+    @Published var futureFlights = [AEFutureFlight]()
     @Published var searchPerformed = false
     @Published var cachedFlights = [FlightChecklist]()
 
@@ -70,39 +70,19 @@ final class AviationEdgeViewmodel: ObservableObject {
         _ flights: [AEFutureFlight],
         flightChecklist: FlightChecklist
     ) {
+        self.futureFlights = flights
         if flights.count > 0 {
             setFlightChecklist(flightChecklist)
         }
-        
-        var travelItems = [TravelItem]()
-        for f in flights {
-            
-            let formattedAirlineName = f.airline.name.capitalizedFirstLetter()
-            let subtitle = "\(f.airline.iataCode.uppercased()) \(f.flight.number) (\(f.airline.icaoCode.uppercased()) ➔ \(formattedAirlineName))"
-            
-            travelItems.append(
-                TravelItem(
-                    iconName: "airplane.departure",
-                    title: "\(f.departure.iataCode) ➔ \(f.arrival.iataCode)",
-                    subtitle: subtitle,
-                    scheduledTime: f.arrival.scheduledTime
-                )
-            )
-        }
-        
-        self.travelData = TravelSection(
-            title: "\(formatDateDisplay(flightChecklist.flightDate ?? Date()))",
-            items: travelItems
-        )
     }
     
     func resetSearchFlights() {
-        self.travelData = TravelSection(title: "", items: [])
+        futureFlights = []
     }
     
     func deActivateSearch() {
         searchPerformed = false
-        self.travelData = TravelSection(title: "", items: [])
+        futureFlights = []
     }
     
     func clearCachedFlightSearches() {

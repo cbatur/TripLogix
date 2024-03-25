@@ -249,7 +249,11 @@ struct FlightManageView: View {
                 date: formatDateParameter(flightDate)
             )
             
-            SelectFlightResultsView(flightCheckList: flightCheckList(), futureFlightsParams: futureFlightsParams)
+            SelectFlightResultsView(
+                flightCheckList: flightCheckList(),
+                futureFlightsParams: futureFlightsParams,
+                actionPassFlight: passSelectedFlight
+            )
         }
         .popover(
             present: $launchSearchAirport,
@@ -283,6 +287,64 @@ struct FlightManageView: View {
 }
 
 extension FlightManageView {
+    
+    func convertFlights(_ s: SelectedFlight) {
+        
+        let dDeparture = DAirportDetail(
+            iataCode: s.flight.departure.iataCode,
+            icaoCode: s.flight.departure.icaoCode,
+            terminal: s.flight.departure.terminal,
+            gate: s.flight.departure.gate,
+            scheduledTime: s.flight.departure.scheduledTime
+        )
+        
+        let dArrival = DAirportDetail(
+            iataCode: s.flight.arrival.iataCode,
+            icaoCode: s.flight.arrival.icaoCode,
+            terminal: s.flight.arrival.terminal,
+            gate: s.flight.arrival.gate,
+            scheduledTime: s.flight.arrival.scheduledTime
+        )
+        
+        let dAircraft = DAircraft(
+            modelCode: s.flight.aircraft.modelCode,
+            modelText: s.flight.aircraft.modelText
+        )
+        
+        let dAirline = DAirline(
+            name: s.flight.airline.name,
+            iataCode: s.flight.airline.iataCode,
+            icaoCode: s.flight.airline.icaoCode
+        )
+        
+        let dFlight = DFlight(
+            number: s.flight.flight.number,
+            iataNumber: s.flight.flight.iataNumber,
+            icaoNumber: s.flight.flight.icaoNumber
+        )
+        
+        let dFutureFlight = DFutureFlight(
+            weekday: s.flight.weekday,
+            departure: dDeparture,
+            arrival: dArrival,
+            aircraft: dAircraft,
+            airline: dAirline,
+            flight: dFlight
+        )
+        
+        let dSelectedFlight = DSelectedFlight(
+            date: Date(),
+            flight: dFutureFlight
+        )
+        
+        destination.flights.append(dSelectedFlight)
+        print("[Debug] \(dSelectedFlight)")
+        dismiss()
+    }
+    
+    func passSelectedFlight(_ selectedFlight: SelectedFlight) {
+        convertFlights(selectedFlight)
+    }
     
     func setChecklist(_ f: FlightChecklist) {
         self.departureCity = f.departureCity
@@ -359,6 +421,7 @@ extension FlightManageView {
 
 }
 
+// User this function to format Dates
 public func formatDateDisplay(_ date: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
@@ -456,4 +519,9 @@ struct SearchAirportPopover: View {
             }
         }
     }
+}
+
+struct SelectedFlight {
+    var date: Date = Date()
+    let flight: AEFutureFlight
 }

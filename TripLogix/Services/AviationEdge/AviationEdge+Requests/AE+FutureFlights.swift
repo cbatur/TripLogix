@@ -1,7 +1,8 @@
 
 import Foundation
 
-struct AEFutureFlight: Codable {
+struct AEFutureFlight: Codable, Hashable, Identifiable, Equatable {
+    let id = UUID()
     var weekday: String
     var departure: AirportDetail
     var arrival: AirportDetail
@@ -9,24 +10,24 @@ struct AEFutureFlight: Codable {
     var airline: Airline
     var flight: Flight
     
-    struct Flight: Codable {
+    struct Flight: Codable, Hashable {
         var number: String
         var iataNumber: String
         var icaoNumber: String
     }
 
-    struct Airline: Codable {
+    struct Airline: Codable, Hashable {
         var name: String
         var iataCode: String
         var icaoCode: String
     }
 
-    struct Aircraft: Codable {
+    struct Aircraft: Codable, Hashable {
         var modelCode: String
         var modelText: String
     }
 
-    struct AirportDetail: Codable {
+    struct AirportDetail: Codable, Hashable {
         var iataCode: String
         var icaoCode: String
         var terminal: String

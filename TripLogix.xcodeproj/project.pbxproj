@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E5913312BAF99DD00529823 /* FlightListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5913302BAF99DD00529823 /* FlightListView.swift */; };
 		7E85E4292BAE8CE700432BA9 /* TripLogixApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E4282BAE8CE700432BA9 /* TripLogixApp.swift */; };
 		7E85E42D2BAE8CE800432BA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E85E42C2BAE8CE800432BA9 /* Assets.xcassets */; };
 		7E85E4302BAE8CE800432BA9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E85E42F2BAE8CE800432BA9 /* Preview Assets.xcassets */; };
@@ -159,7 +160,6 @@
 		7E85E7C62BAE985100432BA9 /* DailyPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E71D2BAE985100432BA9 /* DailyPlanView.swift */; };
 		7E85E7C72BAE985100432BA9 /* DestinationListingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E71E2BAE985100432BA9 /* DestinationListingView.swift */; };
 		7E85E7C82BAE985100432BA9 /* NavigationToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E71F2BAE985100432BA9 /* NavigationToolbar.swift */; };
-		7E85E7C92BAE985100432BA9 /* ReservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7202BAE985100432BA9 /* ReservationsView.swift */; };
 		7E85E7CA2BAE985100432BA9 /* SearchDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7212BAE985100432BA9 /* SearchDestinationView.swift */; };
 		7E85E7CB2BAE985100432BA9 /* TripDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7222BAE985100432BA9 /* TripDetailsView.swift */; };
 		7E85E7CC2BAE985100432BA9 /* TripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7232BAE985100432BA9 /* TripsView.swift */; };
@@ -202,6 +202,7 @@
 
 /* Begin PBXFileReference section */
 		7E59132F2BAEA44700529823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7E5913302BAF99DD00529823 /* FlightListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightListView.swift; sourceTree = "<group>"; };
 		7E85E4252BAE8CE700432BA9 /* TripLogix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TripLogix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E85E4282BAE8CE700432BA9 /* TripLogixApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripLogixApp.swift; sourceTree = "<group>"; };
 		7E85E42C2BAE8CE800432BA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -355,7 +356,6 @@
 		7E85E71D2BAE985100432BA9 /* DailyPlanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyPlanView.swift; sourceTree = "<group>"; };
 		7E85E71E2BAE985100432BA9 /* DestinationListingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationListingView.swift; sourceTree = "<group>"; };
 		7E85E71F2BAE985100432BA9 /* NavigationToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationToolbar.swift; sourceTree = "<group>"; };
-		7E85E7202BAE985100432BA9 /* ReservationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationsView.swift; sourceTree = "<group>"; };
 		7E85E7212BAE985100432BA9 /* SearchDestinationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDestinationView.swift; sourceTree = "<group>"; };
 		7E85E7222BAE985100432BA9 /* TripDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripDetailsView.swift; sourceTree = "<group>"; };
 		7E85E7232BAE985100432BA9 /* TripsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripsView.swift; sourceTree = "<group>"; };
@@ -756,6 +756,7 @@
 			children = (
 				7E85E6FA2BAE985100432BA9 /* FlightManageView.swift */,
 				7E85E6FB2BAE985100432BA9 /* SelectFlightsResultsView.swift */,
+				7E5913302BAF99DD00529823 /* FlightListView.swift */,
 				7E85E6F92BAE985100432BA9 /* FlightCardsView.swift */,
 			);
 			path = Reservations;
@@ -780,9 +781,9 @@
 		7E85E70B2BAE985100432BA9 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				7E85E7072BAE985100432BA9 /* _TabItineraryView.swift */,
 				7E85E7082BAE985100432BA9 /* _TabOverviewView.swift */,
 				7E85E7092BAE985100432BA9 /* _TabReservationsView.swift */,
+				7E85E7072BAE985100432BA9 /* _TabItineraryView.swift */,
 				7E85E70A2BAE985100432BA9 /* _TabTripSettings.swift */,
 			);
 			path = Tabs;
@@ -838,7 +839,6 @@
 				7E85E71D2BAE985100432BA9 /* DailyPlanView.swift */,
 				7E85E71E2BAE985100432BA9 /* DestinationListingView.swift */,
 				7E85E71F2BAE985100432BA9 /* NavigationToolbar.swift */,
-				7E85E7202BAE985100432BA9 /* ReservationsView.swift */,
 				7E85E7212BAE985100432BA9 /* SearchDestinationView.swift */,
 				7E85E7222BAE985100432BA9 /* TripDetailsView.swift */,
 				7E85E7232BAE985100432BA9 /* TripsView.swift */,
@@ -1117,6 +1117,7 @@
 			files = (
 				7E85E7C12BAE985100432BA9 /* _PlacesViewModel.swift in Sources */,
 				7E85E7D42BAE985100432BA9 /* GPTResponseModels.swift in Sources */,
+				7E5913312BAF99DD00529823 /* FlightListView.swift in Sources */,
 				7E85E79D2BAE985100432BA9 /* CryptoSwift.swift in Sources */,
 				7E85E7D62BAE985100432BA9 /* ActivityIndicatorMessage.swift in Sources */,
 				7E85E7A92BAE985100432BA9 /* FlightManageView.swift in Sources */,
@@ -1145,7 +1146,6 @@
 				7E85E7CA2BAE985100432BA9 /* SearchDestinationView.swift in Sources */,
 				7E85E7B52BAE985100432BA9 /* _TabOverviewView.swift in Sources */,
 				7E85E7AC2BAE985100432BA9 /* BannerWithDismiss.swift in Sources */,
-				7E85E7C92BAE985100432BA9 /* ReservationsView.swift in Sources */,
 				7E85E73B2BAE985100432BA9 /* AE+FutureFlights.swift in Sources */,
 				7E85E7D22BAE985100432BA9 /* ChatGPTResponse.swift in Sources */,
 				7E85E7CC2BAE985100432BA9 /* TripsView.swift in Sources */,
