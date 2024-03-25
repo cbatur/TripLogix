@@ -11,7 +11,7 @@ struct FlightListView: View {
     var body: some View {
         VStack {
             List {
-                Section(header: Text("\(futureFlights.count)")) {
+                Section(header: Text("\(formatDateDisplay(flightDate))")) {
                     ForEach(futureFlights, id: \.self) { item in
                         FlightResultCard(item)
                         .onTapGesture {
@@ -42,6 +42,7 @@ struct FlightListView: View {
                         
                         Button {
                             showingCustomActionSheet = false
+                            self.selectedFlight = nil
                         } label: {
                             Image(systemName: "xmark.circle")
                                 .resizable()

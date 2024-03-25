@@ -15,7 +15,7 @@ final class AviationEdgeViewmodel: ObservableObject {
         _ futureFlightParams: AEFutureFlightParams,
         flightChecklist: FlightChecklist
     ) {
-        let filterAirportCode = flightChecklist.arrivalCity?.codeIataCity ?? ""
+        let filterAirportCode = flightChecklist.arrivalCity?.codeIataAirport ?? ""
         searchPerformed = true
         loading = true
         self.cancellable = self.apiService.futureFlights(futureFlightParams: futureFlightParams)
@@ -23,7 +23,7 @@ final class AviationEdgeViewmodel: ObservableObject {
         .sink(receiveCompletion: { _ in }, receiveValue: {
             self.loading = false
             self.migrateFutureFlights($0.filter({ flight in
-                flight.arrival.iataCode == filterAirportCode.lowercased() &&
+                flight.arrival.iataCode.lowercased() == filterAirportCode.lowercased() &&
                 !flight.airline.name.isEmpty
             }), flightChecklist: flightChecklist)
         })

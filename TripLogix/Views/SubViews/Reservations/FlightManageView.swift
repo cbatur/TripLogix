@@ -333,12 +333,11 @@ extension FlightManageView {
         )
         
         let dSelectedFlight = DSelectedFlight(
-            date: Date(),
+            date: s.date,
             flight: dFutureFlight
         )
         
         destination.flights.append(dSelectedFlight)
-        print("[Debug] \(dSelectedFlight)")
         dismiss()
     }
     
