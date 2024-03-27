@@ -5,7 +5,8 @@ enum QCategory {
     case getDailyPlan(city: String, dateRange: String)
     case getVenueDetails(location: String)
     case getAllEvents(city: String, dateRange: String)
-    
+    case textFromImageUrl(imageUrl: String)
+
     var title: String {
         switch self {
         case .getDailyPlan(let city, let dateRange):
@@ -14,6 +15,8 @@ enum QCategory {
             return "Venue Infiormation \(location)"
         case .getAllEvents(let city, let dateRange):
             return "All events for \(city) between \(dateRange)"
+        case .textFromImageUrl(let imageUrl):
+            return "Flight info from \(imageUrl)"
         }
     }
     
@@ -25,6 +28,8 @@ enum QCategory {
             return "\(location) " + venueInformationExtension
         case .getAllEvents(let city, let dateRange):
             return "Generate a list of events to do in \(city), for dates \(dateRange)" + allEvents
+        case .textFromImageUrl(let imageUrl):
+            return "\(imageUrl) " + createFlightParametersFromImage
         }
     }
     
@@ -55,3 +60,5 @@ public let allEvents = " group them by category such as art, nature, sports, din
 public let dailyPlanExtension = "return in an array of json object of title with key named 'title', and a key named 'date' with the date of the particular day with format 'yyyy-MM-dd', and a key named index for the order as Integer, and a key named 'activities' as [Activity], where Activity has a key named title for title and a key named index for the order as Integer and categories as category of activity as a string array such as, restaurant, sports, checkin, checkout, drive, train, bus, art, nature, museum, nightlife etc"
 
 public let venueInformationExtension = "return as a json object of keys venueName and venueDescription as string, also city, country as Strings and locationName in a format to be searched for geolocation."
+
+public let createFlightParametersFromImage = "analyze this image and return "

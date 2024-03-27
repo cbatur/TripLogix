@@ -27,7 +27,8 @@ final class PlacesViewModel: ObservableObject {
             longitudeDelta: 0.1)
     )
     
-    private var apiService = APIService()
+    private var apiService = TLAPIService()
+    private var openAIAPIService = OpenAIAPIService()
     private var cancellable: AnyCancellable?
     private var alertMessage: String?
     @Published var billboardRandomLocation: String?
@@ -129,7 +130,7 @@ final class PlacesViewModel: ObservableObject {
     
     func fetchRandomLocationPhoto(keyword: String) {
         self.randomLocationCity = nil
-        self.cancellable = self.apiService.openAPIGenerateImage(keyword: keyword)
+        self.cancellable = self.openAIAPIService.openAPIGenerateImage(keyword: keyword)
         .catch {_ in Just(ChatGPTImageResponse(created: 0, data: [])) }
         .sink(receiveCompletion: { _ in }, receiveValue: {
             self.randomLocationCity = keyword

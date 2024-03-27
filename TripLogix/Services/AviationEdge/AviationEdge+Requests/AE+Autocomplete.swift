@@ -3,6 +3,7 @@ import Foundation
 
 extension AERequests {
     struct Autocomplete {
+        
         var city: String
         
         var request: URLRequest {

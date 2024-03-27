@@ -6,13 +6,14 @@ final class ChatAPIViewModel: ObservableObject {
     
     @Published var allEvents: [EventCategory] = []
     @Published var itineraries: [DayItinerary] = []
+    @Published var textFromImage: String = ""
     @Published var venueInfo: VenueInfo?
     @Published var backgroundLocationImageUrl: String?
     @Published var randomLocationCity: String?
     @Published var imageData: Data = (UIImage(named: "destination_placeholder")?.pngData() ?? Data())
     @Published var imageDataSet: [Data] = []
 
-    private var apiService = APIService()
+    private var apiService = OpenAIAPIService()
     private var cancellable: AnyCancellable?
     @Published var loadingMessage: String? = nil
     @Published var loadingIconMessage: String? = nil
@@ -42,7 +43,34 @@ final class ChatAPIViewModel: ObservableObject {
             
         case .getVenueDetails(let location):
             self.executeVenueService(qType: qType, location: location)
+        case .textFromImageUrl(let imageUrl):
+            self.getFlightParametersFromImage(imageUrl)
         }
+    }
+    
+    func getFlightParametersFromImage(_ imageUrl: String) {
+        
+        self.loadingMessage = self.activityMessage.content
+        self.cancellable = self.apiService.openAPICommand4(qType: QCategory.textFromImageUrl(imageUrl: imageUrl))
+            .catch {_ in Just(ChatGPTResponse(id: "0", choices: [])) }
+            .sink(receiveCompletion: { _ in }, receiveValue: {
+                guard let questionSet = $0.choices.first?.message.content else { return }
+                self.textFromImage = questionSet
+                if let jsonData = questionSet.data(using: .utf8) {
+                    do {
+                        let items = try JSONDecoder().decode(String.self, from: jsonData)
+                        
+                        self.textFromImage = items
+                        
+                        self.loadingMessage = nil
+                        
+                    } catch {
+                        self.getChatGPTContent(qType: QCategory.textFromImageUrl(imageUrl: imageUrl))
+                    }
+                }
+            })
+        
+        
     }
     
     func executeMockVenueService() {
@@ -67,7 +95,7 @@ final class ChatAPIViewModel: ObservableObject {
         city: String
     ) {
         self.loadingMessage = self.activityMessage.content
-        self.cancellable = self.apiService.openAPIGetDailyPlan(qType: qType)
+        self.cancellable = self.apiService.openAPICommand(qType: qType)
             .catch {_ in Just(ChatGPTResponse(id: "0", choices: [])) }
             .sink(receiveCompletion: { _ in }, receiveValue: {
                 guard let questionSet = $0.choices.first?.message.content else { return }
@@ -101,7 +129,7 @@ final class ChatAPIViewModel: ObservableObject {
         location: String
     ) {
         self.loadingMessage = self.activityMessage.content
-        self.cancellable = self.apiService.openAPIGetDailyPlan(qType: qType)
+        self.cancellable = self.apiService.openAPICommand(qType: qType)
             .catch {_ in Just(ChatGPTResponse(id: "0", choices: [])) }
             .sink(receiveCompletion: { _ in }, receiveValue: {
                 guard let questionSet = $0.choices.first?.message.content else { return }
@@ -114,7 +142,6 @@ final class ChatAPIViewModel: ObservableObject {
                         self.venueInfo = item
                         self.loadingMessage = nil
                     } catch {
-                        //self.getDailyitinerary(qType: qType)
                         print("Error deserializing JSON: \(error)")
                     }
                 }
