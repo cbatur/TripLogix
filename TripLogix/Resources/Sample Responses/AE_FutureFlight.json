@@ -1,0 +1,45 @@
+[
+  {
+    "weekday": "3",
+    "departure": {
+      "iataCode": "yyz",
+      "icaoCode": "cyyz",
+      "terminal": "1",
+      "gate": "",
+      "scheduledTime": "20:30"
+    },
+    "arrival": {
+      "iataCode": "yul",
+      "icaoCode": "cyul",
+      "terminal": "",
+      "gate": "",
+      "scheduledTime": "21:50"
+    },
+    "aircraft": {
+      "modelCode": "bcs3",
+      "modelText": "airbus a220-300"
+    },
+    "airline": {
+      "name": "",
+      "iataCode": "ei",
+      "icaoCode": "ei"
+    },
+    "flight": {
+      "number": "8528",
+      "iataNumber": "ei8528",
+      "icaoNumber": "ei8528"
+    },
+    "codeshared": {
+      "airline": {
+        "name": "air canada",
+        "iataCode": "ac",
+        "icaoCode": "aca"
+      },
+      "flight": {
+        "number": "426",
+        "iataNumber": "ac426",
+        "icaoNumber": "aca426"
+      }
+    }
+  }
+]

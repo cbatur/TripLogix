@@ -246,7 +246,8 @@ struct FlightManageView: View {
             let futureFlightsParams = AEFutureFlightParams(
                 iataCode: departureCity?.codeIataAirport ?? "",
                 type: "departure",
-                date: formatDateParameter(flightDate)
+                date: formatDateParameter(flightDate),
+                destinationIataCode: ""
             )
             
             SelectFlightResultsView(

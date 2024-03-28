@@ -29,7 +29,7 @@ enum QCategory {
         case .getAllEvents(let city, let dateRange):
             return "Generate a list of events to do in \(city), for dates \(dateRange)" + allEvents
         case .textFromImageUrl(let imageUrl):
-            return "\(imageUrl) " + createFlightParametersFromImage
+            return createFlightParametersFromImage
         }
     }
     
@@ -38,7 +38,7 @@ enum QCategory {
     }
 }
 
-func appendJsonModel(filename: String) -> String {
+func appendJsonModel(_ filename: String) -> String {
     guard let fileURL = Bundle.main.url(forResource: "\(filename)", withExtension: "json") else {
         print("Failed to locate the JSON file.")
         return ""
@@ -61,4 +61,4 @@ public let dailyPlanExtension = "return in an array of json object of title with
 
 public let venueInformationExtension = "return as a json object of keys venueName and venueDescription as string, also city, country as Strings and locationName in a format to be searched for geolocation."
 
-public let createFlightParametersFromImage = "analyze this image and return "
+public let createFlightParametersFromImage = "Analyze this image and return the list of flight infos in a json format to be serialized as an array of the following object. Please provide the flight information as a plain array of objects, without the 'json' keyword, backticks, or any additional formatting. Just the raw array is needed. -> a key named iataCode as String as the departure airport iata code, a key named type as String to be hardcoded to departure, a key named date as String as the departure date formatted 2024-01-01, a key named destinationIataCode as String as the arrival airport iata code"

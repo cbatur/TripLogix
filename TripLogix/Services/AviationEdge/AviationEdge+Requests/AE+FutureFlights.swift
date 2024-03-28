@@ -36,10 +36,11 @@ struct AEFutureFlight: Codable, Hashable, Identifiable, Equatable {
     }
 }
 
-struct AEFutureFlightParams {
+struct AEFutureFlightParams: Decodable, Hashable {
     let iataCode: String
     let type: String
     let date: String
+    let destinationIataCode: String?
 }
 
 extension AERequests {

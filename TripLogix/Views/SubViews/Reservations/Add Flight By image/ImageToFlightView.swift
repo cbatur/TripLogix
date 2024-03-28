@@ -4,7 +4,10 @@ import SwiftUI
 struct ImageToFlightView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var chatAPIViewModel: ChatAPIViewModel = ChatAPIViewModel()
+    @StateObject var aviationEdgeViewmodel: AviationEdgeViewmodel = AviationEdgeViewmodel()
+    @StateObject var tripLogixMediaViewmodel: TripLogixMediaViewmodel = TripLogixMediaViewmodel()
     @State var showImagePicker: Bool = false
+    @State var isRotating: Bool = false
     @State var selectedImage: Image? = nil
 
     private func dismiss() {
@@ -15,6 +18,21 @@ struct ImageToFlightView: View {
         chatAPIViewModel.getChatGPTContent(qType: QCategory.textFromImageUrl(imageUrl: imageUrl))
     }
     
+    private func uploadFlightImage() {
+        let uiImage: UIImage? = self.selectedImage?.asUIImage()
+        let imageData: Data? = uiImage?.jpegData(compressionQuality: 0.1) ?? Data()
+        let imageString: String? = imageData?.base64EncodedString()
+        let imageURL: String = "https://palamana.com/TripLogix/TempFlightImages/uploadTempImage.php?id=\(UUID().uuidString)"
+        guard let imageString = imageString else { return }
+        tripLogixMediaViewmodel.uploadFlightPhoto(imageUrl: imageURL, imageString: imageString)
+    }
+    
+    func activity() -> Bool {
+        return tripLogixMediaViewmodel.loadingFlightImage == true ||
+        chatAPIViewModel.loadingMessage != nil ||
+        aviationEdgeViewmodel.loading == true
+    }
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -23,59 +41,90 @@ struct ImageToFlightView: View {
                     headline: "Add Flights to Trip".uppercased(),
                     subHeadline: "Add your flight reservation screenshot"
                 )
+                .disabled(activity())
+                .opacity(activity() ? 0.4 : 1.0)
                 .padding()
                 .padding(.top, 10)
                 
                 VStack {
-                    Text("Upload Itinerary image".uppercased())
-                        .font(.custom("Gilroy-Bold", size: 18))
-                        .foregroundColor(.gray)
-                        .onTapGesture {
-                            self.showImagePicker = true
+                    if selectedImage == nil {
+                        
+                        Text("Upload Itinerary image".uppercased())
+                            .font(.custom("Gilroy-Bold", size: 18))
+                            .foregroundColor(.gray)
+                            .onTapGesture {
+                                self.showImagePicker = true
+                            }
+                            .isHidden(activity())
+                            .padding()
+                    } else {
+                        Button(action: {
+                            uploadFlightImage()
+                        }) {
+                            Text("Scan This Flight Photo?".uppercased())
+                                .font(.custom("Gilroy-Bold", size: 18))
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
                         }
-                    
-                    Button(action: {
-                        
-                        //self.isLoading.toggle()
-                        
-                        let uiImage: UIImage? = self.selectedImage?.asUIImage()
-                        let imageData: Data? = uiImage?.jpegData(compressionQuality: 0.1) ?? Data()
-                        let imageString: String? = imageData?.base64EncodedString()
-                        
-                        guard let url: URL = URL(string: "https://palamana.com/TripLogixTempImages/uploadTempImage.php?id=\(UUID().uuidString)"), let imageString = imageString else { return }
-                        
-                        let paramStr: String = "image=\(imageString)"
-                        let paramData: Data = paramStr.data(using: .utf8) ?? Data()
-                        
-                        var urlRequest: URLRequest = URLRequest(url: url)
-                        urlRequest.httpMethod = "POST"
-                        urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Cpntent-Type")
-                        urlRequest.httpBody = paramData
-                        
-                        URLSession.shared.dataTask(with: urlRequest, completionHandler: { data, response, error in
-                            guard let data = data else { return }
-                            
-                            let responseStr: String = String(data: data, encoding: .utf8) ?? ""
-//                                SDImageCache.shared.clearMemory()
-//                                SDImageCache.shared.clearDisk()
-                            print("[Debug] \(responseStr)")
-                            submitImageUrl(responseStr)
-                            //self.isLoading.toggle()
-                            self.selectedImage = nil
-                        })
-                            .resume()
-                        
-                    }) {
-                        Text("Add Flight Photo")
-                            .font(.largeTitle)
+                        .padding()
+                        .cardStyle(.wbPinkMedium)
                     }
-                    Divider()
-                    self.selectedImage?.resizable().scaledToFit()
                     
-                    Divider()
-                    Text("Response: \(chatAPIViewModel.textFromImage)")
-                        .font(.caption)
-                        .foregroundColor(.gray)
+                    Divider().isHidden(activity())
+                    
+                    self.selectedImage?.resizable().scaledToFit()
+
+                    if tripLogixMediaViewmodel.loadingFlightImage {
+                        HStack {
+                            Image(systemName: "text.below.photo.fill")
+                                .font(.largeTitle)
+                                .foregroundColor(.wbPinkMedium)
+                                .rotationEffect(.degrees(isRotating ? 360 : 0))
+                                .animation(Animation.linear(duration: 3).repeatForever(autoreverses: false), value: isRotating)
+                                .onAppear() {
+                                    self.isRotating = true
+                                }
+                            Text("Trying to understand your image!!!")
+                        }
+                    }
+                    
+                    if chatAPIViewModel.loadingMessage != nil {
+                        HStack {
+                            Image(systemName: "airplane")
+                                .font(.largeTitle)
+                                .foregroundColor(.wbPinkMedium)
+                                .rotationEffect(.degrees(isRotating ? 360 : 0))
+                                .animation(Animation.linear(duration: 3).repeatForever(autoreverses: false), value: isRotating)
+                                .onAppear() {
+                                    self.isRotating = chatAPIViewModel.loadingMessage == nil
+                                }
+                            Text("Got your image, let's see If we can pull your flight info...")
+                        }
+                    }
+                    
+                    if aviationEdgeViewmodel.loading {
+                        HStack {
+                            Image(systemName: "info.bubble")
+                                .font(.largeTitle)
+                                .foregroundColor(.wbPinkMedium)
+                                .rotationEffect(.degrees(isRotating ? 360 : 0))
+                                .animation(Animation.linear(duration: 3).repeatForever(autoreverses: false), value: isRotating)
+                                .onAppear() {
+                                    self.isRotating = true
+                                }
+                            Text("Perfect. We tracked some flights, now fetching the details.")
+                        }
+                    }
+                    
+                    VStack {
+                        ForEach(aviationEdgeViewmodel.futureFlights, id: \.self) { item in
+                            FlightResultCard(item)
+                            Divider()
+                                .onTapGesture {
+                                    //self.selectedFlight = item
+                                }
+                        }
+                    }
                     
                 }
                 .padding()
@@ -86,6 +135,16 @@ struct ImageToFlightView: View {
             .sheet(isPresented: $showImagePicker, content: {
                 ImagePicker(image: self.$selectedImage)
             })
+            .onChange(of: chatAPIViewModel.flightsFromImage) { _, flightSet in
+                guard let firstRound = flightSet.first else { return }
+                aviationEdgeViewmodel.getFutureFlights(firstRound, flightChecklist: nil)
+            }
+            .onChange(of: tripLogixMediaViewmodel.flightImageUrl) { _, url in
+                guard let imageUrl = url else { return }
+                submitImageUrl(imageUrl)
+                selectedImage = nil
+            }
+            
         }
     }
 }

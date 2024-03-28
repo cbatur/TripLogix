@@ -10,6 +10,7 @@ enum APIError: Error {
 
 protocol ServiceProvider {
     func searchLocation(keyword: String) -> AnyPublisher<[Location], APIError>
+    func flightImageUpload(imageUrl: String, imageString: String) -> AnyPublisher<TLImageUrl, APIError>
 }
 
 class TLAPIService: ServiceProvider {
@@ -28,6 +29,10 @@ class TLAPIService: ServiceProvider {
     
     func searchLocation(keyword: String) -> AnyPublisher<[Location], APIError> {
         return self.apiCall(TLRequests.SearchGooglePlaces(keyword: keyword).request)
+    }
+    
+    func flightImageUpload(imageUrl: String, imageString: String) -> AnyPublisher<TLImageUrl, APIError> {
+        return self.apiCall(TLRequests.FlightImageUpload(imageString: imageString, imageUrl: imageUrl).request)
     }
 }
 

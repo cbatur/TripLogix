@@ -13,9 +13,10 @@ final class AviationEdgeViewmodel: ObservableObject {
     
     func getFutureFlights(
         _ futureFlightParams: AEFutureFlightParams,
-        flightChecklist: FlightChecklist
+        flightChecklist: FlightChecklist?
     ) {
-        let filterAirportCode = flightChecklist.arrivalCity?.codeIataAirport ?? ""
+        //let filterAirportCode = flightChecklist.arrivalCity?.codeIataAirport ?? ""
+        let filterAirportCode = futureFlightParams.destinationIataCode ?? ""
         searchPerformed = true
         loading = true
         self.cancellable = self.apiService.futureFlights(futureFlightParams: futureFlightParams)
@@ -68,10 +69,10 @@ final class AviationEdgeViewmodel: ObservableObject {
     
     func migrateFutureFlights(
         _ flights: [AEFutureFlight],
-        flightChecklist: FlightChecklist
+        flightChecklist: FlightChecklist?
     ) {
         self.futureFlights = flights
-        if flights.count > 0 {
+        if let flightChecklist = flightChecklist, flights.count > 0 {
             setFlightChecklist(flightChecklist)
         }
     }

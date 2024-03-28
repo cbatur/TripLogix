@@ -28,11 +28,11 @@ extension OpenAIRequests {
                 "model": "\(OpenAPIModel.gpt4VisionPreview.rawValue)",
                 "messages": [
                     {
-                        "role": "user",
+                        "role": "assistant",
                         "content": [
                           {
                             "type": "text",
-                            "text": "What’s in this image?"
+                            "text": "\(qType.content)"
                           },
                           {
                             "type": "image_url",
@@ -49,11 +49,9 @@ extension OpenAIRequests {
             var request = URLRequest(url: url ,timeoutInterval: Double.infinity)
             request.httpMethod = "POST"
             request.httpBody = postData.data(using: .utf8)
-            
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("Bearer \(openAPIKey)", forHTTPHeaderField: "Authorization")
             
-            print(request.prettyDescription)
             return request
         }
     }

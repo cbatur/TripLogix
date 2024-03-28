@@ -103,7 +103,12 @@ extension SelectFlightResultsView {
         self.aviationEdgeViewmodel.resetSearchFlights()
 
         self.aviationEdgeViewmodel.getFutureFlights(
-            futureFlightsParams,
+            AEFutureFlightParams(
+                iataCode: futureFlightsParams.iataCode,
+                type: futureFlightsParams.type,
+                date: futureFlightsParams.date,
+                destinationIataCode: flightCheckList.arrivalCity?.codeIataAirport
+            ),
             flightChecklist: flightCheckList
         )
     }
