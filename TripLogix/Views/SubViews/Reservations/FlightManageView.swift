@@ -6,13 +6,13 @@ struct FlightManageView: View {
     @Environment(\.presentationMode) var presentationMode
     @Bindable var destination: Destination
     @StateObject var aviationEdgeViewmodel: AviationEdgeViewmodel = AviationEdgeViewmodel()
-    @State private var flightDate = Date()
 
     @State private var launchSearchAirport: Bool = false
     @State private var launchSearchResultsView: Bool = false
         
-    @State private var departureCity: AEAirport.AECity?
-    @State private var arrivalCity: AEAirport.AECity?
+    @State var departureCity: AEAirport.AECity?
+    @State var arrivalCity: AEAirport.AECity?
+    @State var flightDate = Date()
     @State private var airportType: AirportType = .departure
     
     @State private var showDatePicker: Bool = false
@@ -234,6 +234,7 @@ struct FlightManageView: View {
             }
             .padding()
         }
+        .analyticsScreen(name: "FlightManageView")
         .onAppear{
             self.aviationEdgeViewmodel.getCachedFlightsSearch()
         }
@@ -353,6 +354,10 @@ extension FlightManageView {
     }
     
     func searchFutureFlights() {
+        AnalyticsManager.shared.logEvent(
+            name: "FlightManageView_FlightSearched",
+            params: analyticsFlightSearchParams
+        )
         launchSearchResultsView = true
     }
     

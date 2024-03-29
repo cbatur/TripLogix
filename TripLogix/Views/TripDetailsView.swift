@@ -110,6 +110,8 @@ struct TripDetailsView: View {
             }
         )
         .onAppear {
+            AnalyticsManager.shared.logEvent(name: "TripDetailsView_Appear", params: tripDetailsViewAppearParams)
+            
             if destination.icon == nil {
                 self.googlePlacesViewModel.fetchPlaceDetails(placeId: destination.googlePlaceId ?? "")
             }

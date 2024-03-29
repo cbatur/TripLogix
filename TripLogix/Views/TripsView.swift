@@ -77,6 +77,15 @@ struct TripsView: View {
                 }
             )
         }
+        .analyticsScreen(name: "TripsView")
+        .onAppear{
+            AnalyticsManager.shared.logEvent(name: "TripsView_Appear")
+            AnalyticsManager.shared.setUserId(userId: "TL12345")
+            AnalyticsManager.shared.setUserProperty(value: true.description, property: "test_user")
+        }
+        .onDisappear{
+            AnalyticsManager.shared.logEvent(name: "TripsView_Disappear")
+        }
     }
     
     func addDestination(name: String, googlePlaceId: String) {
