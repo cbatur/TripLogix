@@ -188,6 +188,7 @@
 		7E8821EE2BB6968D00B32747 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E8821EC2BB6968D00B32747 /* GoogleService-Info.plist */; };
 		7E8821EF2BB6968D00B32747 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E8821EC2BB6968D00B32747 /* GoogleService-Info.plist */; };
 		7E8821F12BB69AAB00B32747 /* Analytics+ViewParameterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8821F02BB69AAB00B32747 /* Analytics+ViewParameterExtensions.swift */; };
+		7E8821F32BB7419C00B32747 /* ImageToFlightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8821F22BB7419C00B32747 /* ImageToFlightViewModel.swift */; };
 		7EA98D0B2BB149DE00AE39A9 /* ImageToFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */; };
 		7EC183C22BB27A5B007B2602 /* _OpenAIImageViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C12BB27A5B007B2602 /* _OpenAIImageViewModels.swift */; };
 		7EC183C62BB2860C007B2602 /* OpenAI+TextCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */; };
@@ -199,7 +200,6 @@
 		7EC183D72BB3E5E7007B2602 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183D62BB3E5E7007B2602 /* ImagePicker.swift */; };
 		7EC183DB2BB511F9007B2602 /* AE_FutureFlight.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EC183DA2BB511F9007B2602 /* AE_FutureFlight.json */; };
 		7EC183DD2BB53285007B2602 /* TLRequests+FlightImageUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183DC2BB53285007B2602 /* TLRequests+FlightImageUpload.swift */; };
-		7EC183DF2BB5369F007B2602 /* _TripLogixMediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183DE2BB5369F007B2602 /* _TripLogixMediaViewModel.swift */; };
 		7EC183E12BB53DDC007B2602 /* TLModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183E02BB53DDC007B2602 /* TLModels.swift */; };
 /* End PBXBuildFile section */
 
@@ -398,6 +398,7 @@
 		7E8821EA2BB68A6A00B32747 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		7E8821EC2BB6968D00B32747 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7E8821F02BB69AAB00B32747 /* Analytics+ViewParameterExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics+ViewParameterExtensions.swift"; sourceTree = "<group>"; };
+		7E8821F22BB7419C00B32747 /* ImageToFlightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToFlightViewModel.swift; sourceTree = "<group>"; };
 		7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToFlightView.swift; sourceTree = "<group>"; };
 		7EC183C12BB27A5B007B2602 /* _OpenAIImageViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _OpenAIImageViewModels.swift; sourceTree = "<group>"; };
 		7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenAI+TextCommand.swift"; sourceTree = "<group>"; };
@@ -409,7 +410,6 @@
 		7EC183D62BB3E5E7007B2602 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		7EC183DA2BB511F9007B2602 /* AE_FutureFlight.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AE_FutureFlight.json; sourceTree = "<group>"; };
 		7EC183DC2BB53285007B2602 /* TLRequests+FlightImageUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+FlightImageUpload.swift"; sourceTree = "<group>"; };
-		7EC183DE2BB5369F007B2602 /* _TripLogixMediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _TripLogixMediaViewModel.swift; sourceTree = "<group>"; };
 		7EC183E02BB53DDC007B2602 /* TLModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -867,7 +867,6 @@
 				7E85E7172BAE985100432BA9 /* _PlacesViewModel.swift */,
 				7E85E7182BAE985100432BA9 /* _StaticViewModel.swift */,
 				7EC183C12BB27A5B007B2602 /* _OpenAIImageViewModels.swift */,
-				7EC183DE2BB5369F007B2602 /* _TripLogixMediaViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -944,6 +943,7 @@
 			isa = PBXGroup;
 			children = (
 				7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */,
+				7E8821F22BB7419C00B32747 /* ImageToFlightViewModel.swift */,
 			);
 			path = "Add Flight By image";
 			sourceTree = "<group>";
@@ -1233,7 +1233,6 @@
 				7E85E79D2BAE985100432BA9 /* CryptoSwift.swift in Sources */,
 				7EC183D22BB29780007B2602 /* OpenAI+RemoteImageToText.swift in Sources */,
 				7E85E7D62BAE985100432BA9 /* ActivityIndicatorMessage.swift in Sources */,
-				7EC183DF2BB5369F007B2602 /* _TripLogixMediaViewModel.swift in Sources */,
 				7EC183DD2BB53285007B2602 /* TLRequests+FlightImageUpload.swift in Sources */,
 				7E85E7A92BAE985100432BA9 /* FlightManageView.swift in Sources */,
 				7E85E7B32BAE985100432BA9 /* SideMenuView.swift in Sources */,
@@ -1289,6 +1288,7 @@
 				7E85E7A62BAE985100432BA9 /* AccountView.swift in Sources */,
 				7EC183E12BB53DDC007B2602 /* TLModels.swift in Sources */,
 				7E8821EB2BB68A6A00B32747 /* AnalyticsManager.swift in Sources */,
+				7E8821F32BB7419C00B32747 /* ImageToFlightViewModel.swift in Sources */,
 				7E85E4292BAE8CE700432BA9 /* TripLogixApp.swift in Sources */,
 				7E85E7D32BAE985100432BA9 /* Destination.swift in Sources */,
 				7EC183CF2BB295C4007B2602 /* Request+Extension.swift in Sources */,
@@ -1473,7 +1473,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 103;
 				DEVELOPMENT_ASSET_PATHS = "\"TripLogix/Preview Content\"";
 				DEVELOPMENT_TEAM = ZLA3S7L9MF;
 				ENABLE_PREVIEWS = YES;
@@ -1507,7 +1507,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 103;
 				DEVELOPMENT_ASSET_PATHS = "\"TripLogix/Preview Content\"";
 				DEVELOPMENT_TEAM = ZLA3S7L9MF;
 				ENABLE_PREVIEWS = YES;

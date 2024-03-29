@@ -6,8 +6,8 @@ final class ChatAPIViewModel: ObservableObject {
     
     @Published var allEvents: [EventCategory] = []
     @Published var itineraries: [DayItinerary] = []
-    @Published var flightsFromImage: [AEFutureFlightParams] = []
-    @Published var textFromImage: String = ""
+//    @Published var flightsFromImage: [AEFutureFlightParams] = []
+//    @Published var textFromImage: String = ""
     @Published var venueInfo: VenueInfo?
     @Published var backgroundLocationImageUrl: String?
     @Published var randomLocationCity: String?
@@ -45,30 +45,9 @@ final class ChatAPIViewModel: ObservableObject {
         case .getVenueDetails(let location):
             self.executeVenueService(qType: qType, location: location)
         case .textFromImageUrl(let imageUrl):
-            self.getFlightParametersFromImage(imageUrl)
+            //Do Nothing
+            print("\(imageUrl)")
         }
-    }
-    
-    func getFlightParametersFromImage(_ imageUrl: String) {
-        self.loadingMessage = self.activityMessage.content
-        self.cancellable = self.apiService.openAPICommand4(qType: QCategory.textFromImageUrl(imageUrl: imageUrl))
-            .catch {_ in Just(ChatGPTResponse(id: "0", choices: [])) }
-            .sink(receiveCompletion: { _ in }, receiveValue: {
-                guard let questionSet = $0.choices.first?.message.content else { return }
-                
-                self.textFromImage = questionSet
-                
-                if let jsonData = questionSet.data(using: .utf8) {
-                    do {
-                        let items = try JSONDecoder().decode([AEFutureFlightParams].self, from: jsonData)
-                        
-                        self.flightsFromImage = items
-                        self.loadingMessage = nil
-                    } catch {
-                        self.getChatGPTContent(qType: QCategory.textFromImageUrl(imageUrl: imageUrl))
-                    }
-                }
-            })
     }
     
     func executeMockVenueService() {

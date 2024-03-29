@@ -28,7 +28,7 @@ enum QCategory {
             return "\(location) " + venueInformationExtension
         case .getAllEvents(let city, let dateRange):
             return "Generate a list of events to do in \(city), for dates \(dateRange)" + allEvents
-        case .textFromImageUrl(let imageUrl):
+        case .textFromImageUrl:
             return createFlightParametersFromImage
         }
     }
