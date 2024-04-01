@@ -76,8 +76,17 @@ struct _TabReservationsView: View {
         for s in selectedFlights {
             if !destination.flights.contains(convertFlight(s)) {
                 destination.flights.append(convertFlight(s))
+                
+                AnalyticsManager.shared.logEvent(
+                    name: "_TabReservationsView_AddFlight",
+                    params: ["added_flight": simplfyFlightInfo(s)]
+                )
             }
         }
+    }
+    
+    private func simplfyFlightInfo(_ f: SelectedFlight) -> String {
+        return "\(f.flight.departure.iataCode.uppercased()) ➔ \(f.flight.arrival.iataCode.uppercased()) - \(f.flight.airline.iataCode.uppercased()) \(f.flight.flight.number)\n"
     }
     
     var body: some View {
