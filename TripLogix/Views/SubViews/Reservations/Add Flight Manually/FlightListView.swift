@@ -106,27 +106,34 @@ struct FlightResultCard: View {
     init(_ flight: AEFutureFlight) {
         self.flight = flight
     }
-    
-    func getSubTitle() -> String {
-        let f = flight
-        let formattedAirlineName = f.airline.name.capitalizedFirstLetter()
-        let subtitle = "\(f.airline.iataCode.uppercased()) \(f.flight.number) (\(f.airline.icaoCode.uppercased()) ➔ \(formattedAirlineName))"
-        return subtitle
-    }
-    
+
     var body: some View {
         HStack {
-            VStack {
-                Text(flight.departure.scheduledTime)
-                    .fontWeight(.semibold)
-            }
             Image(systemName: "airplane.circle")
+                .font(.largeTitle)
+                .foregroundColor(.gray.opacity(0.7))
+
             VStack(alignment: .leading) {
                 Text("\(flight.departure.iataCode.uppercased()) ➔ \(flight.arrival.iataCode.uppercased())")
                     .fontWeight(.semibold)
-                Text(getSubTitle())
+                    .foregroundColor(.black)
+                
+                Text("\(flight.airline.icaoCode.uppercased()) ")
+                    .foregroundColor(.black.opacity(0.8))
+                    .font(.subheadline).bold() +
+                
+                Text("\(flight.airline.name.capitalizedFirstLetter())")
                     .font(.subheadline)
                     .foregroundColor(.gray)
+            }
+            Spacer()
+            VStack {
+                Text("\(flight.airline.iataCode.uppercased()) \(flight.flight.number)")
+                    .font(.subheadline).bold()
+                    .foregroundColor(.black)
+                Text(flight.departure.scheduledTime)
+                    .font(.custom("Gilroy-Bold", size: 23))
+                    .foregroundColor(.wbPinkMedium)
             }
         }
     }

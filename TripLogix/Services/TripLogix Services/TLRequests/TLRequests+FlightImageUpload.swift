@@ -5,10 +5,12 @@ extension TLRequests {
     struct FlightImageUpload {
         
         var imageString: String
-        var imageUrl: String
+        var imageName: String
+        var path = "TempFlightImages/uploadTempImage.php?id="
         
         var request: URLRequest {
-            guard let url = URL(string: imageUrl) else { preconditionFailure("Bad URL") }
+            let path = "\(Configuration.TripLogix.baseUrl)\(path)\(imageName)"
+            guard let url = URL(string: path) else { preconditionFailure("Bad URL") }
             
             let paramStr: String = "image=\(imageString)"
             let paramData: Data = paramStr.data(using: .utf8) ?? Data()

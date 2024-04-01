@@ -17,7 +17,6 @@ extension Color { // Generic
 
 }
 
-
 extension Color {
     
     static let cbYellow = Color(red: 240 / 255, green: 194 / 255, blue: 67 / 255)
@@ -43,4 +42,20 @@ extension Color {
     static let wbPinkLightAlt = Color(red: 248 / 255, green: 143 / 255, blue: 176 / 255)
     static let wbPinkMediumAlt = Color(red: 240 / 255, green: 93 / 255, blue: 140 / 255)
     static let wbPinkDarkAlt = Color(red: 200 / 255, green: 37 / 255, blue: 104 / 255)
+    
+    static let wbBlueShade = Color(red: 162 / 255, green: 210 / 255, blue: 255 / 255)
+    static let wbBlueLight = Color(red: 123 / 255, green: 183 / 255, blue: 255 / 255)
+    static let wbBlueMedium = Color(red: 63 / 255, green: 143 / 255, blue: 255 / 255)
+    static let wbBlueDark = Color(red: 7 / 255, green: 94 / 255, blue: 190 / 255)
+    
+    static let wbOrangeShade = Color(red: 255 / 255, green: 210 / 255, blue: 162 / 255)
+    static let wbOrangeLight = Color(red: 255 / 255, green: 183 / 255, blue: 123 / 255)
+    static let wbOrangeMedium = Color(red: 255 / 255, green: 143 / 255, blue: 63 / 255)
+    static let wbOrangeDark = Color(red: 190 / 255, green: 94 / 255, blue: 7 / 255)
+    
+    static let tlGreen = Color(red: 134 / 255, green: 198 / 255, blue: 129 / 255)
+    static let tlBlue = Color(red: 89 / 255, green: 103 / 255, blue: 200 / 255)
+    static let tlOrange = Color(red: 236 / 255, green: 98 / 255, blue: 53 / 255)
+    static let tlAccentYellow = Color(red: 245 / 255, green: 240 / 255, blue: 230 / 255)
+
 }

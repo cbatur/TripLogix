@@ -26,8 +26,6 @@ struct SelectFlightResultsView: View {
                 headline: "Flight Search Results".uppercased(),
                 subHeadline: subHeaderCities()
             )
-            .padding()
-            .padding(.top, 10)
             
             if let d = flightCheckList.departureCity, let a = flightCheckList.arrivalCity {
                 HStack {

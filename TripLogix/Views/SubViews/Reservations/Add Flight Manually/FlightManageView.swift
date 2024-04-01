@@ -30,8 +30,6 @@ struct FlightManageView: View {
                     headline: "Add Flights to Trip".uppercased(),
                     subHeadline: "Search for a one-way flight"
                 )
-                .padding()
-                .padding(.top, 10)
                 
                 VStack {
                     VStack {
@@ -290,8 +288,8 @@ struct FlightManageView: View {
 
 extension FlightManageView {
     
-    func convertFlights(_ s: SelectedFlight) {
-        
+    // Move Public FlightMethods to here
+    public func convertFlight(_ s: SelectedFlight) -> DSelectedFlight {
         let dDeparture = DAirportDetail(
             iataCode: s.flight.departure.iataCode,
             icaoCode: s.flight.departure.icaoCode,
@@ -339,12 +337,16 @@ extension FlightManageView {
             flight: dFutureFlight
         )
         
-        destination.flights.append(dSelectedFlight)
+        return dSelectedFlight
+    }
+    
+    func addFlight(_ s: SelectedFlight) {
+        destination.flights.append(convertFlight(s))
         dismiss()
     }
     
     func passSelectedFlight(_ selectedFlight: SelectedFlight) {
-        convertFlights(selectedFlight)
+        addFlight(selectedFlight)
     }
     
     func setChecklist(_ f: FlightChecklist) {
@@ -502,9 +504,4 @@ struct SearchAirportPopover: View {
             }
         }
     }
-}
-
-struct SelectedFlight {
-    var date: Date = Date()
-    let flight: AEFutureFlight
 }

@@ -20,6 +20,66 @@ struct _TabReservationsView: View {
         deleteFlight = false
     }
     
+    // Move Public FlightMethods to here
+    public func convertFlight(_ s: SelectedFlight) -> DSelectedFlight {
+        let dDeparture = DAirportDetail(
+            iataCode: s.flight.departure.iataCode,
+            icaoCode: s.flight.departure.icaoCode,
+            terminal: s.flight.departure.terminal,
+            gate: s.flight.departure.gate,
+            scheduledTime: s.flight.departure.scheduledTime
+        )
+        
+        let dArrival = DAirportDetail(
+            iataCode: s.flight.arrival.iataCode,
+            icaoCode: s.flight.arrival.icaoCode,
+            terminal: s.flight.arrival.terminal,
+            gate: s.flight.arrival.gate,
+            scheduledTime: s.flight.arrival.scheduledTime
+        )
+        
+        let dAircraft = DAircraft(
+            modelCode: s.flight.aircraft.modelCode,
+            modelText: s.flight.aircraft.modelText
+        )
+        
+        let dAirline = DAirline(
+            name: s.flight.airline.name,
+            iataCode: s.flight.airline.iataCode,
+            icaoCode: s.flight.airline.icaoCode
+        )
+        
+        let dFlight = DFlight(
+            number: s.flight.flight.number,
+            iataNumber: s.flight.flight.iataNumber,
+            icaoNumber: s.flight.flight.icaoNumber
+        )
+        
+        let dFutureFlight = DFutureFlight(
+            weekday: s.flight.weekday,
+            departure: dDeparture,
+            arrival: dArrival,
+            aircraft: dAircraft,
+            airline: dAirline,
+            flight: dFlight
+        )
+        
+        let dSelectedFlight = DSelectedFlight(
+            date: s.date,
+            flight: dFutureFlight
+        )
+
+        return dSelectedFlight
+    }
+    
+    func passSelectedFlights(_ selectedFlights: [SelectedFlight]) {
+        for s in selectedFlights {
+            if !destination.flights.contains(convertFlight(s)) {
+                destination.flights.append(convertFlight(s))
+            }
+        }
+    }
+    
     var body: some View {
         VStack {
             Form {
@@ -130,7 +190,7 @@ struct _TabReservationsView: View {
             FlightManageView(destination: destination)
         }
         .sheet(isPresented: $launchImageToFlightView) {
-            ImageToFlightView()
+            ImageToFlightView(actionPassFlights: passSelectedFlights)
         }
         .onChange(of: self.flightToDelete) { _, flight in
             guard let _ = flight else { return }

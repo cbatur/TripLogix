@@ -233,3 +233,12 @@ public func formatDateDisplay(_ date: Date) -> String {
     dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
     return dateFormatter.string(from: date)
 }
+
+// Date Formatters to Return Dates from Strings
+public func stringToDate(_ dateString: String) -> Date? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+    return dateFormatter.date(from: dateString)
+}

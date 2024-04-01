@@ -10,7 +10,7 @@ enum APIError: Error {
 
 protocol ServiceProvider {
     func searchLocation(keyword: String) -> AnyPublisher<[Location], APIError>
-    func flightImageUpload(imageUrl: String, imageString: String) -> AnyPublisher<TLImageUrl, APIError>
+    func flightImageUpload(imageName: String, imageString: String) -> AnyPublisher<TLImageUrl, APIError>
 }
 
 class TLAPIService: ServiceProvider {
@@ -19,9 +19,9 @@ class TLAPIService: ServiceProvider {
         return URLSession.shared.dataTaskPublisher(for: request)
             .mapError { _ in APIError.serverError }
             .map { $0.data }
-            .print()
+            //.print()
             .decode(type: T.self, decoder: JSONDecoder())
-            .print()
+            //.print()
             .mapError { _ in APIError.parsingError }
             .receive(on: RunLoop.main)
             .eraseToAnyPublisher()
@@ -31,8 +31,8 @@ class TLAPIService: ServiceProvider {
         return self.apiCall(TLRequests.SearchGooglePlaces(keyword: keyword).request)
     }
     
-    func flightImageUpload(imageUrl: String, imageString: String) -> AnyPublisher<TLImageUrl, APIError> {
-        return self.apiCall(TLRequests.FlightImageUpload(imageString: imageString, imageUrl: imageUrl).request)
+    func flightImageUpload(imageName: String, imageString: String) -> AnyPublisher<TLImageUrl, APIError> {
+        return self.apiCall(TLRequests.FlightImageUpload(imageString: imageString, imageName: imageName).request)
     }
 }
 

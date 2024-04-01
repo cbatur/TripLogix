@@ -3,180 +3,148 @@ import SwiftUI
 
 struct ImageToFlightView: View {
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var viewModel: ImageToFlightViewModel = ImageToFlightViewModel()
-    @StateObject var aviationEdgeViewmodel: AviationEdgeViewmodel = AviationEdgeViewmodel()
-    @State var showImagePicker: Bool = false
-    @State var isRotating: Bool = false
-    @State var selectedImage: Image? = nil
-    @State var isPastDate: Bool = false
+    @StateObject var viewModel = ImageToFlightViewModel()
+    @State private var addVerificationActionSheet = false
+    var actionPassFlights: ([SelectedFlight]) -> Void
+    
+    private var flightGroupsView: some View {
+        ForEach(Array(viewModel.futureFlights.enumerated()), id: \.element.id) { index, group in
+            Section {
+                flightGroupHeaderView(for: group)
+                flightsView(for: group, atIndex: index)
+            }
+        }
+    }
 
-    private func dismiss() {
+    private func flightGroupHeaderView(for group: SelectedFlightGroup) -> some View {
+        HStack {
+            Text(formatDateDisplay(group.date).uppercased())
+                .font(.custom("Gilroy-Bold", size: 17))
+                .foregroundColor(Color.gray)
+            Spacer()
+        }
+    }
+
+    private func flightsView(for group: SelectedFlightGroup, atIndex index: Int) -> some View {
+        VStack {
+            ForEach(group.flights, id: \.self) { flight in
+                flightView(for: flight, inGroupAtIndex: index)
+            }
+        }
+        .padding(.bottom, 30)
+    }
+
+    private func flightView(for flight: AEFutureFlight, inGroupAtIndex index: Int) -> some View {
+        VStack {
+            FlightResultCard(flight)
+        }
+        .padding()
+        .cardStyle(isFlightSelected(flight, inGroupAtIndex: index) ? .tlAccentYellow : Color.white)
+        .onTapGesture {
+            viewModel.selectFlight(flightToSelect: flight, inGroupAtIndex: index)
+        }
+    }
+
+    private func isFlightSelected(_ flight: AEFutureFlight, inGroupAtIndex index: Int) -> Bool {
+        viewModel.selectedFlights[index]?.flight.id == flight.id && viewModel.selectedFlights[index]?.selected == true
+    }
+    
+    private func addSelectedFlights() {
+        actionPassFlights(Array(viewModel.selectedFlights.values))
         presentationMode.wrappedValue.dismiss()
-    }
-    
-    private func submitImageUrl(_ imageUrl: String) {
-        viewModel.getFlightParametersFromImage(imageUrl)
-    }
-    
-    private func uploadFlightImage() {
-        let uiImage: UIImage? = self.selectedImage?.asUIImage()
-        let imageData: Data? = uiImage?.jpegData(compressionQuality: 0.1) ?? Data()
-        let imageString: String? = imageData?.base64EncodedString()
-        let imageURL: String = "https://palamana.com/TripLogix/TempFlightImages/uploadTempImage.php?id=\(UUID().uuidString)"
-        guard let imageString = imageString else { return }
-        viewModel.uploadFlightPhoto(imageUrl: imageURL, imageString: imageString)
-    }
-    
-    func activity() -> Bool {
-        return viewModel.loadingFlightImage == true ||
-        viewModel.loadingMessage != nil ||
-        aviationEdgeViewmodel.loading == true
     }
     
     var body: some View {
         ScrollView {
             VStack {
                 BannerWithDismiss(
-                    dismiss: dismiss,
+                    dismiss: { presentationMode.wrappedValue.dismiss() },
                     headline: "Add Flights to Trip".uppercased(),
                     subHeadline: "Add your flight reservation screenshot"
                 )
-                .disabled(activity())
-                .opacity(activity() ? 0.4 : 1.0)
-                .padding()
-                .padding(.top, 10)
-                
-                VStack {
-                    if selectedImage == nil {
-                        
-                        Text("Upload Itinerary image".uppercased())
-                            .font(.custom("Gilroy-Bold", size: 21))
-                            .foregroundColor(.gray)
-                            .onTapGesture {
-                                self.showImagePicker = true
-                            }
-                            .isHidden(activity())
-                            .padding()
-                    } else {
-                        Button(action: {
-                            uploadFlightImage()
-                        }) {
-                            Text("Scan This Flight Photo?".uppercased())
-                                .font(.custom("Gilroy-Bold", size: 18))
-                                .font(.largeTitle)
-                                .foregroundColor(.white)
-                        }
-                        .padding()
-                        .cardStyle(.wbPinkMedium)
-                    }
-                    
-                    //Divider().isHidden(activity())
-                    
-                    self.selectedImage?.resizable().scaledToFit()
+                .opacity(viewModel.activity() ? 0.4 : 1.0)
 
-                    if viewModel.loadingFlightImage {
-                        AlertWithIconView(
-                            startAnimate: true,
-                            systemImage: "text.below.photo.fill",
-                            message: "Trying to understand your image!!!"
-                        )
-                    }
-                    
-                    if viewModel.loadingMessage != nil {
-                        AlertWithIconView(
-                            startAnimate: true,
-                            systemImage: "airplane",
-                            message: "Got your image, let's see If we can pull your flight info..."
-                        )
-                    }
-                    
-                    if aviationEdgeViewmodel.loading {
-                        AlertWithIconView(
-                            startAnimate: true,
-                            systemImage: "info.bubble",
-                            message: "Perfect. We tracked some flights, now fetching the details."
-                        )
-                    }
-                    
-                    if isPastDate {
-                        AlertWithIconView(
-                            startAnimate: false,
-                            systemImage: "square.and.arrow.up.trianglebadge.exclamationmark",
-                            message: "The reservation for this ticket is in the past; please ensure it is for a future flight."
-                        )
-                    }
-                    
-                    VStack {
-                        ForEach(aviationEdgeViewmodel.futureFlights, id: \.self) { item in
-                            FlightResultCard(item)
-                            Divider()
+                VStack {
+                    VStack { // CTA Buttons
+                        if viewModel.selectedImage == nil {
+                            HStack {
+                                TLButton(.secondary, title: "Select image")
+                                    .onTapGesture {
+                                        viewModel.resetSearch()
+                                        viewModel.showImagePicker = true
+                                    }
+                                    .isHidden(viewModel.activity())
+                                
+                                if viewModel.hasFlights() {
+                                    TLButton(.green, title: "Add Flight(s)")
+                                        .onTapGesture {
+                                            addVerificationActionSheet = true
+                                        }
+                                }
+                            }
+                            
+                        } else {
+                            TLButton(.primary, title: "Scan This Flight Photo?")
                                 .onTapGesture {
-                                    //self.selectedFlight = item
+                                    viewModel.uploadSelectedImage()
                                 }
                         }
                     }
-                    
+                    .isHidden(viewModel.activity())
+      
+                    if let alert = viewModel.activeAlertBox {
+                        AlertWithIconView(alertBox: alert)
+                    }
+
+                    viewModel.selectedImage?
+                        .resizable()
+                        .scaledToFit()
+
+                    VStack {
+                        HStack {
+                            Text("SELECT YOUR FLIGHT(S)")
+                                .font(.custom("Gilroy-Bold", size: 23))
+                                .foregroundColor(Color.tlOrange)
+                            Spacer()
+                        }
+                        Divider()
+                            .padding(.bottom, 30)
+                         
+                        flightGroupsView
+                    }
+                    .isHidden(viewModel.futureFlights.isEmpty)
+                    .padding(.top, 40)
                 }
                 .padding()
-                //.cardStyle(.white)
             }
+            .disabled(viewModel.activity())
             .padding()
             .frame(maxWidth: .infinity, alignment: .center)
-            .sheet(isPresented: $showImagePicker, content: {
-                ImagePicker(image: self.$selectedImage)
-            })
-            .onChange(of: viewModel.flightsFromImage) { _, flightSet in
-                guard let firstRound = flightSet.first else { return }
-                
-                let dateString = firstRound.date
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                if let date = dateFormatter.date(from: dateString), date <= Date() {
-                    isPastDate = true
-                } else {
-                    aviationEdgeViewmodel.getFutureFlights(firstRound, flightChecklist: nil)
-                }
+            .sheet(isPresented: $viewModel.showImagePicker) {
+                ImagePicker(image: $viewModel.selectedImage)
+            }
+            .onChange(of: viewModel.flightsFromImage) { _, _ in
+                viewModel.checkIfPastDate(from: viewModel.flightsFromImage)
             }
             .onChange(of: viewModel.flightImageUrl) { _, url in
                 guard let imageUrl = url else { return }
-                submitImageUrl(imageUrl)
-                selectedImage = nil
+                viewModel.getFlightParametersFromImage(imageUrl)
             }
-            
+            .actionSheet(isPresented: $addVerificationActionSheet) {
+                ActionSheet(
+                    title: Text("Add flights to itinerary"),
+                    message: Text(viewModel.hasFlights() ? viewModel.getVerificationString() : "You did not select any flights."),
+                    buttons: [
+                        .default(Text(viewModel.hasFlights() ? "YES" : "OK")) {
+                            if viewModel.hasFlights() {
+                                addSelectedFlights()
+                            }
+                        },
+                        .cancel()
+                    ]
+                )
+            }
+            .analyticsScreen(name: "ImageToFlightView")
         }
     }
 }
-
-struct AlertWithIconView: View {
-    
-    var startAnimate: Bool = false
-    @State var isRotating: Bool = false
-    var systemImage: String = "info.bubble"
-    var message: String = "..."
-    
-    init(startAnimate: Bool, systemImage: String, message: String) {
-        self.systemImage = systemImage
-        self.message = message
-        self.startAnimate = startAnimate
-    }
-    
-    var body: some View {
-        HStack {
-            Image(systemName: systemImage)
-                .font(.largeTitle)
-                .foregroundColor(.wbPinkMedium)
-                .rotationEffect(.degrees(isRotating ? 360 : 0))
-                .animation(Animation.linear(duration: 3).repeatForever(autoreverses: false), value: isRotating)
-                .onAppear() {
-                    self.isRotating = startAnimate
-                }
-            Text(message)
-                .font(.custom("Gilroy-Medium", size: 19))
-                .foregroundColor(.black.opacity(0.8))
-                .padding()
-        }
-        .padding()
-        .cardStyle(.gray.opacity(0.1))
-    }
-}
-

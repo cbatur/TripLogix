@@ -126,7 +126,7 @@
 		7E85E7A52BAE985100432BA9 /* UIView+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6F22BAE985100432BA9 /* UIView+Utilities.swift */; };
 		7E85E7A62BAE985100432BA9 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6F42BAE985100432BA9 /* AccountView.swift */; };
 		7E85E7A72BAE985100432BA9 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6F72BAE985100432BA9 /* LaunchScreenView.swift */; };
-		7E85E7A82BAE985100432BA9 /* FlightCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6F92BAE985100432BA9 /* FlightCardsView.swift */; };
+		7E85E7A82BAE985100432BA9 /* FlightCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6F92BAE985100432BA9 /* FlightCards.swift */; };
 		7E85E7A92BAE985100432BA9 /* FlightManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6FA2BAE985100432BA9 /* FlightManageView.swift */; };
 		7E85E7AA2BAE985100432BA9 /* SelectFlightsResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6FB2BAE985100432BA9 /* SelectFlightsResultsView.swift */; };
 		7E85E7AB2BAE985100432BA9 /* AddDestinationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6FD2BAE985100432BA9 /* AddDestinationButton.swift */; };
@@ -189,6 +189,9 @@
 		7E8821EF2BB6968D00B32747 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E8821EC2BB6968D00B32747 /* GoogleService-Info.plist */; };
 		7E8821F12BB69AAB00B32747 /* Analytics+ViewParameterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8821F02BB69AAB00B32747 /* Analytics+ViewParameterExtensions.swift */; };
 		7E8821F32BB7419C00B32747 /* ImageToFlightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8821F22BB7419C00B32747 /* ImageToFlightViewModel.swift */; };
+		7E8821F52BB7BC0600B32747 /* AlertBoxMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8821F42BB7BC0600B32747 /* AlertBoxMessage.swift */; };
+		7E8821FC2BB7D69400B32747 /* TLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8821FB2BB7D69400B32747 /* TLButton.swift */; };
+		7E8821FE2BB908F800B32747 /* TLFlightModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8821FD2BB908F800B32747 /* TLFlightModels.swift */; };
 		7EA98D0B2BB149DE00AE39A9 /* ImageToFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */; };
 		7EC183C22BB27A5B007B2602 /* _OpenAIImageViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C12BB27A5B007B2602 /* _OpenAIImageViewModels.swift */; };
 		7EC183C62BB2860C007B2602 /* OpenAI+TextCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */; };
@@ -197,7 +200,7 @@
 		7EC183CC2BB28CAB007B2602 /* OpenAI+ImageCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183CB2BB28CAB007B2602 /* OpenAI+ImageCreate.swift */; };
 		7EC183CF2BB295C4007B2602 /* Request+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183CE2BB295C4007B2602 /* Request+Extension.swift */; };
 		7EC183D22BB29780007B2602 /* OpenAI+RemoteImageToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183D12BB29780007B2602 /* OpenAI+RemoteImageToText.swift */; };
-		7EC183D72BB3E5E7007B2602 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183D62BB3E5E7007B2602 /* ImagePicker.swift */; };
+		7EC183D72BB3E5E7007B2602 /* UIView+ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183D62BB3E5E7007B2602 /* UIView+ImagePicker.swift */; };
 		7EC183DB2BB511F9007B2602 /* AE_FutureFlight.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EC183DA2BB511F9007B2602 /* AE_FutureFlight.json */; };
 		7EC183DD2BB53285007B2602 /* TLRequests+FlightImageUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183DC2BB53285007B2602 /* TLRequests+FlightImageUpload.swift */; };
 		7EC183E12BB53DDC007B2602 /* TLModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183E02BB53DDC007B2602 /* TLModels.swift */; };
@@ -342,7 +345,7 @@
 		7E85E6F22BAE985100432BA9 /* UIView+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Utilities.swift"; sourceTree = "<group>"; };
 		7E85E6F42BAE985100432BA9 /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		7E85E6F72BAE985100432BA9 /* LaunchScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
-		7E85E6F92BAE985100432BA9 /* FlightCardsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightCardsView.swift; sourceTree = "<group>"; };
+		7E85E6F92BAE985100432BA9 /* FlightCards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightCards.swift; sourceTree = "<group>"; };
 		7E85E6FA2BAE985100432BA9 /* FlightManageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightManageView.swift; sourceTree = "<group>"; };
 		7E85E6FB2BAE985100432BA9 /* SelectFlightsResultsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectFlightsResultsView.swift; sourceTree = "<group>"; };
 		7E85E6FD2BAE985100432BA9 /* AddDestinationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDestinationButton.swift; sourceTree = "<group>"; };
@@ -399,6 +402,9 @@
 		7E8821EC2BB6968D00B32747 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7E8821F02BB69AAB00B32747 /* Analytics+ViewParameterExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics+ViewParameterExtensions.swift"; sourceTree = "<group>"; };
 		7E8821F22BB7419C00B32747 /* ImageToFlightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToFlightViewModel.swift; sourceTree = "<group>"; };
+		7E8821F42BB7BC0600B32747 /* AlertBoxMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBoxMessage.swift; sourceTree = "<group>"; };
+		7E8821FB2BB7D69400B32747 /* TLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLButton.swift; sourceTree = "<group>"; };
+		7E8821FD2BB908F800B32747 /* TLFlightModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLFlightModels.swift; sourceTree = "<group>"; };
 		7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToFlightView.swift; sourceTree = "<group>"; };
 		7EC183C12BB27A5B007B2602 /* _OpenAIImageViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _OpenAIImageViewModels.swift; sourceTree = "<group>"; };
 		7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenAI+TextCommand.swift"; sourceTree = "<group>"; };
@@ -407,7 +413,7 @@
 		7EC183CB2BB28CAB007B2602 /* OpenAI+ImageCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenAI+ImageCreate.swift"; sourceTree = "<group>"; };
 		7EC183CE2BB295C4007B2602 /* Request+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+Extension.swift"; sourceTree = "<group>"; };
 		7EC183D12BB29780007B2602 /* OpenAI+RemoteImageToText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenAI+RemoteImageToText.swift"; sourceTree = "<group>"; };
-		7EC183D62BB3E5E7007B2602 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		7EC183D62BB3E5E7007B2602 /* UIView+ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ImagePicker.swift"; sourceTree = "<group>"; };
 		7EC183DA2BB511F9007B2602 /* AE_FutureFlight.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AE_FutureFlight.json; sourceTree = "<group>"; };
 		7EC183DC2BB53285007B2602 /* TLRequests+FlightImageUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+FlightImageUpload.swift"; sourceTree = "<group>"; };
 		7EC183E02BB53DDC007B2602 /* TLModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLModels.swift; sourceTree = "<group>"; };
@@ -766,6 +772,7 @@
 				7E85E6F02BAE985100432BA9 /* String+DateUtilities.swift */,
 				7E85E6F12BAE985100432BA9 /* Strings+Extensions.swift */,
 				7E85E6F22BAE985100432BA9 /* UIView+Utilities.swift */,
+				7EC183D62BB3E5E7007B2602 /* UIView+ImagePicker.swift */,
 				7EC183CE2BB295C4007B2602 /* Request+Extension.swift */,
 			);
 			path = Extensions;
@@ -798,11 +805,9 @@
 		7E85E6FC2BAE985100432BA9 /* Reservations */ = {
 			isa = PBXGroup;
 			children = (
+				7E8821FA2BB7D5D000B32747 /* Cards */,
+				7E8821F92BB7D59800B32747 /* Add Flight Manually */,
 				7EA98D072BB1489700AE39A9 /* Add Flight By image */,
-				7E85E6FA2BAE985100432BA9 /* FlightManageView.swift */,
-				7E85E6FB2BAE985100432BA9 /* SelectFlightsResultsView.swift */,
-				7E5913302BAF99DD00529823 /* FlightListView.swift */,
-				7E85E6F92BAE985100432BA9 /* FlightCardsView.swift */,
 			);
 			path = Reservations;
 			sourceTree = "<group>";
@@ -810,9 +815,10 @@
 		7E85E7062BAE985100432BA9 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				7EC183D62BB3E5E7007B2602 /* ImagePicker.swift */,
+				7E8821F82BB7D42D00B32747 /* Alerts and Notifications */,
+				7E8821F72BB7D40600B32747 /* Buttons and Text */,
+				7E8821F62BB7D2A500B32747 /* Banners and Headers */,
 				7E85E6FD2BAE985100432BA9 /* AddDestinationButton.swift */,
-				7E85E6FE2BAE985100432BA9 /* BannerWithDismiss.swift */,
 				7E85E6FF2BAE985100432BA9 /* CalendarMonthView.swift */,
 				7E85E7002BAE985100432BA9 /* DestinationIconView.swift */,
 				7E85E7012BAE985100432BA9 /* LoadingItineraryView.swift */,
@@ -841,7 +847,6 @@
 				7E85E6FC2BAE985100432BA9 /* Reservations */,
 				7E85E7062BAE985100432BA9 /* Shared */,
 				7E85E70B2BAE985100432BA9 /* Tabs */,
-				7E85E70C2BAE985100432BA9 /* CityTitleBannerView.swift */,
 				7E85E70D2BAE985100432BA9 /* EventSubViews.swift */,
 				7E85E70E2BAE985100432BA9 /* NavigationBarSubViews.swift */,
 			);
@@ -905,6 +910,7 @@
 				7E85E72C2BAE985100432BA9 /* GPTResponseModels.swift */,
 				7E85E72D2BAE985100432BA9 /* Location.swift */,
 				7EC183E02BB53DDC007B2602 /* TLModels.swift */,
+				7E8821FD2BB908F800B32747 /* TLFlightModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -937,6 +943,49 @@
 				7E8821F02BB69AAB00B32747 /* Analytics+ViewParameterExtensions.swift */,
 			);
 			path = Analytics;
+			sourceTree = "<group>";
+		};
+		7E8821F62BB7D2A500B32747 /* Banners and Headers */ = {
+			isa = PBXGroup;
+			children = (
+				7E85E6FE2BAE985100432BA9 /* BannerWithDismiss.swift */,
+				7E85E70C2BAE985100432BA9 /* CityTitleBannerView.swift */,
+			);
+			path = "Banners and Headers";
+			sourceTree = "<group>";
+		};
+		7E8821F72BB7D40600B32747 /* Buttons and Text */ = {
+			isa = PBXGroup;
+			children = (
+				7E8821FB2BB7D69400B32747 /* TLButton.swift */,
+			);
+			path = "Buttons and Text";
+			sourceTree = "<group>";
+		};
+		7E8821F82BB7D42D00B32747 /* Alerts and Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				7E8821F42BB7BC0600B32747 /* AlertBoxMessage.swift */,
+			);
+			path = "Alerts and Notifications";
+			sourceTree = "<group>";
+		};
+		7E8821F92BB7D59800B32747 /* Add Flight Manually */ = {
+			isa = PBXGroup;
+			children = (
+				7E85E6FA2BAE985100432BA9 /* FlightManageView.swift */,
+				7E85E6FB2BAE985100432BA9 /* SelectFlightsResultsView.swift */,
+				7E5913302BAF99DD00529823 /* FlightListView.swift */,
+			);
+			path = "Add Flight Manually";
+			sourceTree = "<group>";
+		};
+		7E8821FA2BB7D5D000B32747 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				7E85E6F92BAE985100432BA9 /* FlightCards.swift */,
+			);
+			path = Cards;
 			sourceTree = "<group>";
 		};
 		7EA98D072BB1489700AE39A9 /* Add Flight By image */ = {
@@ -1228,8 +1277,9 @@
 				7E85E7C12BAE985100432BA9 /* _PlacesViewModel.swift in Sources */,
 				7E85E7D42BAE985100432BA9 /* GPTResponseModels.swift in Sources */,
 				7E5913312BAF99DD00529823 /* FlightListView.swift in Sources */,
-				7EC183D72BB3E5E7007B2602 /* ImagePicker.swift in Sources */,
+				7EC183D72BB3E5E7007B2602 /* UIView+ImagePicker.swift in Sources */,
 				7EC183C82BB28669007B2602 /* RequestNameSpaces.swift in Sources */,
+				7E8821FC2BB7D69400B32747 /* TLButton.swift in Sources */,
 				7E85E79D2BAE985100432BA9 /* CryptoSwift.swift in Sources */,
 				7EC183D22BB29780007B2602 /* OpenAI+RemoteImageToText.swift in Sources */,
 				7E85E7D62BAE985100432BA9 /* ActivityIndicatorMessage.swift in Sources */,
@@ -1270,10 +1320,12 @@
 				7E85E7D92BAE985100432BA9 /* QCategory.swift in Sources */,
 				7E85E7C72BAE985100432BA9 /* DestinationListingView.swift in Sources */,
 				7E85E7D12BAE985100432BA9 /* CalendarModals.swift in Sources */,
+				7E8821F52BB7BC0600B32747 /* AlertBoxMessage.swift in Sources */,
 				7E85E7C82BAE985100432BA9 /* NavigationToolbar.swift in Sources */,
 				7E85E79E2BAE985100432BA9 /* ViewHelpers.swift in Sources */,
 				7E85E7D52BAE985100432BA9 /* Location.swift in Sources */,
 				7E85E7C32BAE985100432BA9 /* AddNewDestinationView.swift in Sources */,
+				7E8821FE2BB908F800B32747 /* TLFlightModels.swift in Sources */,
 				7E85E7BD2BAE985100432BA9 /* _AvionEdgeAutocompleteViewModel.swift in Sources */,
 				7E85E7C22BAE985100432BA9 /* _StaticViewModel.swift in Sources */,
 				7E85E79F2BAE985100432BA9 /* Array+Extensions.swift in Sources */,
@@ -1294,7 +1346,7 @@
 				7EC183CF2BB295C4007B2602 /* Request+Extension.swift in Sources */,
 				7E85E7B42BAE985100432BA9 /* _TabItineraryView.swift in Sources */,
 				7E85E7D72BAE985100432BA9 /* AirportType.swift in Sources */,
-				7E85E7A82BAE985100432BA9 /* FlightCardsView.swift in Sources */,
+				7E85E7A82BAE985100432BA9 /* FlightCards.swift in Sources */,
 				7E85E7BB2BAE985100432BA9 /* UpdateDestinationIcon.swift in Sources */,
 				7E85E7BA2BAE985100432BA9 /* NavigationBarSubViews.swift in Sources */,
 				7E85E7B92BAE985100432BA9 /* EventSubViews.swift in Sources */,

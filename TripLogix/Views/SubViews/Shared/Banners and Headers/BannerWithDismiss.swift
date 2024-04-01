@@ -47,6 +47,8 @@ struct BannerWithDismiss: View {
                 .fill(Color.gray.opacity(0.3))
                 .frame(height: 1)
         }
+        .padding()
+        .padding(.top, 10)
         .frame(height: 120)
     }
 }
