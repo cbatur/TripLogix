@@ -34,7 +34,7 @@ struct TripLogixApp: App {
                         }
                     }
             } else {
-                MainTabbedView()
+                TripsView()
             }
         }
         .modelContainer(for: Destination.self)

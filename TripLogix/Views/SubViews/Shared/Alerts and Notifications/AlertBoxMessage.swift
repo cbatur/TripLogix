@@ -2,13 +2,16 @@
 import Foundation
 import SwiftUI
 
-enum AlertBoxMessage {
+enum AlertBoxMessage: Equatable {
     case analyzeImage
     case imageReceived
     case flightsTrackedInImage
     case reservationInThePast
     case imageNotSerialized
-    case error
+    case error(String)
+    case dayTripInitial(String)
+    case dayTripInitial2
+    case dayTripInitial3(String)
     
     var systemImage: String {
         switch self {
@@ -24,6 +27,12 @@ enum AlertBoxMessage {
             return "exclamationmark.triangle"
         case .error:
             return "exclamationmark.triangle"
+        case .dayTripInitial:
+            return "cablecar"
+        case .dayTripInitial2:
+            return "fork.knife.circle"
+        case .dayTripInitial3:
+            return "cloud.hail"
         }
     }
     
@@ -39,8 +48,14 @@ enum AlertBoxMessage {
             return "The reservation for this ticket is in the past; please ensure it is for a future flight."
         case .imageNotSerialized:
             return "Flight info could not be read the image. Try again or upload another image."
-        case .error:
-            return "Something Went Wrong!"
+        case .error(let message):
+            return "\(message)"
+        case .dayTripInitial(let city):
+            return "SIT TIGHT \nWe're building the perfect itinerary for \(city)"
+        case .dayTripInitial2:
+            return "This is taking a while because we're looking up everything. \n\nYou're in good hands."
+        case .dayTripInitial3(let city):
+            return "There are lots of exciting places to do in \(city) \n\nWe're brushing up the details."
         }
     }
     
@@ -58,6 +73,12 @@ enum AlertBoxMessage {
             return false
         case .error:
             return false
+        case .dayTripInitial:
+            return true
+        case .dayTripInitial2:
+            return true
+        case .dayTripInitial3:
+            return true
         }
     }
 }

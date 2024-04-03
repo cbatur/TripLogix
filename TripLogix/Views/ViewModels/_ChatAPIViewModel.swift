@@ -19,21 +19,11 @@ final class ChatAPIViewModel: ObservableObject {
     @Published var loadingMessage: String? = nil
     @Published var loadingIconMessage: String? = nil
     private var apiCount = 0
-    private var activityMessage: ActivityIndicatorMessage = .blank
     
     func getChatGPTContent(qType: QCategory, isMock: Bool? = false) {
         switch qType {
             case .getDailyPlan(let city, _), .getAllEvents(let city, _):
                 self.fetchRandomLocationPhoto(keyword: city)
-            
-                if apiCount == 0 {
-                    activityMessage = .dayTripInitial(city)
-                } else if apiCount == 1 {
-                    activityMessage = .dayTripInitial2
-                } else {
-                    activityMessage = .dayTripInitial3(city)
-                }
-            
                 apiCount = apiCount + 1
             
             if isMock == true {
@@ -71,7 +61,6 @@ final class ChatAPIViewModel: ObservableObject {
         qType: QCategory,
         city: String
     ) {
-        self.loadingMessage = self.activityMessage.content
         self.cancellable = self.apiService.openAPICommand(qType: qType)
             .catch {_ in Just(ChatGPTResponse(id: "0", choices: [])) }
             .sink(receiveCompletion: { _ in }, receiveValue: {
@@ -105,7 +94,7 @@ final class ChatAPIViewModel: ObservableObject {
         qType: QCategory,
         location: String
     ) {
-        self.loadingMessage = self.activityMessage.content
+        //self.loadingMessage = self.activityMessage.content
         self.cancellable = self.apiService.openAPICommand(qType: qType)
             .catch {_ in Just(ChatGPTResponse(id: "0", choices: [])) }
             .sink(receiveCompletion: { _ in }, receiveValue: {

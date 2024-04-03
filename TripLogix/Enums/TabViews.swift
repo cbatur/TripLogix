@@ -14,7 +14,7 @@ enum TabViews {
         case .reservations:
             return "Reservations"
         case .itinerary:
-            return "itinerary"
+            return "Trip Plan"
         case .settings:
             return "Settings"
         }

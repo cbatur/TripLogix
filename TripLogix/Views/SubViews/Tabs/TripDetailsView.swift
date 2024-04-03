@@ -7,10 +7,13 @@ struct TripDetailsView: View {
     @StateObject var chatAPIViewModel: ChatAPIViewModel = ChatAPIViewModel()
     @StateObject var googlePlacesViewModel: GooglePlacesViewModel = GooglePlacesViewModel()
     @Bindable var destination: Destination
-    let tabTripItems: [TabViews] = [.overview, .reservations, .itinerary, .settings]
+    let tabTripItems: [TabViews] = [.overview, .itinerary, .reservations]
     @State private var selectedTab: TabViews = .overview
 
     @State private var launchUpdateIconView = false
+    let columns: [GridItem] = [GridItem(.flexible()),
+                               GridItem(.flexible()),
+                               GridItem(.flexible())]
 
     init(destination: Destination) {
         _destination = Bindable(wrappedValue: destination)
@@ -42,34 +45,28 @@ struct TripDetailsView: View {
                         CityTitleBannerView(cityName: destination.name)
                             .frame(alignment: .leading)
                     }
-                    .padding(.leading, 10)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     
                     // TabView for trip tabs
-                    VStack {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 8) {
-                                ForEach(tabTripItems, id: \.self) { tab in
-                                    Text(tab.title.uppercased())
-                                        .font(.custom("Satoshi-Bold", size: 13))
-                                        .padding(7)
-                                        .background(
-                                            self.selectedTab == tab ? Color.wbPinkMedium : Color.clear
-                                        )
-                                        .foregroundColor(
-                                            self.selectedTab == tab ? Color.white : Color.black
-                                        )
-                                        .cornerRadius(5)
-                                        .onTapGesture {
-                                            self.selectedTab = tab
-                                        }
+                    LazyVGrid(columns: columns) {
+                        ForEach(tabTripItems, id: \.self) { tab in
+                            Text(tab.title.uppercased())
+                                .font(.custom("Satoshi-Bold", size: 13))
+                                .padding(7)
+                                .background(
+                                    self.selectedTab == tab ? Color.wbPinkMedium : Color.clear
+                                )
+                                .foregroundColor(
+                                    self.selectedTab == tab ? Color.white : Color.black
+                                )
+                                .cornerRadius(5)
+                                .onTapGesture {
+                                    self.selectedTab = tab
                                 }
-                            }
-                            .padding(.horizontal)
                         }
                     }
                     .padding(7)
-                    .frame(width: max(geometry.size.width - 20, 0))
-                    .cardStyle(.white.opacity(0.9))
+                    .cardStyle(.white)
                     
                     Spacer()
                     
@@ -96,7 +93,7 @@ struct TripDetailsView: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
-            NavigationBarSubViews(onAction: {
+            NavigationBarIconView(onAction: {
                 self.presentationMode.wrappedValue.dismiss()
             })
         )

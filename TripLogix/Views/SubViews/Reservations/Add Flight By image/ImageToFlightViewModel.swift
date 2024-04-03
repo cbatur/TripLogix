@@ -23,7 +23,7 @@ final class ImageToFlightViewModel: ObservableObject {
     // Additional methods and logic...
     func activity() -> Bool {
         (
-            activeAlertBox != nil && activeAlertBox != .reservationInThePast && activeAlertBox != .imageNotSerialized && activeAlertBox != .error
+            activeAlertBox != nil && activeAlertBox != .reservationInThePast && activeAlertBox != .imageNotSerialized && activeAlertBox != .error("Something Went Wrong!")
         )
     }
     
@@ -96,7 +96,7 @@ extension ImageToFlightViewModel { // API MEthods
         tlAPIService.flightImageUpload(imageName: imageName, imageString: imageString)
             .sink(receiveCompletion: { [weak self] completion in
                 if case .failure = completion {
-                    self?.activeAlertBox = AlertBoxMessage.error
+                    self?.activeAlertBox = AlertBoxMessage.error("Something Went Wrong!")
                 }
             }, receiveValue: { [weak self] tlImageUrl in
                 self?.flightImageUrl = tlImageUrl.imageUrl
@@ -152,7 +152,7 @@ extension ImageToFlightViewModel { // API MEthods
         aviationEdgeAPIService.futureFlights(futureFlightParams: futureFlightParams)
             .sink(receiveCompletion: { [weak self] completion in
                 if case .failure = completion {
-                    self?.activeAlertBox = AlertBoxMessage.error
+                    self?.activeAlertBox = AlertBoxMessage.error("Something Went Wrong!")
                 }
             }, receiveValue: { [weak self] flights in
                  let flightSet = flights.filter { flight in

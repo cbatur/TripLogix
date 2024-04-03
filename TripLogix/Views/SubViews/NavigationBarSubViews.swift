@@ -25,3 +25,22 @@ struct NavigationBarSubViews: View {
         }
     }
 }
+
+struct NavigationBarIconView: View {
+    let onAction: () -> Void
+    
+    var body: some View {
+        HStack {
+            Button(action: {
+                self.onAction()
+            }) {
+                Image(systemName: "list.bullet.circle.fill")
+                    .aspectRatio(contentMode: .fit)
+                    .font(.largeTitle)
+                    .background(.clear)
+                    .foregroundColor(Color.white)
+            }
+            Spacer()
+        }
+    }
+}

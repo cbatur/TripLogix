@@ -170,7 +170,6 @@
 		7E85E7D32BAE985100432BA9 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E72B2BAE985100432BA9 /* Destination.swift */; };
 		7E85E7D42BAE985100432BA9 /* GPTResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E72C2BAE985100432BA9 /* GPTResponseModels.swift */; };
 		7E85E7D52BAE985100432BA9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E72D2BAE985100432BA9 /* Location.swift */; };
-		7E85E7D62BAE985100432BA9 /* ActivityIndicatorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E72F2BAE985100432BA9 /* ActivityIndicatorMessage.swift */; };
 		7E85E7D72BAE985100432BA9 /* AirportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7302BAE985100432BA9 /* AirportType.swift */; };
 		7E85E7D82BAE985100432BA9 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7312BAE985100432BA9 /* Icons.swift */; };
 		7E85E7D92BAE985100432BA9 /* QCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7322BAE985100432BA9 /* QCategory.swift */; };
@@ -192,6 +191,8 @@
 		7E8821F52BB7BC0600B32747 /* AlertBoxMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8821F42BB7BC0600B32747 /* AlertBoxMessage.swift */; };
 		7E8821FC2BB7D69400B32747 /* TLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8821FB2BB7D69400B32747 /* TLButton.swift */; };
 		7E8821FE2BB908F800B32747 /* TLFlightModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8821FD2BB908F800B32747 /* TLFlightModels.swift */; };
+		7E8822002BBBA17300B32747 /* TempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8821FF2BBBA17300B32747 /* TempView.swift */; };
+		7E8822022BBD09FA00B32747 /* __TabItineraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822012BBD09FA00B32747 /* __TabItineraryViewModel.swift */; };
 		7EA98D0B2BB149DE00AE39A9 /* ImageToFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */; };
 		7EC183C22BB27A5B007B2602 /* _OpenAIImageViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C12BB27A5B007B2602 /* _OpenAIImageViewModels.swift */; };
 		7EC183C62BB2860C007B2602 /* OpenAI+TextCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */; };
@@ -389,7 +390,6 @@
 		7E85E72B2BAE985100432BA9 /* Destination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		7E85E72C2BAE985100432BA9 /* GPTResponseModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPTResponseModels.swift; sourceTree = "<group>"; };
 		7E85E72D2BAE985100432BA9 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		7E85E72F2BAE985100432BA9 /* ActivityIndicatorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorMessage.swift; sourceTree = "<group>"; };
 		7E85E7302BAE985100432BA9 /* AirportType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirportType.swift; sourceTree = "<group>"; };
 		7E85E7312BAE985100432BA9 /* Icons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		7E85E7322BAE985100432BA9 /* QCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QCategory.swift; sourceTree = "<group>"; };
@@ -405,6 +405,8 @@
 		7E8821F42BB7BC0600B32747 /* AlertBoxMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBoxMessage.swift; sourceTree = "<group>"; };
 		7E8821FB2BB7D69400B32747 /* TLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLButton.swift; sourceTree = "<group>"; };
 		7E8821FD2BB908F800B32747 /* TLFlightModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLFlightModels.swift; sourceTree = "<group>"; };
+		7E8821FF2BBBA17300B32747 /* TempView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempView.swift; sourceTree = "<group>"; };
+		7E8822012BBD09FA00B32747 /* __TabItineraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __TabItineraryViewModel.swift; sourceTree = "<group>"; };
 		7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToFlightView.swift; sourceTree = "<group>"; };
 		7EC183C12BB27A5B007B2602 /* _OpenAIImageViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _OpenAIImageViewModels.swift; sourceTree = "<group>"; };
 		7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenAI+TextCommand.swift"; sourceTree = "<group>"; };
@@ -833,9 +835,11 @@
 		7E85E70B2BAE985100432BA9 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				7E85E7222BAE985100432BA9 /* TripDetailsView.swift */,
 				7E85E7082BAE985100432BA9 /* _TabOverviewView.swift */,
 				7E85E7092BAE985100432BA9 /* _TabReservationsView.swift */,
 				7E85E7072BAE985100432BA9 /* _TabItineraryView.swift */,
+				7E8822012BBD09FA00B32747 /* __TabItineraryViewModel.swift */,
 				7E85E70A2BAE985100432BA9 /* _TabTripSettings.swift */,
 			);
 			path = Tabs;
@@ -891,9 +895,9 @@
 				7E85E71E2BAE985100432BA9 /* DestinationListingView.swift */,
 				7E85E71F2BAE985100432BA9 /* NavigationToolbar.swift */,
 				7E85E7212BAE985100432BA9 /* SearchDestinationView.swift */,
-				7E85E7222BAE985100432BA9 /* TripDetailsView.swift */,
 				7E85E7232BAE985100432BA9 /* TripsView.swift */,
 				7E85E7242BAE985100432BA9 /* VenueDetailsView.swift */,
+				7E8821FF2BBBA17300B32747 /* TempView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -918,7 +922,6 @@
 		7E85E7352BAE985100432BA9 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				7E85E72F2BAE985100432BA9 /* ActivityIndicatorMessage.swift */,
 				7E85E7302BAE985100432BA9 /* AirportType.swift */,
 				7E85E7312BAE985100432BA9 /* Icons.swift */,
 				7E85E7322BAE985100432BA9 /* QCategory.swift */,
@@ -1282,7 +1285,6 @@
 				7E8821FC2BB7D69400B32747 /* TLButton.swift in Sources */,
 				7E85E79D2BAE985100432BA9 /* CryptoSwift.swift in Sources */,
 				7EC183D22BB29780007B2602 /* OpenAI+RemoteImageToText.swift in Sources */,
-				7E85E7D62BAE985100432BA9 /* ActivityIndicatorMessage.swift in Sources */,
 				7EC183DD2BB53285007B2602 /* TLRequests+FlightImageUpload.swift in Sources */,
 				7E85E7A92BAE985100432BA9 /* FlightManageView.swift in Sources */,
 				7E85E7B32BAE985100432BA9 /* SideMenuView.swift in Sources */,
@@ -1316,6 +1318,7 @@
 				7E85E73B2BAE985100432BA9 /* AE+FutureFlights.swift in Sources */,
 				7E85E7D22BAE985100432BA9 /* ChatGPTResponse.swift in Sources */,
 				7EC183CA2BB28962007B2602 /* OpenAIAPIServices.swift in Sources */,
+				7E8822002BBBA17300B32747 /* TempView.swift in Sources */,
 				7E85E7CC2BAE985100432BA9 /* TripsView.swift in Sources */,
 				7E85E7D92BAE985100432BA9 /* QCategory.swift in Sources */,
 				7E85E7C72BAE985100432BA9 /* DestinationListingView.swift in Sources */,
@@ -1336,6 +1339,7 @@
 				7E85E7B82BAE985100432BA9 /* CityTitleBannerView.swift in Sources */,
 				7E85E7A52BAE985100432BA9 /* UIView+Utilities.swift in Sources */,
 				7E85E7A02BAE985100432BA9 /* Calendar+Utilities.swift in Sources */,
+				7E8822022BBD09FA00B32747 /* __TabItineraryViewModel.swift in Sources */,
 				7E85E7DC2BAE985100432BA9 /* Configuration.swift in Sources */,
 				7E85E7A62BAE985100432BA9 /* AccountView.swift in Sources */,
 				7EC183E12BB53DDC007B2602 /* TLModels.swift in Sources */,

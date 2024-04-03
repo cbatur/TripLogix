@@ -13,7 +13,7 @@ struct MainTabbedView: View {
         ZStack{
             
             TabView(selection: $selectedSideMenuTab) {
-                TripsView(presentSideMenu: $presentSideMenu)
+                AccountView(presentSideMenu: $presentSideMenu)
                     .tag(0)
                 AccountView(presentSideMenu: $presentSideMenu)
                     .tag(1)
@@ -37,7 +37,7 @@ struct MainTabbedView: View {
 }
 
 struct TripsView: View {
-    @Binding var presentSideMenu: Bool
+    //@Binding var presentSideMenu: Bool
     
     @Environment(\.modelContext) var modelContext
     @State private var path = [Destination]()
@@ -69,7 +69,7 @@ struct TripsView: View {
             }
             .navigationBarItems(leading:
                 Button{
-                    presentSideMenu.toggle()
+                    //presentSideMenu.toggle()
                 } label: {
                     Image("menu")
                         .resizable()
