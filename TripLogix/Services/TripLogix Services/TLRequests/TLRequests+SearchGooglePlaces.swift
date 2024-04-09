@@ -18,13 +18,10 @@ extension TLRequests {
             guard let postData = try? JSONSerialization.data(withJSONObject: body) else {
                 fatalError("Invalid Body")
             }
-
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.httpBody = postData
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            
-            print(request.prettyDescription)
             return request
         }
     }

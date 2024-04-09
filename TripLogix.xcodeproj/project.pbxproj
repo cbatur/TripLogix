@@ -155,10 +155,8 @@
 		7E85E7C22BAE985100432BA9 /* _StaticViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7182BAE985100432BA9 /* _StaticViewModel.swift */; };
 		7E85E7C32BAE985100432BA9 /* AddNewDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E71A2BAE985100432BA9 /* AddNewDestinationView.swift */; };
 		7E85E7C42BAE985100432BA9 /* AllEventsSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E71B2BAE985100432BA9 /* AllEventsSelectionView.swift */; };
-		7E85E7C62BAE985100432BA9 /* DailyPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E71D2BAE985100432BA9 /* DailyPlanView.swift */; };
 		7E85E7C72BAE985100432BA9 /* DestinationListingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E71E2BAE985100432BA9 /* DestinationListingView.swift */; };
 		7E85E7C82BAE985100432BA9 /* NavigationToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E71F2BAE985100432BA9 /* NavigationToolbar.swift */; };
-		7E85E7CA2BAE985100432BA9 /* SearchDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7212BAE985100432BA9 /* SearchDestinationView.swift */; };
 		7E85E7CB2BAE985100432BA9 /* TripDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7222BAE985100432BA9 /* TripDetailsView.swift */; };
 		7E85E7CC2BAE985100432BA9 /* TripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7232BAE985100432BA9 /* TripsView.swift */; };
 		7E85E7CD2BAE985100432BA9 /* VenueDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7242BAE985100432BA9 /* VenueDetailsView.swift */; };
@@ -193,8 +191,10 @@
 		7E8821FE2BB908F800B32747 /* TLFlightModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8821FD2BB908F800B32747 /* TLFlightModels.swift */; };
 		7E8822002BBBA17300B32747 /* TempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8821FF2BBBA17300B32747 /* TempView.swift */; };
 		7E8822022BBD09FA00B32747 /* __TabItineraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822012BBD09FA00B32747 /* __TabItineraryViewModel.swift */; };
+		7E8822042BBE587400B32747 /* _AddNewDestinationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822032BBE587400B32747 /* _AddNewDestinationViewModel.swift */; };
+		7E8822062BBE6CC500B32747 /* GP+SearchByPlaceId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822052BBE6CC500B32747 /* GP+SearchByPlaceId.swift */; };
+		7E8822092BBE6F4800B32747 /* GooglePlacesAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822082BBE6F4800B32747 /* GooglePlacesAPIService.swift */; };
 		7EA98D0B2BB149DE00AE39A9 /* ImageToFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */; };
-		7EC183C22BB27A5B007B2602 /* _OpenAIImageViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C12BB27A5B007B2602 /* _OpenAIImageViewModels.swift */; };
 		7EC183C62BB2860C007B2602 /* OpenAI+TextCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */; };
 		7EC183C82BB28669007B2602 /* RequestNameSpaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C72BB28669007B2602 /* RequestNameSpaces.swift */; };
 		7EC183CA2BB28962007B2602 /* OpenAIAPIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C92BB28962007B2602 /* OpenAIAPIServices.swift */; };
@@ -375,10 +375,8 @@
 		7E85E7182BAE985100432BA9 /* _StaticViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _StaticViewModel.swift; sourceTree = "<group>"; };
 		7E85E71A2BAE985100432BA9 /* AddNewDestinationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewDestinationView.swift; sourceTree = "<group>"; };
 		7E85E71B2BAE985100432BA9 /* AllEventsSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllEventsSelectionView.swift; sourceTree = "<group>"; };
-		7E85E71D2BAE985100432BA9 /* DailyPlanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyPlanView.swift; sourceTree = "<group>"; };
 		7E85E71E2BAE985100432BA9 /* DestinationListingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationListingView.swift; sourceTree = "<group>"; };
 		7E85E71F2BAE985100432BA9 /* NavigationToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationToolbar.swift; sourceTree = "<group>"; };
-		7E85E7212BAE985100432BA9 /* SearchDestinationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDestinationView.swift; sourceTree = "<group>"; };
 		7E85E7222BAE985100432BA9 /* TripDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripDetailsView.swift; sourceTree = "<group>"; };
 		7E85E7232BAE985100432BA9 /* TripsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripsView.swift; sourceTree = "<group>"; };
 		7E85E7242BAE985100432BA9 /* VenueDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailsView.swift; sourceTree = "<group>"; };
@@ -407,8 +405,10 @@
 		7E8821FD2BB908F800B32747 /* TLFlightModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLFlightModels.swift; sourceTree = "<group>"; };
 		7E8821FF2BBBA17300B32747 /* TempView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempView.swift; sourceTree = "<group>"; };
 		7E8822012BBD09FA00B32747 /* __TabItineraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __TabItineraryViewModel.swift; sourceTree = "<group>"; };
+		7E8822032BBE587400B32747 /* _AddNewDestinationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _AddNewDestinationViewModel.swift; sourceTree = "<group>"; };
+		7E8822052BBE6CC500B32747 /* GP+SearchByPlaceId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GP+SearchByPlaceId.swift"; sourceTree = "<group>"; };
+		7E8822082BBE6F4800B32747 /* GooglePlacesAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesAPIService.swift; sourceTree = "<group>"; };
 		7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToFlightView.swift; sourceTree = "<group>"; };
-		7EC183C12BB27A5B007B2602 /* _OpenAIImageViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _OpenAIImageViewModels.swift; sourceTree = "<group>"; };
 		7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenAI+TextCommand.swift"; sourceTree = "<group>"; };
 		7EC183C72BB28669007B2602 /* RequestNameSpaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNameSpaces.swift; sourceTree = "<group>"; };
 		7EC183C92BB28962007B2602 /* OpenAIAPIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIAPIServices.swift; sourceTree = "<group>"; };
@@ -559,6 +559,7 @@
 		7E85E67F2BAE985000432BA9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7E8822072BBE6F2100B32747 /* Google Places Requests */,
 				7EC183CD2BB29565007B2602 /* TripLogix Services */,
 				7EC183C32BB2851B007B2602 /* Open AI */,
 				7E85E67C2BAE985000432BA9 /* AviationEdge */,
@@ -875,7 +876,6 @@
 				7E85E7162BAE985100432BA9 /* _MockServicesViewModel.swift */,
 				7E85E7172BAE985100432BA9 /* _PlacesViewModel.swift */,
 				7E85E7182BAE985100432BA9 /* _StaticViewModel.swift */,
-				7EC183C12BB27A5B007B2602 /* _OpenAIImageViewModels.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -883,18 +883,17 @@
 		7E85E7252BAE985100432BA9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7E85E71A2BAE985100432BA9 /* AddNewDestinationView.swift */,
+				7E8822032BBE587400B32747 /* _AddNewDestinationViewModel.swift */,
 				7E85E6F52BAE985100432BA9 /* Account */,
 				7E85E6F62BAE985100432BA9 /* Animatons */,
 				7E85E6F82BAE985100432BA9 /* Launch */,
 				7E85E70F2BAE985100432BA9 /* SubViews */,
 				7E85E7112BAE985100432BA9 /* UpdateViews */,
 				7E85E7192BAE985100432BA9 /* ViewModels */,
-				7E85E71A2BAE985100432BA9 /* AddNewDestinationView.swift */,
 				7E85E71B2BAE985100432BA9 /* AllEventsSelectionView.swift */,
-				7E85E71D2BAE985100432BA9 /* DailyPlanView.swift */,
 				7E85E71E2BAE985100432BA9 /* DestinationListingView.swift */,
 				7E85E71F2BAE985100432BA9 /* NavigationToolbar.swift */,
-				7E85E7212BAE985100432BA9 /* SearchDestinationView.swift */,
 				7E85E7232BAE985100432BA9 /* TripsView.swift */,
 				7E85E7242BAE985100432BA9 /* VenueDetailsView.swift */,
 				7E8821FF2BBBA17300B32747 /* TempView.swift */,
@@ -989,6 +988,23 @@
 				7E85E6F92BAE985100432BA9 /* FlightCards.swift */,
 			);
 			path = Cards;
+			sourceTree = "<group>";
+		};
+		7E8822072BBE6F2100B32747 /* Google Places Requests */ = {
+			isa = PBXGroup;
+			children = (
+				7E88220A2BBE6F6900B32747 /* Google Requests */,
+				7E8822082BBE6F4800B32747 /* GooglePlacesAPIService.swift */,
+			);
+			path = "Google Places Requests";
+			sourceTree = "<group>";
+		};
+		7E88220A2BBE6F6900B32747 /* Google Requests */ = {
+			isa = PBXGroup;
+			children = (
+				7E8822052BBE6CC500B32747 /* GP+SearchByPlaceId.swift */,
+			);
+			path = "Google Requests";
 			sourceTree = "<group>";
 		};
 		7EA98D072BB1489700AE39A9 /* Add Flight By image */ = {
@@ -1290,15 +1306,14 @@
 				7E85E7B32BAE985100432BA9 /* SideMenuView.swift in Sources */,
 				7E85E7BF2BAE985100432BA9 /* _GooglePlacesViewModel.swift in Sources */,
 				7E85E7BC2BAE985100432BA9 /* _AviationEdgeViewModel.swift in Sources */,
-				7EC183C22BB27A5B007B2602 /* _OpenAIImageViewModels.swift in Sources */,
 				7E85E7A32BAE985100432BA9 /* String+DateUtilities.swift in Sources */,
 				7E85E7392BAE985100432BA9 /* AE+Autocomplete.swift in Sources */,
 				7EA98D0B2BB149DE00AE39A9 /* ImageToFlightView.swift in Sources */,
 				7E85E7AB2BAE985100432BA9 /* AddDestinationButton.swift in Sources */,
 				7E85E7AF2BAE985100432BA9 /* LoadingItineraryView.swift in Sources */,
 				7E85E7382BAE985100432BA9 /* ColorKit.swift in Sources */,
+				7E8822042BBE587400B32747 /* _AddNewDestinationViewModel.swift in Sources */,
 				7E85E73E2BAE985100432BA9 /* TLAPIService.swift in Sources */,
-				7E85E7C62BAE985100432BA9 /* DailyPlanView.swift in Sources */,
 				7E85E7E02BAE991000432BA9 /* AnimationsView.swift in Sources */,
 				7E85E7C02BAE985100432BA9 /* _MockServicesViewModel.swift in Sources */,
 				7E8821F12BB69AAB00B32747 /* Analytics+ViewParameterExtensions.swift in Sources */,
@@ -1312,7 +1327,6 @@
 				7E85E7AE2BAE985100432BA9 /* DestinationIconView.swift in Sources */,
 				7E85E7A42BAE985100432BA9 /* Strings+Extensions.swift in Sources */,
 				7E85E7DA2BAE985100432BA9 /* TabViews.swift in Sources */,
-				7E85E7CA2BAE985100432BA9 /* SearchDestinationView.swift in Sources */,
 				7E85E7B52BAE985100432BA9 /* _TabOverviewView.swift in Sources */,
 				7E85E7AC2BAE985100432BA9 /* BannerWithDismiss.swift in Sources */,
 				7E85E73B2BAE985100432BA9 /* AE+FutureFlights.swift in Sources */,
@@ -1353,6 +1367,7 @@
 				7E85E7A82BAE985100432BA9 /* FlightCards.swift in Sources */,
 				7E85E7BB2BAE985100432BA9 /* UpdateDestinationIcon.swift in Sources */,
 				7E85E7BA2BAE985100432BA9 /* NavigationBarSubViews.swift in Sources */,
+				7E8822062BBE6CC500B32747 /* GP+SearchByPlaceId.swift in Sources */,
 				7E85E7B92BAE985100432BA9 /* EventSubViews.swift in Sources */,
 				7E85E7AA2BAE985100432BA9 /* SelectFlightsResultsView.swift in Sources */,
 				7E85E7A72BAE985100432BA9 /* LaunchScreenView.swift in Sources */,
@@ -1361,6 +1376,7 @@
 				7E85E7CB2BAE985100432BA9 /* TripDetailsView.swift in Sources */,
 				7E85E73D2BAE985100432BA9 /* AviationEdgeAPIServices.swift in Sources */,
 				7E85E7A12BAE985100432BA9 /* Color+Extensions.swift in Sources */,
+				7E8822092BBE6F4800B32747 /* GooglePlacesAPIService.swift in Sources */,
 				7EC183CC2BB28CAB007B2602 /* OpenAI+ImageCreate.swift in Sources */,
 				7E85E7B02BAE985100432BA9 /* LoadingView.swift in Sources */,
 				7E85E73A2BAE985100432BA9 /* AE+FlightTrack.swift in Sources */,
@@ -1529,7 +1545,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 104;
+				CURRENT_PROJECT_VERSION = 105;
 				DEVELOPMENT_ASSET_PATHS = "\"TripLogix/Preview Content\"";
 				DEVELOPMENT_TEAM = ZLA3S7L9MF;
 				ENABLE_PREVIEWS = YES;
@@ -1563,7 +1579,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 104;
+				CURRENT_PROJECT_VERSION = 105;
 				DEVELOPMENT_ASSET_PATHS = "\"TripLogix/Preview Content\"";
 				DEVELOPMENT_TEAM = ZLA3S7L9MF;
 				ENABLE_PREVIEWS = YES;

@@ -19,9 +19,7 @@ class TLAPIService: ServiceProvider {
         return URLSession.shared.dataTaskPublisher(for: request)
             .mapError { _ in APIError.serverError }
             .map { $0.data }
-            //.print()
             .decode(type: T.self, decoder: JSONDecoder())
-            //.print()
             .mapError { _ in APIError.parsingError }
             .receive(on: RunLoop.main)
             .eraseToAnyPublisher()

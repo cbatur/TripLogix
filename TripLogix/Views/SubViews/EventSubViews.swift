@@ -1,6 +1,11 @@
 
 import SwiftUI
 
+struct IdentifiableString: Identifiable {
+    let id: UUID = UUID()
+    var value: String
+}
+
 // This view is the Itinerary event list.
 struct EventView: View {
     let day: Itinerary

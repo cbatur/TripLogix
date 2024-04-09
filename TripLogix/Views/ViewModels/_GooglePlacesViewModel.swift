@@ -3,55 +3,10 @@ import Foundation
 import Combine
 
 class GooglePlacesViewModel: ObservableObject {
-    @Published var query = ""
-    @Published private(set) var suggestions: [GooglePlacesResponse.Prediction] = []
     @Published var photosData: [String] = []
     private var cancellables = Set<AnyCancellable>()
     
-    init() {
-        $query
-            .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
-            .removeDuplicates()
-            .flatMap { (queryString) -> AnyPublisher<[GooglePlacesResponse.Prediction], Never> in
-                if queryString.count < 3 {
-                    return Just([]).eraseToAnyPublisher()
-                }
-                return self.fetchAutocomplete(queryString)
-                    .replaceError(with: [])
-                    .eraseToAnyPublisher()
-            }
-            .assign(to: &$suggestions)
-    }
-    
-    private func fetchAutocomplete(_ query: String) -> AnyPublisher<[GooglePlacesResponse.Prediction], Error> {
-        
-        guard let apiKey = decryptAPIKey(.googlePlaces) else { preconditionFailure("Bad API Key") }
 
-        let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=\(query)&types=(cities)&key=\(apiKey)"
-        
-        guard let url = URL(string: urlString) else {
-            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
-        }
-        
-        return URLSession.shared.dataTaskPublisher(for: url)
-            .map(\.data)
-            .decode(type: GooglePlacesResponse.self, decoder: JSONDecoder())
-            .map { response in
-                response.predictions.map { $0 }
-            }
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
-    }
-    
-    func selectSuggestion(_ suggestion: String) {
-        self.query = suggestion
-        self.suggestions = []
-    }
-    
-    func resetSearch() {
-        self.query = ""
-        self.suggestions = []
-    }
     
     // Get Photos By Places Id
 
@@ -127,11 +82,4 @@ class GooglePlacesViewModel: ObservableObject {
 }
 
 // Model for Google Places response
-struct GooglePlacesResponse: Codable {
-    let predictions: [Prediction]
-    
-    struct Prediction: Codable, Hashable {
-        let description: String
-        let place_id: String
-    }
-}
+

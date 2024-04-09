@@ -1,5 +1,6 @@
 
 import SwiftUI
+import UIKit
 
 struct DestinationIconDataView: View {
     let iconData: Data?
