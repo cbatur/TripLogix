@@ -13,7 +13,7 @@ struct Location: Codable, Hashable, Identifiable {
     //let place_saved: Bool
 }
 
-struct GooglePlace: Codable, Identifiable {
+struct GooglePlace: Codable, Identifiable, Equatable {
     var id = UUID()
     let htmlAttributions: [String]
     let result: PlaceResult
@@ -22,6 +22,14 @@ struct GooglePlace: Codable, Identifiable {
     enum CodingKeys: String, CodingKey {
         case htmlAttributions = "html_attributions"
         case result, status
+    }
+    
+    static func == (lhs: GooglePlace, rhs: GooglePlace) -> Bool {
+        return lhs.id == rhs.id && lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
 

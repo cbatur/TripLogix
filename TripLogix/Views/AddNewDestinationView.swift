@@ -1,23 +1,32 @@
 
 import SwiftUI
-import LonginusSwiftUI
-import UIKit
 
 struct AddNewDestinationView: View {
     @StateObject private var viewModel = AddNewDestinationViewModel()
     @StateObject var placesViewModel: PlacesViewModel = PlacesViewModel()
-    @State private var showAlert = false
+    @State private var showMenu = false
     @Environment(\.presentationMode) var presentationMode
     let columns: [GridItem] = [GridItem(.flexible()),
                                GridItem(.flexible())]
     
-    var onDataReceive: ((String,String)) -> Void
+    var onDataReceive: ((GooglePlace)) -> Void
+    @State private var settingsDetent = PresentationDetent.medium
 
     @FocusState private var isInputActive: Bool
     @State private var searchCity = ""
+    @State private var selectedCity: PlaceWithPhoto?
     
     private var alertMessage: String {
         return "Set your destination as \(self.searchCity)? "
+    }
+    
+    func passSelectedCity(_ f: PlaceWithPhoto) {
+        onDataReceive(f.googlePlace)
+        presentationMode.wrappedValue.dismiss()
+    }
+    
+    func addToWishList(_ f: PlaceWithPhoto) {
+        self.viewModel.cachePlace(f.googlePlace, catalog: .wishlist)
     }
     
     var body: some View {
@@ -66,8 +75,6 @@ struct AddNewDestinationView: View {
                         }
                         .onTapGesture {
                             self.searchCity = suggestion.description
-                            onDataReceive((suggestion.description, suggestion.place_id))
-                            showAlert = true
                             isInputActive = false
                             viewModel.selectSuggestion(suggestion)
                         }
@@ -78,46 +85,60 @@ struct AddNewDestinationView: View {
                 .padding()
                 .isHidden(isInputActive == false)
                 
-                // Display Cached Places
-                LazyVGrid(columns: columns) {
-                    ForEach(viewModel.cachedPhotos) { f in
-                        VStack {
-                            Text("\(f.googlePlace.result.formattedAddress)")
-                            
-                            if let imageData = f.imageData, let uiImage = UIImage(data: imageData) {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 20, alignment: .leading)
-//                                    .frame(height: 160)
-//                                    .frame(width: 160)
-                                    .clipped()
-                                    .background(Color.gray)
-                                    .cornerRadius(8)
-                                    //.padding()
-                            } else {
-                                Text("Loading...")
+                // Cached Wished List
+                if !viewModel.cachedTilesWishlist.isEmpty {
+                    VStack {
+                        HeaderHero(headline: "My Wishlist")
+                            .padding(.leading, 13)
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 10) {
+                                ForEach(viewModel.cachedTilesWishlist) { f in
+                                    LocationCardRecentSearch(f: f)
+                                }
                             }
                         }
-                        .padding()
+                        .frame(height: 200)
+                        .padding(.bottom, 50)
                     }
+                    .isHidden(isInputActive == true)
+                }
+                    
+                // Cached Recent Searched Places
+                if !viewModel.cachedTilesRecentSearches.isEmpty {
+                    VStack {
+                        HeaderHero(headline: "Recent Searches")
+                            .padding(.leading, 13)
+                        LazyVGrid(columns: columns) {
+                            ForEach(viewModel.cachedTilesRecentSearches) { f in
+                                LocationCardRecentSearch(f: f)
+                                    .onTapGesture {
+                                        self.selectedCity = f
+                                        showMenu.toggle()
+                                    }
+                            }
+                        }
+                    }
+                    .isHidden(isInputActive == true)
                 }
             }
+            .opacity(showMenu ? 0.02 : 1.0)
             .onAppear{
-                viewModel.getCachedPlaces()
+                viewModel.getCachedSearchedPlaces()
+                viewModel.getCachedWishlistPlaces()
             }
-            .alert(isPresented: $showAlert) { // Use the $ prefix to bind showAlert
-                Alert(
-                    title: Text("\(self.searchCity)"),
-                    message: Text(alertMessage),
-                    primaryButton: .destructive(Text("OK")) {
-                        //self.setToNewCity()
-                        presentationMode.wrappedValue.dismiss()
-                    },
-                    secondaryButton: .cancel() {
-                        print("Cancel pressed")
-                    }
-                )
+            .sheet(isPresented: $showMenu) {
+                if let city = selectedCity {
+                    LocationLinkMenu(
+                        f: city,
+                        passToParentSearched: passSelectedCity,
+                        passToParentWishlist: addToWishList
+                    )
+                }
+            }
+            .onChange(of: viewModel.selectedLocation) { _, newLocation in
+                guard let city = newLocation else { return }
+                self.selectedCity = city
+                showMenu = true
             }
             .navigationBarTitle("", displayMode: .inline)
         }
@@ -127,5 +148,36 @@ struct AddNewDestinationView: View {
         searchCity = ""
         viewModel.resetSearch()
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+struct LocationLinkMenu: View {
+    var f: PlaceWithPhoto
+    @Environment(\.presentationMode) var presentationMode
+    var passToParentSearched: ((PlaceWithPhoto)) -> Void
+    var passToParentWishlist: ((PlaceWithPhoto)) -> Void
+
+    var body: some View {
+        VStack {
+            LocationCardRecentSearch(f: f)
+            VStack {
+                TLButton(.green, title: "Add as a New Trip")
+                    .onTapGesture {
+                        passToParentSearched(f)
+                    }
+                TLButton(.orange, title: "Add to Wishlist")
+                    .onTapGesture {
+                        passToParentWishlist(f)
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                TLButton(.plain, title: "Cancel")
+                    .onTapGesture {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+            }
+            .padding()
+        }
+        .presentationDetents([.medium])
+
     }
 }

@@ -8,7 +8,7 @@ class Destination {
     var id: String = UUID().uuidString
     var name: String
     var details: String
-    var googlePlaceId: String?
+    var googlePlaceId: String
     var startDate: Date
     var endDate: Date
     var priority: Int
@@ -20,12 +20,14 @@ class Destination {
     init(
         name: String = "",
         details: String = "",
+        googlePlaceId: String = "",
         startDate: Date = .now,
         endDate: Date = .now,
         priority: Int = 2
     ) {
         self.name = name
         self.details = details
+        self.googlePlaceId = googlePlaceId
         self.startDate = startDate
         self.endDate = endDate
         self.priority = priority

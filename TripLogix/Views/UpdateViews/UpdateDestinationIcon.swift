@@ -16,7 +16,7 @@ struct UpdateDestinationIcon: View {
     }
     
     func loadPhotodByGooglePlacesId() {
-        self.googlePlacesViewModel.fetchPlaceDetails(placeId: destination.googlePlaceId ?? "")
+        self.googlePlacesViewModel.fetchPlaceDetails(placeId: destination.googlePlaceId)
     }
     
     var body: some View {

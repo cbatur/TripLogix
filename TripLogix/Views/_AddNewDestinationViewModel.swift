@@ -3,27 +3,44 @@ import Foundation
 import UIKit
 import SwiftUI
 
-struct PlaceWithPhoto: Identifiable {
+struct PlaceWithPhoto: Identifiable, Equatable {
     var id: String = UUID().uuidString
     let googlePlace: GooglePlace
     let imageData: Data?
+    
+    static func == (lhs: PlaceWithPhoto, rhs: PlaceWithPhoto) -> Bool {
+        return lhs.id == rhs.id && lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+enum LocationCatalog {
+    case recentSearches
+    case wishlist
+    case visited
 }
 
 final class AddNewDestinationViewModel: ObservableObject {
     
     @Published var query = ""
     @Published private(set) var suggestions: [GooglePlacesResponse.Prediction] = []
-    @Published var gpLocation: GooglePlace?
-    @Published var cachedPlaces = [GooglePlace]()
-    @Published var cachedPhotos = [PlaceWithPhoto]()
+    @Published var selectedLocation: PlaceWithPhoto?
+    // Recent Searches
+    var cachedRecentSearches = [GooglePlace]()
+    @Published var cachedTilesRecentSearches = [PlaceWithPhoto]()
+    
+    // Wishlist
+    var cachedWishlist = [GooglePlace]()
+    @Published var cachedTilesWishlist = [PlaceWithPhoto]()
 
     @Published var activeAlertBox: AlertBoxMessage?
     private var apiCount: Int = 0
     private var cancellables = Set<AnyCancellable>()
     
-    private let openAIAPIService = OpenAIAPIService()
     private let gpAPIService = GooglePlacesAPIService()
-    
     
     init() {
         $query
@@ -64,7 +81,7 @@ final class AddNewDestinationViewModel: ObservableObject {
     func searchLocation(with placeId: String) {
         gpAPIService.searchGooglePlaceId(placeId: placeId)
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] place in
-                self?.cachePlace(place)
+                self?.cachePlace(place, catalog: .recentSearches)
             })
             .store(in: &cancellables)
     }
@@ -72,62 +89,165 @@ final class AddNewDestinationViewModel: ObservableObject {
     // -----------------------------------
     // Manage caching Google Places    
     // -----------------------------------
-    func cachePlace(_ place: GooglePlace?) {
+    func cachePlace(_ place: GooglePlace?, catalog: LocationCatalog) {
         guard let p = place else { return }
-        getCachedPlaces()
         
-        if !self.cachedPlaces.contains(where: {
-            $0.result.place_id == p.result.place_id
-        }) {
-            self.cachedPlaces.append(p)
-        }
+        switch catalog {
+        case .recentSearches:
+            getCachedSearchedPlaces()
+            
+            if !self.cachedRecentSearches.contains(where: {
+                $0.result.place_id == p.result.place_id
+            }) {
+                self.cachedRecentSearches.append(p)
+                self.convertSinglePlace(p)
+            }
 
-        let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(self.cachedPlaces) {
-            UserDefaults.standard.set(encoded, forKey: "cachedPlaces")
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(self.cachedRecentSearches) {
+                UserDefaults.standard.set(encoded, forKey: "recentSearches")
+            }
+        case .wishlist:
+            getCachedWishlistPlaces()
+            
+            if !self.cachedWishlist.contains(where: {
+                $0.result.place_id == p.result.place_id
+            }) {
+                self.cachedWishlist.append(p)
+                self.convertSingleWishlistPlace(p)
+            
+            }
+
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(self.cachedWishlist) {
+                UserDefaults.standard.set(encoded, forKey: "locationWishlist")
+            }
+        default:
+            break;
         }
     }
     
     func removeOlderRecords() {
-        // Keeps the last 20 records, removes the older ones.
+        // Keeps the last 12 records, removes the older ones.
         let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(Array(self.cachedPlaces.prefix(19))) {
-            UserDefaults.standard.set(encoded, forKey: "cachedPlaces")
+        if let encoded = try? encoder.encode(Array(self.cachedRecentSearches.prefix(12))) {
+            UserDefaults.standard.set(encoded, forKey: "recentSearches")
         }
     }
     
-    func getCachedPlaces() {
-        if let savedObjects = UserDefaults.standard.object(forKey: "cachedPlaces") as? Data {
+    func removeOlderWishlistRecords() {
+        // Keeps the last 12 records, removes the older ones.
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(Array(self.cachedWishlist.prefix(20))) {
+            UserDefaults.standard.set(encoded, forKey: "locationWishlist")
+        }
+    }
+    
+    func getCachedSearchedPlaces() {
+        self.cachedTilesRecentSearches = []
+        if let savedObjects = UserDefaults.standard.object(forKey: "recentSearches") as? Data {
             let decoder = JSONDecoder()
             if let loadedObjects = try? decoder.decode([GooglePlace].self, from: savedObjects) {
-                self.cachedPlaces = loadedObjects.reversed()
+                self.cachedRecentSearches = loadedObjects.reversed()
                 removeOlderRecords()
-                convertCachedPlaces()
+                convertCachedPlaces(.recentSearches)
             } else { return }
         } else { return }
     }
     
-    func convertCachedPlaces() {
-        for place in self.cachedPlaces {
-            loadImage(place)
+    func getCachedWishlistPlaces() {
+        self.cachedTilesWishlist = []
+        if let savedObjects = UserDefaults.standard.object(forKey: "locationWishlist") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedObjects = try? decoder.decode([GooglePlace].self, from: savedObjects) {
+                self.cachedWishlist = loadedObjects.reversed()
+                removeOlderWishlistRecords()
+                convertCachedPlaces(.wishlist)
+            } else { return }
+        } else { return }
+    }
+    
+    func convertSinglePlace(_ place: GooglePlace) {
+        let group = DispatchGroup()
+        group.enter()
+        loadImage(place) { placeWithPhoto in
+            if let photo = placeWithPhoto {
+                DispatchQueue.main.async {
+                    self.selectedLocation = photo
+                    self.cachedTilesRecentSearches.append(photo)
+                }
+            }
+            group.leave()
+        }
+    }
+    
+    func convertSingleWishlistPlace(_ place: GooglePlace) {
+        loadImage(place) { placeWithPhoto in
+            if let photo = placeWithPhoto {
+                DispatchQueue.main.async {
+                    //self.selectedLocation = photo
+                    self.cachedTilesWishlist.append(photo)
+                }
+            }
+        }
+    }
+
+    func convertCachedPlaces(_ catalog: LocationCatalog) {
+        switch catalog {
+        case .recentSearches:
+            for place in self.cachedRecentSearches {
+                loadImage(place) { placeWithPhoto in
+                    if let photo = placeWithPhoto {
+                        DispatchQueue.main.async {
+                            self.cachedTilesRecentSearches.append(photo)
+                        }
+                    }
+                }
+            }
+        case .wishlist:
+            for place in self.cachedWishlist {
+                loadImage(place) { placeWithPhoto in
+                    if let photo = placeWithPhoto {
+                        DispatchQueue.main.async {
+                            self.cachedTilesWishlist.append(photo)
+                        }
+                    }
+                }
+            }
+        default:
+            break;
+            // Add Visited Trips Later
         }
     }
     // -----------------------------------
     // End caching Google Places
     // -----------------------------------
     
-    func loadImage(_ googlePlace: GooglePlace) {
-        guard let photoReference = googlePlace.result.photos.first?.photoReference else { return }
-        guard let apiKey = decryptAPIKey(.googlePlaces) else { preconditionFailure("Bad API Key") }
-        let maxWidth = 400 // Example width, adjust as needed
+    func loadImage(_ googlePlace: GooglePlace, completion: @escaping (PlaceWithPhoto?) -> Void) {
+        guard let photoReference = googlePlace.result.photos.first?.photoReference else {
+            completion(nil)
+            return
+        }
+        guard let apiKey = decryptAPIKey(.googlePlaces) else {
+            preconditionFailure("Bad API Key")
+        }
+        let maxWidth = 400
         let urlString = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=\(maxWidth)&photoreference=\(photoReference)&key=\(apiKey)"
         
-        guard let url = URL(string: urlString) else { return }
+        guard let url = URL(string: urlString) else {
+            completion(nil)
+            return
+        }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            DispatchQueue.main.async {
-                self.cachedPhotos.append(PlaceWithPhoto(googlePlace: googlePlace, imageData: data))
+            if let data = data, error == nil {
+                DispatchQueue.main.async {
+                    completion(PlaceWithPhoto(googlePlace: googlePlace, imageData: data))
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
             }
         }.resume()
     }
@@ -142,6 +262,7 @@ final class AddNewDestinationViewModel: ObservableObject {
         self.query = ""
         self.suggestions = []
     }
+
 }
 
 struct GooglePlacesResponse: Codable {

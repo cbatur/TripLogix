@@ -110,7 +110,7 @@ struct TripDetailsView: View {
             AnalyticsManager.shared.logEvent(name: "TripDetailsView_Appear", params: tripDetailsViewAppearParams)
             
             if destination.icon == nil {
-                self.googlePlacesViewModel.fetchPlaceDetails(placeId: destination.googlePlaceId ?? "")
+                self.googlePlacesViewModel.fetchPlaceDetails(placeId: destination.googlePlaceId)
             }
         }
         .onChange(of: self.googlePlacesViewModel.photosData) { oldData, newData in
@@ -126,14 +126,14 @@ struct TripDetailsView: View {
     }
 }
 
-#Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Destination.self, configurations: config)
-        let example = Destination(name: "Example Destination", details: "Example details go here and will automatically expand vertically as they are edited.")
-        return TripDetailsView(destination: example)
-            .modelContainer(container)
-    } catch {
-        fatalError("Failed to create model container")
-    }
-}
+//#Preview {
+//    do {
+//        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+//        let container = try ModelContainer(for: Destination.self, configurations: config)
+//        let example = Destination(name: "Example Destination", details: "Example details go here and will automatically expand vertically as they are edited.")
+//        return TripDetailsView(destination: example)
+//            .modelContainer(container)
+//    } catch {
+//        fatalError("Failed to create model container")
+//    }
+//}

@@ -194,6 +194,7 @@
 		7E8822042BBE587400B32747 /* _AddNewDestinationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822032BBE587400B32747 /* _AddNewDestinationViewModel.swift */; };
 		7E8822062BBE6CC500B32747 /* GP+SearchByPlaceId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822052BBE6CC500B32747 /* GP+SearchByPlaceId.swift */; };
 		7E8822092BBE6F4800B32747 /* GooglePlacesAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822082BBE6F4800B32747 /* GooglePlacesAPIService.swift */; };
+		7E88220C2BCA3A4C00B32747 /* LocationCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E88220B2BCA3A4C00B32747 /* LocationCards.swift */; };
 		7EA98D0B2BB149DE00AE39A9 /* ImageToFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */; };
 		7EC183C62BB2860C007B2602 /* OpenAI+TextCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */; };
 		7EC183C82BB28669007B2602 /* RequestNameSpaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C72BB28669007B2602 /* RequestNameSpaces.swift */; };
@@ -408,6 +409,7 @@
 		7E8822032BBE587400B32747 /* _AddNewDestinationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _AddNewDestinationViewModel.swift; sourceTree = "<group>"; };
 		7E8822052BBE6CC500B32747 /* GP+SearchByPlaceId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GP+SearchByPlaceId.swift"; sourceTree = "<group>"; };
 		7E8822082BBE6F4800B32747 /* GooglePlacesAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesAPIService.swift; sourceTree = "<group>"; };
+		7E88220B2BCA3A4C00B32747 /* LocationCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCards.swift; sourceTree = "<group>"; };
 		7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToFlightView.swift; sourceTree = "<group>"; };
 		7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenAI+TextCommand.swift"; sourceTree = "<group>"; };
 		7EC183C72BB28669007B2602 /* RequestNameSpaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNameSpaces.swift; sourceTree = "<group>"; };
@@ -885,6 +887,7 @@
 			children = (
 				7E85E71A2BAE985100432BA9 /* AddNewDestinationView.swift */,
 				7E8822032BBE587400B32747 /* _AddNewDestinationViewModel.swift */,
+				7E88220B2BCA3A4C00B32747 /* LocationCards.swift */,
 				7E85E6F52BAE985100432BA9 /* Account */,
 				7E85E6F62BAE985100432BA9 /* Animatons */,
 				7E85E6F82BAE985100432BA9 /* Launch */,
@@ -1327,6 +1330,7 @@
 				7E85E7AE2BAE985100432BA9 /* DestinationIconView.swift in Sources */,
 				7E85E7A42BAE985100432BA9 /* Strings+Extensions.swift in Sources */,
 				7E85E7DA2BAE985100432BA9 /* TabViews.swift in Sources */,
+				7E88220C2BCA3A4C00B32747 /* LocationCards.swift in Sources */,
 				7E85E7B52BAE985100432BA9 /* _TabOverviewView.swift in Sources */,
 				7E85E7AC2BAE985100432BA9 /* BannerWithDismiss.swift in Sources */,
 				7E85E73B2BAE985100432BA9 /* AE+FutureFlights.swift in Sources */,

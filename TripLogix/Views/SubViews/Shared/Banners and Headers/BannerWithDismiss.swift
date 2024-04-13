@@ -16,10 +16,7 @@ struct BannerWithDismiss: View {
                     dismiss()
                 }) {
                     VStack {
-                        Text(headline ?? "")
-                            .font(.custom("Gilroy-Bold", size: 24))
-                            .foregroundColor(Color.wbPinkMediumAlt)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                        HeaderHero(headline: headline ?? "")
                             .isHidden(headline == nil)
                         
                         Text(subHeadline ?? "")
@@ -50,6 +47,17 @@ struct BannerWithDismiss: View {
         .padding()
         .padding(.top, 10)
         .frame(height: 120)
+    }
+}
+
+struct HeaderHero: View {
+    var headline: String
+
+    var body: some View {
+        Text(headline.uppercased())
+            .font(.custom("Gilroy-Bold", size: 24))
+            .foregroundColor(Color.wbPinkMediumAlt)
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
