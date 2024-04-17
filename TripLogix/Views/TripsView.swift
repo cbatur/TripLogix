@@ -79,8 +79,9 @@ struct TripsView: View {
         }
         .analyticsScreen(name: "TripsView")
         .onAppear{
+            let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? "TL12345"
             AnalyticsManager.shared.logEvent(name: "TripsView_Appear")
-            AnalyticsManager.shared.setUserId(userId: "TL12345")
+            AnalyticsManager.shared.setUserId(userId: deviceId)
             AnalyticsManager.shared.setUserProperty(value: true.description, property: "test_user")
         }
         .onDisappear{
@@ -89,7 +90,7 @@ struct TripsView: View {
     }
     
     func addDestination(place: GooglePlace) {
-        let destination = Destination(name: place.result.formattedAddress)
+        let destination = Destination(name: place.result.formattedAddress.sanitizeLocation())
         destination.googlePlaceId = place.result.place_id
         destination.startDate = Date.daysFromToday(1)
         destination.endDate = Date.daysFromToday(1)

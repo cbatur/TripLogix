@@ -242,3 +242,7 @@ public func stringToDate(_ dateString: String) -> Date? {
     dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
     return dateFormatter.date(from: dateString)
 }
+
+public func daysBetween(start: Date, end: Date) -> Int {
+    return (Calendar.current.dateComponents([.day], from: start, to: end).day ?? -1)
+}
