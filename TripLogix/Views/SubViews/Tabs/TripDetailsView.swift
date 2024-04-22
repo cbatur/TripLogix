@@ -207,6 +207,7 @@ struct DateSelectionAlertView: View {
     
     var body: some View {
         VStack {
+            Spacer()
             VStack {
                 Spacer()
                 HStack(alignment: .center) {
@@ -282,12 +283,12 @@ struct DateSelectionAlertView: View {
                         .transition(.move(edge: .trailing))
                     }
                 }
-                .animation(.default, value: displayStart) // Apply animation to the VStack
+                .animation(.default, value: displayStart)
                 
             }
             .padding()
         }
-        .presentationDetents([.medium])
+        .presentationDetents([.height(650)])
         .interactiveDismissDisabled()
     }
 }
