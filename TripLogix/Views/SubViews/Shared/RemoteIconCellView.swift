@@ -37,6 +37,26 @@ struct RemoteIconCellView: View {
 
 }
 
-#Preview {
-    RemoteIconCellView(with: "")
+struct RemoteIcon: View {
+    let url: String?
+    
+    init(with url: String?) {
+        self.url = url
+    }
+    
+    var body: some View {
+        
+        LGImage(source: URL(string: url ?? ""), placeholder: {
+                    Image("destination_placeholder")
+                        .font(.largeTitle) })
+                .onProgress(progress: { (data, expectedSize, _) in
+                    //print("Downloaded: \(data?.count ?? 0)/\(expectedSize)")
+                })
+                .onCompletion(completion: { (image, data, error, cacheType) in
+                    // Do nothing
+                })
+                .resizable()
+                .cancelOnDisappear(true)
+    }
+
 }

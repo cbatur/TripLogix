@@ -114,7 +114,7 @@ struct _TabReservationsView: View {
                     if self.displayBottomToolbar == false {
     
                         Text("MANAGE RESERVATIONS")
-                            .font(.custom("Gilroy-Meduim", size: 20))
+                            .font(.custom("Gilroy-Medium", size: 20))
                             .padding()
                             .foregroundColor(.white)
                             .cornerRadius(5)

@@ -14,8 +14,11 @@ struct GPAPIError: Error, Decodable {
     }
 }
 
+// Handle GooglePlaceMasked Errors and log them in Firebase
+
 protocol GPServiceProvider {
     func searchGooglePlaceId(placeId: String) -> AnyPublisher<GooglePlace, GPAPIError>
+    func placeSearchText(fieldMask: String, textQuery: String) -> AnyPublisher<GooglePlaceMaskedResponse, GPAPIError>
 }
 
 class GooglePlacesAPIService: GPServiceProvider {
@@ -32,6 +35,10 @@ class GooglePlacesAPIService: GPServiceProvider {
     
     func searchGooglePlaceId(placeId: String) -> AnyPublisher<GooglePlace, GPAPIError> {
         return self.apiCall(GooglePlacesRequests.SearchByPlaceId(placeId: placeId).request)
+    }
+    
+    func placeSearchText(fieldMask: String, textQuery: String) -> AnyPublisher<GooglePlaceMaskedResponse, GPAPIError> {
+        return self.apiCall(GooglePlacesRequests.SearchByKeyword(fieldMask: fieldMask, textQuery: textQuery).request)
     }
 }
 

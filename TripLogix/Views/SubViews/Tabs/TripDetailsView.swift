@@ -109,7 +109,14 @@ struct TripDetailsView: View {
                     }
                     .padding(7)
                     .cardStyle(.white)
-                    
+
+                    NavigationView {
+                        NavigationLink(destination: TripPlanView(destination: destination)) {
+                            Text("Trip Plan")
+                                .foregroundColor(.blue)
+                                .padding()
+                        }
+                    }
                     Spacer()
                     
                     VStack {
@@ -120,10 +127,7 @@ struct TripDetailsView: View {
                         case .reservations:
                             _TabReservationsView(destination: destination)
                                 .transition(.opacity)
-                        case .itinerary:
-                            _TabItineraryView(destination: destination)
-                                .transition(.opacity)
-                        case .settings:
+                        case .itinerary, .settings:
                             _TabTripSettings(destination: destination)
                                 .transition(.opacity)
                         }

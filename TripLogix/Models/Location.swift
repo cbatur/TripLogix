@@ -13,7 +13,7 @@ struct Location: Codable, Hashable, Identifiable {
     //let place_saved: Bool
 }
 
-struct GooglePlace: Codable, Identifiable, Equatable {
+struct GooglePlace: Codable, Identifiable, Equatable, Hashable {
     var id = UUID()
     let htmlAttributions: [String]
     let result: PlaceResult
@@ -82,3 +82,30 @@ struct PlacePhoto: Codable {
         case width
     }
 }
+
+// Google Places API - New
+struct GooglePlaceMaskedResponse: Decodable, Encodable {
+    
+    let places: [GooglePlaceMasked]
+    
+    struct GooglePlaceMasked: Decodable, Encodable, Hashable, Identifiable {
+        
+        let id: String
+        let formattedAddress: String?
+        let displayName: DisplayName?
+        
+        static func == (lhs: GooglePlaceMasked, rhs: GooglePlaceMasked) -> Bool {
+            return lhs.id == rhs.id && lhs.id == rhs.id
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
+    }
+    
+    struct DisplayName: Decodable, Encodable {
+        let text: String
+        let languageCode: String
+    }
+}
+

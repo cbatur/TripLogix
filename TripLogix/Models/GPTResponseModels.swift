@@ -5,12 +5,14 @@ struct DayItinerary: Decodable, Hashable {
     let index: Int
     let title: String
     var date: String
-    let activities: [Activity]
+    var activities: [Activity]
 }
 
 struct Activity: Decodable, Hashable {
     let index: Int
     let title: String
+    let googlePlaceId: String
+    let googlePlace: GooglePlace?
     let categories: [String]
 }
 

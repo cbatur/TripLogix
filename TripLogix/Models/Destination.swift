@@ -68,11 +68,13 @@ class EventItem: Hashable {
     let index: Int
     let title: String
     let categories: [String]
+    var googlePlaceId: String
     
-    init(index: Int, title: String, categories: [String]) {
+    init(index: Int, title: String, categories: [String], googlePlaceId: String) {
         self.index = index
         self.title = title
         self.categories = categories
+        self.googlePlaceId = googlePlaceId
     }
     
     static func == (lhs: EventItem, rhs: EventItem) -> Bool {

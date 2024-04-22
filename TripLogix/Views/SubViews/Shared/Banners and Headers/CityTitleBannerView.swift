@@ -21,3 +21,20 @@ struct CityTitleBannerView: View {
         .cardStyle(.black.opacity(0.6))
     }
 }
+
+struct CityTitleHeader: View {
+    var cityName: String
+    
+    var body: some View {
+        HStack {
+            Image(cityName.split(separator: ",").map(String.init).last?.replacingOccurrences(of: " ", with: "") ?? "")
+                .resizable()
+                .frame(width: 26, height: 18)
+            
+            Text(cityName)
+                .font(.system(size: 25)).bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 5)
+        }
+    }
+}

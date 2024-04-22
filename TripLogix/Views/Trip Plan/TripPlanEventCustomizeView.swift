@@ -2,7 +2,7 @@
 import SwiftUI
 import Combine
 
-struct AllEventsSelectionView: View {
+struct TripPlanEventCustomizeView: View {
     @Environment(\.presentationMode) var presentationMode
     @Bindable var destination: Destination
     @StateObject var mockServices: MockServices = MockServices()
