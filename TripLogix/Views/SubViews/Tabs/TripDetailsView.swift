@@ -110,13 +110,23 @@ struct TripDetailsView: View {
                     .padding(7)
                     .cardStyle(.white)
 
-                    NavigationView {
-                        NavigationLink(destination: TripPlanView(destination: destination)) {
+//                    NavigationView {
+//                        NavigationLink(destination: TripPlanView(destination: destination)) {
+//                            Text("Trip Plan")
+//                                .foregroundColor(.blue)
+//                                .padding()
+//                        }
+//                    }
+                    
+                    NavigationLink(destination: TripPlanView(destination: destination)) {
+                        HStack {
+                            Image(systemName: "pencil")
                             Text("Trip Plan")
-                                .foregroundColor(.blue)
-                                .padding()
                         }
+                        .padding()
+                        .cardStyle(.black.opacity(0.7))
                     }
+                    
                     Spacer()
                     
                     VStack {

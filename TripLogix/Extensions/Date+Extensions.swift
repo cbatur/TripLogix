@@ -243,6 +243,12 @@ public func stringToDate(_ dateString: String) -> Date? {
     return dateFormatter.date(from: dateString)
 }
 
+public func basicDateTime(_ date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
+    return dateFormatter.string(from: date)
+}
+
 public func daysBetween(start: Date, end: Date) -> Int {
     return (Calendar.current.dateComponents([.day], from: start, to: end).day ?? -1)
 }

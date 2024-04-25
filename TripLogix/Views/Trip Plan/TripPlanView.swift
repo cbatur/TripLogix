@@ -4,9 +4,11 @@ import SwiftUI
 struct TripPlanView: View {
     @Bindable var destination: Destination
     @StateObject var viewModel: TripPlanViewModel = TripPlanViewModel()
+    @StateObject var cacheViewModel: CacheViewModel = CacheViewModel()
 
     @State private var launchAllEvents = false
     @State private var isAnimating = false
+    @State private var launchAdminTools = false
     
     init(destination: Destination) {
         _destination = Bindable(wrappedValue: destination)
@@ -14,6 +16,7 @@ struct TripPlanView: View {
     
     func shareButtonTapped() {
         // Share button tapped
+        launchAdminTools = true
         print("Share button tapped \(destination.id)")
     }
     
@@ -40,29 +43,18 @@ struct TripPlanView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     .padding()
-                    
+                                        
                     HStack {
-                        Text("Update".uppercased())
-                            .font(.custom("Gilroy-Bold", size: 15))
-                            .foregroundColor(.gray)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .padding()
-                            .cardStyle(.gray10)
-                            .onTapGesture {
-                                self.updateTrip()
-                            }
                         Spacer()
-                        Text("Personalize".uppercased())
-                            .font(.custom("Gilroy-Bold", size: 15))
-                            .foregroundColor(.gray)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .padding()
-                            .cardStyle(.gray10)
+                        Text("Personalize")
+                            .foregroundColor(.accentColor)
+                            .padding(7)
+                            .cardStyleBordered()
                             .onTapGesture {
-                                launchAllEvents = true
+                                self.launchAllEvents = true
                             }
                     }
-                    .padding()
+                    .padding(.trailing, 15)
                 }
                 .isHidden(!viewModel.showUpdateButton())
                 
@@ -76,20 +68,36 @@ struct TripPlanView: View {
             
             Spacer()
         }
+        .background(Color(UIColor.systemGroupedBackground))
         .navigationTitle("Trip Plan")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button(action: shareButtonTapped) {
                     Image(systemName: "square.and.arrow.up")
                 }
+                
+                Button(action: { updateTrip() }) {
+                    Image(systemName: "arrow.clockwise")
+                }
             }
         }
-        .onChange(of: viewModel.itineraries) { _, newEvents in
+        .onChange(of: viewModel.itineraries) {
+            _,
+            newEvents in
             self.populateEvents(newEvents)
+            
+            let c = CacheItem(
+                name: "Itinerary Created - \(destination.id)",
+                content: newEvents.map { $0.title }.joined(separator: ", ")
+            )
+            cacheViewModel.addCachedItem(c)
         }
         .sheet(isPresented: $launchAllEvents) {
             TripPlanEventCustomizeView(destination: destination)
+        }
+        .sheet(isPresented: $launchAdminTools) {
+            AdminViewCachedLocations()
         }
     }
 }
@@ -141,5 +149,12 @@ extension TripPlanView {
                     activities: events
                 ))
         }
+        
+        let c = CacheItem(
+            name: "Itinerary Added to Destination - \(destination.id)",
+            content: destination.itinerary.map { $0.title }.joined(separator: ", ")
+        )
+        cacheViewModel.addCachedItem(c)
+        
     }
 }
