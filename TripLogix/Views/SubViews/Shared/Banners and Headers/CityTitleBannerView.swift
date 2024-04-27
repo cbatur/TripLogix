@@ -32,9 +32,9 @@ struct CityTitleHeader: View {
                 .frame(width: 26, height: 18)
             
             Text(cityName)
-                .font(.system(size: 25)).bold()
+                .font(.system(size: 19)).bold()
+                .foregroundColor(.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 5)
         }
     }
 }

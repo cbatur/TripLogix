@@ -56,7 +56,7 @@ struct TripsView: View {
                         self.launchNewDestination = true
                     }
             }
-            .navigationTitle("My Trips".uppercased())
+            //.navigationTitle("My Trips".uppercased())
             .navigationDestination(for: Destination.self, destination: TripDetailsView.init)
             .sheet(isPresented: $launchNewDestination) {
                 AddNewDestinationView { data in

@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "icon_luggage.png",
+      "filename" : "navigation_logo_3.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icon_luggage 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icon_luggage 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

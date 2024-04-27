@@ -5,6 +5,8 @@ struct TripPlanView: View {
     @Bindable var destination: Destination
     @StateObject var viewModel: TripPlanViewModel = TripPlanViewModel()
     @StateObject var cacheViewModel: CacheViewModel = CacheViewModel()
+    let columns: [GridItem] = [GridItem(.flexible()),
+                               GridItem(.flexible())]
 
     @State private var launchAllEvents = false
     @State private var isAnimating = false
@@ -21,49 +23,104 @@ struct TripPlanView: View {
     }
     
     var body: some View {
+        
         VStack {
             if let alert = viewModel.activeAlertBox {
+                
                 AlertWithIconView(alertBox: alert)
                 .cardStyle(.white)
+                
             } else {
+                
                 VStack {
-                    
-                    VStack {
-                        CityTitleHeader(cityName: destination.name)
-                            .frame(alignment: .leading)
-                        
-                        HStack {
-                            Image(systemName: "calendar.badge.clock")
-                            Text("\(destination.startDate.formatted(date: .abbreviated, time: .omitted)) - \(destination.endDate.formatted(date: .abbreviated, time: .omitted))")
-                                .font(.custom("Gilroy-Medium", size: 17))
-                                .foregroundColor(.black) +
-                            Text(dayDiffLabel())
-                                .foregroundColor(.gray)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    .padding()
-                                        
-                    HStack {
-                        Spacer()
-                        Text("Personalize")
-                            .foregroundColor(.accentColor)
-                            .padding(7)
-                            .cardStyleBordered()
-                            .onTapGesture {
-                                self.launchAllEvents = true
-                            }
-                    }
-                    .padding(.trailing, 15)
+                    Divider()
+                    LocationDateHeader(destination: destination)
+                    Divider()
+                    TripLinks()
+                    Divider()
                 }
                 .isHidden(!viewModel.showUpdateButton())
                 
-                Form {
-                    ForEach(destination.itinerary.sorted(by: { $0.index < $1.index }), id: \.self) { day in
-                        EventCardView(day: day, city: destination.name)
+                LazyVGrid(columns: columns) {
+                    HStack {
+                        Image(systemName: "text.redaction")
+                            .padding(8)
+                        Text("Create".uppercased())
+                            .foregroundColor(Color.black)
+                            .padding(.trailing, 6)
+                            .fontWeight(.medium)
+                            .font(.system(size: 15))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .onTapGesture {
+                                updateTrip()
+                            }
+                    }
+                    .cardStyleBordered()
+                    
+                    if destination.allEventTags.count > 0 {
+                        HStack {
+                            Image(systemName: "person.2.badge.gearshape")
+                                .padding(8)
+                            Text("Personalize".uppercased())
+                                .foregroundColor(Color.black)
+                                .padding(.trailing, 6)
+                                .fontWeight(.medium)
+                                .font(.system(size: 15))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .onTapGesture {
+                                    self.launchAllEvents = true
+                                }
+                        }
+                        .cardStyleBordered()
+                    }
+
+                    if destination.itinerary.count == 0 {
+                        Text("A trip itinerary will be created for the dates you selected.")
+                            .foregroundColor(.gray)
+                            .frame(maxWidth: .infinity)
+                        
+                        if destination.allEventTags.count > 0 {
+                            Text("Customize your trip to fit the activities you enjoy.")
+                                .foregroundColor(.gray)
+                                .frame(maxWidth: .infinity)
+                        }
                     }
                 }
-                .isHidden(destination.itinerary.count == 0)
+                .padding()
+                
+                if destination.itinerary.count > 0 {
+                    VStack {
+                        HStack {
+                            Text("Events and Activities")
+                                .font(.system(size: 25)).bold()
+                                .padding(.leading, 20)
+                                .padding(.top, 13)
+                            Spacer()
+                        }
+                        
+                        Form {
+                            ForEach(destination.itinerary.sorted(by: { $0.index < $1.index }), id: \.self) { day in
+                                EventCardView(day: day, city: destination.name)
+                            }
+                        }
+                    }
+                    
+                } else {
+                    
+                    VStack {
+                        Image("empty_state_trip_events")
+                            .resizable()
+                            .scaledToFit()
+                            .background(Color.clear)
+                            .edgesIgnoringSafeArea(.all)
+                        Text("No trip plan has been created yet.")
+                            .font(.custom("Gilroy-Medium", size: 20))
+                            .foregroundColor(Color.wbPinkMediumAlt)
+                    }
+                    .padding(.leading, 35)
+                    .padding(.trailing, 35)
+                    .frame(alignment: .center)
+                }
             }
             
             Spacer()
@@ -72,6 +129,13 @@ struct TripPlanView: View {
         .navigationTitle("Trip Plan")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItem(placement: .principal) {
+                Image("navigation_logo_3")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 28)
+            }
+            
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button(action: shareButtonTapped) {
                     Image(systemName: "square.and.arrow.up")
@@ -99,27 +163,37 @@ struct TripPlanView: View {
         .sheet(isPresented: $launchAdminTools) {
             AdminViewCachedLocations()
         }
+        .onAppear {            
+            if destination.allEventTags.count == 0 {
+                self.viewModel.getCityEventCategories(
+                    qType: .getEventCategories(
+                        city: destination.name
+                    )
+                )
+            }
+        }
+        .onChange(of: viewModel.allTags) { _, events in
+            if events.count > 0 {
+                destination.allEventTags = events
+            }
+        }
     }
 }
 
 extension TripPlanView {
     
-    func dayDiff() -> Int {
-        return daysBetween(start: destination.startDate, end: destination.endDate)
-    }
-    
-    func dayDiffLabel() -> String {
-        let ext = dayDiff() == 0 ? "day" : "days"
-        return " (\(dayDiff()) \(ext))"
-    }
-    
     func updateTrip() {
         self.viewModel.generateItinerary(
             qType: .getDailyPlan(
                 city: destination.name,
-                dateRange: parseDateRange()
+                dateRange: parseDateRange(),
+                eventsExtension: eventsExtension()
             )
         )
+    }
+    
+    func eventsExtension() -> String {
+        return "Fetch events the following categories -> " + destination.selectedEventTags.joined(separator: ",")
     }
     
     func parseDateRange() -> String {

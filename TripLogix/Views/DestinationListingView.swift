@@ -69,14 +69,18 @@ struct DestinationListingView: View {
         
         if destinations.count == 0 {
             VStack {
-                Image("icon_luggage_alt")
-                    .resizable()
-                    .scaledToFit()
+                Text("You don't have any trips...")
+                    .font(.custom("Gilroy-Medium", size: 25))
+                    .foregroundColor(Color.tlOrange)
                 
-                Text("...and let's get you to places")
-                    .font(.custom("Boska-Regular", size: 26))
+                Text("...let's get you to places")
+                    .font(.custom("Bevellier-Regular", size: 26))
                     .foregroundColor(.black)
                     .lineLimit(nil)
+
+                Image("hero_destination_orange")
+                    .resizable()
+                    .scaledToFit()
             }
         }
         

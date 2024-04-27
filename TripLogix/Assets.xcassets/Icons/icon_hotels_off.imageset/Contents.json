@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "icon_luggage_alt.png",
+      "filename" : "icon_hotels_off.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icon_luggage_alt 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icon_luggage_alt 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

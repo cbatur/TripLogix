@@ -22,7 +22,7 @@ final class ChatAPIViewModel: ObservableObject {
     
     func getChatGPTContent(qType: QCategory, isMock: Bool? = false) {
         switch qType {
-            case .getDailyPlan(let city, _), .getAllEvents(let city, _):
+            case .getDailyPlan(let city, _, _), .getAllEvents(let city, _):
                 self.fetchRandomLocationPhoto(keyword: city)
                 apiCount = apiCount + 1
             
@@ -37,6 +37,9 @@ final class ChatAPIViewModel: ObservableObject {
         case .textFromImageUrl(let imageUrl):
             //Do Nothing
             print("\(imageUrl)")
+        case .getEventCategories(city: let city):
+            // Do Nothing
+            print("\(city)")
         }
     }
     

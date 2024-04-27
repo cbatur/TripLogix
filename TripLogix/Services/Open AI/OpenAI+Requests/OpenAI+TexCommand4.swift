@@ -2,10 +2,15 @@
 import Foundation
 
 extension OpenAIRequests {
-    struct TextCommand {
+    struct TextCommand4 {
         
         var qType: QCategory
         var path = "chat/completions"
+        
+        init(qType: QCategory, path: String = "chat/completions") {
+            self.qType = qType
+            self.path = path
+        }
         
         var request: URLRequest {
             
@@ -14,21 +19,18 @@ extension OpenAIRequests {
             
             guard let openAPIKey = decryptAPIKey(.openAI) else { preconditionFailure("Bad API Key") }
             
-            let jsonString = """
-            {
-                "model": "\(OpenAPIModel.gpt4.rawValue)",
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": "\(qType.content.replacingOccurrences(of: "\"", with: "\\\""))"
-                    }
-                ]
-            }
-            """
+            let postData = """
+                {
+                    "model": "\(OpenAPIModel.textDavinci004.rawValue)",
+                    "prompt": "\(qType.content)", 
+                        "max_tokens": 150,
+                        "temperature": 0.5
+                }
+                """
 
-            var request = URLRequest(url: url)
+            var request = URLRequest(url: url ,timeoutInterval: Double.infinity)
             request.httpMethod = "POST"
-            request.httpBody = jsonString.data(using: .utf8)            
+            request.httpBody = postData.data(using: .utf8)
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("Bearer \(openAPIKey)", forHTTPHeaderField: "Authorization")
             

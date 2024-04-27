@@ -12,14 +12,22 @@ struct EventCardView: View {
     }
     
     func loadPlaces() {
+        // Add to Google place cache If it doesn't exist.
+        for activity in day.activities {
+            if !viewModel.cachedGoogleLocations.contains(where: { $0.result.place_id == activity.googlePlaceId }) {
+                viewModel.addSingleGooglePlace(activity.googlePlaceId)
+            }
+        }
+        
+        // Get all cached Google Places
         viewModel.getCachedGooglelocations()
     }
     
     var body: some View {
         Section(header: Text("\(viewModel.displayDailyDate(day.date)) - \(day.title)".uppercased())
-            .foregroundColor(.wbPinkMediumAlt)
+            .foregroundColor(Color.tlOrange)
             .font(.custom("Satoshi-Bold", size: 16))) {
-    
+                
                 ForEach(day.activities.sorted(by: { $0.index < $1.index }), id: \.self) { activity in
                     
                     if let place = viewModel.cachedGoogleLocations.filter({ place in
@@ -45,7 +53,6 @@ struct EventCardView: View {
                 }
         }
         .onAppear {
-            // Get all cached Google Places
             self.loadPlaces()
         }
     }

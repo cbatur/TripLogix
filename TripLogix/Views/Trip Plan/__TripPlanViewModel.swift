@@ -9,6 +9,7 @@ final class TripPlanViewModel: ObservableObject {
     @Published var allEvents: [EventCategory] = []
     @Published var itineraries: [DayItinerary] = []
     @Published var activeAlertBox: AlertBoxMessage?
+    @Published var allTags: [String] = []
     private var apiCount: Int = 0
     private var city: String = ""
 
@@ -17,7 +18,7 @@ final class TripPlanViewModel: ObservableObject {
     private let googleAPIService = GooglePlacesAPIService()
     
     func generateAllEvents(qType: QCategory) {
-        if case .getDailyPlan(let city, _) = qType {
+        if case .getDailyPlan(let city, _, _) = qType {
             startService(city)
             serviceDailyPlan(qType: qType)
         }
@@ -51,11 +52,31 @@ final class TripPlanViewModel: ObservableObject {
     }
     
     func generateItinerary(qType: QCategory) {
-        if case .getDailyPlan(let city, _) = qType {
+        if case .getDailyPlan(let city, _, _) = qType {
             self.city = city
             startService(city)
             serviceDailyPlan(qType: qType)
         }
+    }
+    
+    func getCityEventCategories(qType: QCategory) {
+        openAIAPIService.openAPICommand(qType: qType)
+            .sink(receiveCompletion: { [weak self] completion in
+                if case .failure = completion {
+                    // Handle Failure
+                }
+            }, receiveValue: {
+                guard let eventCategories = $0.choices.first?.message.content else { return }
+                if let jsonData = eventCategories.data(using: .utf8) {
+                    do {
+                        let items = try JSONDecoder().decode([String].self, from: jsonData)
+                        self.allTags = items
+                    } catch {
+
+                    }
+                }
+            })
+            .store(in: &cancellableSet)
     }
     
     // Get the photo URL from Google Place Object
@@ -90,24 +111,28 @@ final class TripPlanViewModel: ObservableObject {
             var newActivities = [Activity]()
             
             for activity in day.activities {
-                group.enter()
-                serviceGooglePlaces(textQuery: activity.title)
-                    .sink(receiveCompletion: { _ in }, receiveValue: { place in
-                        
-                        let googlePlaceId = self.googlePlaceIdNeeded(activity) ? place.places.first?.id ?? "" : ""
-                        
-                        DispatchQueue.main.async {
-                            newActivities.append(Activity(
-                                index: activity.index,
-                                title: activity.title,
-                                googlePlaceId: googlePlaceId,
-                                googlePlace: activity.googlePlace,
-                                categories: activity.categories
-                            ))
-                            group.leave()
-                        }
-                    })
-                    .store(in: &cancellableSet)
+                
+                if !activity.title.isEmpty {
+                    
+                    group.enter()
+                    serviceGooglePlaces(textQuery: activity.title)
+                        .sink(receiveCompletion: { _ in }, receiveValue: { place in
+                            
+                            let googlePlaceId = self.googlePlaceIdNeeded(activity) ? place.places.first?.id ?? "" : ""
+                            
+                            DispatchQueue.main.async {
+                                newActivities.append(Activity(
+                                    index: activity.index,
+                                    title: activity.title,
+                                    googlePlaceId: googlePlaceId,
+                                    googlePlace: activity.googlePlace,
+                                    categories: activity.categories
+                                ))
+                                group.leave()
+                            }
+                        })
+                        .store(in: &cancellableSet)
+                }
             }
             
             group.notify(queue: .main) {
@@ -145,6 +170,20 @@ final class TripPlanViewModel: ObservableObject {
         self.itineraries = e
     }
     
+    func addSingleGooglePlace(_ googlePlaceId: String) {
+        let group = DispatchGroup()
+        group.enter()
+        completeGooglePlaces(googlePlaceId)
+            .sink(receiveCompletion: { _ in }, receiveValue: { place in
+                DispatchQueue.main.async {
+                    self.manageGooglePlaceCache(place)
+                    group.leave()
+                }
+            })
+            .store(in: &cancellableSet)
+    }
+    
+    
     // API Call to Get the Google Place
     func completeGooglePlaces(_ placeId: String) -> AnyPublisher<GooglePlace, Error> {
         googleAPIService.searchGooglePlaceId(placeId: placeId)
@@ -169,7 +208,7 @@ final class TripPlanViewModel: ObservableObject {
     func removeOlderGooglePlaces() {
         // Keeps the last 100 records, removes the older ones.
         let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(Array(self.cachedGoogleLocations.prefix(100))) {
+        if let encoded = try? encoder.encode(Array(self.cachedGoogleLocations.prefix(50))) {
             UserDefaults.standard.set(encoded, forKey: "savedGooglePlaces")
         }
     }

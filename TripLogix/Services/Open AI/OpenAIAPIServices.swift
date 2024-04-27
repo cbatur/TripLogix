@@ -5,6 +5,8 @@ import Combine
 enum OpenAPIModel: String {
     case gpt35Turbo = "gpt-3.5-turbo"
     case gpt4VisionPreview = "gpt-4-vision-preview"
+    case gpt4 = "gpt-4"
+    case textDavinci004 = "text-davinci-004"
 }
 
 struct OpenAIAPIError: Codable, Error {
@@ -33,6 +35,7 @@ protocol OpenAIServiceProvider {
     func openAPICommand(qType: QCategory) -> AnyPublisher<ChatGPTResponse, OpenAIAPIError>
     func openAPIGenerateImage(keyword: String) -> AnyPublisher<ChatGPTImageResponse, OpenAIAPIError>
     func openAPICommand4(qType: QCategory) -> AnyPublisher<ChatGPTResponse, OpenAIAPIError>
+    func openAPITextCommand4(qType: QCategory) -> AnyPublisher<ChatGPTResponse, OpenAIAPIError>
 }
 
 class OpenAIAPIService: OpenAIServiceProvider {
@@ -59,6 +62,10 @@ class OpenAIAPIService: OpenAIServiceProvider {
     
     func openAPICommand4(qType: QCategory) -> AnyPublisher<ChatGPTResponse, OpenAIAPIError> {
         return self.apiCall(OpenAIRequests.RemoteImageToText(qType: qType).request)
+    }
+    
+    func openAPITextCommand4(qType: QCategory) -> AnyPublisher<ChatGPTResponse, OpenAIAPIError> {
+        return self.apiCall(OpenAIRequests.TextCommand4(qType: qType).request)
     }
 }
 

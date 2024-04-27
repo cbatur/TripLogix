@@ -13,6 +13,8 @@ class Destination {
     var endDate: Date
     var priority: Int
     var icon: Data?
+    var allEventTags: [String]
+    var selectedEventTags: [String]
     @Relationship(deleteRule: .cascade) var allEvents = [AllEventsSD]()
     @Relationship(deleteRule: .cascade) var itinerary = [Itinerary]()
     @Relationship(deleteRule: .cascade) var flights = [DSelectedFlight]()
@@ -31,6 +33,8 @@ class Destination {
         self.startDate = startDate
         self.endDate = endDate
         self.priority = priority
+        self.allEventTags = []
+        self.selectedEventTags = []
     }
 }
 
