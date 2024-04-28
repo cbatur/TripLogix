@@ -306,11 +306,44 @@ extension TripPlanViewModel {
             qType: .getDailyPlan(
                 city: destination.name,
                 dateRange: self.parseDateRange(destination),
-                eventsExtension: self.eventsExtension(destination)
+                tripsExtension: self.flightsExtension(destination)
             )
         )
     }
     
+    func tripsExtension(_ destination: Destination) -> String {
+        if destination.selectedEventTags.count == 0 {
+            return ""
+        } else {
+            return "Fetch events the following categories -> " + destination.selectedEventTags.joined(separator: ",")
+        }
+    }
+    
+    // Attach Flight extension If applicable and If user agrees
+    func flightsExtension(_ destination: Destination) -> String {
+        if destination.flights.isEmpty {
+            return ""
+        } else {
+            return "This is my flights info, consider them when creating my itinerary -> " + convertFlightsToString(destination.flights)
+        }
+    }
+    
+    // Create a function to convert array of DSelectedFlight to the desired string
+    func convertFlightsToString(_ flights: [DSelectedFlight]) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+
+        let flightsDescriptions = flights.map { flight -> String in
+            let dateStr = dateFormatter.string(from: flight.date)
+            let departureCode = flight.flight.departure.iataCode
+            let arrivalCode = flight.flight.arrival.iataCode
+            let flightNumber = flight.flight.airline.iataCode + "-" + flight.flight.flight.number
+            return "\(dateStr) - airline number \(flightNumber) from \(departureCode) to \(arrivalCode)"
+        }
+
+        return flightsDescriptions.joined(separator: ", ")
+    }
+
     // Custom categories string to attach to the query
     func eventsExtension(_ destination: Destination) -> String {
         if destination.selectedEventTags.count == 0 {

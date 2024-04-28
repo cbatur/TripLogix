@@ -2,7 +2,7 @@
 import Foundation
 
 enum QCategory {
-    case getDailyPlan(city: String, dateRange: String, eventsExtension: String)
+    case getDailyPlan(city: String, dateRange: String, tripsExtension: String)
     case getVenueDetails(location: String)
     case getAllEvents(city: String, dateRange: String)
     case textFromImageUrl(imageUrl: String)
@@ -25,8 +25,8 @@ enum QCategory {
     
     var chatDescription: String {
         switch self {
-        case .getDailyPlan(let city, let dateRange, let eventsExtension):
-            return "Make a travel plan for \(city) between dates \(dateRange), in a json format using the following format " + dailyPlanExtension + eventsExtension
+        case .getDailyPlan(let city, let dateRange, let tripsExtension):
+            return "Make a travel plan for \(city) between dates \(dateRange), in a json format using the following format " + dailyPlanExtension + tripsExtension
         case .getVenueDetails(let location):
             return "\(location) " + venueInformationExtension
         case .getAllEvents(let city, let dateRange):
