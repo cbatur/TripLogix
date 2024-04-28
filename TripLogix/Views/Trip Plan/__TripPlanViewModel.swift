@@ -63,7 +63,7 @@ final class TripPlanViewModel: ObservableObject {
         openAIAPIService.openAPICommand(qType: qType)
             .sink(receiveCompletion: { [weak self] completion in
                 if case .failure = completion {
-                    // Handle Failure
+                    self?.activeAlertBox = .error("Something went wrong, try again.")
                 }
             }, receiveValue: {
                 guard let eventCategories = $0.choices.first?.message.content else { return }
@@ -283,5 +283,86 @@ final class TripPlanViewModel: ObservableObject {
         outputFormatter.locale = Locale(identifier: "en_US")
         let formattedDate = outputFormatter.string(from: date)
         return formattedDate
+    }
+}
+
+// Methods that require Destination
+extension TripPlanViewModel {
+    
+    // Get all initial categories for first time locations.
+    func fetchEventCategoriesIfNeeded(_ destination: Destination) {
+        if destination.allEventTags.count == 0 {
+            self.getCityEventCategories(
+                qType: .getEventCategories(
+                    city: destination.name
+                )
+            )
+        }
+    }
+    
+    // Initiate "Get itinerary" items
+    func updateTrip(_ destination: Destination) {
+        self.generateItinerary(
+            qType: .getDailyPlan(
+                city: destination.name,
+                dateRange: self.parseDateRange(destination),
+                eventsExtension: self.eventsExtension(destination)
+            )
+        )
+    }
+    
+    // Custom categories string to attach to the query
+    func eventsExtension(_ destination: Destination) -> String {
+        if destination.selectedEventTags.count == 0 {
+            return ""
+        } else {
+            return "Fetch events the following categories -> " + destination.selectedEventTags.joined(separator: ",")
+        }
+    }
+    
+    func parseDateRange(_ destination: Destination) -> String {
+        let dateRange = "\(destination.startDate.formatted(date: .long, time: .omitted)) and \(destination.endDate.formatted(date: .long, time: .omitted))"
+        return dateRange
+    }
+    
+    // Assign itinerary details from API to SWIFTData Persistent Cache
+    func populateEvents(
+        itineries: [DayItinerary],
+        destination: Destination,
+        cacheViewModel: CacheViewModel
+    ) {
+        let cacheItinerary = CacheItem(
+            name: "Itinerary Created - \(destination.id)",
+            content: itineries.map { $0.title }.joined(separator: ", ")
+        )
+        cacheViewModel.addCachedItem(cacheItinerary)
+        
+        destination.itinerary = []
+        for item in itineries {
+            var events = [EventItem]()
+            for event in item.activities {
+                events.append(EventItem(
+                    index: event.index,
+                    title: event.title,
+                    categories: event.categories,
+                    googlePlaceId: event.googlePlaceId
+                ))
+            }
+            
+            destination.itinerary.append(
+                Itinerary(
+                    index: item.index,
+                    title: item.title,
+                    date: item.date,
+                    activities: events
+                ))
+        }
+        
+        let c = CacheItem(
+            name: "Itinerary Added to Destination - \(destination.id)",
+            content: destination.itinerary.map { $0.title }.joined(separator: ", ")
+        )
+        cacheViewModel.addCachedItem(c)
+        
     }
 }

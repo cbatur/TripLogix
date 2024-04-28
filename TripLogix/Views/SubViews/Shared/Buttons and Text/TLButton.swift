@@ -8,12 +8,14 @@ enum TLButtonType {
     case plain
     case green
     case orange
+    case blue
+    case pink
     case transDark
     
     var background: Color {
         switch self {
         case .primary:
-            return Color.wbPinkMedium
+            return Color.black
         case .secondary:
             return Color.gray.opacity(0.03)
         case .plain:
@@ -22,6 +24,10 @@ enum TLButtonType {
             return Color.tlGreen
         case .orange:
             return Color.tlOrange
+        case .blue:
+            return Color.tlBlue
+        case .pink:
+            return Color.wbPinkMedium
         case .transDark:
             return Color.black.opacity(0.6)
         }
@@ -29,7 +35,7 @@ enum TLButtonType {
     
     var foreground: Color {
         switch self {
-        case .primary, .green, .orange:
+        case .primary, .green, .orange, .blue, .pink:
             return Color.white
         case .secondary, .plain:
             return Color.gray

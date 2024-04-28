@@ -33,8 +33,24 @@ struct CardStyleBordered: ViewModifier {
     }
 }
 
+struct ButtonStylePrimary: ViewModifier {
+    let style: TLButtonType
+    func body(content: Content) -> some View {
+        content
+            .background(style.background)
+            .foregroundColor(style.foreground)
+            .font(.system(size: 15))
+            .fontWeight(.medium)
+            .clipShape(Capsule())
+    }
+}
+
 extension View {
     func cardStyleBordered() -> some View {
         self.modifier(CardStyleBordered())
+    }
+    
+    func buttonStylePrimary(_ style: TLButtonType = .primary) -> some View {
+        self.modifier(ButtonStylePrimary(style: style))
     }
 }

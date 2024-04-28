@@ -90,9 +90,10 @@ struct TripPlanEventCustomizeView: View {
                             Text(tag)
                                 .padding(10)
                                 .frame(maxWidth: .infinity)
-                                .background(tagExists(tag) ? Color.tlGreen : Color.gray)
-                                .foregroundColor(.white)
-                                .font(.system(size: 15)).fontWeight(tagExists(tag) ? .bold : .medium)
+                                .background(tagExists(tag) ? Color.black : Color.gray8)
+                                .foregroundColor(tagExists(tag) ? Color.white : Color.black)
+                                .font(.system(size: 15))
+                                .fontWeight(.medium)
                                 .clipShape(Capsule())
                                 .onTapGesture {
                                     tapTag(tag)

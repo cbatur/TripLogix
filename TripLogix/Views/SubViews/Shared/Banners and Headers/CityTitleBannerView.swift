@@ -29,10 +29,11 @@ struct CityTitleHeader: View {
         HStack {
             Image(cityName.split(separator: ",").map(String.init).last?.replacingOccurrences(of: " ", with: "") ?? "")
                 .resizable()
-                .frame(width: 26, height: 18)
+                .frame(width: 24, height: 17)
             
             Text(cityName)
-                .font(.system(size: 19)).bold()
+                .font(.system(size: 18))
+                .fontWeight(.medium)
                 .foregroundColor(.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }

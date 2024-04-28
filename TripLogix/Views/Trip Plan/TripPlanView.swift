@@ -5,157 +5,38 @@ struct TripPlanView: View {
     @Bindable var destination: Destination
     @StateObject var viewModel: TripPlanViewModel = TripPlanViewModel()
     @StateObject var cacheViewModel: CacheViewModel = CacheViewModel()
-    let columns: [GridItem] = [GridItem(.flexible()),
-                               GridItem(.flexible())]
 
     @State private var launchAllEvents = false
-    @State private var isAnimating = false
     @State private var launchAdminTools = false
     
     init(destination: Destination) {
         _destination = Bindable(wrappedValue: destination)
     }
     
-    func shareButtonTapped() {
-        // Share button tapped
-        launchAdminTools = true
-        print("Share button tapped \(destination.id)")
-    }
-    
     var body: some View {
-        
         VStack {
-            if let alert = viewModel.activeAlertBox {
-                
-                AlertWithIconView(alertBox: alert)
-                .cardStyle(.white)
-                
-            } else {
-                
-                VStack {
-                    Divider()
-                    LocationDateHeader(destination: destination)
-                    Divider()
-                    TripLinks()
-                    Divider()
-                }
-                .isHidden(!viewModel.showUpdateButton())
-                
-                LazyVGrid(columns: columns) {
-                    HStack {
-                        Image(systemName: "text.redaction")
-                            .padding(8)
-                        Text("Create".uppercased())
-                            .foregroundColor(Color.black)
-                            .padding(.trailing, 6)
-                            .fontWeight(.medium)
-                            .font(.system(size: 15))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .onTapGesture {
-                                updateTrip()
-                            }
-                    }
-                    .cardStyleBordered()
-                    
-                    if destination.allEventTags.count > 0 {
-                        HStack {
-                            Image(systemName: "person.2.badge.gearshape")
-                                .padding(8)
-                            Text("Personalize".uppercased())
-                                .foregroundColor(Color.black)
-                                .padding(.trailing, 6)
-                                .fontWeight(.medium)
-                                .font(.system(size: 15))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .onTapGesture {
-                                    self.launchAllEvents = true
-                                }
-                        }
-                        .cardStyleBordered()
-                    }
-
-                    if destination.itinerary.count == 0 {
-                        Text("A trip itinerary will be created for the dates you selected.")
-                            .foregroundColor(.gray)
-                            .frame(maxWidth: .infinity)
-                        
-                        if destination.allEventTags.count > 0 {
-                            Text("Customize your trip to fit the activities you enjoy.")
-                                .foregroundColor(.gray)
-                                .frame(maxWidth: .infinity)
-                        }
-                    }
-                }
-                .padding()
-                
-                if destination.itinerary.count > 0 {
-                    VStack {
-                        HStack {
-                            Text("Events and Activities")
-                                .font(.system(size: 25)).bold()
-                                .padding(.leading, 20)
-                                .padding(.top, 13)
-                            Spacer()
-                        }
-                        
-                        Form {
-                            ForEach(destination.itinerary.sorted(by: { $0.index < $1.index }), id: \.self) { day in
-                                EventCardView(day: day, city: destination.name)
-                            }
-                        }
-                    }
-                    
-                } else {
-                    
-                    VStack {
-                        Image("empty_state_trip_events")
-                            .resizable()
-                            .scaledToFit()
-                            .background(Color.clear)
-                            .edgesIgnoringSafeArea(.all)
-                        Text("No trip plan has been created yet.")
-                            .font(.custom("Gilroy-Medium", size: 20))
-                            .foregroundColor(Color.wbPinkMediumAlt)
-                    }
-                    .padding(.leading, 35)
-                    .padding(.trailing, 35)
-                    .frame(alignment: .center)
-                }
-            }
-            
-            Spacer()
+            alertSection
+            mainContent
         }
         .background(Color(UIColor.systemGroupedBackground))
-        .navigationTitle("Trip Plan")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .principal) {
-                Image("navigation_logo_3")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 120, height: 28)
-            }
-            
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button(action: shareButtonTapped) {
-                    Image(systemName: "square.and.arrow.up")
-                }
-                
-                Button(action: { updateTrip() }) {
-                    Image(systemName: "arrow.clockwise")
-                }
+            navigationBarItems
+        }
+        .onAppear {
+            viewModel.fetchEventCategoriesIfNeeded(destination)
+        }
+        .onChange(of: viewModel.allTags) { _, events in
+            if events.count > 0 {
+                destination.allEventTags = events
             }
         }
-        .onChange(of: viewModel.itineraries) {
-            _,
-            newEvents in
-            self.populateEvents(newEvents)
-            
-            let c = CacheItem(
-                name: "Itinerary Created - \(destination.id)",
-                content: newEvents.map { $0.title }.joined(separator: ", ")
+        .onChange(of: viewModel.itineraries) { _, newEvents in
+            self.viewModel.populateEvents(
+                itineries: newEvents,
+                destination: destination,
+                cacheViewModel: cacheViewModel
             )
-            cacheViewModel.addCachedItem(c)
         }
         .sheet(isPresented: $launchAllEvents) {
             TripPlanEventCustomizeView(destination: destination)
@@ -163,72 +44,177 @@ struct TripPlanView: View {
         .sheet(isPresented: $launchAdminTools) {
             AdminViewCachedLocations()
         }
-        .onAppear {            
-            if destination.allEventTags.count == 0 {
-                self.viewModel.getCityEventCategories(
-                    qType: .getEventCategories(
-                        city: destination.name
-                    )
-                )
+    }
+    
+    private var alertSection: some View {
+        Group {
+            if let alert = viewModel.activeAlertBox {
+                AlertWithIconView(alertBox: alert)
+                    .cardStyle(.white)
             }
         }
-        .onChange(of: viewModel.allTags) { _, events in
-            if events.count > 0 {
-                destination.allEventTags = events
+    }
+    
+    private var mainContent: some View {
+        VStack {
+            tripDetails
+            itineraryDetails
+                .isHidden(viewModel.activeAlertBox != nil)
+        }
+    }
+    
+    private var tripDetails: some View {
+        VStack {
+            Divider()
+            LocationDateHeader(destination: destination)
+            VStack {
+                Divider()
+                TripLinks()
+                Divider()
+            }
+            .isHidden(viewModel.activeAlertBox != nil)
+        }
+        
+    }
+    
+    private var eventGrid: some View {
+        Group {
+            if destination.itinerary.count == 0 {
+                HStack {
+                    createTripButton
+                    personalizeButton
+                }
+                .padding(.top, 20)
+                .isHidden(viewModel.activeAlertBox != nil)
+            }
+        }
+    }
+    
+    private var createTripButton: some View {
+        Button(action: { viewModel.updateTrip(destination) }) {
+            if destination.itinerary.count == 0 {
+                Label("Create", systemImage: "text.redaction")
+                .padding(.horizontal, 15)
+                .padding(9)
+            } else {
+                Image(systemName: "arrow.clockwise")
+                    .padding(10)
+            }
+        }
+        .buttonStylePrimary(.pink)
+    }
+
+    private var personalizeButton: some View {
+        Group {
+            if destination.allEventTags.count > 0 {
+                Button(action: { launchAllEvents = true }) {
+                    if destination.itinerary.count == 0 {
+                        Label("Personalize", systemImage: "person.fill.viewfinder")
+                            .padding(.horizontal, 15)
+                            .padding(9)
+                    } else {
+                        Image(systemName: "person.fill.viewfinder")
+                            .padding(10)
+                    }
+                }
+                .buttonStylePrimary(.primary)
+            } else {
+                EmptyView()
+            }
+        }
+    }
+    
+    private var itineraryDetails: some View {
+        VStack {
+            if destination.itinerary.count > 0 {
+                eventGrid
+                eventsAndActivitiesView
+            } else {
+                noPlanView
+                    .padding(.top, 30)
+            }
+        }
+    }
+    
+    private var navigationBarItems: some ToolbarContent {
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
+            Button(action: shareButtonTapped) {
+                Image(systemName: "square.and.arrow.up")
+            }
+        }
+    }
+    
+    private func shareButtonTapped() {
+        launchAdminTools = true
+        print("Share button tapped \(destination.id)")
+    }
+    
+    private var noPlanView: some View {
+        GeometryReader { geometry in
+            VStack {
+                Image("hero_create_trip")
+                    .resizable()
+                    .scaledToFit()
+                    .background(Color.clear)
+                    .edgesIgnoringSafeArea(.all)
+                    .padding(.leading, geometry.size.width / 4)
+                    .padding(.trailing, geometry.size.width / 4)
+                Text("Create a trip plan")
+                    .font(.custom("Gilroy-Bold", size: 23))
+                    .foregroundColor(Color.black)
+                    .padding(.bottom, 10)
+                Text("A trip itinerary will be created for the dates you selected.")
+                    .font(.custom("Gilroy-Regular", size: 18))
+                    .foregroundColor(Color.gray3)
+                    .frame(alignment: .center)
+                
+                eventGrid
+            }
+            .padding(.leading, 15)
+            .padding(.trailing, 15)
+            .padding(.top, 15)
+        }
+    }
+    
+    private var eventsAndActivitiesView: some View {
+        VStack {
+            HStack {
+                HeaderView(title: "Events and Activities")
+                Spacer()
+                HStack {
+                    createTripButton
+                    personalizeButton
+                }
+                .padding(.trailing, 10)
+            }
+            Form {
+                ForEach(destination.itinerary.sorted(by: { $0.index < $1.index }), id: \.self) { day in
+                    EventCardView(day: day, city: destination.name)
+                }
             }
         }
     }
 }
 
-extension TripPlanView {
-    
-    func updateTrip() {
-        self.viewModel.generateItinerary(
-            qType: .getDailyPlan(
-                city: destination.name,
-                dateRange: parseDateRange(),
-                eventsExtension: eventsExtension()
-            )
-        )
+struct ButtonStyleModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding(8)
+            .foregroundColor(.black)
+            .font(.system(size: 15, weight: .medium))
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
-    
-    func eventsExtension() -> String {
-        return "Fetch events the following categories -> " + destination.selectedEventTags.joined(separator: ",")
-    }
-    
-    func parseDateRange() -> String {
-        let dateRange = "\(destination.startDate.formatted(date: .long, time: .omitted)) and \(destination.endDate.formatted(date: .long, time: .omitted))"
-        return dateRange
-    }
-    
-    // Assign itinerary details from API to SWIFTData Persistent Cache
-    func populateEvents(_ itineries: [DayItinerary]) {
-        destination.itinerary = []
-        for item in itineries {
-            var events = [EventItem]()
-            for event in item.activities {
-                events.append(EventItem(
-                    index: event.index,
-                    title: event.title,
-                    categories: event.categories,
-                    googlePlaceId: event.googlePlaceId
-                ))
-            }
-            
-            destination.itinerary.append(
-                Itinerary(
-                    index: item.index,
-                    title: item.title,
-                    date: item.date,
-                    activities: events
-                ))
+}
+
+struct HeaderView: View {
+    var title: String
+
+    var body: some View {
+        HStack {
+            Text(title)
+                .font(.system(size: 23)).bold()
+                .padding(.leading, 20)
+                .padding(.top, 13)
         }
-        
-        let c = CacheItem(
-            name: "Itinerary Added to Destination - \(destination.id)",
-            content: destination.itinerary.map { $0.title }.joined(separator: ", ")
-        )
-        cacheViewModel.addCachedItem(c)
-        
     }
 }

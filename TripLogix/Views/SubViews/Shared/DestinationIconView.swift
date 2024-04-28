@@ -18,10 +18,10 @@ struct DestinationIconDataView: View {
         if let size = self.size {
             self.setImage()
                 .resizable()
-                .aspectRatio(contentMode: .fill)
                 .frame(width: size, height: size)
-                .edgesIgnoringSafeArea(.all)
-                .clipShape(RoundedRectangle(cornerRadius: 7))
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                .shadow(radius: 1)
         } else {
             self.setImage()
                 .resizable()

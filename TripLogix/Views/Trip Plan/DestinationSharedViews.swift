@@ -23,19 +23,23 @@ struct LocationDateHeader: View {
     }
     
     var body: some View {
-        VStack {
-            CityTitleHeader(cityName: destination.name)
-                .frame(alignment: .leading)
+        HStack {
+            DestinationIconDataView(iconData: destination.icon, size: 70)
             
-            HStack {
-                Text("\(destination.startDate.formatted(date: .abbreviated, time: .omitted)) - \(destination.endDate.formatted(date: .abbreviated, time: .omitted))")
-                    .font(.system(size: 15))
-                    .foregroundColor(.black) +
-                Text(dayDiffLabel())
-                    .foregroundColor(.gray)
+            VStack {
+                CityTitleHeader(cityName: destination.name)
+                    .frame(alignment: .leading)
                 
+                HStack {
+                    Text("\(destination.startDate.formatted(date: .abbreviated, time: .omitted)) - \(destination.endDate.formatted(date: .abbreviated, time: .omitted))")
+                        .font(.system(size: 14))
+                        .foregroundColor(.gray3) +
+                    Text(dayDiffLabel())
+                        .foregroundColor(.gray)
+                    
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding()
     }
