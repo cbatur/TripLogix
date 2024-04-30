@@ -1,5 +1,6 @@
 
 import SwiftUI
+import Popovers
 
 struct TripPlanView: View {
     @Bindable var destination: Destination
@@ -8,6 +9,7 @@ struct TripPlanView: View {
 
     @State private var launchAllEvents = false
     @State private var launchAdminTools = false
+    @State private var showModal = false
     
     init(destination: Destination) {
         _destination = Bindable(wrappedValue: destination)
@@ -57,7 +59,7 @@ struct TripPlanView: View {
     
     private var mainContent: some View {
         VStack {
-            tripDetails
+            //tripDetails
             itineraryDetails
                 .isHidden(viewModel.activeAlertBox != nil)
         }
@@ -66,15 +68,14 @@ struct TripPlanView: View {
     private var tripDetails: some View {
         VStack {
             Divider()
-            LocationDateHeader(destination: destination)
+            //LocationDateHeader(destination: destination)
             VStack {
                 Divider()
-                TripLinks()
+                //TripLinks()
                 Divider()
             }
             .isHidden(viewModel.activeAlertBox != nil)
         }
-        
     }
     
     private var eventGrid: some View {
@@ -138,9 +139,9 @@ struct TripPlanView: View {
     
     private var navigationBarItems: some ToolbarContent {
         ToolbarItemGroup(placement: .navigationBarTrailing) {
-            Button(action: shareButtonTapped) {
-                Image(systemName: "square.and.arrow.up")
-            }
+            NavigationBarIconView(onAction: {
+                shareButtonTapped()
+            }, icon: "square.and.arrow.up")
         }
     }
     
@@ -176,15 +177,46 @@ struct TripPlanView: View {
         }
     }
     
+    private func launchInternalMenu() {
+        showModal = true
+    }
+    
     private var eventsAndActivitiesView: some View {
         VStack {
             HStack {
                 HeaderView(title: "Events and Activities")
                 Spacer()
-                HStack {
-                    createTripButton
-                    personalizeButton
+                
+                
+                Templates.Menu {
+                    Templates.MenuButton(title: "Personalize", systemImage: "person.fill.viewfinder") {
+                        launchAllEvents = true
+                    }
+                    Templates.MenuButton(title: "Create New", systemImage: "arrow.clockwise") {
+                        //launchImageToFlightView = true
+                    }
+                    
+                } label: { fade in
+                    VStack {
+                        Image(systemName: "ellipsis")
+                            .aspectRatio(contentMode: .fit)
+                            .font(.system(size: 21)).bold()
+                            .background(.clear)
+                            .padding(8)
+                            .buttonStylePrimary(.plain)
+                            .onTapGesture {
+                                self.launchInternalMenu()
+                            }
+                    }
+                    .opacity(fade ? 0.5 : 1)
                 }
+                
+                
+                
+//                HStack {
+//                    createTripButton
+//                    personalizeButton
+//                }
                 .padding(.trailing, 10)
             }
             Form {

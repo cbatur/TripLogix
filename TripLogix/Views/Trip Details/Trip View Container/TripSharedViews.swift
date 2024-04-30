@@ -3,14 +3,19 @@ import SwiftUI
 
 struct LocationDateHeader: View {
     @Bindable var destination: Destination
-    let tripLinks: [String] = ["Events", "Hotels", "Flights", "Documents"]
     @State private var selectedLink: String = "Events"
-    let columns: [GridItem] = [GridItem(.flexible())]
-    var linksHidden: Bool = false
+
+    let passDateClick: () -> Void
+    let passIconClick: () -> Void
     
-    init(destination: Destination, linksHidden: Bool = false) {
+    init(
+        destination: Destination,
+        passDateClick: @escaping () -> Void,
+        passIconClick: @escaping () -> Void
+    ) {
         _destination = Bindable(wrappedValue: destination)
-        self.linksHidden = linksHidden
+        self.passDateClick = passDateClick
+        self.passIconClick = passIconClick
     }
     
     func dayDiff() -> Int {
@@ -25,6 +30,7 @@ struct LocationDateHeader: View {
     var body: some View {
         HStack {
             DestinationIconDataView(iconData: destination.icon, size: 70)
+                .onTapGesture { passIconClick() }
             
             VStack {
                 CityTitleHeader(cityName: destination.name)
@@ -38,6 +44,7 @@ struct LocationDateHeader: View {
                         .foregroundColor(.gray)
                     
                 }
+                .onTapGesture { passDateClick() }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
@@ -45,24 +52,63 @@ struct LocationDateHeader: View {
     }
 }
 
+enum TripLink {
+    case events
+    case flights
+    case hotels
+    case rentals
+    case docs
+    
+    var title: String {
+        switch self {
+        case .events:
+            return "Events"
+        case .flights:
+            return "Flights"
+        case .hotels:
+            return "Hotels"
+        case .rentals:
+            return "Rentals"
+        case .docs:
+            return "Docs"
+        }
+    }
+    
+    var icon: String {
+        switch self {
+        case .events:
+            return "map"
+        case .flights:
+            return "airplane"
+        case .hotels:
+            return "house"
+        case .rentals:
+            return "car"
+        case .docs:
+            return "doc"
+        }
+    }
+    
+}
+
 struct TripLinks: View {
     
-    let tripLinks: [String] = ["Events", "Flights", "Hotels", "Rentals", "Docs"]
-    let tripIcons: [String] = ["map", "airplane", "house", "car", "doc"]
-    @State private var selectedLink: String = "Events"
+    let tripLinks: [TripLink] = [.events, .flights, .hotels, .rentals, .docs]
+    @State private var selectedLink: TripLink = .events
     let columns: [GridItem] = [GridItem(.flexible())]
+    let passSelectedIndex: (Int) -> Void
     
     var body: some View {
         VStack {
             HStack {
                 ForEach(tripLinks.indices, id: \.self) { index in
                     VStack {
-                        Image(systemName: tripIcons[index])
+                        Image(systemName: tripLinks[index].icon)
                             .font(.subheadline)
                             .foregroundColor(.gray)
                             .padding(.bottom, 3)
                         
-                        Text(tripLinks[index].uppercased())
+                        Text(tripLinks[index].title.uppercased())
                             .font(.custom("Satoshi-Bold", size: 13))
                             .foregroundColor(
                                 self.selectedLink == tripLinks[index] ? Color.wbPinkMedium : Color.gray
@@ -71,6 +117,7 @@ struct TripLinks: View {
                     .padding(6)
                     .onTapGesture {
                         self.selectedLink = tripLinks[index]
+                        self.passSelectedIndex(index)
                     }
                 }
             }

@@ -2,7 +2,7 @@
 import SwiftUI
 import Popovers
 
-struct _TabReservationsView: View {
+struct FlightsHomeView: View {
     @Bindable var destination: Destination
     @State private var displayBottomToolbar = true
     @State private var flightManageViewDisplay = false

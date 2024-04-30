@@ -28,17 +28,18 @@ struct NavigationBarSubViews: View {
 
 struct NavigationBarIconView: View {
     let onAction: () -> Void
+    let icon: String
     
     var body: some View {
         HStack {
             Button(action: {
                 self.onAction()
             }) {
-                Image(systemName: "list.bullet.circle.fill")
+                Image(systemName: icon)
                     .aspectRatio(contentMode: .fit)
-                    .font(.largeTitle)
+                    .font(.system(size: 21)).bold()
                     .background(.clear)
-                    .foregroundColor(Color.wbPinkMedium)
+                    .foregroundColor(Color.black)
             }
             Spacer()
         }
