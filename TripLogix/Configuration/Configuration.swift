@@ -23,12 +23,19 @@ enum Configuration {
         static let encryptedBase64 = "hOmzigNnj3CtjR6ilKN1rg=="
     }
     
+    enum SkyScrapper {
+        static let apiHost = "sky-scanner3.p.rapidapi.com"
+        static let keyHex = "cdc0634f6e5a9eeb3ef63593b349aa7692051c9b8f5554d9df2248f54cd56b8e"
+        static let ivHex = "e625c3f91e54630046f650be28f036e2"
+        static let encryptedBase64 = "YXk01C/L8vmD+J2BhAoymirGB97+qYSTd3i4+Lq4nwQTpcM1fzJ54+Ka8xFTAvovPW4JVFBjvCQUJyU8J1jDlg=="
+    }
+    
     enum GooglePlaces {
         static let baseUrl = "https://maps.googleapis.com/maps/api/"
         static let newBaseUrl = "https://places.googleapis.com/v1/"
-        static let keyHex = "0f018542ac21547c31bbd51f2626962e"
-        static let ivHex = "6fb32dd1797ba80a702288554ec27bef"
-        static let encryptedBase64 = "essey31h0rzWHbrCBVRCpf86clyd2m2DsVUFf7DGPp6erIRIB09t/4Mm7C/YpgEY"
+        static let keyHex = "8fe0ccdfc3977c5f5a0f39b137d65571a8d3049509f7ac70a05bd05ac2afb100"
+        static let ivHex = "65c833266ac46d87a95986126daeffdf"
+        static let encryptedBase64 = "LZyOnAOj81/9h6wDQL9QRZgqDPt/4S36UKGQthKdorWYHAHhbnILqNRn6ak12yeM"
     }
     
     enum Links {

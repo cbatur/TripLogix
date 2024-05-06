@@ -71,4 +71,12 @@ extension String {
         
         return result
     }
+    
+    func flagIconSanitized() -> String {
+        let words = self.split(separator: " ")
+        var pascalCase = words.map { $0 }.joined()
+        pascalCase = pascalCase.replacingOccurrences(of: "Türkiye(Turkey)", with: "Türkiye")
+        pascalCase = pascalCase.replacingOccurrences(of: "UnitedStates", with: "USA")
+        return pascalCase
+    }
 }

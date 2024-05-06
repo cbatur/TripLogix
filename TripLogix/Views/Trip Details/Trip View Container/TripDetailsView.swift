@@ -5,6 +5,7 @@ import SwiftData
 struct TripDetailsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var googlePlacesViewModel: GooglePlacesViewModel = GooglePlacesViewModel()
+    @StateObject var ssFlightsViewModel: SSFlightsViewModel = SSFlightsViewModel()
     @Bindable var destination: Destination
     
     @State private var selectedIndex = 0
@@ -59,6 +60,8 @@ struct TripDetailsView: View {
             if destination.icon == nil {
                 self.googlePlacesViewModel.fetchPlaceDetails(placeId: destination.googlePlaceId)
             }
+            
+            ssFlightsViewModel.queryAirport(destination.baseCity)
         }
         .sheet(isPresented: $launchDateSelection) {
             DateSelectionAlertView(

@@ -22,7 +22,7 @@ enum LocationCatalog {
     case wishlist
     case visited
 }
-
+//
 final class AddNewDestinationViewModel: ObservableObject {
     
     @Published var query = ""

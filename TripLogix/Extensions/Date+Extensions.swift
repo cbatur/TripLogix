@@ -243,6 +243,47 @@ public func stringToDate(_ dateString: String) -> Date? {
     return dateFormatter.date(from: dateString)
 }
 
+// Needed for Sky Scrapper date formats
+public func extractTime(from timestamp: String) -> String {
+    let inputFormatter = DateFormatter()
+    inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+
+    let outputFormatter = DateFormatter()
+    outputFormatter.dateFormat = "HH:mm"
+
+    if let date = inputFormatter.date(from: timestamp) {
+        return outputFormatter.string(from: date)
+    } else {
+        return "__:__"
+    }
+}
+
+// Needed for Sky Scrapper date formats
+public func formatDateFlightCard(from timestamp: String) -> String {
+    let inputFormatter = DateFormatter()
+    inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+
+    let outputFormatter = DateFormatter()
+    outputFormatter.dateFormat = "MMM d, yyyy"
+
+    if let date = inputFormatter.date(from: timestamp) {
+        return outputFormatter.string(from: date)
+    } else {
+        return "__:__"
+    }
+}
+
+// Convert number of minutes 430 -> 7hr 30min
+public func formatMinutes(_ minutes: Int) -> String {
+    let hours = minutes / 60
+    let remainingMinutes = minutes % 60
+    if remainingMinutes == 0 {
+        return "\(hours)h"
+    } else {
+        return "\(hours)h \(remainingMinutes)min"
+    }
+}
+
 public func basicDateTime(_ date: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"

@@ -8,8 +8,10 @@ final class CryptoSwiftViewModel: ObservableObject {
     @Published var key = ""
 
     // --------- To generate a new CryptoSet ------
-    // Paste this func in ChatGPT and command to create a random keyHex and ivHex
-    // Print it via this ViewModel and delete it from here
+    // 1- Paste this func in ChatGPT and command "create a random keyHex and ivHex with the following specifications.
+    // let key = Array<UInt8>(hex: keyHex)
+    // let iv = Array<UInt8>(hex: ivHex)
+    // 2- Print it via this ViewModel and delete it from here
     // --------------------------------------------
     // Create a random keyHex and ivHex
     func shuffleAPIKey() {
@@ -27,7 +29,7 @@ final class CryptoSwiftViewModel: ObservableObject {
             print("[Debug] - Generate Encrypted encryptedBase64 Key: \(encryptedBase64)")
             self.key = encryptedBase64
         } catch {
-            print("An error occurred: \(error)")
+            print("[Debug] An error occurred: \(error)")
         }
     }
 }
@@ -69,6 +71,7 @@ public enum CryptoKeySet {
     case openAI
     case googlePlaces
     case avionEdge
+    case skyScrapper
     
     var package: CryptoPackage {
         switch self {
@@ -89,6 +92,12 @@ public enum CryptoKeySet {
                 keyHex: Configuration.AvionEdge.keyHex,
                 ivHex: Configuration.AvionEdge.ivHex,
                 encryptedBase64: Configuration.AvionEdge.encryptedBase64
+            )
+        case .skyScrapper:
+            return CryptoPackage(
+                keyHex: Configuration.SkyScrapper.keyHex,
+                ivHex: Configuration.SkyScrapper.ivHex,
+                encryptedBase64: Configuration.SkyScrapper.encryptedBase64
             )
         }
     }

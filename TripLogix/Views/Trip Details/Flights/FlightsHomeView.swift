@@ -4,13 +4,14 @@ import Popovers
 
 struct FlightsHomeView: View {
     @Bindable var destination: Destination
+    @StateObject var viewModel: SSFlightsViewModel = SSFlightsViewModel()
+
     @State private var displayBottomToolbar = true
     @State private var flightManageViewDisplay = false
     @State private var deleteFlight = false
     @State private var flightToDelete: DSelectedFlight?
-    @State var flightTypesButtonDisabled = true
     @State var launchImageToFlightView = false
-
+    
     init(destination: Destination) {
         _destination = Bindable(wrappedValue: destination)
     }
@@ -91,10 +92,43 @@ struct FlightsHomeView: View {
     
     var body: some View {
         VStack {
+            popUpMenu
+            
             Form {
                 ForEach(destination.flights, id: \.self) { f in
                     Section(header: Text("\(formatDateDisplay(f.date))")) {
-                        D_FlightResultCard(f)
+                        //D_FlightResultCard(f)
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("Jakarta")
+                                Text("CGK")
+                                    .font(.largeTitle)
+                                    .fontWeight(.bold)
+                                Text("12:30")
+                            }
+                            Spacer()
+                            VStack {
+                                Text("1 Jan 2024")
+                                Image(systemName: "airplane")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 15, height: 15)
+                                Text("21h 45min")
+                                    .padding(.horizontal)
+                            }
+                            Spacer()
+                            VStack(alignment: .trailing) {
+                                Text("Singapore")
+                                Text("SIN")
+                                    .font(.largeTitle)
+                                    .fontWeight(.bold)
+                                Text("13:45")
+                            }
+                        }
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(10)
+                        .padding()
                     }
                     .onTapGesture {
                         flightToDelete = f
@@ -108,95 +142,15 @@ struct FlightsHomeView: View {
             .isHidden(destination.flights.count == 0)
             
             Spacer()
+            buttonsToolBar
             
-            VStack {
-                VStack {
-                    if self.displayBottomToolbar == false {
-    
-                        Text("MANAGE RESERVATIONS")
-                            .font(.custom("Gilroy-Medium", size: 20))
-                            .padding()
-                            .foregroundColor(.white)
-                            .cornerRadius(5)
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 40, alignment: .center)
-                        .onTapGesture {
-                            self.displayBottomToolbar = true
-                        }
-                        .animation(.easeInOut(duration: 0.3), value: displayBottomToolbar)
-    
-                    } else {
-    
-                        VStack {
-                            Button(action: {
-                                self.displayBottomToolbar = false
-                            }) {
-                                HStack {
-                                    Image(systemName: "chevron.down")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 20, height: 20)
-                                        .foregroundColor(.gray)
-                                }
-                                .padding(.bottom, 10)
-                            }
-    
-                            HStack {
-                                Templates.Menu {
-                                    Templates.MenuButton(title: "Add Manually", systemImage: "rectangle.and.text.magnifyingglass") {
-                                        flightManageViewDisplay = true
-                                    }
-                                    Templates.MenuButton(title: "Add From Image", systemImage: "photo") {
-                                        launchImageToFlightView = true
-                                    }
-                                    Templates.MenuButton(title: "Email Reservation", systemImage: "at") { }
-                                    .disabled(flightTypesButtonDisabled)
-                                    
-                                } label: { fade in
-                                    VStack {
-                                        Text("FLIGHTS")
-                                            .font(.custom("Satoshi-Bold", size: 15))
-                                            .padding(10)
-                                            .foregroundColor(.white)
-                                            .cornerRadius(5)
-                                            .cardStyle(.black.opacity(0.5))
-                                    }
-                                    .opacity(fade ? 0.5 : 1)
-                                }
-                                
-                                Button {
-                                    //Manage Hotels
-                                } label: {
-                                    Text("HOTELS")
-                                        .font(.custom("Satoshi-Bold", size: 15))
-                                        .padding(10)
-                                        .foregroundColor(.white)
-                                        .cornerRadius(5)
-                                        .cardStyle(.black.opacity(0.5))
-                                }
-                                
-                                Button {
-                                    //Manage Car Rentals
-                                } label: {
-                                    Text("CAR RENTALS")
-                                        .font(.custom("Satoshi-Bold", size: 15))
-                                        .padding(10)
-                                        .foregroundColor(.white)
-                                        .cornerRadius(5)
-                                        .cardStyle(.black.opacity(0.5))
-                                }
-                            }
-                        }
-                        .animation(.easeInOut(duration: 0.3), value: displayBottomToolbar)
-                        .padding()
-                    }
-                }
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 40, alignment: .center)
-                .padding()
-                .cardStyle(.black.opacity(0.5))
-            }
+        }
+        .onAppear {
+            flightManageViewDisplay = true
+            viewModel.queryAirport(destination.name.components(separatedBy: ",").first ?? "London")
         }
         .sheet(isPresented: $flightManageViewDisplay) {
-            FlightManageView(destination: destination)
+            SS_ManualFlightSearchView(destination: destination)
         }
         .sheet(isPresented: $launchImageToFlightView) {
             ImageToFlightView(actionPassFlights: passSelectedFlights)
@@ -205,36 +159,99 @@ struct FlightsHomeView: View {
             guard let _ = flight else { return }
             self.deleteFlight = true
         }
-        .customActionSheet(isPresented: $deleteFlight) {
-            if let f = flightToDelete {
-                VStack {
-                    Text("Delete This Flight?")
-                    Divider()
-                    D_FlightResultCard(f)
-                    Divider()
-                    HStack {
-                        Button {
-                            deleteFlight(f)
-                        } label: {
-                            Text("YES, DELETE")
-                                .padding()
-                                .cardStyle(.wbPinkMedium)
-                        }
-                        
-                        Button {
-                            deleteFlight = false
-                            self.flightToDelete = nil
-                        } label: {
-                            Image(systemName: "xmark.circle")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 23, height: 23)
-                                .foregroundColor(.gray)
-                        }
+//        .customActionSheet(isPresented: $deleteFlight) {
+//            if let f = flightToDelete {
+//                VStack {
+//                    Text("Delete This Flight?")
+//                    Divider()
+//                    D_FlightResultCard(f)
+//                    Divider()
+//                    HStack {
+//                        Button {
+//                            deleteFlight(f)
+//                        } label: {
+//                            Text("YES, DELETE")
+//                                .padding()
+//                                .cardStyle(.wbPinkMedium)
+//                        }
+//                        
+//                        Button {
+//                            deleteFlight = false
+//                            self.flightToDelete = nil
+//                        } label: {
+//                            Image(systemName: "xmark.circle")
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: 23, height: 23)
+//                                .foregroundColor(.gray)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+    }
+    
+    private var popUpMenu: some View {
+        VStack {
+            HStack {
+                HeaderView(title: "Flights")
+                Spacer()
+                Templates.Menu {
+                    Templates.MenuButton(title: "Add Manually", systemImage: "rectangle.and.text.magnifyingglass") {
+                        flightManageViewDisplay = true
                     }
+                    Templates.MenuButton(title: "Add From Image", systemImage: "photo") {
+                        launchImageToFlightView = true
+                    }
+                    Templates.MenuButton(title: "Email Reservation", systemImage: "at") { }
+                    //.disabled(flightTypesButtonDisabled)
+                    
+                } label: { fader in
+                    Image(systemName: "plus")
+                        .aspectRatio(contentMode: .fit)
+                        .font(.system(size: 21)).bold()
+                        .background(.clear)
+                        .padding(8)
+                        .buttonStylePrimary(.green)
+                        .padding(.trailing, 10)
+                        .opacity(fader ? 0.5 : 1)
                 }
+
+                .padding(.trailing, 10)
             }
         }
+    }
+    
+    private var buttonsToolBar: some View {
+        HStack {
+            buttonAddManually
+            buttonFromImage
+        }
+        .padding(.top, 20)
+        .isHidden(viewModel.activeAlertBox != nil)
+    }
+    
+    private var buttonAddManually: some View {
+//        Button(action: { flightManageViewDisplay = true }) {
+//
+//        }
+        Label("Add Manually", systemImage: "text.redaction")
+        .padding(.horizontal, 15)
+        .padding(9)
+        .buttonStylePrimary(.pink)
+        .onTapGesture {
+            flightManageViewDisplay = true
+        }
+        
+    }
+
+    private var buttonFromImage: some View {
+        Button(action: { launchImageToFlightView = true }) {
+            Label("Add From Image", systemImage: "text.redaction")
+            .padding(.horizontal, 15)
+            .padding(9)
+        }
+        .buttonStylePrimary(.primary)
     }
 }
 

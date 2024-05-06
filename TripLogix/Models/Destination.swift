@@ -11,6 +11,7 @@ class Destination {
     var googlePlaceId: String
     var startDate: Date
     var endDate: Date
+    var baseCity: String = "Toronto"
     var priority: Int
     var icon: Data?
     var allEventTags: [String]

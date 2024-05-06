@@ -25,8 +25,8 @@ struct EventCardView: View {
     
     var body: some View {
         Section(header: Text("\(viewModel.displayDailyDate(day.date)) - \(day.title)".uppercased())
-            .foregroundColor(Color.tlOrange)
-            .font(.custom("Satoshi-Bold", size: 16))) {
+            .foregroundColor(Color.wbPinkMediumAlt)
+            .font(.custom("Satoshi-Bold", size: 14))) {
                 
                 ForEach(day.activities.sorted(by: { $0.index < $1.index }), id: \.self) { activity in
                     

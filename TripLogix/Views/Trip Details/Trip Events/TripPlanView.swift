@@ -9,7 +9,6 @@ struct TripPlanView: View {
 
     @State private var launchAllEvents = false
     @State private var launchAdminTools = false
-    @State private var showModal = false
     
     init(destination: Destination) {
         _destination = Bindable(wrappedValue: destination)
@@ -177,23 +176,17 @@ struct TripPlanView: View {
         }
     }
     
-    private func launchInternalMenu() {
-        showModal = true
-    }
-    
     private var eventsAndActivitiesView: some View {
         VStack {
             HStack {
                 HeaderView(title: "Events and Activities")
                 Spacer()
-                
-                
                 Templates.Menu {
                     Templates.MenuButton(title: "Personalize", systemImage: "person.fill.viewfinder") {
                         launchAllEvents = true
                     }
                     Templates.MenuButton(title: "Create New", systemImage: "arrow.clockwise") {
-                        //launchImageToFlightView = true
+                        viewModel.updateTrip(destination)
                     }
                     
                 } label: { fade in
@@ -204,9 +197,6 @@ struct TripPlanView: View {
                             .background(.clear)
                             .padding(8)
                             .buttonStylePrimary(.plain)
-                            .onTapGesture {
-                                self.launchInternalMenu()
-                            }
                     }
                     .opacity(fade ? 0.5 : 1)
                 }
@@ -244,7 +234,7 @@ struct HeaderView: View {
     var body: some View {
         HStack {
             Text(title)
-                .font(.system(size: 23)).bold()
+                .font(.system(size: 25)).bold()
                 .padding(.leading, 20)
                 .padding(.top, 13)
         }

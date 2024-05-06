@@ -17,7 +17,7 @@ enum TLButtonType {
         case .primary:
             return Color.black
         case .secondary:
-            return Color.gray.opacity(0.03)
+            return Color.gray.opacity(0.08)
         case .plain:
             return Color.white
         case .green:
