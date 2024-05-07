@@ -123,3 +123,22 @@ extension View {
         self.modifier(CustomActionSheetModifier(isPresented: isPresented, sheetContent: sheetContent))
     }
 }
+
+extension View {
+    func customAlert<T: View>(isVisible: Binding<Bool>, @ViewBuilder content: () -> T) -> some View {
+        ZStack {
+            self
+                .blur(radius: isVisible.wrappedValue ? 6 : 0)
+                .animation(.easeInOut, value: isVisible.wrappedValue)
+
+            if isVisible.wrappedValue {
+                content()
+                    .transition(.scale.combined(with: .opacity))
+                    .animation(.spring(), value: isVisible.wrappedValue)
+                    .onTapGesture {
+                        isVisible.wrappedValue = false
+                    }
+            }
+        }
+    }
+}

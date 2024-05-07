@@ -20,6 +20,8 @@ struct SS_ManualFlightSearchView: View {
     @State private var isFromListActive: Bool = true
     
     @State private var selectedSegment = 0
+    @State private var showVerificationFlightAlert = false
+    @State private var selectedSegmentFlight: SSLeg.SSSegment?
     
     init(destination: Destination) {
         _destination = Bindable(wrappedValue: destination)
@@ -49,6 +51,15 @@ struct SS_ManualFlightSearchView: View {
     
     func searchEnabled() -> Bool {
         return fromAirport != nil && toAirport != nil
+    }
+    
+    func receiveSelectedFlight(_ segment: SSLeg.SSSegment) {
+        self.selectedSegmentFlight = segment
+        showVerificationFlightAlert = true
+    }
+    
+    func addFlightToTrip(_ segment: SSLeg.SSSegment) {
+        print("pass to Viewmodel and add flight")
     }
     
     var body: some View {
@@ -113,7 +124,6 @@ struct SS_ManualFlightSearchView: View {
                                                 Text("\(airport.suggestionTitle)")
                                                     .font(.system(size: 18))
                                                     .fontWeight(.medium)
-//                                                    .padding(.top, 5)
                                                 Text("\(airport.subtitle)")
                                                     .font(.system(size: 15))
                                                     .foregroundColor(.gray3)
@@ -237,7 +247,7 @@ struct SS_ManualFlightSearchView: View {
                     
                 } else {
                     
-                    Group {
+                    Group { // Search Rrsults Flights List View
                         VStack {
                             Form {
                                 
@@ -284,7 +294,7 @@ struct SS_ManualFlightSearchView: View {
                                             
                                             if viewModel.itineraries.count > 0 {
                                                 ForEach(viewModel.itineraries, id: \.self) { flight in
-                                                    SSFlightCard(flight: flight)
+                                                    SSFlightCard(flight: flight, actionPassFlight: receiveSelectedFlight)
                                                 }
                                             } else {
                                                 VStack {
@@ -346,6 +356,12 @@ struct SS_ManualFlightSearchView: View {
             .onChange(of: viewModel.fromAirport) { _, airport in
                 self.fromAirport = airport
             }
+            .customAlert(isVisible: $showVerificationFlightAlert, content: {
+                VerifyLegAlertView(showAlert: $showVerificationFlightAlert,
+                                   segment: selectedSegmentFlight,
+                                   actionSelectedFlight: addFlightToTrip)
+                    .padding()
+            })
     }
 }
 
@@ -366,7 +382,7 @@ struct SS_ManualFlightSearchView: View {
 //                }
 //                .padding()
 //                .cardStyleBordered()
-//                
+//
 //                VStack {
 //                    HStack {
 //                        Image(systemName: "airplane.arrival")
@@ -382,74 +398,6 @@ struct SS_ManualFlightSearchView: View {
 //        //}
 //    }
 //}
-
-struct SSFlightCard: View {
-    
-    var flight: SSItinerary
-    
-    var body: some View {
-        
-        Section() {
-            VStack {
-                ForEach(flight.legs, id: \.self) { leg in
-
-                    HStack {
-                        Spacer()
-                        
-                        Text("Stops: \(leg.stopCount)".uppercased())
-                            .foregroundColor(.accentColor).bold()
-                            .font(.system(size: 15))
-                            .isHidden(leg.stopCount == 0)
-                        
-                        Text("\(flight.price.formatted)")
-                            .padding(8)
-                            .padding(.horizontal, 8)
-                            .buttonStylePrimary(.secondary)
-                    }
-                        
-                    ForEach(leg.segments, id: \.self) { segment in
-                        
-                        Group {
-                            Divider()
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text("\(segment.origin.parent.name)")
-                                    Text("\(segment.origin.flightPlaceId)")
-                                        .font(.system(size: 22))
-                                        .fontWeight(.bold)
-                                    Text("\(extractTime(from: leg.departure))")
-                                }
-                                
-                                Spacer()
-                                VStack {
-                                    Text("\(formatDateFlightCard(from: segment.departure))")
-                                        .font(.system(size: 15)).bold()
-                                    Image(systemName: "airplane")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 20, height: 20)
-                                    Text("\(segment.marketingCarrier.alternateId) \(segment.flightNumber) (\(formatMinutes(segment.durationInMinutes)))")
-                                        .font(.system(size: 15))
-                                        .foregroundColor(.gray4)
-                                        .padding(.horizontal)
-                                }
-                                Spacer()
-                                VStack(alignment: .trailing) {
-                                    Text("\(segment.destination.parent.name)")
-                                    Text("\(segment.destination.flightPlaceId)")
-                                        .font(.system(size: 22))
-                                        .fontWeight(.bold)
-                                    Text("\(extractTime(from: segment.arrival))")
-                                }
-                            }
-                        }
-                        .padding(.vertical, 4)
-                    }
-                }
-            }
-        }
-    }
-}
 
 struct SearchAirportsView: View {
     @Environment(\.presentationMode) var presentationMode
