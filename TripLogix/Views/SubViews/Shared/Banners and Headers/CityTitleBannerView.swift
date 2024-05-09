@@ -32,7 +32,7 @@ struct CityTitleHeader: View {
                 .frame(width: 24, height: 17)
             
             Text(cityName)
-                .font(.system(size: 18))
+                .font(.system(size: 21))
                 .fontWeight(.medium)
                 .foregroundColor(.black)
                 .frame(maxWidth: .infinity, alignment: .leading)

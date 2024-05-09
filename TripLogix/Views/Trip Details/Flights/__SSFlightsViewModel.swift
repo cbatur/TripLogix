@@ -3,11 +3,9 @@ import Foundation
 
 final class SSFlightsViewModel: ObservableObject {
     
-    @Published var query = ""
     @Published var airports: [SSAirport] = []
     @Published var itineraries: [SSItinerary] = []
     @Published var cachedSSAirports: [SSAirport.SSAirportPresentation] = []
-    @Published var globalSSAirports: [SSAirport] = []
     @Published var searchModeOn: Bool = false
     @Published var searchLoading: Bool = false
 
@@ -21,56 +19,6 @@ final class SSFlightsViewModel: ObservableObject {
     private var cancellableSet: Set<AnyCancellable> = []
     private let ssAPIService = SkyScrapperAPIService()
     
-    init() {
-        $query
-            .debounce(for: .milliseconds(300), scheduler: RunLoop.main) // Adds a debounce to limit requests
-            .removeDuplicates() // Avoids sending a request if the search text hasn't changed
-            .filter { $0.count > 2 } // Only sends a request if the search text has more than 2 characters
-            .flatMap { query in
-                self.fetchAirportsPublisher(query: query)
-            }
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    print("Error: \(error)")
-                }
-            }, receiveValue: { [weak self] airports in
-                self?.globalSSAirports = airports.data
-            })
-            .store(in: &cancellableSet)
-    }
-    
-    private func fetchAirportsPublisher(query: String) -> AnyPublisher<SSAirportResponse, Error> {
-        guard let url = URL(string: "https://\(Configuration.SkyScrapper.apiHost)/flights/auto-complete?query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")") else {
-            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
-        }
-
-        guard let apiKey = decryptAPIKey(.skyScrapper) else { preconditionFailure("Bad API Key") }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue(apiKey, forHTTPHeaderField: "X-RapidAPI-Key")
-        request.setValue(apiHost, forHTTPHeaderField: "X-RapidAPI-Host")
-
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .map(\.data)
-            .decode(type: SSAirportResponse.self, decoder: JSONDecoder())
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
-    }
-    
-    func searchAirport(_ city: String) -> AnyPublisher<[SSAirport], SSError> {
-        guard city.count == 3 else {
-            return Just([]).setFailureType(to: SSError.self).eraseToAnyPublisher()
-        }
-
-        return ssAPIService.airportSearch(city: city)
-            .map { $0.data }
-            .eraseToAnyPublisher()
-    }
-    
     // Make an API Call to a single airport and cache
     func queryAirport(_ city: String) {
         ssAPIService.airportSearch(city: city)
@@ -83,20 +31,6 @@ final class SSFlightsViewModel: ObservableObject {
                 self.cacheAirports()
             })
             .store(in: &cancellableSet)
-    }
-    
-    func searchFlightsMock() {
-        if let fileURL = Bundle.main.url(forResource: "SS_FlightSearchResults", withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: fileURL)
-                let items = try JSONDecoder().decode(SSFlightResponse.self, from: data)
-                self.itineraries = items.data.itineraries
-            } catch {
-                print("Error reading or parsing city.JSON: \(error.localizedDescription)")
-            }
-        } else {
-            print("JSON file not found.")
-        }
     }
     
     func searchFlights(_ date: String, d: String, a: String) {
@@ -169,6 +103,23 @@ extension SSFlightsViewModel {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(self.cachedSSAirports) {
             UserDefaults.standard.set(encoded, forKey: "savedSSAirports")
+        }
+    }
+}
+
+// Mock Services
+extension SSFlightsViewModel {
+    func searchFlightsMock() {
+        if let fileURL = Bundle.main.url(forResource: "SS_FlightSearchResults", withExtension: "json") {
+            do {
+                let data = try Data(contentsOf: fileURL)
+                let items = try JSONDecoder().decode(SSFlightResponse.self, from: data)
+                self.itineraries = items.data.itineraries
+            } catch {
+                print("Error reading or parsing city.JSON: \(error.localizedDescription)")
+            }
+        } else {
+            print("JSON file not found.")
         }
     }
 }

@@ -9,80 +9,29 @@ struct FlightsHomeView: View {
     @State private var displayBottomToolbar = true
     @State private var flightManageViewDisplay = false
     @State private var deleteFlight = false
-    @State private var flightToDelete: DSelectedFlight?
+    @State private var flightToDelete: DSSLeg?
     @State var launchImageToFlightView = false
     
     init(destination: Destination) {
         _destination = Bindable(wrappedValue: destination)
     }
     
-    func deleteFlight(_ flight: DSelectedFlight) {
-        destination.flights.removeAll { $0.id == flight.id }
+    func deleteFlight(_ flight: DSSLeg) {
+        destination.flightLegs.removeAll { $0.id == flight.id }
         deleteFlight = false
     }
     
-    // Move Public FlightMethods to here
-    public func convertFlight(_ s: SelectedFlight) -> DSelectedFlight {
-        let dDeparture = DAirportDetail(
-            iataCode: s.flight.departure.iataCode,
-            icaoCode: s.flight.departure.icaoCode,
-            terminal: s.flight.departure.terminal,
-            gate: s.flight.departure.gate,
-            scheduledTime: s.flight.departure.scheduledTime
-        )
-        
-        let dArrival = DAirportDetail(
-            iataCode: s.flight.arrival.iataCode,
-            icaoCode: s.flight.arrival.icaoCode,
-            terminal: s.flight.arrival.terminal,
-            gate: s.flight.arrival.gate,
-            scheduledTime: s.flight.arrival.scheduledTime
-        )
-        
-        let dAircraft = DAircraft(
-            modelCode: s.flight.aircraft.modelCode,
-            modelText: s.flight.aircraft.modelText
-        )
-        
-        let dAirline = DAirline(
-            name: s.flight.airline.name,
-            iataCode: s.flight.airline.iataCode,
-            icaoCode: s.flight.airline.icaoCode
-        )
-        
-        let dFlight = DFlight(
-            number: s.flight.flight.number,
-            iataNumber: s.flight.flight.iataNumber,
-            icaoNumber: s.flight.flight.icaoNumber
-        )
-        
-        let dFutureFlight = DFutureFlight(
-            weekday: s.flight.weekday,
-            departure: dDeparture,
-            arrival: dArrival,
-            aircraft: dAircraft,
-            airline: dAirline,
-            flight: dFlight
-        )
-        
-        let dSelectedFlight = DSelectedFlight(
-            date: s.date,
-            flight: dFutureFlight
-        )
-
-        return dSelectedFlight
-    }
-    
+    // Process response received from Image Scan
     func passSelectedFlights(_ selectedFlights: [SelectedFlight]) {
         for s in selectedFlights {
-            if !destination.flights.contains(convertFlight(s)) {
-                destination.flights.append(convertFlight(s))
-                
-                AnalyticsManager.shared.logEvent(
-                    name: "_TabReservationsView_AddFlight",
-                    params: ["added_flight": simplfyFlightInfo(s)]
-                )
-            }
+//            if !destination.flights.contains(convertFlight(s)) {
+//                destination.flights.append(convertFlight(s))
+//                
+//                AnalyticsManager.shared.logEvent(
+//                    name: "_TabReservationsView_AddFlight",
+//                    params: ["added_flight": simplfyFlightInfo(s)]
+//                )
+//            }
         }
     }
     
@@ -90,56 +39,81 @@ struct FlightsHomeView: View {
         return "\(f.flight.departure.iataCode.uppercased()) ➔ \(f.flight.arrival.iataCode.uppercased()) - \(f.flight.airline.iataCode.uppercased()) \(f.flight.flight.number)\n"
     }
     
+    func sortFlightsByDate(_ segments: [DSSLeg]) -> [DSSLeg] {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+
+        let sortedSegments = segments.sorted { (lhs, rhs) -> Bool in
+            if let lhsDate = formatter.date(from: lhs.departure), let rhsDate = formatter.date(from: rhs.departure) {
+                return lhsDate < rhsDate
+            }
+            return false
+        }
+        return sortedSegments
+    }
+    
+    func sortSegmentsByDate(_ segments: [DSSSegment]) -> [DSSSegment] {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+
+        let sortedSegments = segments.sorted { (lhs, rhs) -> Bool in
+            if let lhsDate = formatter.date(from: lhs.departure), let rhsDate = formatter.date(from: rhs.departure) {
+                return lhsDate < rhsDate
+            }
+            return false
+        }
+        return sortedSegments
+    }
+    
     var body: some View {
         VStack {
             popUpMenu
             
             Form {
-                ForEach(destination.flights, id: \.self) { f in
-                    Section(header: Text("\(formatDateDisplay(f.date))")) {
-                        //D_FlightResultCard(f)
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("Jakarta")
-                                Text("CGK")
-                                    .font(.largeTitle)
-                                    .fontWeight(.bold)
-                                Text("12:30")
-                            }
-                            Spacer()
-                            VStack {
-                                Text("1 Jan 2024")
-                                Image(systemName: "airplane")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 15, height: 15)
-                                Text("21h 45min")
-                                    .padding(.horizontal)
-                            }
-                            Spacer()
-                            VStack(alignment: .trailing) {
-                                Text("Singapore")
-                                Text("SIN")
-                                    .font(.largeTitle)
-                                    .fontWeight(.bold)
-                                Text("13:45")
+                ForEach(sortFlightsByDate(destination.flightLegs), id: \.self) { leg in
+                    Section(header:
+                        VStack {
+                            HStack {
+                                AsyncImage(url: URL(string: "\(leg.carriers.marketing.first?.logoUrl ?? "")")) { image in
+                                            image
+                                                .resizable()
+                                                .scaledToFit()
+                                        } placeholder: {
+                                            ProgressView()
+                                        }
+                                        .frame(width: 25, height: 25)
+                                
+                                Text("\(leg.carriers.marketing.first?.name ?? "")")
+                                    .font(.subheadline)
+                                
+                                Text(leg.stopCount > 0 ? "Stops: \(leg.stopCount)" : "")
+                                    .foregroundColor(.tlOrange).bold()
+                                
+                                Spacer()
+                                Image(systemName: "trash")
+                                    .font(.headline )
+                                    .onTapGesture {
+                                        flightToDelete = nil
+                                        flightToDelete = leg
+                                        deleteFlight = true
+                                    }
                             }
                         }
-                        .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(10)
-                        .padding()
-                    }
-                    .onTapGesture {
-                        flightToDelete = f
-                        deleteFlight = true
+                    ) {
+                        ForEach(sortSegmentsByDate(leg.segments), id: \.self) { segment in
+                            DSSSegmentCard(segment: segment)
+                        }
                     }
                 }
             }
             .opacity(0.8)
             .clipShape(RoundedRectangle(cornerRadius: 13))
             .frame(maxWidth: .infinity)
-            .isHidden(destination.flights.count == 0)
+            .isHidden(destination.flightLegs.count == 0)
             
             Spacer()
             buttonsToolBar
@@ -155,46 +129,22 @@ struct FlightsHomeView: View {
         .sheet(isPresented: $launchImageToFlightView) {
             ImageToFlightView(actionPassFlights: passSelectedFlights)
         }
-        .onChange(of: self.flightToDelete) { _, flight in
-            guard let _ = flight else { return }
-            self.deleteFlight = true
-        }
-//        .customActionSheet(isPresented: $deleteFlight) {
-//            if let f = flightToDelete {
-//                VStack {
-//                    Text("Delete This Flight?")
-//                    Divider()
-//                    D_FlightResultCard(f)
-//                    Divider()
-//                    HStack {
-//                        Button {
-//                            deleteFlight(f)
-//                        } label: {
-//                            Text("YES, DELETE")
-//                                .padding()
-//                                .cardStyle(.wbPinkMedium)
-//                        }
-//                        
-//                        Button {
-//                            deleteFlight = false
-//                            self.flightToDelete = nil
-//                        } label: {
-//                            Image(systemName: "xmark.circle")
-//                                .resizable()
-//                                .scaledToFit()
-//                                .frame(width: 23, height: 23)
-//                                .foregroundColor(.gray)
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        .customAlert(isVisible: $deleteFlight,
+                     content: {
+            
+            DeleteFlightAlert(
+                showAlert: $deleteFlight,
+                leg: flightToDelete,
+                actionSelectedLeg: deleteFlight
+            )
+            .padding()
+        })
     }
     
     private var popUpMenu: some View {
         VStack {
             HStack {
-                HeaderView(title: "Flights")
+                HeaderView(title: "Flights in my trip")
                 Spacer()
                 Templates.Menu {
                     Templates.MenuButton(title: "Add Manually", systemImage: "rectangle.and.text.magnifyingglass") {

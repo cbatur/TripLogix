@@ -21,7 +21,7 @@ struct SS_ManualFlightSearchView: View {
     
     @State private var selectedSegment = 0
     @State private var showVerificationFlightAlert = false
-    @State private var selectedSegmentFlight: SSLeg.SSSegment?
+    @State private var selectedLeg: SSLeg?
     
     init(destination: Destination) {
         _destination = Bindable(wrappedValue: destination)
@@ -53,13 +53,133 @@ struct SS_ManualFlightSearchView: View {
         return fromAirport != nil && toAirport != nil
     }
     
-    func receiveSelectedFlight(_ segment: SSLeg.SSSegment) {
-        self.selectedSegmentFlight = segment
+    func receiveSelectedFlight(_ leg: SSLeg) {
+        self.selectedLeg = leg
+        
+        for segment in leg.segments {
+            print("[Debug] \(segment.departure)")
+        }
+        
         showVerificationFlightAlert = true
     }
     
-    func addFlightToTrip(_ segment: SSLeg.SSSegment) {
+    func addFlightToTrip(_ s: SSLeg) {
         print("pass to Viewmodel and add flight")
+        
+        if !destination.flightLegs.contains(where: { $0.id == s.id }) {
+        
+            destination.flightLegs.append(convertFlight(s))
+            
+//            AnalyticsManager.shared.logEvent(
+//                name: "_TabReservationsView_AddFlight",
+//                params: ["added_flight": simplfyFlightInfo(s)]
+//            )
+        }
+    }
+    
+    // Move Public FlightMethods to here
+    func convertFlight(_ s: SSLeg) -> DSSLeg {
+
+        var dMarketing: [DSSMarketing] = []
+        for m in s.carriers.marketing {
+            dMarketing.append(
+                DSSMarketing(
+                    logoUrl: m.logoUrl,
+                    name: m.name
+                )
+            )
+        }
+        
+        let dCarrier = DCarrier(
+            marketing: dMarketing,
+            operationType: s.carriers.operationType
+        )
+        
+        let dOriginAirportEntity = DSSAirportEntity(
+            id: s.origin.id,
+            entityId: s.origin.entityId,
+            name: s.origin.name,
+            displayCode: s.origin.displayCode,
+            city: s.origin.city,
+            country: s.origin.country
+        )
+        
+        let dDestinationAirportEntity = DSSAirportEntity(
+            id: s.destination.id,
+            entityId: s.destination.entityId,
+            name: s.destination.name,
+            displayCode: s.destination.displayCode,
+            city: s.destination.city,
+            country: s.destination.country
+        )
+        
+        var dSelectedSegments: [DSSSegment] = []
+        for segment in s.segments {
+            
+            let dOriginRouteParent = DSSRouteParent(
+                flightPlaceId: segment.origin.parent.flightPlaceId,
+                displayCode: segment.origin.parent.displayCode,
+                name: segment.origin.parent.name,
+                type: segment.origin.parent.type
+            )
+            
+            let dOriginRoute = DSSRoute(
+                flightPlaceId: segment.origin.flightPlaceId,
+                name: segment.origin.name,
+                type: segment.origin.type,
+                country: segment.origin.country,
+                parent: dOriginRouteParent
+            )
+            
+            let dDestinationRouteParent = DSSRouteParent(
+                flightPlaceId: segment.destination.parent.flightPlaceId,
+                displayCode: segment.destination.parent.displayCode,
+                name: segment.destination.parent.name,
+                type: segment.destination.parent.type
+            )
+            
+            let dDestinationRoute = DSSRoute(
+                flightPlaceId: segment.destination.flightPlaceId,
+                name: segment.destination.name,
+                type: segment.destination.type,
+                country: segment.destination.country,
+                parent: dDestinationRouteParent
+            )
+            
+            let dMarketingCarier = DSSCarrier(
+                name: segment.marketingCarrier.name,
+                alternateId: segment.marketingCarrier.alternateId
+            )
+            
+            dSelectedSegments.append(
+                DSSSegment(
+                    id: segment.id,
+                    origin: dOriginRoute,
+                    destination: dDestinationRoute,
+                    departure: segment.departure,
+                    arrival: segment.arrival,
+                    durationInMinutes: segment.durationInMinutes,
+                    flightNumber: segment.flightNumber,
+                    marketingCarrier: dMarketingCarier
+                )
+            )
+        }
+
+        let dLeg = DSSLeg(
+            id: s.id,
+            origin: dOriginAirportEntity,
+            destination: dDestinationAirportEntity,
+            durationInMinutes: s.durationInMinutes,
+            flightNumber: s.flightNumber,
+            stopCount: s.stopCount,
+            departure: s.departure,
+            arrival: s.arrival,
+            timeDeltaInDays: s.timeDeltaInDays,
+            carriers: dCarrier,
+            segments: dSelectedSegments
+        )
+
+        return dLeg
     }
     
     var body: some View {
@@ -356,158 +476,14 @@ struct SS_ManualFlightSearchView: View {
             .onChange(of: viewModel.fromAirport) { _, airport in
                 self.fromAirport = airport
             }
-            .customAlert(isVisible: $showVerificationFlightAlert, content: {
-                VerifyLegAlertView(showAlert: $showVerificationFlightAlert,
-                                   segment: selectedSegmentFlight,
-                                   actionSelectedFlight: addFlightToTrip)
-                    .padding()
-            })
-    }
-}
-
-//struct FlightBookingView: View {
-//    @State private var departureAirport = "CGK"
-//    @State private var arrivalAirport = "LGA"
-//
-//    var body: some View {
-//        //NavigationView {
-//            VStack {
-//                VStack {
-//                    HStack {
-//                        Image(systemName: "airplane.departure")
-//                            .foregroundColor(.gray)
-//                        TextField("Airport Code", text: $departureAirport)
-//                    }
-//                    Text("Soekarno Hatta International Airport")
-//                }
-//                .padding()
-//                .cardStyleBordered()
-//
-//                VStack {
-//                    HStack {
-//                        Image(systemName: "airplane.arrival")
-//                            .foregroundColor(.gray)
-//                        TextField("Airport Code", text: $arrivalAirport)
-//                    }
-//                    Text("New York La Guardia International Airport")
-//                }
-//                .padding()
-//                .cardStyleBordered()
-//            }
-//            .padding()
-//        //}
-//    }
-//}
-
-struct SearchAirportsView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @StateObject var viewModel: SSFlightsViewModel = SSFlightsViewModel()
-    @State private var searchText: String = ""
-    @State private var globalSearchText: String = ""
-    var passCachedAirport: (SSAirport.SSAirportPresentation) -> Void
-    @State private var selectedSegment = 0
-
-    func loadCachedAirports() {
-        viewModel.getCachedSSAirports()
-    }
-    
-    var filteredAirports: [SSAirport.SSAirportPresentation] {
-        if searchText.isEmpty {
-            return viewModel.cachedSSAirports
-        } else {
-            return viewModel.cachedSSAirports.filter { $0.suggestionTitle.localizedCaseInsensitiveContains(searchText) }
-        }
-    }
-    
-    var body: some View {
-        VStack {
-            HStack {
-                Spacer()
-                Image(systemName: "x.circle")
-                    .font(.largeTitle)
-                    .foregroundColor(.wbPinkMedium)
-                    .onTapGesture {
-                        presentationMode.wrappedValue.dismiss()
-                    }
-            }
-            .padding()
-
-            VStack {
-                Picker("Options", selection: $selectedSegment) {
-                    Text("Recent Searches").tag(0)
-                        .background(Color.blue)
-                        .foregroundColor(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 5))
-                    Text("Search Airports").tag(1)
-                        .background(Color.green)
-                        .foregroundColor(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 5))
-                    
-                }
-                .pickerStyle(SegmentedPickerStyle())
+            .customAlert(isVisible: $showVerificationFlightAlert,
+                         content: {
+                VerifyLegAlertView(
+                    showAlert: $showVerificationFlightAlert,
+                    leg: selectedLeg,
+                    actionSelectedLeg: addFlightToTrip
+                )
                 .padding()
-                .background(Color.gray.opacity(0.2))
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-            }
-
-            if selectedSegment == 0 {
-                Form {
-                    TextField("Filter Search History", text: $searchText)
-                        .textFieldStyle(.roundedBorder)
-                    
-                    ForEach(Array(filteredAirports.reversed().enumerated()), id: \.element) { index, item in
-                        HStack {
-                            Image(item.subtitle.split(separator: ",").map(String.init).last?.replacingOccurrences(of: " ", with: "").flagIconSanitized() ?? "")
-                                .resizable()
-                                .frame(width: 24, height: 17)
-                                .clipShape(RoundedRectangle(cornerRadius: 3))
-                            
-                            Text("\(item.suggestionTitle)")
-                                .font(.custom("Gilroy-Medium", size: 16))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.bottom, 4)
-                        }
-                        .padding(8)
-                        .onTapGesture {
-                            passCachedAirport(item)
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    }
-                }
-                
-            } else {
-                
-                Form {
-                    TextField("Airport or City Name", text: $viewModel.query)
-                        .textFieldStyle(.roundedBorder)
-                    
-                    ForEach(viewModel.globalSSAirports, id: \.self) { item in
-                        HStack {
-                            Image(item.presentation.subtitle.split(separator: ",").map(String.init).last?.replacingOccurrences(of: " ", with: "").flagIconSanitized() ?? "")
-                                .resizable()
-                                .frame(width: 24, height: 17)
-                                .clipShape(RoundedRectangle(cornerRadius: 3))
-                            
-                            Text("\(item.presentation.suggestionTitle)")
-                                .font(.custom("Gilroy-Medium", size: 16))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.bottom, 4)
-                        }
-                        .padding(8)
-                        .onTapGesture {
-                            viewModel.manageSSAirporteCache(item.presentation)
-                            passCachedAirport(item.presentation)
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    }
-                }
-            }
-            
-        }
-        .background(Color(UIColor.systemGroupedBackground))
-        .presentationDetents([.fraction(0.6)])
-        .onAppear {
-            self.loadCachedAirports()
-        }
+            })
     }
 }

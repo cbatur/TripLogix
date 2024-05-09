@@ -209,6 +209,11 @@
 		7E8822362BE20E4A00B32747 /* SS+FlightSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822352BE20E4A00B32747 /* SS+FlightSearch.swift */; };
 		7E8822382BE2EDF700B32747 /* SS_FlightSearchResults.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E8822372BE2EDF700B32747 /* SS_FlightSearchResults.json */; };
 		7E88223A2BE9ECAC00B32747 /* SSFlights_Cards_Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822392BE9ECAC00B32747 /* SSFlights_Cards_Alerts.swift */; };
+		7E88223C2BE9EF3800B32747 /* Destination+AvionEdge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E88223B2BE9EF3800B32747 /* Destination+AvionEdge.swift */; };
+		7E88223E2BE9EFD900B32747 /* Destination+TripModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E88223D2BE9EFD900B32747 /* Destination+TripModels.swift */; };
+		7E8822402BE9F08D00B32747 /* SSSearchAirportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E88223F2BE9F08D00B32747 /* SSSearchAirportView.swift */; };
+		7E8822422BE9F11200B32747 /* __SSSearchAirportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822412BE9F11200B32747 /* __SSSearchAirportViewModel.swift */; };
+		7E8822442BEBF9C000B32747 /* Destination+SkyScrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822432BEBF9C000B32747 /* Destination+SkyScrapper.swift */; };
 		7EA98D0B2BB149DE00AE39A9 /* ImageToFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */; };
 		7EC183C62BB2860C007B2602 /* OpenAI+TextCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */; };
 		7EC183C82BB28669007B2602 /* RequestNameSpaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C72BB28669007B2602 /* RequestNameSpaces.swift */; };
@@ -438,6 +443,11 @@
 		7E8822352BE20E4A00B32747 /* SS+FlightSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SS+FlightSearch.swift"; sourceTree = "<group>"; };
 		7E8822372BE2EDF700B32747 /* SS_FlightSearchResults.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SS_FlightSearchResults.json; sourceTree = "<group>"; };
 		7E8822392BE9ECAC00B32747 /* SSFlights_Cards_Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSFlights_Cards_Alerts.swift; sourceTree = "<group>"; };
+		7E88223B2BE9EF3800B32747 /* Destination+AvionEdge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Destination+AvionEdge.swift"; sourceTree = "<group>"; };
+		7E88223D2BE9EFD900B32747 /* Destination+TripModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Destination+TripModels.swift"; sourceTree = "<group>"; };
+		7E88223F2BE9F08D00B32747 /* SSSearchAirportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSSearchAirportView.swift; sourceTree = "<group>"; };
+		7E8822412BE9F11200B32747 /* __SSSearchAirportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __SSSearchAirportViewModel.swift; sourceTree = "<group>"; };
+		7E8822432BEBF9C000B32747 /* Destination+SkyScrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Destination+SkyScrapper.swift"; sourceTree = "<group>"; };
 		7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToFlightView.swift; sourceTree = "<group>"; };
 		7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenAI+TextCommand.swift"; sourceTree = "<group>"; };
 		7EC183C72BB28669007B2602 /* RequestNameSpaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNameSpaces.swift; sourceTree = "<group>"; };
@@ -835,6 +845,8 @@
 				7E85E7092BAE985100432BA9 /* FlightsHomeView.swift */,
 				7E8822332BE2092F00B32747 /* SSManualFlightSearch.swift */,
 				7E8822312BE0D9FD00B32747 /* __SSFlightsViewModel.swift */,
+				7E88223F2BE9F08D00B32747 /* SSSearchAirportView.swift */,
+				7E8822412BE9F11200B32747 /* __SSSearchAirportViewModel.swift */,
 				7E8822392BE9ECAC00B32747 /* SSFlights_Cards_Alerts.swift */,
 				7E8821FA2BB7D5D000B32747 /* Cards */,
 				7E8821F92BB7D59800B32747 /* Add Flight Manually */,
@@ -921,11 +933,14 @@
 				7E85E7282BAE985100432BA9 /* AvionModels.swift */,
 				7E85E7292BAE985100432BA9 /* CalendarModals.swift */,
 				7E85E72A2BAE985100432BA9 /* ChatGPTResponse.swift */,
-				7E85E72B2BAE985100432BA9 /* Destination.swift */,
 				7E85E72C2BAE985100432BA9 /* GPTResponseModels.swift */,
 				7E85E72D2BAE985100432BA9 /* Location.swift */,
 				7EC183E02BB53DDC007B2602 /* TLModels.swift */,
 				7E8821FD2BB908F800B32747 /* TLFlightModels.swift */,
+				7E85E72B2BAE985100432BA9 /* Destination.swift */,
+				7E88223B2BE9EF3800B32747 /* Destination+AvionEdge.swift */,
+				7E88223D2BE9EFD900B32747 /* Destination+TripModels.swift */,
+				7E8822432BEBF9C000B32747 /* Destination+SkyScrapper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1421,6 +1436,7 @@
 				7E85E7A32BAE985100432BA9 /* String+DateUtilities.swift in Sources */,
 				7E85E7392BAE985100432BA9 /* AE+Autocomplete.swift in Sources */,
 				7EA98D0B2BB149DE00AE39A9 /* ImageToFlightView.swift in Sources */,
+				7E8822402BE9F08D00B32747 /* SSSearchAirportView.swift in Sources */,
 				7E85E7AB2BAE985100432BA9 /* AddDestinationButton.swift in Sources */,
 				7E85E7AF2BAE985100432BA9 /* LoadingItineraryView.swift in Sources */,
 				7E88223A2BE9ECAC00B32747 /* SSFlights_Cards_Alerts.swift in Sources */,
@@ -1447,6 +1463,7 @@
 				7E85E73B2BAE985100432BA9 /* AE+FutureFlights.swift in Sources */,
 				7E85E7D22BAE985100432BA9 /* ChatGPTResponse.swift in Sources */,
 				7EC183CA2BB28962007B2602 /* OpenAIAPIServices.swift in Sources */,
+				7E88223C2BE9EF3800B32747 /* Destination+AvionEdge.swift in Sources */,
 				7E8822002BBBA17300B32747 /* TempView.swift in Sources */,
 				7E8822342BE2092F00B32747 /* SSManualFlightSearch.swift in Sources */,
 				7E85E7CC2BAE985100432BA9 /* TripsView.swift in Sources */,
@@ -1459,6 +1476,7 @@
 				7E85E79E2BAE985100432BA9 /* ViewHelpers.swift in Sources */,
 				7E85E7D52BAE985100432BA9 /* Location.swift in Sources */,
 				7E85E7C32BAE985100432BA9 /* AddNewDestinationView.swift in Sources */,
+				7E8822422BE9F11200B32747 /* __SSSearchAirportViewModel.swift in Sources */,
 				7E8821FE2BB908F800B32747 /* TLFlightModels.swift in Sources */,
 				7E85E7BD2BAE985100432BA9 /* _AvionEdgeAutocompleteViewModel.swift in Sources */,
 				7E85E7C22BAE985100432BA9 /* _StaticViewModel.swift in Sources */,
@@ -1487,10 +1505,12 @@
 				7E85E7D72BAE985100432BA9 /* AirportType.swift in Sources */,
 				7E85E7A82BAE985100432BA9 /* FlightCards.swift in Sources */,
 				7E85E7BB2BAE985100432BA9 /* UpdateDestinationIcon.swift in Sources */,
+				7E8822442BEBF9C000B32747 /* Destination+SkyScrapper.swift in Sources */,
 				7E85E7BA2BAE985100432BA9 /* NavigationBarSubViews.swift in Sources */,
 				7E88222A2BDF13AC00B32747 /* DocumentsView.swift in Sources */,
 				7E8822062BBE6CC500B32747 /* GP+SearchByPlaceId.swift in Sources */,
 				7E85E7B92BAE985100432BA9 /* EventCardView.swift in Sources */,
+				7E88223E2BE9EFD900B32747 /* Destination+TripModels.swift in Sources */,
 				7E85E7AA2BAE985100432BA9 /* SelectFlightsResultsView.swift in Sources */,
 				7E85E7A72BAE985100432BA9 /* LaunchScreenView.swift in Sources */,
 				7E85E7C42BAE985100432BA9 /* TripPlanEventCustomizeView.swift in Sources */,
