@@ -11,6 +11,8 @@ enum TLButtonType {
     case blue
     case pink
     case transDark
+    case google
+    case facebook
     
     var background: Color {
         switch self {
@@ -30,12 +32,16 @@ enum TLButtonType {
             return Color.wbPinkMedium
         case .transDark:
             return Color.black.opacity(0.6)
+        case .google:
+            return Color.red
+        case .facebook:
+            return Color.blue
         }
     }
     
     var foreground: Color {
         switch self {
-        case .primary, .green, .orange, .blue, .pink:
+        case .primary, .green, .orange, .blue, .pink, .google, .facebook:
             return Color.white
         case .secondary, .plain:
             return Color.gray

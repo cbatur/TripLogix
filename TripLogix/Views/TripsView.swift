@@ -44,6 +44,7 @@ struct TripsView: View {
     @State private var sortOrder = SortDescriptor(\Destination.startDate)
     @State private var launchNewDestination = false
     @State var dataFromChild: (GooglePlace?)
+    @State var launchLoginView = false
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -67,6 +68,9 @@ struct TripsView: View {
                 guard let place = place else { return }
                 self.addDestination(place: place)
             }
+            .toolbar {
+                navigationBarItems
+            }
             .navigationBarItems(leading:
                 Button{
                     //presentSideMenu.toggle()
@@ -78,6 +82,9 @@ struct TripsView: View {
             )
         }
         .analyticsScreen(name: "TripsView")
+        .sheet(isPresented: $launchLoginView) {
+            UserAccountManagementView()
+        }
         .onAppear{
             let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? "TL12345"
             AnalyticsManager.shared.logEvent(name: "TripsView_Appear")
@@ -86,6 +93,16 @@ struct TripsView: View {
         }
         .onDisappear{
             AnalyticsManager.shared.logEvent(name: "TripsView_Disappear")
+        }
+    }
+    
+    private var navigationBarItems: some ToolbarContent {
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
+            Image(systemName: "person.circle")
+                .font(.system(size: 27))
+                .onTapGesture {
+                    launchLoginView = true
+                }
         }
     }
     

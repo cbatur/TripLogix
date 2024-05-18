@@ -225,6 +225,7 @@
 		7EC183DB2BB511F9007B2602 /* AE_FutureFlight.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EC183DA2BB511F9007B2602 /* AE_FutureFlight.json */; };
 		7EC183DD2BB53285007B2602 /* TLRequests+FlightImageUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183DC2BB53285007B2602 /* TLRequests+FlightImageUpload.swift */; };
 		7EC183E12BB53DDC007B2602 /* TLModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183E02BB53DDC007B2602 /* TLModels.swift */; };
+		7EF82E952BF43DE600DFB53A /* UserAccountManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82E942BF43DE600DFB53A /* UserAccountManagementView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -459,6 +460,7 @@
 		7EC183DA2BB511F9007B2602 /* AE_FutureFlight.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AE_FutureFlight.json; sourceTree = "<group>"; };
 		7EC183DC2BB53285007B2602 /* TLRequests+FlightImageUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+FlightImageUpload.swift"; sourceTree = "<group>"; };
 		7EC183E02BB53DDC007B2602 /* TLModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLModels.swift; sourceTree = "<group>"; };
+		7EF82E942BF43DE600DFB53A /* UserAccountManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountManagementView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -827,6 +829,7 @@
 			isa = PBXGroup;
 			children = (
 				7E85E6F42BAE985100432BA9 /* AccountView.swift */,
+				7EF82E942BF43DE600DFB53A /* UserAccountManagementView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -1475,6 +1478,7 @@
 				7E85E7C82BAE985100432BA9 /* NavigationToolbar.swift in Sources */,
 				7E85E79E2BAE985100432BA9 /* ViewHelpers.swift in Sources */,
 				7E85E7D52BAE985100432BA9 /* Location.swift in Sources */,
+				7EF82E952BF43DE600DFB53A /* UserAccountManagementView.swift in Sources */,
 				7E85E7C32BAE985100432BA9 /* AddNewDestinationView.swift in Sources */,
 				7E8822422BE9F11200B32747 /* __SSSearchAirportViewModel.swift in Sources */,
 				7E8821FE2BB908F800B32747 /* TLFlightModels.swift in Sources */,
@@ -1689,7 +1693,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 113;
+				CURRENT_PROJECT_VERSION = 117;
 				DEVELOPMENT_ASSET_PATHS = "\"TripLogix/Preview Content\"";
 				DEVELOPMENT_TEAM = ZLA3S7L9MF;
 				ENABLE_PREVIEWS = YES;
@@ -1723,7 +1727,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 113;
+				CURRENT_PROJECT_VERSION = 117;
 				DEVELOPMENT_ASSET_PATHS = "\"TripLogix/Preview Content\"";
 				DEVELOPMENT_TEAM = ZLA3S7L9MF;
 				ENABLE_PREVIEWS = YES;

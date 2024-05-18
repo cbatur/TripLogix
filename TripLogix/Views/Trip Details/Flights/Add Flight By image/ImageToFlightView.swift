@@ -36,7 +36,8 @@ struct ImageToFlightView: View {
 
     private func flightView(for flight: AEFutureFlight, inGroupAtIndex index: Int) -> some View {
         VStack {
-            FlightResultCard(flight)
+            Text("FlightREsultCard")
+            //FlightResultCard(flight)
         }
         .padding()
         .cardStyle(isFlightSelected(flight, inGroupAtIndex: index) ? .tlAccentYellow : Color.white)

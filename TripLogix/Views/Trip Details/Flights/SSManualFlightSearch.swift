@@ -75,6 +75,9 @@ struct SS_ManualFlightSearchView: View {
 //                params: ["added_flight": simplfyFlightInfo(s)]
 //            )
         }
+        
+        // Display a toaster here that the flight has been added.
+        presentationMode.wrappedValue.dismiss()
     }
     
     // Move Public FlightMethods to here

@@ -135,36 +135,56 @@ struct SSSegmentCard: View {
     
     var body: some View {
         Group {
-            Divider()
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("\(segment.origin.parent.name)")
-                    Text("\(segment.origin.flightPlaceId)")
-                        .font(.system(size: 22))
-                        .fontWeight(.bold)
-                    Text("\(extractTime(from: segment.departure))")
-                }
-                
-                Spacer()
-                VStack {
+            VStack {
+                HStack {
+                    Image(systemName: "calendar")
+                        .foregroundColor(.gray)
+                        .font(.caption)
+                    
                     Text("\(formatDateFlightCard(from: segment.departure))")
                         .font(.system(size: 15)).bold()
-                    Image(systemName: "airplane")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 20, height: 20)
+                    
                     Text("\(segment.marketingCarrier.alternateId) \(segment.flightNumber) (\(formatMinutes(segment.durationInMinutes)))")
                         .font(.system(size: 15))
                         .foregroundColor(.gray4)
                         .padding(.horizontal)
                 }
-                Spacer()
-                VStack(alignment: .trailing) {
-                    Text("\(segment.destination.parent.name)")
-                    Text("\(segment.destination.flightPlaceId)")
-                        .font(.system(size: 22))
-                        .fontWeight(.bold)
-                    Text("\(extractTime(from: segment.arrival))")
+                .background(Color.gray9)
+                .padding(.bottom, 7)
+                
+                HStack {
+                    Text("\(segment.origin.name)")
+                        .font(.caption)
+                    Spacer()
+                    Text("\(segment.destination.name)")
+                        .font(.caption)
+                }
+                
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("\(segment.origin.flightPlaceId)")
+                            .font(.system(size: 25))
+                            .fontWeight(.bold)
+                        Text("\(extractTime(from: segment.departure))")
+                    }
+                    
+                    Spacer()
+                    VStack {
+                        Image(systemName: "airplane")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                        
+                    }
+                    .padding(.horizontal, 30)
+                    Spacer()
+                    VStack(alignment: .trailing) {
+                        
+                        Text("\(segment.destination.flightPlaceId)")
+                            .font(.system(size: 22))
+                            .fontWeight(.bold)
+                        Text("\(extractTime(from: segment.arrival))")
+                    }
                 }
             }
         }
@@ -176,36 +196,60 @@ struct DSSSegmentCard: View {
     
     var body: some View {
         Group {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("\(segment.origin.parent.name)")
-                    Text("\(segment.origin.flightPlaceId)")
-                        .font(.system(size: 22))
-                        .fontWeight(.bold)
-                    Text("\(extractTime(from: segment.departure))")
-                }
-                
-                Spacer()
-                VStack {
+            VStack {
+                HStack {
+                    Image(systemName: "calendar")
+                        .foregroundColor(.gray)
+                        .font(.caption)
+                    
                     Text("\(formatDateFlightCard(from: segment.departure))")
-                        .font(.system(size: 15)).bold()
-                    Image(systemName: "airplane")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 20, height: 20)
+                        .font(.system(size: 17)).bold()
+                    Spacer()
                     Text("\(segment.marketingCarrier.alternateId) \(segment.flightNumber) (\(formatMinutes(segment.durationInMinutes)))")
                         .font(.system(size: 15))
                         .foregroundColor(.gray4)
                         .padding(.horizontal)
                 }
-                .padding(.vertical)
-                Spacer()
-                VStack(alignment: .trailing) {
-                    Text("\(segment.destination.parent.name)")
-                    Text("\(segment.destination.flightPlaceId)")
-                        .font(.system(size: 22))
-                        .fontWeight(.bold)
-                    Text("\(extractTime(from: segment.arrival))")
+                .padding(10)
+                .cardStyleBordered()
+                
+                HStack {
+                    Text("\(segment.origin.name)")
+                        .font(.caption)
+                    Spacer()
+                    Text("\(segment.destination.name)")
+                        .font(.caption)
+                }
+                .padding(.top, 8)
+
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("\(segment.origin.flightPlaceId)")
+                            .font(.system(size: 25))
+                            .fontWeight(.bold)
+                        Text("\(extractTime(from: segment.departure))")
+                    }
+                    
+                    Spacer()
+                    
+                    VStack {
+                        Image(systemName: "airplane")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(.tlOrange)
+                    }
+                    .padding(.horizontal, 4)
+                    
+                    Spacer()
+                    
+                    VStack(alignment: .trailing) {
+                        
+                        Text("\(segment.destination.flightPlaceId)")
+                            .font(.system(size: 22))
+                            .fontWeight(.bold)
+                        Text("\(extractTime(from: segment.arrival))")
+                    }
                 }
             }
         }

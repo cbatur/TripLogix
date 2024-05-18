@@ -80,10 +80,12 @@ struct TripPlanView: View {
     private var eventGrid: some View {
         Group {
             if destination.itinerary.count == 0 {
-                HStack {
+                VStack {
                     createTripButton
                     personalizeButton
                 }
+                .padding(.leading, 35)
+                .padding(.trailing, 35)
                 .padding(.top, 20)
                 .isHidden(viewModel.activeAlertBox != nil)
             }
@@ -101,6 +103,7 @@ struct TripPlanView: View {
                     .padding(10)
             }
         }
+        .frame(maxWidth: .infinity)
         .buttonStylePrimary(.pink)
     }
 
@@ -117,6 +120,7 @@ struct TripPlanView: View {
                             .padding(10)
                     }
                 }
+                .frame(maxWidth: .infinity)
                 .buttonStylePrimary(.primary)
             } else {
                 EmptyView()
@@ -189,7 +193,7 @@ struct TripPlanView: View {
                         viewModel.updateTrip(destination)
                     }
                     
-                } label: { fade in
+                } label: { fadeEvents in
                     VStack {
                         Image(systemName: "ellipsis")
                             .aspectRatio(contentMode: .fit)
@@ -198,15 +202,8 @@ struct TripPlanView: View {
                             .padding(8)
                             .buttonStylePrimary(.plain)
                     }
-                    .opacity(fade ? 0.5 : 1)
+                    .opacity(fadeEvents ? 0.5 : 1)
                 }
-                
-                
-                
-//                HStack {
-//                    createTripButton
-//                    personalizeButton
-//                }
                 .padding(.trailing, 10)
             }
             Form {

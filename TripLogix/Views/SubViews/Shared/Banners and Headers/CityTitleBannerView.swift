@@ -30,12 +30,13 @@ struct CityTitleHeader: View {
             Image(cityName.split(separator: ",").map(String.init).last?.replacingOccurrences(of: " ", with: "") ?? "")
                 .resizable()
                 .frame(width: 24, height: 17)
-            
-            Text(cityName)
-                .font(.system(size: 21))
-                .fontWeight(.medium)
-                .foregroundColor(.black)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                        
+            Text(cityName.split(separator: ",").map(String.init).first ?? "")
+                .font(.system(size: 22)).bold()
+                .foregroundColor(.black) +
+            Text(cityName.split(separator: ",").map(String.init).last ?? "")
+                .font(.system(size: 22))
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
