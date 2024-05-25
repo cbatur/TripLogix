@@ -10,9 +10,151 @@ struct UserAccountManagementView: View {
             if userLogged {
                 UserHasSessionView()
             } else {
-                UserNeedsSessionView()
+                LoginView()
             }
         }
+    }
+}
+
+struct LoginView: View {
+    @State private var email: String = ""
+    @State private var password: String = ""
+    @State private var isFaceIDEnabled: Bool = false
+    @StateObject private var facebookLoginViewModel = FacebookLoginViewModel()
+    @StateObject private var googleSignInViewModel = GoogleSignInViewModel()
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Spacer()
+
+            Text("Log in")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+
+            Text("Log in to an existing account")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+
+            TextField("Email Address", text: $email)
+                .padding()
+                .background(Color(UIColor.secondarySystemBackground))
+                .cornerRadius(10)
+                .keyboardType(.emailAddress)
+                .autocapitalization(.none)
+                .padding(.horizontal, 20)
+
+            SecureField("Password", text: $password)
+                .padding()
+                .background(Color(UIColor.secondarySystemBackground))
+                .cornerRadius(10)
+                .padding(.horizontal, 20)
+
+            Toggle(isOn: $isFaceIDEnabled) {
+                Text("Enable Face ID")
+            }
+            .padding(.horizontal, 20)
+
+            Button(action: {
+                // Handle login action
+            }) {
+                Text("Log in")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(10)
+                    .padding(.horizontal, 20)
+            }
+            .disabled(email.isEmpty || password.isEmpty)
+
+            Button(action: {
+                // Handle forgot password action
+            }) {
+                Text("Forgot Password?")
+                    .foregroundColor(.blue)
+            }
+
+            Spacer()
+
+            VStack(spacing: 10) {
+                Button(action: {
+                    // Handle Apple sign-in
+                }) {
+                    HStack {
+                        Image(systemName: "a.square")
+                        Text("Continue with Apple")
+                            .fontWeight(.semibold)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .padding(.horizontal, 20)
+                }
+
+
+                if let user = googleSignInViewModel.user {
+                    Button(action: googleSignInViewModel.signOut) {
+                        Text("Logout \(user)")
+                    }
+                } else {
+                    Button(action: {
+                        googleSignInViewModel.signIn()
+                    }) {
+                        HStack {
+                            Image(systemName: "g.square")
+                            Text("Continue with Google")
+                                .fontWeight(.semibold)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .padding(.horizontal, 20)
+                    }
+                }
+
+                if facebookLoginViewModel.isLoggedIn {
+                    Button(action: facebookLoginViewModel.logout) {
+                        Text("Logout \(facebookLoginViewModel.userName ?? "User")")
+                    }
+                } else {
+                    Button(action: {
+                        facebookLoginViewModel.login()
+                    }) {
+                        HStack {
+                            Image(systemName: "f.square")
+                            Text("Continue with Facebook")
+                                .fontWeight(.semibold)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .padding(.horizontal, 20)
+                    }
+                }
+            }
+
+            Spacer()
+
+            HStack {
+                Text("New to TripLogix?")
+                Button(action: {
+                    // Handle sign-up action
+                }) {
+                    Text("Sign up for free")
+                        .fontWeight(.bold)
+                        .foregroundColor(.blue)
+                }
+            }
+            .padding(.bottom, 20)
+        }
+        .padding()
     }
 }
 

@@ -127,7 +127,7 @@
 		7E85E7A62BAE985100432BA9 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6F42BAE985100432BA9 /* AccountView.swift */; };
 		7E85E7A72BAE985100432BA9 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6F72BAE985100432BA9 /* LaunchScreenView.swift */; };
 		7E85E7A82BAE985100432BA9 /* FlightCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6F92BAE985100432BA9 /* FlightCards.swift */; };
-		7E85E7A92BAE985100432BA9 /* FlightManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6FA2BAE985100432BA9 /* FlightManageView.swift */; };
+		7E85E7A92BAE985100432BA9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6FA2BAE985100432BA9 /* ContentView.swift */; };
 		7E85E7AA2BAE985100432BA9 /* SelectFlightsResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6FB2BAE985100432BA9 /* SelectFlightsResultsView.swift */; };
 		7E85E7AB2BAE985100432BA9 /* AddDestinationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6FD2BAE985100432BA9 /* AddDestinationButton.swift */; };
 		7E85E7AC2BAE985100432BA9 /* BannerWithDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6FE2BAE985100432BA9 /* BannerWithDismiss.swift */; };
@@ -226,6 +226,30 @@
 		7EC183DD2BB53285007B2602 /* TLRequests+FlightImageUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183DC2BB53285007B2602 /* TLRequests+FlightImageUpload.swift */; };
 		7EC183E12BB53DDC007B2602 /* TLModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183E02BB53DDC007B2602 /* TLModels.swift */; };
 		7EF82E952BF43DE600DFB53A /* UserAccountManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82E942BF43DE600DFB53A /* UserAccountManagementView.swift */; };
+		7EF82E982BF97B9100DFB53A /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 7EF82E972BF97B9100DFB53A /* ScalingHeaderScrollView */; };
+		7EF82E9D2BF98C2500DFB53A /* ProfileHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82E992BF98C2500DFB53A /* ProfileHelpers.swift */; };
+		7EF82E9E2BF98C2500DFB53A /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82E9A2BF98C2500DFB53A /* ProfileScreen.swift */; };
+		7EF82E9F2BF98C2500DFB53A /* ProfileScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82E9B2BF98C2500DFB53A /* ProfileScreenViewModel.swift */; };
+		7EF82EA12BF98CC400DFB53A /* Color+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82EA02BF98CC400DFB53A /* Color+hex.swift */; };
+		7EF82EA32BF98CCD00DFB53A /* CommonHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82EA22BF98CCD00DFB53A /* CommonHelpers.swift */; };
+		7EF82EA92BFD207E00DFB53A /* BankingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82EA52BFD207D00DFB53A /* BankingService.swift */; };
+		7EF82EAA2BFD207E00DFB53A /* BankingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82EA62BFD207D00DFB53A /* BankingScreen.swift */; };
+		7EF82EAB2BFD207E00DFB53A /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82EA72BFD207D00DFB53A /* TransactionView.swift */; };
+		7EF82EAC2BFD207E00DFB53A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82EA82BFD207E00DFB53A /* CardView.swift */; };
+		7EF82EB22BFD20F800DFB53A /* BookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82EAE2BFD20F800DFB53A /* BookingModel.swift */; };
+		7EF82EB32BFD20F800DFB53A /* BookingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82EAF2BFD20F800DFB53A /* BookingScreen.swift */; };
+		7EF82EB42BFD20F800DFB53A /* BookingScreenHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82EB02BFD20F800DFB53A /* BookingScreenHelper.swift */; };
+		7EF82EB52BFD20F800DFB53A /* BookingScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82EB12BFD20F800DFB53A /* BookingScreenViewModel.swift */; };
+		7EF82EB82BFEE20E00DFB53A /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82EB72BFEE20E00DFB53A /* EventsView.swift */; };
+		7EF82EBB2C0018EB00DFB53A /* _FacebookLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82EBA2C0018EB00DFB53A /* _FacebookLoginViewModel.swift */; };
+		7EF82EBD2C001BE100DFB53A /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 7EF82EBC2C001BE100DFB53A /* FacebookLogin */; };
+		7EF82EBF2C001C4F00DFB53A /* FacebookAEM in Frameworks */ = {isa = PBXBuildFile; productRef = 7EF82EBE2C001C4F00DFB53A /* FacebookAEM */; };
+		7EF82EC12C001C4F00DFB53A /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = 7EF82EC02C001C4F00DFB53A /* FacebookBasics */; };
+		7EF82EC32C001C4F00DFB53A /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7EF82EC22C001C4F00DFB53A /* FacebookCore */; };
+		7EF82EC52C001C4F00DFB53A /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 7EF82EC42C001C4F00DFB53A /* FacebookShare */; };
+		7EF82EC82C0030A200DFB53A /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7EF82EC72C0030A200DFB53A /* GoogleSignIn */; };
+		7EF82ECA2C0030A200DFB53A /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7EF82EC92C0030A200DFB53A /* GoogleSignInSwift */; };
+		7EF82ECC2C00317C00DFB53A /* _GoogleSignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82ECB2C00317C00DFB53A /* _GoogleSignInViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -368,7 +392,7 @@
 		7E85E6F42BAE985100432BA9 /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		7E85E6F72BAE985100432BA9 /* LaunchScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		7E85E6F92BAE985100432BA9 /* FlightCards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightCards.swift; sourceTree = "<group>"; };
-		7E85E6FA2BAE985100432BA9 /* FlightManageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightManageView.swift; sourceTree = "<group>"; };
+		7E85E6FA2BAE985100432BA9 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7E85E6FB2BAE985100432BA9 /* SelectFlightsResultsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectFlightsResultsView.swift; sourceTree = "<group>"; };
 		7E85E6FD2BAE985100432BA9 /* AddDestinationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDestinationButton.swift; sourceTree = "<group>"; };
 		7E85E6FE2BAE985100432BA9 /* BannerWithDismiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerWithDismiss.swift; sourceTree = "<group>"; };
@@ -461,6 +485,22 @@
 		7EC183DC2BB53285007B2602 /* TLRequests+FlightImageUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+FlightImageUpload.swift"; sourceTree = "<group>"; };
 		7EC183E02BB53DDC007B2602 /* TLModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLModels.swift; sourceTree = "<group>"; };
 		7EF82E942BF43DE600DFB53A /* UserAccountManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountManagementView.swift; sourceTree = "<group>"; };
+		7EF82E992BF98C2500DFB53A /* ProfileHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHelpers.swift; sourceTree = "<group>"; };
+		7EF82E9A2BF98C2500DFB53A /* ProfileScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		7EF82E9B2BF98C2500DFB53A /* ProfileScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileScreenViewModel.swift; sourceTree = "<group>"; };
+		7EF82EA02BF98CC400DFB53A /* Color+hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+hex.swift"; sourceTree = "<group>"; };
+		7EF82EA22BF98CCD00DFB53A /* CommonHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHelpers.swift; sourceTree = "<group>"; };
+		7EF82EA52BFD207D00DFB53A /* BankingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankingService.swift; sourceTree = "<group>"; };
+		7EF82EA62BFD207D00DFB53A /* BankingScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankingScreen.swift; sourceTree = "<group>"; };
+		7EF82EA72BFD207D00DFB53A /* TransactionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
+		7EF82EA82BFD207E00DFB53A /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		7EF82EAE2BFD20F800DFB53A /* BookingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingModel.swift; sourceTree = "<group>"; };
+		7EF82EAF2BFD20F800DFB53A /* BookingScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingScreen.swift; sourceTree = "<group>"; };
+		7EF82EB02BFD20F800DFB53A /* BookingScreenHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingScreenHelper.swift; sourceTree = "<group>"; };
+		7EF82EB12BFD20F800DFB53A /* BookingScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingScreenViewModel.swift; sourceTree = "<group>"; };
+		7EF82EB72BFEE20E00DFB53A /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
+		7EF82EBA2C0018EB00DFB53A /* _FacebookLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _FacebookLoginViewModel.swift; sourceTree = "<group>"; };
+		7EF82ECB2C00317C00DFB53A /* _GoogleSignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _GoogleSignInViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -468,13 +508,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EF82ECA2C0030A200DFB53A /* GoogleSignInSwift in Frameworks */,
 				7E85E6712BAE966700432BA9 /* Popovers in Frameworks */,
 				7E85E66F2BAE966700432BA9 /* LonginusSwiftUI in Frameworks */,
 				7E8821E22BB689FB00B32747 /* FirebaseAnalytics in Frameworks */,
+				7EF82EC52C001C4F00DFB53A /* FacebookShare in Frameworks */,
+				7EF82E982BF97B9100DFB53A /* ScalingHeaderScrollView in Frameworks */,
 				7E8821E62BB68A1700B32747 /* FirebaseCrashlytics in Frameworks */,
+				7EF82EBD2C001BE100DFB53A /* FacebookLogin in Frameworks */,
+				7EF82EC12C001C4F00DFB53A /* FacebookBasics in Frameworks */,
+				7EF82EC32C001C4F00DFB53A /* FacebookCore in Frameworks */,
+				7EF82EBF2C001C4F00DFB53A /* FacebookAEM in Frameworks */,
 				7E85E7DE2BAE98D100432BA9 /* CryptoSwift in Frameworks */,
 				7E8821E42BB689FB00B32747 /* FirebaseAnalyticsSwift in Frameworks */,
 				7E8821E82BB68A1F00B32747 /* AdSupport.framework in Frameworks */,
+				7EF82EC82C0030A200DFB53A /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,6 +878,8 @@
 			children = (
 				7E85E6F42BAE985100432BA9 /* AccountView.swift */,
 				7EF82E942BF43DE600DFB53A /* UserAccountManagementView.swift */,
+				7EF82EBA2C0018EB00DFB53A /* _FacebookLoginViewModel.swift */,
+				7EF82ECB2C00317C00DFB53A /* _GoogleSignInViewModel.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -912,6 +962,8 @@
 		7E85E7252BAE985100432BA9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7EF82EB62BFD228400DFB53A /* Reference Frameworks */,
+				7E85E6FA2BAE985100432BA9 /* ContentView.swift */,
 				7E8822212BDF128D00B32747 /* Trip Details */,
 				7E8822172BD743A500B32747 /* Admin Tools */,
 				7E85E6F82BAE985100432BA9 /* Launch */,
@@ -1005,7 +1057,6 @@
 		7E8821F92BB7D59800B32747 /* Add Flight Manually */ = {
 			isa = PBXGroup;
 			children = (
-				7E85E6FA2BAE985100432BA9 /* FlightManageView.swift */,
 				7E85E6FB2BAE985100432BA9 /* SelectFlightsResultsView.swift */,
 				7E5913302BAF99DD00529823 /* FlightListView.swift */,
 			);
@@ -1045,6 +1096,7 @@
 				7E85E70D2BAE985100432BA9 /* EventCardView.swift */,
 				7E8822012BBD09FA00B32747 /* __TripPlanViewModel.swift */,
 				7E85E71B2BAE985100432BA9 /* TripPlanEventCustomizeView.swift */,
+				7EF82EB72BFEE20E00DFB53A /* EventsView.swift */,
 			);
 			path = "Trip Events";
 			sourceTree = "<group>";
@@ -1180,6 +1232,50 @@
 			path = TLRequests;
 			sourceTree = "<group>";
 		};
+		7EF82E9C2BF98C2500DFB53A /* ProfileScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7EF82E9A2BF98C2500DFB53A /* ProfileScreen.swift */,
+				7EF82E992BF98C2500DFB53A /* ProfileHelpers.swift */,
+				7EF82E9B2BF98C2500DFB53A /* ProfileScreenViewModel.swift */,
+				7EF82EA22BF98CCD00DFB53A /* CommonHelpers.swift */,
+				7EF82EA02BF98CC400DFB53A /* Color+hex.swift */,
+			);
+			path = ProfileScreen;
+			sourceTree = "<group>";
+		};
+		7EF82EA42BFD206900DFB53A /* BankingScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7EF82EA62BFD207D00DFB53A /* BankingScreen.swift */,
+				7EF82EA52BFD207D00DFB53A /* BankingService.swift */,
+				7EF82EA82BFD207E00DFB53A /* CardView.swift */,
+				7EF82EA72BFD207D00DFB53A /* TransactionView.swift */,
+			);
+			path = BankingScreen;
+			sourceTree = "<group>";
+		};
+		7EF82EAD2BFD20DB00DFB53A /* BookingScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7EF82EAE2BFD20F800DFB53A /* BookingModel.swift */,
+				7EF82EAF2BFD20F800DFB53A /* BookingScreen.swift */,
+				7EF82EB02BFD20F800DFB53A /* BookingScreenHelper.swift */,
+				7EF82EB12BFD20F800DFB53A /* BookingScreenViewModel.swift */,
+			);
+			path = BookingScreen;
+			sourceTree = "<group>";
+		};
+		7EF82EB62BFD228400DFB53A /* Reference Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7EF82EAD2BFD20DB00DFB53A /* BookingScreen */,
+				7EF82EA42BFD206900DFB53A /* BankingScreen */,
+				7EF82E9C2BF98C2500DFB53A /* ProfileScreen */,
+			);
+			path = "Reference Frameworks";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1203,6 +1299,14 @@
 				7E8821E12BB689FB00B32747 /* FirebaseAnalytics */,
 				7E8821E32BB689FB00B32747 /* FirebaseAnalyticsSwift */,
 				7E8821E52BB68A1700B32747 /* FirebaseCrashlytics */,
+				7EF82E972BF97B9100DFB53A /* ScalingHeaderScrollView */,
+				7EF82EBC2C001BE100DFB53A /* FacebookLogin */,
+				7EF82EBE2C001C4F00DFB53A /* FacebookAEM */,
+				7EF82EC02C001C4F00DFB53A /* FacebookBasics */,
+				7EF82EC22C001C4F00DFB53A /* FacebookCore */,
+				7EF82EC42C001C4F00DFB53A /* FacebookShare */,
+				7EF82EC72C0030A200DFB53A /* GoogleSignIn */,
+				7EF82EC92C0030A200DFB53A /* GoogleSignInSwift */,
 			);
 			productName = TripLogix;
 			productReference = 7E85E4252BAE8CE700432BA9 /* TripLogix.app */;
@@ -1281,6 +1385,9 @@
 				7E85E6692BAE908B00432BA9 /* XCRemoteSwiftPackageReference "Longinus" */,
 				7E85E66A2BAE909600432BA9 /* XCRemoteSwiftPackageReference "Popovers" */,
 				7E8821E02BB689CB00B32747 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7EF82E962BF97B6700DFB53A /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */,
+				7EF82EB92C00177C00DFB53A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				7EF82EC62C00308800DFB53A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 7E85E4262BAE8CE700432BA9 /* Products */;
 			projectDirPath = "";
@@ -1431,11 +1538,13 @@
 				7E85E79D2BAE985100432BA9 /* CryptoSwift.swift in Sources */,
 				7EC183D22BB29780007B2602 /* OpenAI+RemoteImageToText.swift in Sources */,
 				7EC183DD2BB53285007B2602 /* TLRequests+FlightImageUpload.swift in Sources */,
-				7E85E7A92BAE985100432BA9 /* FlightManageView.swift in Sources */,
+				7E85E7A92BAE985100432BA9 /* ContentView.swift in Sources */,
+				7EF82EAB2BFD207E00DFB53A /* TransactionView.swift in Sources */,
 				7E85E7B32BAE985100432BA9 /* SideMenuView.swift in Sources */,
 				7E85E7BF2BAE985100432BA9 /* _GooglePlacesViewModel.swift in Sources */,
 				7E85E7BC2BAE985100432BA9 /* _AviationEdgeViewModel.swift in Sources */,
 				7E88221D2BD9F77900B32747 /* TripSharedViews.swift in Sources */,
+				7EF82E9E2BF98C2500DFB53A /* ProfileScreen.swift in Sources */,
 				7E85E7A32BAE985100432BA9 /* String+DateUtilities.swift in Sources */,
 				7E85E7392BAE985100432BA9 /* AE+Autocomplete.swift in Sources */,
 				7EA98D0B2BB149DE00AE39A9 /* ImageToFlightView.swift in Sources */,
@@ -1458,6 +1567,7 @@
 				7E85E7DB2BAE985100432BA9 /* TripGroup.swift in Sources */,
 				7E85E7AE2BAE985100432BA9 /* DestinationIconView.swift in Sources */,
 				7E85E7A42BAE985100432BA9 /* Strings+Extensions.swift in Sources */,
+				7EF82EA92BFD207E00DFB53A /* BankingService.swift in Sources */,
 				7E8822362BE20E4A00B32747 /* SS+FlightSearch.swift in Sources */,
 				7E85E7DA2BAE985100432BA9 /* TabViews.swift in Sources */,
 				7E88220C2BCA3A4C00B32747 /* LocationCards.swift in Sources */,
@@ -1465,7 +1575,9 @@
 				7E85E7AC2BAE985100432BA9 /* BannerWithDismiss.swift in Sources */,
 				7E85E73B2BAE985100432BA9 /* AE+FutureFlights.swift in Sources */,
 				7E85E7D22BAE985100432BA9 /* ChatGPTResponse.swift in Sources */,
+				7EF82EA12BF98CC400DFB53A /* Color+hex.swift in Sources */,
 				7EC183CA2BB28962007B2602 /* OpenAIAPIServices.swift in Sources */,
+				7EF82EAC2BFD207E00DFB53A /* CardView.swift in Sources */,
 				7E88223C2BE9EF3800B32747 /* Destination+AvionEdge.swift in Sources */,
 				7E8822002BBBA17300B32747 /* TempView.swift in Sources */,
 				7E8822342BE2092F00B32747 /* SSManualFlightSearch.swift in Sources */,
@@ -1477,13 +1589,16 @@
 				7E8821F52BB7BC0600B32747 /* AlertBoxMessage.swift in Sources */,
 				7E85E7C82BAE985100432BA9 /* NavigationToolbar.swift in Sources */,
 				7E85E79E2BAE985100432BA9 /* ViewHelpers.swift in Sources */,
+				7EF82EBB2C0018EB00DFB53A /* _FacebookLoginViewModel.swift in Sources */,
 				7E85E7D52BAE985100432BA9 /* Location.swift in Sources */,
 				7EF82E952BF43DE600DFB53A /* UserAccountManagementView.swift in Sources */,
 				7E85E7C32BAE985100432BA9 /* AddNewDestinationView.swift in Sources */,
 				7E8822422BE9F11200B32747 /* __SSSearchAirportViewModel.swift in Sources */,
 				7E8821FE2BB908F800B32747 /* TLFlightModels.swift in Sources */,
+				7EF82EA32BF98CCD00DFB53A /* CommonHelpers.swift in Sources */,
 				7E85E7BD2BAE985100432BA9 /* _AvionEdgeAutocompleteViewModel.swift in Sources */,
 				7E85E7C22BAE985100432BA9 /* _StaticViewModel.swift in Sources */,
+				7EF82E9F2BF98C2500DFB53A /* ProfileScreenViewModel.swift in Sources */,
 				7E85E79F2BAE985100432BA9 /* Array+Extensions.swift in Sources */,
 				7EC183C62BB2860C007B2602 /* OpenAI+TextCommand.swift in Sources */,
 				7E85E7B72BAE985100432BA9 /* _TabTripSettings.swift in Sources */,
@@ -1491,6 +1606,7 @@
 				7E8822282BDF138B00B32747 /* RentalsHomeView.swift in Sources */,
 				7E88222D2BE0D38100B32747 /* SkyScrapperAPIRequests.swift in Sources */,
 				7E85E7A22BAE985100432BA9 /* Date+Extensions.swift in Sources */,
+				7EF82ECC2C00317C00DFB53A /* _GoogleSignInViewModel.swift in Sources */,
 				7E88221F2BDA1F8200B32747 /* OpenAI+TexCommand4.swift in Sources */,
 				7E88220F2BD0D37E00B32747 /* TripPlanView.swift in Sources */,
 				7E85E7B82BAE985100432BA9 /* CityTitleBannerView.swift in Sources */,
@@ -1502,6 +1618,7 @@
 				7E85E7A62BAE985100432BA9 /* AccountView.swift in Sources */,
 				7EC183E12BB53DDC007B2602 /* TLModels.swift in Sources */,
 				7E8821EB2BB68A6A00B32747 /* AnalyticsManager.swift in Sources */,
+				7EF82EB52BFD20F800DFB53A /* BookingScreenViewModel.swift in Sources */,
 				7E8821F32BB7419C00B32747 /* ImageToFlightViewModel.swift in Sources */,
 				7E85E4292BAE8CE700432BA9 /* TripLogixApp.swift in Sources */,
 				7E85E7D32BAE985100432BA9 /* Destination.swift in Sources */,
@@ -1513,6 +1630,7 @@
 				7E85E7BA2BAE985100432BA9 /* NavigationBarSubViews.swift in Sources */,
 				7E88222A2BDF13AC00B32747 /* DocumentsView.swift in Sources */,
 				7E8822062BBE6CC500B32747 /* GP+SearchByPlaceId.swift in Sources */,
+				7EF82EB32BFD20F800DFB53A /* BookingScreen.swift in Sources */,
 				7E85E7B92BAE985100432BA9 /* EventCardView.swift in Sources */,
 				7E88223E2BE9EFD900B32747 /* Destination+TripModels.swift in Sources */,
 				7E85E7AA2BAE985100432BA9 /* SelectFlightsResultsView.swift in Sources */,
@@ -1524,13 +1642,18 @@
 				7E85E73D2BAE985100432BA9 /* AviationEdgeAPIServices.swift in Sources */,
 				7E85E7A12BAE985100432BA9 /* Color+Extensions.swift in Sources */,
 				7E8822092BBE6F4800B32747 /* GooglePlacesAPIService.swift in Sources */,
+				7EF82EAA2BFD207E00DFB53A /* BankingScreen.swift in Sources */,
 				7EC183CC2BB28CAB007B2602 /* OpenAI+ImageCreate.swift in Sources */,
 				7E85E7B02BAE985100432BA9 /* LoadingView.swift in Sources */,
+				7EF82EB82BFEE20E00DFB53A /* EventsView.swift in Sources */,
 				7E85E73A2BAE985100432BA9 /* AE+FlightTrack.swift in Sources */,
 				7E85E7B12BAE985100432BA9 /* RemoteIconCellView.swift in Sources */,
 				7E85E7AD2BAE985100432BA9 /* CalendarMonthView.swift in Sources */,
+				7EF82EB42BFD20F800DFB53A /* BookingScreenHelper.swift in Sources */,
 				7E85E7D82BAE985100432BA9 /* Icons.swift in Sources */,
+				7EF82E9D2BF98C2500DFB53A /* ProfileHelpers.swift in Sources */,
 				7E8822322BE0D9FD00B32747 /* __SSFlightsViewModel.swift in Sources */,
+				7EF82EB22BFD20F800DFB53A /* BookingModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1701,6 +1824,7 @@
 				INFOPLIST_FILE = TripLogix/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TripLogix;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1735,6 +1859,7 @@
 				INFOPLIST_FILE = TripLogix/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TripLogix;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1904,6 +2029,30 @@
 				minimumVersion = 10.23.1;
 			};
 		};
+		7EF82E962BF97B6700DFB53A /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ScalingHeaderScrollView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.3;
+			};
+		};
+		7EF82EB92C00177C00DFB53A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.1.0;
+			};
+		};
+		7EF82EC62C00308800DFB53A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1936,6 +2085,46 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E8821E02BB689CB00B32747 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		7EF82E972BF97B9100DFB53A /* ScalingHeaderScrollView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7EF82E962BF97B6700DFB53A /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */;
+			productName = ScalingHeaderScrollView;
+		};
+		7EF82EBC2C001BE100DFB53A /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7EF82EB92C00177C00DFB53A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		7EF82EBE2C001C4F00DFB53A /* FacebookAEM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7EF82EB92C00177C00DFB53A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookAEM;
+		};
+		7EF82EC02C001C4F00DFB53A /* FacebookBasics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7EF82EB92C00177C00DFB53A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookBasics;
+		};
+		7EF82EC22C001C4F00DFB53A /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7EF82EB92C00177C00DFB53A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		7EF82EC42C001C4F00DFB53A /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7EF82EB92C00177C00DFB53A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
+		};
+		7EF82EC72C0030A200DFB53A /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7EF82EC62C00308800DFB53A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		7EF82EC92C0030A200DFB53A /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7EF82EC62C00308800DFB53A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

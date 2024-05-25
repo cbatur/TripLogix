@@ -46,6 +46,23 @@ struct DestinationIconView: View {
     }
 }
 
+struct DestinationIconRawImage: View {
+    let iconData: Data?
+    
+    func setImage() -> Image {
+        if let iconData = iconData, let uiImage = UIImage(data: iconData) {
+            return Image(uiImage: uiImage)
+        } else {
+            return Image("destination_placeholder")
+        }
+    }
+    
+    var body: some View {
+        self.setImage()
+            .resizable()
+    }
+}
+
 struct DestinationBackgroundIconView: View {
     let iconData: Data?
     
