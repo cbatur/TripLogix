@@ -64,6 +64,7 @@ struct TripLogixApp: App {
                     }
             } else {
                 TripsView()
+                    .environmentObject(SessionManager.shared)
             }
         }
         .modelContainer(for: Destination.self)

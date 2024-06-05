@@ -5,6 +5,8 @@ enum Configuration {
     
     enum TripLogix {
         static let baseUrl = "https://palamana.com/TripLogix/"
+        static let api = "https://palamana.com/aSpanish/"
+        static let baseURL = "https://triplogix.app/api/"
     }
     
     static let accessToken = "35433@!D65HW66$$bTT2854SSpw!A"

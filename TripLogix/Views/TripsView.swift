@@ -83,7 +83,7 @@ struct TripsView: View {
         }
         .analyticsScreen(name: "TripsView")
         .sheet(isPresented: $launchLoginView) {
-            UserAccountManagementView()
+            SessionCheckView()
         }
         .onAppear{
             let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? "TL12345"
