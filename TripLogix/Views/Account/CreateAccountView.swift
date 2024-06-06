@@ -7,7 +7,7 @@ struct CreateAccountView: View {
     @State private var password: String = ""
     @State private var passwordConfirm: String = ""
     @StateObject private var viewModel = SessionViewModel()
-    @State private var isLogin: Bool = true
+    //@State private var isLogin: Bool = true
     
     private func getValidationColor() -> Color {
         if username.isEmpty || username.count < 8 {

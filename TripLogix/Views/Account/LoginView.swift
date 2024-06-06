@@ -1,5 +1,15 @@
 import SwiftUI
-import Popovers
+import PopupView
+
+struct ToastTopFirst: View {
+    var body: some View {
+        Text("Invalid Login - Check your login credentials and try again.")
+            .foregroundColor(.white)
+            .padding(EdgeInsets(top: 60, leading: 32, bottom: 16, trailing: 32))
+            .frame(maxWidth: .infinity)
+            .background(Color.red)
+    }
+}
 
 struct LoginView: View {
     @State private var email: String = ""
@@ -134,34 +144,22 @@ struct LoginView: View {
             }
         }
         .padding(.top, 30)
-        .customAlert(isVisible: $viewModel.invalidLogin, content: {
-            VStack {
-                HStack {
-                    Spacer()
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.largeTitle)
+        .popup(isPresented: $viewModel.invalidLogin) {
+            ToastTopFirst()
+        } customize: {
+            $0
+                .type(.floater())
+                .position(.top)
+                .animation(.spring())
+                .closeOnTapOutside(true)
+                .autohideIn(3)
+                .dismissCallback {
+                    print("did", $0)
                 }
-                .padding()
-                
-                VStack {
-                    Text("Invalid Login")
-                        .font(.system(size: 21)).bold()
-                        .foregroundColor(.white)
-                    Divider()
-                    Text("Please check your email/password and try again.")
-                        .font(.system(size: 17))
-                        .foregroundColor(.white)
-                        .padding(.bottom, 9)
+                .willDismissCallback {
+                    print("will", $0)
                 }
-                .padding()
-            }
-            .cardStyle(.red.opacity(0.8))
-            .padding()
-            .onTapGesture {
-                self.viewModel.dismissInvalidLogin()
-            }
-
-        })
+        }
     }
     
     private var buttonLoginFacebook: some View {

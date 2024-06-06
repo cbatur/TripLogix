@@ -236,6 +236,8 @@
 		7EEAAA8A2C0C243F00A46BC5 /* TLRequests+CheckUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA892C0C243F00A46BC5 /* TLRequests+CheckUsername.swift */; };
 		7EEAAA8C2C0CBCBD00A46BC5 /* TLRequests+CheckEmailExists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA8B2C0CBCBD00A46BC5 /* TLRequests+CheckEmailExists.swift */; };
 		7EEAAA8E2C10275400A46BC5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA8D2C10275400A46BC5 /* LoginView.swift */; };
+		7EEAAA912C11722F00A46BC5 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 7EEAAA902C11722F00A46BC5 /* PopupView */; };
+		7EEAAA932C11770500A46BC5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA922C11770500A46BC5 /* Utils.swift */; };
 		7EF82E952BF43DE600DFB53A /* SessionCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82E942BF43DE600DFB53A /* SessionCheckView.swift */; };
 		7EF82E982BF97B9100DFB53A /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 7EF82E972BF97B9100DFB53A /* ScalingHeaderScrollView */; };
 		7EF82E9D2BF98C2500DFB53A /* ProfileHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82E992BF98C2500DFB53A /* ProfileHelpers.swift */; };
@@ -506,6 +508,7 @@
 		7EEAAA892C0C243F00A46BC5 /* TLRequests+CheckUsername.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+CheckUsername.swift"; sourceTree = "<group>"; };
 		7EEAAA8B2C0CBCBD00A46BC5 /* TLRequests+CheckEmailExists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+CheckEmailExists.swift"; sourceTree = "<group>"; };
 		7EEAAA8D2C10275400A46BC5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		7EEAAA922C11770500A46BC5 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7EF82E942BF43DE600DFB53A /* SessionCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCheckView.swift; sourceTree = "<group>"; };
 		7EF82E992BF98C2500DFB53A /* ProfileHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHelpers.swift; sourceTree = "<group>"; };
 		7EF82E9A2BF98C2500DFB53A /* ProfileScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
@@ -538,6 +541,7 @@
 				7EF82E982BF97B9100DFB53A /* ScalingHeaderScrollView in Frameworks */,
 				7E8821E62BB68A1700B32747 /* FirebaseCrashlytics in Frameworks */,
 				7EF82EBD2C001BE100DFB53A /* FacebookLogin in Frameworks */,
+				7EEAAA912C11722F00A46BC5 /* PopupView in Frameworks */,
 				7EF82EC12C001C4F00DFB53A /* FacebookBasics in Frameworks */,
 				7EF82EC32C001C4F00DFB53A /* FacebookCore in Frameworks */,
 				7EF82EBF2C001C4F00DFB53A /* FacebookAEM in Frameworks */,
@@ -1043,6 +1047,7 @@
 		7E85E7372BAE985100432BA9 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
+				7EEAAA922C11770500A46BC5 /* Utils.swift */,
 				7E85E7362BAE985100432BA9 /* Configuration.swift */,
 			);
 			path = Configuration;
@@ -1340,6 +1345,7 @@
 				7EF82EC42C001C4F00DFB53A /* FacebookShare */,
 				7EF82EC72C0030A200DFB53A /* GoogleSignIn */,
 				7EF82EC92C0030A200DFB53A /* GoogleSignInSwift */,
+				7EEAAA902C11722F00A46BC5 /* PopupView */,
 			);
 			productName = TripLogix;
 			productReference = 7E85E4252BAE8CE700432BA9 /* TripLogix.app */;
@@ -1421,6 +1427,7 @@
 				7EF82E962BF97B6700DFB53A /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */,
 				7EF82EB92C00177C00DFB53A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				7EF82EC62C00308800DFB53A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				7EEAAA8F2C1171FF00A46BC5 /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = 7E85E4262BAE8CE700432BA9 /* Products */;
 			projectDirPath = "";
@@ -1668,6 +1675,7 @@
 				7EC183CF2BB295C4007B2602 /* Request+Extension.swift in Sources */,
 				7E85E7D72BAE985100432BA9 /* AirportType.swift in Sources */,
 				7E85E7A82BAE985100432BA9 /* FlightCards.swift in Sources */,
+				7EEAAA932C11770500A46BC5 /* Utils.swift in Sources */,
 				7E85E7BB2BAE985100432BA9 /* UpdateDestinationIcon.swift in Sources */,
 				7E8822442BEBF9C000B32747 /* Destination+SkyScrapper.swift in Sources */,
 				7E85E7BA2BAE985100432BA9 /* NavigationBarSubViews.swift in Sources */,
@@ -2073,6 +2081,14 @@
 				minimumVersion = 10.23.1;
 			};
 		};
+		7EEAAA8F2C1171FF00A46BC5 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.1;
+			};
+		};
 		7EF82E962BF97B6700DFB53A /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/exyte/ScalingHeaderScrollView.git";
@@ -2129,6 +2145,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E8821E02BB689CB00B32747 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		7EEAAA902C11722F00A46BC5 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7EEAAA8F2C1171FF00A46BC5 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
 		};
 		7EF82E972BF97B9100DFB53A /* ScalingHeaderScrollView */ = {
 			isa = XCSwiftPackageProductDependency;
