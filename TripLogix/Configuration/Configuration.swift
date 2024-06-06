@@ -3,14 +3,17 @@ import Foundation
 
 enum Configuration {
     
+    static let accessToken = "35433@!D65HW66$$bTT2854SSpw!A"
+    static let isMock: Bool = false
+    static let facebookLoginDisabled: Bool = true
+    static let googleLoginDisabled: Bool = true
+    
+    
     enum TripLogix {
         static let baseUrl = "https://palamana.com/TripLogix/"
         static let api = "https://palamana.com/aSpanish/"
         static let baseURL = "https://triplogix.app/api/"
     }
-    
-    static let accessToken = "35433@!D65HW66$$bTT2854SSpw!A"
-    static let isMock: Bool = false
 
     enum openAI {
         static let baseUrl = "https://api.openai.com/v1/"

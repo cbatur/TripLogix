@@ -119,8 +119,12 @@ struct CreateAccountView: View {
                 }
             }
             .padding()
-            .background(Color(UIColor.secondarySystemBackground))
+            .background(.white)
             .cornerRadius(10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray8, lineWidth: 1)
+            )
             .padding(.horizontal, 20)
             
             VStack {
@@ -146,8 +150,12 @@ struct CreateAccountView: View {
                 }
             }
             .padding()
-            .background(Color(UIColor.secondarySystemBackground))
+            .background(.white)
             .cornerRadius(10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray8, lineWidth: 1)
+            )
             .padding(.horizontal, 20)
             .isHidden(!viewModel.usernameCheck.success || !viewModel.isValidUsername(username))
             
@@ -170,8 +178,12 @@ struct CreateAccountView: View {
                     }
                 }
                 .padding()
-                .background(Color(UIColor.secondarySystemBackground))
+                .background(.white)
                 .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray8, lineWidth: 1)
+                )
                 .padding(.horizontal, 20)
 
                 VStack {
@@ -198,8 +210,12 @@ struct CreateAccountView: View {
                     }
                 }
                 .padding()
-                .background(Color(UIColor.secondarySystemBackground))
+                .background(.white)
                 .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray8, lineWidth: 1)
+                )
                 .padding(.horizontal, 20)
             }
             .isHidden(!viewModel.usernameCheck.success || !viewModel.emailCheck.success)

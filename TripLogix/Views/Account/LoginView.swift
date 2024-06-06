@@ -1,5 +1,5 @@
-
 import SwiftUI
+import Popovers
 
 struct LoginView: View {
     @State private var email: String = ""
@@ -61,7 +61,6 @@ struct LoginView: View {
             }
             .padding()
             
-            // Email Field for sign-in
             VStack {
                 HStack {
                     Text(viewModel.getSignInEmailValidationMessage(self.email))
@@ -82,88 +81,120 @@ struct LoginView: View {
                 }
             }
             .padding()
-            .background(Color(UIColor.secondarySystemBackground))
+            .background(Color.white)
             .cornerRadius(10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray8, lineWidth: 1)
+            )
             .padding(.horizontal, 20)
             
             SecureField("Password", text: $password)
                 .padding()
-                .background(Color(UIColor.secondarySystemBackground))
+                .background(.white)
                 .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray8, lineWidth: 1)
+                )
                 .padding(.horizontal, 20)
             
-            Button(action: {
-                // Handle forgot password action
-            }) {
-                Text("Forgot Password?")
-                    .foregroundColor(.blue)
+            HStack {
+                Spacer()
+                Button(action: {
+                    // Handle forgot password action
+                }) {
+                    Text("Forgot Password?")
+                        .font(.system(size: 15))
+                        .foregroundColor(.blue)
+                }
             }
+            .padding()
             
             Spacer()
             
-            VStack(spacing: 10) {
-                Button(action: {
-                    // Handle Apple sign-in
-                }) {
-                    HStack {
-                        Image(systemName: "a.square")
-                        Text("Continue with Apple")
-                            .fontWeight(.semibold)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding(.horizontal, 20)
-                }
-                
-                
+            VStack {
                 if let user = googleSignInViewModel.user {
                     Button(action: googleSignInViewModel.signOut) {
                         Text("Logout \(user)")
                     }
                 } else {
-                    Button(action: {
-                        googleSignInViewModel.signIn()
-                    }) {
-                        HStack {
-                            Image(systemName: "g.square")
-                            Text("Continue with Google")
-                                .fontWeight(.semibold)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .padding(.horizontal, 20)
-                    }
+                    buttonLoginGoogle
+                        .isHidden(Configuration.googleLoginDisabled)
                 }
-                
+
                 if facebookLoginViewModel.isLoggedIn {
                     Button(action: facebookLoginViewModel.logout) {
                         Text("Logout \(facebookLoginViewModel.userName ?? "User")")
                     }
                 } else {
-                    Button(action: {
-                        facebookLoginViewModel.login()
-                    }) {
-                        HStack {
-                            Image(systemName: "f.square")
-                            Text("Continue with Facebook")
-                                .fontWeight(.semibold)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .padding(.horizontal, 20)
-                    }
+                    buttonLoginFacebook
+                        .isHidden(Configuration.facebookLoginDisabled)
                 }
             }
         }
         .padding(.top, 30)
+        .customAlert(isVisible: $viewModel.invalidLogin, content: {
+            VStack {
+                HStack {
+                    Spacer()
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.largeTitle)
+                }
+                .padding()
+                
+                VStack {
+                    Text("Invalid Login")
+                        .font(.system(size: 21)).bold()
+                        .foregroundColor(.white)
+                    Divider()
+                    Text("Please check your email/password and try again.")
+                        .font(.system(size: 17))
+                        .foregroundColor(.white)
+                        .padding(.bottom, 9)
+                }
+                .padding()
+            }
+            .cardStyle(.red.opacity(0.8))
+            .padding()
+            .onTapGesture {
+                self.viewModel.dismissInvalidLogin()
+            }
+
+        })
+    }
+    
+    private var buttonLoginFacebook: some View {
+        HStack {
+            Image("logo_facebook")
+                .resizable()
+                .frame(width: 24, height: 24)
+            Text("Continue with Facebook")
+        }
+        .padding(.horizontal, 15)
+        .padding(9)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .cardStyleBordered()
+        .padding()
+        .onTapGesture {
+            facebookLoginViewModel.login()
+        }
+    }
+    
+    private var buttonLoginGoogle: some View {
+        HStack {
+            Image("logo_google")
+                .resizable()
+                .frame(width: 24, height: 24)
+            Text("Login with Google")
+        }
+        .padding(.horizontal, 15)
+        .padding(9)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .cardStyleBordered()
+        .padding()
+        .onTapGesture {
+            googleSignInViewModel.signIn()
+        }
     }
 }

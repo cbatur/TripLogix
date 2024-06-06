@@ -2,7 +2,6 @@
 import SwiftUI
 
 struct UserNeedsSessionView: View {
-
     @State private var isLogin: Bool = true
 
     var body: some View {
@@ -16,7 +15,6 @@ struct UserNeedsSessionView: View {
 
             Spacer()
             
-            Divider()
             if isLogin {
                 HStack {
                     Text("New to TripLogix?")
@@ -55,5 +53,12 @@ struct UserNeedsSessionView: View {
                 .padding(.bottom, 20)
             }
         }
+        .background(
+            Image("login_background")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+                .opacity(0.08)
+        )
     }
 }

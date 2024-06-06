@@ -11,7 +11,7 @@ struct CardStyle: ViewModifier {
             .clipShape(RoundedRectangle(cornerRadius: 7))
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.gray.opacity(0.6), lineWidth: 1)
+                    .stroke(Color.gray.opacity(0.6), lineWidth: 0.3)
             )
     }
 }

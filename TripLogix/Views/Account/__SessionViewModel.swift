@@ -13,6 +13,7 @@ class SessionViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var message: String = ""
     
+    @Published var invalidLogin: Bool = false
     @Published var fetchingResponse: Bool = false
     @Published var errorMessage: String?
     
@@ -80,6 +81,7 @@ class SessionViewModel: ObservableObject {
     }
     
     func login(email: String, password: String) {
+        self.invalidLogin = false
         self.apiService.login(email: email, password: password)
             .catch {_ in Just(LoginResponse(message: "")) }
             .sink(receiveCompletion: { _ in }, receiveValue: {
@@ -88,6 +90,7 @@ class SessionViewModel: ObservableObject {
                 } else {
                     self.errorMessage = $0.message
                     self.fetchingResponse = false
+                    self.invalidLogin = true
                 }
             })
             .store(in: &cancellables)
@@ -202,6 +205,10 @@ extension SessionViewModel {
         && password == passwordConfirm
         && self.emailCheck.success == true
         && self.usernameCheck.success == true
+    }
+    
+    func dismissInvalidLogin() {
+        self.invalidLogin = false
     }
     
 }
