@@ -32,7 +32,7 @@ class SessionManager: ObservableObject {
         }
     }
     
-    private func loadSession() {
+    func loadSession() {
         if let sessionIdString = UserDefaults.standard.string(forKey: "sessionId"),
            let sessionId = UUID(uuidString: sessionIdString),
            let userData = UserDefaults.standard.data(forKey: "currentUser"),

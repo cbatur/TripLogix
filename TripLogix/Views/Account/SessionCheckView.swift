@@ -8,7 +8,7 @@ struct SessionCheckView: View {
     var body: some View {
         VStack {
             if let currentUser = sessionManager.currentUser {
-                UserHasSessionView(user: currentUser)
+                AccountInfoView(user: currentUser)
             } else {
                 UserNeedsSessionView()
             }

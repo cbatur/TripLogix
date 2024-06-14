@@ -2,13 +2,18 @@
 import SwiftUI
 import PopupView
 
-struct UserHasSessionView: View {
+struct AccountInfoView: View {
     @State var user: User
     @StateObject private var viewModel = SessionViewModel()
     @Environment(\.presentationMode) var presentationMode
     @State private var privacyPolicyLaunch: Bool = false
     @State private var termsAgreementsLaunch: Bool = false
+    @State private var editNameModal: Bool = false
 
+    func reloadUser(_ user: User) {
+        self.user = user
+    }
+    
     var body: some View {
         VStack {
             HStack {
@@ -24,31 +29,70 @@ struct UserHasSessionView: View {
                     }
                     .padding()
             }
+            .padding(.top, 20)
             
             Form {
-                Section(header: Text("\(user.username)")) {
+                Section(header: Text("")) {
                     HStack {
-                        Text("First Name: ")
-                        Spacer()
-                        Text("\(user.firstname)")
+                        DestinationIconDataView(iconData: nil, size: 65)
+                            .opacity(0.7)
+                        VStack {
+                            HStack {
+                                Text("\(user.username)")
+                                    .font(.system(size: 23)).bold()
+                                Spacer()
+                            }
+                            HStack {
+                                Text("Free Member")
+                                Spacer()
+                            }
+                        }
+                        .padding(.leading, 9)
                     }
+                    
                     HStack {
-                        Text("Last Name: ")
+                        Text("Avatar ")
                         Spacer()
-                        Text("\(user.lastname)")
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.gray)
+                    }
+                }
+                
+                Section(header: Text("Personal Information")) {
+                    HStack {
+                        Text("Name: ")
+                        Spacer()
+                        if user.firstname.isEmpty {
+                            Image(systemName: "plus.circle.fill")
+                                .foregroundColor(.tlGreen)
+                                .font(.system(size: 25))
+                        } else {
+                            Text("\(user.firstname)")
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    .onTapGesture {
+                        editNameModal = true
                     }
                     HStack {
                         Text("Email: ")
                         Spacer()
                         Text("\(user.email)")
+                            .foregroundColor(.gray)
                     }
-                }
+                    HStack {
+                        Text("Change Password ")
+                        Spacer()
+                        Image(systemName: "lock")
+                            .foregroundColor(.gray)
+                    }                }
                 
                 Section(header: Text("")) {
                     HStack {
                         Text("Privacy Policy ")
                         Spacer()
                         Image(systemName: "chevron.right")
+                            .foregroundColor(.gray)
                     }
                     .onTapGesture {
                         privacyPolicyLaunch = true
@@ -58,9 +102,16 @@ struct UserHasSessionView: View {
                         Text("Terms and Agreements ")
                         Spacer()
                         Image(systemName: "chevron.right")
+                            .foregroundColor(.gray)
                     }
                     .onTapGesture {
                         termsAgreementsLaunch = true
+                    }
+                    
+                    HStack {
+                        Text("Delete Account ")
+                        Spacer()
+                        
                     }
                 }
                 
@@ -93,6 +144,16 @@ struct UserHasSessionView: View {
                 .position(.bottom)
                 .closeOnTap(false)
                 .backgroundColor(.black.opacity(0.4))
+        }
+        .popup(isPresented: $editNameModal) {
+            EditNameFooterView(isShowing: $editNameModal, reloadParent: reloadUser)
+        } customize: {
+            $0
+                .position(.bottom)
+                .closeOnTap(false)
+                .backgroundColor(.black.opacity(0.4))
+                .isOpaque(true)
+                .useKeyboardSafeArea(true)
         }
     }
     

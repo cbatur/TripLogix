@@ -2,12 +2,6 @@
 import Foundation
 import Combine
 
-//enum APIError: Error {
-//    case internalError
-//    case serverError
-//    case parsingError
-//}
-
 struct TLError: Codable, Error {
     let message: String
     let success: Bool
@@ -21,6 +15,8 @@ protocol ServiceProvider {
     func create(username: String, email: String, password: String) -> AnyPublisher<LoginResponse, TLError>
     func checkUsernameExists(username: String) -> AnyPublisher<DataExistsCheck, TLError>
     func checkEmailExists(email: String) -> AnyPublisher<DataExistsCheck, TLError>
+    func updateColumn(tablename: String, itemvalue: String, userid: String) -> AnyPublisher<UserResponse, TLError>
+
 }
 
 class TLAPIService: ServiceProvider {
@@ -63,5 +59,8 @@ class TLAPIService: ServiceProvider {
         return self.apiCall(TLRequests.CheckEmailExists(email: email).request)
     }
 
+    func updateColumn(tablename: String, itemvalue: String, userid: String) -> AnyPublisher<UserResponse, TLError> {
+        return self.apiCall(TLRequests.UpdateColumn(tablename: tablename, itemvalue: itemvalue, userid: userid).request)
+    }
 }
 

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E1D30E42C19854600B6ED5D /* EditNameFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E32C19854600B6ED5D /* EditNameFooterView.swift */; };
+		7E1D30E72C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E62C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift */; };
+		7E1D30E92C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E82C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift */; };
 		7E5913312BAF99DD00529823 /* FlightListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5913302BAF99DD00529823 /* FlightListView.swift */; };
 		7E85E4292BAE8CE700432BA9 /* TripLogixApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E4282BAE8CE700432BA9 /* TripLogixApp.swift */; };
 		7E85E42D2BAE8CE800432BA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E85E42C2BAE8CE800432BA9 /* Assets.xcassets */; };
@@ -229,7 +232,7 @@
 		7EEAAA7C2C03891400A46BC5 /* TLRequests+CreateAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA7B2C03891400A46BC5 /* TLRequests+CreateAccount.swift */; };
 		7EEAAA7E2C038C2800A46BC5 /* __SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA7D2C038C2800A46BC5 /* __SessionManager.swift */; };
 		7EEAAA802C038CEC00A46BC5 /* TLRequests+ValidateToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA7F2C038CEC00A46BC5 /* TLRequests+ValidateToken.swift */; };
-		7EEAAA822C05654600A46BC5 /* UserHasSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA812C05654600A46BC5 /* UserHasSessionView.swift */; };
+		7EEAAA822C05654600A46BC5 /* AccountInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA812C05654600A46BC5 /* AccountInfoView.swift */; };
 		7EEAAA842C05658100A46BC5 /* UserNeedsSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA832C05658100A46BC5 /* UserNeedsSessionView.swift */; };
 		7EEAAA862C056AEB00A46BC5 /* __SessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA852C056AEB00A46BC5 /* __SessionViewModel.swift */; };
 		7EEAAA882C0C04F000A46BC5 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA872C0C04F000A46BC5 /* CreateAccountView.swift */; };
@@ -283,6 +286,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E1D30E32C19854600B6ED5D /* EditNameFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNameFooterView.swift; sourceTree = "<group>"; };
+		7E1D30E62C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __EditNameFieldViewModel.swift; sourceTree = "<group>"; };
+		7E1D30E82C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+UpdateColumn.swift"; sourceTree = "<group>"; };
 		7E59132F2BAEA44700529823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7E5913302BAF99DD00529823 /* FlightListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightListView.swift; sourceTree = "<group>"; };
 		7E85E4252BAE8CE700432BA9 /* TripLogix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TripLogix.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -501,7 +507,7 @@
 		7EEAAA7B2C03891400A46BC5 /* TLRequests+CreateAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+CreateAccount.swift"; sourceTree = "<group>"; };
 		7EEAAA7D2C038C2800A46BC5 /* __SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __SessionManager.swift; sourceTree = "<group>"; };
 		7EEAAA7F2C038CEC00A46BC5 /* TLRequests+ValidateToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+ValidateToken.swift"; sourceTree = "<group>"; };
-		7EEAAA812C05654600A46BC5 /* UserHasSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHasSessionView.swift; sourceTree = "<group>"; };
+		7EEAAA812C05654600A46BC5 /* AccountInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoView.swift; sourceTree = "<group>"; };
 		7EEAAA832C05658100A46BC5 /* UserNeedsSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNeedsSessionView.swift; sourceTree = "<group>"; };
 		7EEAAA852C056AEB00A46BC5 /* __SessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __SessionViewModel.swift; sourceTree = "<group>"; };
 		7EEAAA872C0C04F000A46BC5 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
@@ -569,6 +575,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E1D30E52C19855900B6ED5D /* Edit Information */ = {
+			isa = PBXGroup;
+			children = (
+				7E1D30E32C19854600B6ED5D /* EditNameFooterView.swift */,
+				7E1D30E62C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift */,
+			);
+			path = "Edit Information";
+			sourceTree = "<group>";
+		};
 		7E85E41C2BAE8CE700432BA9 = {
 			isa = PBXGroup;
 			children = (
@@ -902,9 +917,10 @@
 		7E85E6F52BAE985100432BA9 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				7E1D30E52C19855900B6ED5D /* Edit Information */,
 				7EF82E942BF43DE600DFB53A /* SessionCheckView.swift */,
 				7EEAAA832C05658100A46BC5 /* UserNeedsSessionView.swift */,
-				7EEAAA812C05654600A46BC5 /* UserHasSessionView.swift */,
+				7EEAAA812C05654600A46BC5 /* AccountInfoView.swift */,
 				7EEAAA852C056AEB00A46BC5 /* __SessionViewModel.swift */,
 				7EEAAA7D2C038C2800A46BC5 /* __SessionManager.swift */,
 				7EF82EBA2C0018EB00DFB53A /* _FacebookLoginViewModel.swift */,
@@ -1266,6 +1282,7 @@
 				7EEAAA7F2C038CEC00A46BC5 /* TLRequests+ValidateToken.swift */,
 				7EEAAA892C0C243F00A46BC5 /* TLRequests+CheckUsername.swift */,
 				7EEAAA8B2C0CBCBD00A46BC5 /* TLRequests+CheckEmailExists.swift */,
+				7E1D30E82C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift */,
 			);
 			path = TLRequests;
 			sourceTree = "<group>";
@@ -1614,9 +1631,10 @@
 				7E85E7B52BAE985100432BA9 /* _TabOverviewView.swift in Sources */,
 				7E85E7AC2BAE985100432BA9 /* BannerWithDismiss.swift in Sources */,
 				7E85E73B2BAE985100432BA9 /* AE+FutureFlights.swift in Sources */,
+				7E1D30E92C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift in Sources */,
 				7E85E7D22BAE985100432BA9 /* ChatGPTResponse.swift in Sources */,
 				7EF82EA12BF98CC400DFB53A /* Color+hex.swift in Sources */,
-				7EEAAA822C05654600A46BC5 /* UserHasSessionView.swift in Sources */,
+				7EEAAA822C05654600A46BC5 /* AccountInfoView.swift in Sources */,
 				7EEAAA862C056AEB00A46BC5 /* __SessionViewModel.swift in Sources */,
 				7EEAAA882C0C04F000A46BC5 /* CreateAccountView.swift in Sources */,
 				7EC183CA2BB28962007B2602 /* OpenAIAPIServices.swift in Sources */,
@@ -1653,6 +1671,7 @@
 				7E88222D2BE0D38100B32747 /* SkyScrapperAPIRequests.swift in Sources */,
 				7EEAAA7E2C038C2800A46BC5 /* __SessionManager.swift in Sources */,
 				7E85E7A22BAE985100432BA9 /* Date+Extensions.swift in Sources */,
+				7E1D30E42C19854600B6ED5D /* EditNameFooterView.swift in Sources */,
 				7EF82ECC2C00317C00DFB53A /* _GoogleSignInViewModel.swift in Sources */,
 				7E88221F2BDA1F8200B32747 /* OpenAI+TexCommand4.swift in Sources */,
 				7E88220F2BD0D37E00B32747 /* TripPlanView.swift in Sources */,
@@ -1665,6 +1684,7 @@
 				7EEAAA8A2C0C243F00A46BC5 /* TLRequests+CheckUsername.swift in Sources */,
 				7E85E7DC2BAE985100432BA9 /* Configuration.swift in Sources */,
 				7E85E7A62BAE985100432BA9 /* AccountView.swift in Sources */,
+				7E1D30E72C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift in Sources */,
 				7EC183E12BB53DDC007B2602 /* TLModels.swift in Sources */,
 				7E8821EB2BB68A6A00B32747 /* AnalyticsManager.swift in Sources */,
 				7EEAAA802C038CEC00A46BC5 /* TLRequests+ValidateToken.swift in Sources */,

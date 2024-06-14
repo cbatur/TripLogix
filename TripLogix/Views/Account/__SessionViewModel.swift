@@ -98,7 +98,7 @@ class SessionViewModel: ObservableObject {
     
     func validateToken(jwt: String) {
         self.apiService.validateToken(jwt: jwt)
-            .catch {_ in Just(UserResponse(message: "", data: User(id: 0, firstname: "", lastname: "", email: "", username: ""))) }
+            .catch {_ in Just(UserResponse(message: "", data: User(id: 0, firstname: "", lastname: "", email: "", username: "", emailVerified: 0))) }
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] response in
                 if let user = response.data {
                     SessionManager.shared.createSession(for: user)

@@ -25,7 +25,6 @@ extension TLRequests {
             request.httpBody = postData
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
-            print(request.prettyDescription)
             return request
         }
     }
