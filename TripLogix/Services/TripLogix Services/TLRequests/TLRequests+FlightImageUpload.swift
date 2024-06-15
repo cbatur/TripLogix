@@ -9,7 +9,7 @@ extension TLRequests {
         var path = "TempFlightImages/uploadTempImage.php?id="
         
         var request: URLRequest {
-            let path = "\(Configuration.TripLogix.baseUrl)\(path)\(imageName)"
+            let path = "\(Configuration.TripLogix.baseUrlTemp)\(path)\(imageName)"
             guard let url = URL(string: path) else { preconditionFailure("Bad URL") }
             
             let paramStr: String = "image=\(imageString)"

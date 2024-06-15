@@ -9,7 +9,7 @@ extension TLRequests {
         
         var request: URLRequest {
             
-            let path = "\(Configuration.TripLogix.baseUrl)\(path)"
+            let path = "\(Configuration.TripLogix.baseUrlTemp)\(path)"
             guard let url = URL(string: path) else { preconditionFailure("Bad URL") }
 
             var body = ["keyword": keyword]

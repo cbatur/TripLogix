@@ -9,7 +9,7 @@ extension TLRequests {
         
         var request: URLRequest {
             
-            let path = "\(Configuration.TripLogix.api)\(path)"
+            let path = "\(Configuration.TripLogix.baseURL)\(path)"
             guard let url = URL(string: path) else { preconditionFailure("Bad URL") }
 
             var body = ["jwt": jwt]

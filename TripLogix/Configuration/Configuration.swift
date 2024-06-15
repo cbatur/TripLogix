@@ -10,8 +10,7 @@ enum Configuration {
     
     
     enum TripLogix {
-        static let baseUrl = "https://palamana.com/TripLogix/"
-        static let api = "https://palamana.com/aSpanish/"
+        static let baseUrlTemp = "https://palamana.com/TripLogix/"
         static let baseURL = "https://triplogix.app/api/"
     }
 
