@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E1BA6492C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1BA6482C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift */; };
 		7E1D30E42C19854600B6ED5D /* EditNameFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E32C19854600B6ED5D /* EditNameFooterView.swift */; };
 		7E1D30E72C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E62C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift */; };
 		7E1D30E92C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E82C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift */; };
@@ -218,6 +219,8 @@
 		7E8822422BE9F11200B32747 /* __SSSearchAirportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822412BE9F11200B32747 /* __SSSearchAirportViewModel.swift */; };
 		7E8822442BEBF9C000B32747 /* Destination+SkyScrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822432BEBF9C000B32747 /* Destination+SkyScrapper.swift */; };
 		7EA98D0B2BB149DE00AE39A9 /* ImageToFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */; };
+		7EB1DABE2C29123200C58846 /* EmailVerificationFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB1DABD2C29123200C58846 /* EmailVerificationFooterView.swift */; };
+		7EB1DAC02C29127500C58846 /* __EmailVerificationFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB1DABF2C29127500C58846 /* __EmailVerificationFooterViewModel.swift */; };
 		7EC183C62BB2860C007B2602 /* OpenAI+TextCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */; };
 		7EC183C82BB28669007B2602 /* RequestNameSpaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C72BB28669007B2602 /* RequestNameSpaces.swift */; };
 		7EC183CA2BB28962007B2602 /* OpenAIAPIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C92BB28962007B2602 /* OpenAIAPIServices.swift */; };
@@ -266,6 +269,7 @@
 		7EF82EC82C0030A200DFB53A /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7EF82EC72C0030A200DFB53A /* GoogleSignIn */; };
 		7EF82ECA2C0030A200DFB53A /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7EF82EC92C0030A200DFB53A /* GoogleSignInSwift */; };
 		7EF82ECC2C00317C00DFB53A /* _GoogleSignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82ECB2C00317C00DFB53A /* _GoogleSignInViewModel.swift */; };
+		7EFF98382C2AA0A100AE0387 /* TLRequests+SetVerificationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF98372C2AA0A100AE0387 /* TLRequests+SetVerificationCode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -286,6 +290,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E1BA6482C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+VerifyUser.swift"; sourceTree = "<group>"; };
 		7E1D30E32C19854600B6ED5D /* EditNameFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNameFooterView.swift; sourceTree = "<group>"; };
 		7E1D30E62C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __EditNameFieldViewModel.swift; sourceTree = "<group>"; };
 		7E1D30E82C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+UpdateColumn.swift"; sourceTree = "<group>"; };
@@ -493,6 +498,8 @@
 		7E8822412BE9F11200B32747 /* __SSSearchAirportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __SSSearchAirportViewModel.swift; sourceTree = "<group>"; };
 		7E8822432BEBF9C000B32747 /* Destination+SkyScrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Destination+SkyScrapper.swift"; sourceTree = "<group>"; };
 		7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToFlightView.swift; sourceTree = "<group>"; };
+		7EB1DABD2C29123200C58846 /* EmailVerificationFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationFooterView.swift; sourceTree = "<group>"; };
+		7EB1DABF2C29127500C58846 /* __EmailVerificationFooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __EmailVerificationFooterViewModel.swift; sourceTree = "<group>"; };
 		7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenAI+TextCommand.swift"; sourceTree = "<group>"; };
 		7EC183C72BB28669007B2602 /* RequestNameSpaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNameSpaces.swift; sourceTree = "<group>"; };
 		7EC183C92BB28962007B2602 /* OpenAIAPIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIAPIServices.swift; sourceTree = "<group>"; };
@@ -532,6 +539,7 @@
 		7EF82EB72BFEE20E00DFB53A /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
 		7EF82EBA2C0018EB00DFB53A /* _FacebookLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _FacebookLoginViewModel.swift; sourceTree = "<group>"; };
 		7EF82ECB2C00317C00DFB53A /* _GoogleSignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _GoogleSignInViewModel.swift; sourceTree = "<group>"; };
+		7EFF98372C2AA0A100AE0387 /* TLRequests+SetVerificationCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+SetVerificationCode.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -580,6 +588,8 @@
 			children = (
 				7E1D30E32C19854600B6ED5D /* EditNameFooterView.swift */,
 				7E1D30E62C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift */,
+				7EB1DABD2C29123200C58846 /* EmailVerificationFooterView.swift */,
+				7EB1DABF2C29127500C58846 /* __EmailVerificationFooterViewModel.swift */,
 			);
 			path = "Edit Information";
 			sourceTree = "<group>";
@@ -1283,6 +1293,8 @@
 				7EEAAA892C0C243F00A46BC5 /* TLRequests+CheckUsername.swift */,
 				7EEAAA8B2C0CBCBD00A46BC5 /* TLRequests+CheckEmailExists.swift */,
 				7E1D30E82C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift */,
+				7EFF98372C2AA0A100AE0387 /* TLRequests+SetVerificationCode.swift */,
+				7E1BA6482C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift */,
 			);
 			path = TLRequests;
 			sourceTree = "<group>";
@@ -1585,6 +1597,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EFF98382C2AA0A100AE0387 /* TLRequests+SetVerificationCode.swift in Sources */,
 				7E85E7C12BAE985100432BA9 /* _PlacesViewModel.swift in Sources */,
 				7E85E7D42BAE985100432BA9 /* GPTResponseModels.swift in Sources */,
 				7E5913312BAF99DD00529823 /* FlightListView.swift in Sources */,
@@ -1652,6 +1665,7 @@
 				7E85E79E2BAE985100432BA9 /* ViewHelpers.swift in Sources */,
 				7EF82EBB2C0018EB00DFB53A /* _FacebookLoginViewModel.swift in Sources */,
 				7EEAAA8E2C10275400A46BC5 /* LoginView.swift in Sources */,
+				7E1BA6492C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift in Sources */,
 				7E85E7D52BAE985100432BA9 /* Location.swift in Sources */,
 				7EF82E952BF43DE600DFB53A /* SessionCheckView.swift in Sources */,
 				7E85E7C32BAE985100432BA9 /* AddNewDestinationView.swift in Sources */,
@@ -1668,6 +1682,7 @@
 				7E85E7B72BAE985100432BA9 /* _TabTripSettings.swift in Sources */,
 				7E85E7BE2BAE985100432BA9 /* _ChatAPIViewModel.swift in Sources */,
 				7E8822282BDF138B00B32747 /* RentalsHomeView.swift in Sources */,
+				7EB1DABE2C29123200C58846 /* EmailVerificationFooterView.swift in Sources */,
 				7E88222D2BE0D38100B32747 /* SkyScrapperAPIRequests.swift in Sources */,
 				7EEAAA7E2C038C2800A46BC5 /* __SessionManager.swift in Sources */,
 				7E85E7A22BAE985100432BA9 /* Date+Extensions.swift in Sources */,
@@ -1724,6 +1739,7 @@
 				7EF82EB42BFD20F800DFB53A /* BookingScreenHelper.swift in Sources */,
 				7E85E7D82BAE985100432BA9 /* Icons.swift in Sources */,
 				7EF82E9D2BF98C2500DFB53A /* ProfileHelpers.swift in Sources */,
+				7EB1DAC02C29127500C58846 /* __EmailVerificationFooterViewModel.swift in Sources */,
 				7E8822322BE0D9FD00B32747 /* __SSFlightsViewModel.swift in Sources */,
 				7EF82EB22BFD20F800DFB53A /* BookingModel.swift in Sources */,
 			);

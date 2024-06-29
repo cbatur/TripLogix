@@ -7,6 +7,11 @@ struct TLError: Codable, Error {
     let success: Bool
 }
 
+struct TLResponse: Codable, Error, Equatable {
+    let message: String
+    let success: Bool
+}
+
 protocol ServiceProvider {
     func searchLocation(keyword: String) -> AnyPublisher<[Location], TLError>
     func flightImageUpload(imageName: String, imageString: String) -> AnyPublisher<TLImageUrl, TLError>
@@ -16,6 +21,8 @@ protocol ServiceProvider {
     func checkUsernameExists(username: String) -> AnyPublisher<DataExistsCheck, TLError>
     func checkEmailExists(email: String) -> AnyPublisher<DataExistsCheck, TLError>
     func updateColumn(tablename: String, itemvalue: String, userid: String) -> AnyPublisher<UserResponse, TLError>
+    func setVerificationCode(email: String) -> AnyPublisher<TLResponse, TLError>
+    func verifyUser(email: String, access_code: String) -> AnyPublisher<TLResponse, TLError>
 
 }
 
@@ -61,6 +68,14 @@ class TLAPIService: ServiceProvider {
 
     func updateColumn(tablename: String, itemvalue: String, userid: String) -> AnyPublisher<UserResponse, TLError> {
         return self.apiCall(TLRequests.UpdateColumn(tablename: tablename, itemvalue: itemvalue, userid: userid).request)
+    }
+    
+    func setVerificationCode(email: String) -> AnyPublisher<TLResponse, TLError> {
+        return self.apiCall(TLRequests.SetVerificationCode(email: email).request)
+    }
+    
+    func verifyUser(email: String, access_code: String) -> AnyPublisher<TLResponse, TLError> {
+        return self.apiCall(TLRequests.VerifyUser(email: email, access_code: access_code).request)
     }
 }
 

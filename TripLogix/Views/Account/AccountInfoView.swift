@@ -9,6 +9,8 @@ struct AccountInfoView: View {
     @State private var privacyPolicyLaunch: Bool = false
     @State private var termsAgreementsLaunch: Bool = false
     @State private var editNameModal: Bool = false
+    @State private var launchVerificationFooter: Bool = false
+    @State private var verificationCode: String = ""
 
     func reloadUser(_ user: User) {
         self.user = user
@@ -16,114 +18,21 @@ struct AccountInfoView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Text("Account")
-                    .font(.system(size: 27)).bold()
-                    .padding(.leading, 33)
-                Spacer()
-                Image(systemName: "x.circle")
-                    .font(.largeTitle)
-                    .foregroundColor(.gray)
-                    .onTapGesture {
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                    .padding()
+            if user.emailVerified == 0 {
+                EmptyView()
+            } else {
+                navigationView
+                Form {
+                    avatarView
+                    personalInfoView
+                    userConsentView
+                    logoutView
+                }
             }
-            .padding(.top, 20)
-            
-            Form {
-                Section(header: Text("")) {
-                    HStack {
-                        DestinationIconDataView(iconData: nil, size: 65)
-                            .opacity(0.7)
-                        VStack {
-                            HStack {
-                                Text("\(user.username)")
-                                    .font(.system(size: 23)).bold()
-                                Spacer()
-                            }
-                            HStack {
-                                Text("Free Member")
-                                Spacer()
-                            }
-                        }
-                        .padding(.leading, 9)
-                    }
-                    
-                    HStack {
-                        Text("Avatar ")
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.gray)
-                    }
-                }
-                
-                Section(header: Text("Personal Information")) {
-                    HStack {
-                        Text("Name: ")
-                        Spacer()
-                        if user.firstname.isEmpty {
-                            Image(systemName: "plus.circle.fill")
-                                .foregroundColor(.tlGreen)
-                                .font(.system(size: 25))
-                        } else {
-                            Text("\(user.firstname)")
-                                .foregroundColor(.gray)
-                        }
-                    }
-                    .onTapGesture {
-                        editNameModal = true
-                    }
-                    HStack {
-                        Text("Email: ")
-                        Spacer()
-                        Text("\(user.email)")
-                            .foregroundColor(.gray)
-                    }
-                    HStack {
-                        Text("Change Password ")
-                        Spacer()
-                        Image(systemName: "lock")
-                            .foregroundColor(.gray)
-                    }                }
-                
-                Section(header: Text("")) {
-                    HStack {
-                        Text("Privacy Policy ")
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.gray)
-                    }
-                    .onTapGesture {
-                        privacyPolicyLaunch = true
-                    }
-                    
-                    HStack {
-                        Text("Terms and Agreements ")
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.gray)
-                    }
-                    .onTapGesture {
-                        termsAgreementsLaunch = true
-                    }
-                    
-                    HStack {
-                        Text("Delete Account ")
-                        Spacer()
-                        
-                    }
-                }
-                
-                HStack {
-                    Spacer()
-                    Text("Logout")
-                        .foregroundColor(.cbRed)
-                        .onTapGesture {
-                            viewModel.logout()
-                        }
-                    Spacer()
-                }
+        }
+        .onAppear {
+            if user.emailVerified == 0 {
+                launchVerificationFooter = true
             }
         }
         .background(Color(UIColor.systemGroupedBackground))
@@ -155,21 +64,173 @@ struct AccountInfoView: View {
                 .isOpaque(true)
                 .useKeyboardSafeArea(true)
         }
+        .popup(isPresented: $launchVerificationFooter) {
+            EmailVerificationFooterView(isShowing: $launchVerificationFooter, reloadParent: reloadUser)
+        } customize: {
+            $0
+                .position(.bottom)
+                .closeOnTap(false)
+                .backgroundColor(.black.opacity(0.4))
+                .isOpaque(true)
+                .useKeyboardSafeArea(true)
+        }
     }
     
-    #if os(iOS)
-        func scrollViewHeader() -> some View {
-            ZStack {
-                Color(.white).cornerRadius(40, corners: [.topLeft, .topRight])
-
-                Color.black
-                    .opacity(0.2)
-                    .frame(width: 30, height: 6)
-                    .clipShape(Capsule())
-                    .padding(.vertical, 20)
+    private var navigationView: some View {
+        HStack {
+            Text("Account")
+                .font(.system(size: 27)).bold()
+                .padding(.leading, 33)
+            Spacer()
+            Image(systemName: "x.circle")
+                .font(.largeTitle)
+                .foregroundColor(.gray)
+                .onTapGesture {
+                    presentationMode.wrappedValue.dismiss()
+                }
+                .padding()
+        }
+        .padding(.top, 20)
+    }
+    
+    private var avatarView: some View {
+        Section(header: Text("")) {
+            HStack {
+                DestinationIconDataView(iconData: nil, size: 65)
+                    .opacity(0.7)
+                VStack {
+                    HStack {
+                        Text("\(user.username)")
+                            .font(.system(size: 23)).bold()
+                        Spacer()
+                    }
+                    HStack {
+                        Text("Free Member")
+                        Spacer()
+                    }
+                }
+                .padding(.leading, 9)
+            }
+            
+            HStack {
+                Text("Avatar ")
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.gray)
             }
         }
-    #endif
+    }
+    
+    private var personalInfoView: some View {
+        Section(header: Text("Personal Information")) {
+            HStack {
+                Text("Name: ")
+                Spacer()
+                if user.firstname.isEmpty {
+                    Image(systemName: "plus.circle.fill")
+                        .foregroundColor(.tlGreen)
+                        .font(.system(size: 25))
+                } else {
+                    Text("\(user.firstname)")
+                        .foregroundColor(.gray)
+                }
+            }
+            .onTapGesture {
+                editNameModal = true
+            }
+            HStack {
+                Text("Email: ")
+                Spacer()
+                Text("\(user.email)")
+                    .foregroundColor(.gray)
+            }
+            HStack {
+                Text("Change Password ")
+                Spacer()
+                Image(systemName: "lock")
+                    .foregroundColor(.gray)
+            }
+        }
+    }
+    
+    private var unverifiedUserView: some View {
+        //Section(header: Text("Verify account")) {
+            VStack {
+                HStack {
+                    TextField("Verification Code", text: $verificationCode)
+                        .keyboardType(.emailAddress)
+                        .autocapitalization(.none)
+                    
+                    Button(action: {
+                        // Submit verification code
+                    }) {
+                        Text("Submit")
+                            .font(.custom("Gilroy-Medium", size: 15))
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .padding(9)
+                            .cardStyle(.teal)
+                    }
+                }
+                .padding()
+            }
+            
+        //}
+    }
+    
+    private var userConsentView: some View {
+        Section(header: Text("")) {
+            HStack {
+                Text("Privacy Policy ")
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.gray)
+            }
+            .onTapGesture {
+                privacyPolicyLaunch = true
+            }
+            
+            HStack {
+                Text("Terms and Agreements ")
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.gray)
+            }
+            .onTapGesture {
+                termsAgreementsLaunch = true
+            }
+            
+            HStack {
+                Text("Delete Account ")
+                Spacer()
+                
+            }
+        }
+    }
+    
+    private var logoutView: some View {
+        HStack {
+            Spacer()
+            Text("Logout")
+                .foregroundColor(.cbRed)
+                .onTapGesture {
+                    viewModel.logout()
+                }
+            Spacer()
+        }
+    }
+    
+    func scrollViewHeader() -> some View {
+        ZStack {
+            Color(.white).cornerRadius(40, corners: [.topLeft, .topRight])
+
+            Color.black
+                .opacity(0.2)
+                .frame(width: 30, height: 6)
+                .clipShape(Capsule())
+                .padding(.vertical, 20)
+        }
+    }
 
 }
 
