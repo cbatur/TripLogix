@@ -12,6 +12,7 @@ struct AccountInfoView: View {
     @State private var launchVerificationFooter: Bool = false
     @State private var verificationCode: String = ""
     @State private var launchPasswordChangeFooter: Bool = false
+    @State private var showLoginSheet = false
 
     func reloadUser(_ user: User) {
         self.user = user
@@ -84,6 +85,18 @@ struct AccountInfoView: View {
                 .backgroundColor(.black.opacity(0.4))
                 .isOpaque(true)
                 .useKeyboardSafeArea(true)
+        }
+        .actionSheet(isPresented: $showLoginSheet) {
+            ActionSheet(
+                title: Text("Logout?"),
+                message: Text(""),
+                buttons: [
+                    .default(Text("YES"), action: {
+                        viewModel.logout()
+                    }),
+                    .cancel(Text("Cancel"))
+                ]
+            )
         }
     }
     
@@ -228,7 +241,7 @@ struct AccountInfoView: View {
             Text("Logout")
                 .foregroundColor(.cbRed)
                 .onTapGesture {
-                    viewModel.logout()
+                    showLoginSheet = true
                 }
             Spacer()
         }
