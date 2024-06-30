@@ -207,6 +207,15 @@ extension SessionViewModel {
         && self.usernameCheck.success == true
     }
     
+    func readyForPasswordChangeSubmit(
+        password: String,
+        passwordConfirm: String
+    ) -> Bool {
+        return isValidPassword(password)
+        && isValidPassword(passwordConfirm)
+        && password == passwordConfirm
+    }
+    
     func dismissInvalidLogin() {
         self.invalidLogin = false
     }

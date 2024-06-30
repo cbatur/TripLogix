@@ -11,6 +11,7 @@ struct AccountInfoView: View {
     @State private var editNameModal: Bool = false
     @State private var launchVerificationFooter: Bool = false
     @State private var verificationCode: String = ""
+    @State private var launchPasswordChangeFooter: Bool = false
 
     func reloadUser(_ user: User) {
         self.user = user
@@ -66,6 +67,16 @@ struct AccountInfoView: View {
         }
         .popup(isPresented: $launchVerificationFooter) {
             EmailVerificationFooterView(isShowing: $launchVerificationFooter, reloadParent: reloadUser)
+        } customize: {
+            $0
+                .position(.bottom)
+                .closeOnTap(false)
+                .backgroundColor(.black.opacity(0.4))
+                .isOpaque(true)
+                .useKeyboardSafeArea(true)
+        }
+        .popup(isPresented: $launchPasswordChangeFooter) {
+            ChangePasswordFooterView(isShowing: $launchPasswordChangeFooter, reloadParent: reloadUser)
         } customize: {
             $0
                 .position(.bottom)
@@ -149,6 +160,9 @@ struct AccountInfoView: View {
                 Spacer()
                 Image(systemName: "lock")
                     .foregroundColor(.gray)
+            }
+            .onTapGesture {
+                launchPasswordChangeFooter = true
             }
         }
     }

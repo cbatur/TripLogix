@@ -23,6 +23,7 @@ protocol ServiceProvider {
     func updateColumn(tablename: String, itemvalue: String, userid: String) -> AnyPublisher<UserResponse, TLError>
     func setVerificationCode(email: String) -> AnyPublisher<TLResponse, TLError>
     func verifyUser(email: String, access_code: String) -> AnyPublisher<TLResponse, TLError>
+    func processPasswordChange(email: String, oldPassword: String, password: String) -> AnyPublisher<TLResponse, TLError>
 
 }
 
@@ -76,6 +77,10 @@ class TLAPIService: ServiceProvider {
     
     func verifyUser(email: String, access_code: String) -> AnyPublisher<TLResponse, TLError> {
         return self.apiCall(TLRequests.VerifyUser(email: email, access_code: access_code).request)
+    }
+    
+    func processPasswordChange(email: String, oldPassword: String, password: String) -> AnyPublisher<TLResponse, TLError> {
+        return self.apiCall(TLRequests.ProcessPasswordChange(email: email, oldPassword: oldPassword, password: password).request)
     }
 }
 

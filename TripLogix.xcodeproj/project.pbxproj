@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		7E1BA6492C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1BA6482C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift */; };
+		7E1BA64B2C3094E0006DAAA0 /* ChangePasswordFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1BA64A2C3094E0006DAAA0 /* ChangePasswordFooterView.swift */; };
+		7E1BA64D2C30953A006DAAA0 /* __ChangePasswordFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1BA64C2C30953A006DAAA0 /* __ChangePasswordFooterViewModel.swift */; };
+		7E1BA64F2C30FAEB006DAAA0 /* TLRequests+ProcessPasswordChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1BA64E2C30FAEB006DAAA0 /* TLRequests+ProcessPasswordChange.swift */; };
 		7E1D30E42C19854600B6ED5D /* EditNameFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E32C19854600B6ED5D /* EditNameFooterView.swift */; };
 		7E1D30E72C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E62C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift */; };
 		7E1D30E92C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E82C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift */; };
@@ -291,6 +294,9 @@
 
 /* Begin PBXFileReference section */
 		7E1BA6482C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+VerifyUser.swift"; sourceTree = "<group>"; };
+		7E1BA64A2C3094E0006DAAA0 /* ChangePasswordFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordFooterView.swift; sourceTree = "<group>"; };
+		7E1BA64C2C30953A006DAAA0 /* __ChangePasswordFooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __ChangePasswordFooterViewModel.swift; sourceTree = "<group>"; };
+		7E1BA64E2C30FAEB006DAAA0 /* TLRequests+ProcessPasswordChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+ProcessPasswordChange.swift"; sourceTree = "<group>"; };
 		7E1D30E32C19854600B6ED5D /* EditNameFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNameFooterView.swift; sourceTree = "<group>"; };
 		7E1D30E62C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __EditNameFieldViewModel.swift; sourceTree = "<group>"; };
 		7E1D30E82C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+UpdateColumn.swift"; sourceTree = "<group>"; };
@@ -590,6 +596,8 @@
 				7E1D30E62C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift */,
 				7EB1DABD2C29123200C58846 /* EmailVerificationFooterView.swift */,
 				7EB1DABF2C29127500C58846 /* __EmailVerificationFooterViewModel.swift */,
+				7E1BA64A2C3094E0006DAAA0 /* ChangePasswordFooterView.swift */,
+				7E1BA64C2C30953A006DAAA0 /* __ChangePasswordFooterViewModel.swift */,
 			);
 			path = "Edit Information";
 			sourceTree = "<group>";
@@ -1295,6 +1303,7 @@
 				7E1D30E82C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift */,
 				7EFF98372C2AA0A100AE0387 /* TLRequests+SetVerificationCode.swift */,
 				7E1BA6482C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift */,
+				7E1BA64E2C30FAEB006DAAA0 /* TLRequests+ProcessPasswordChange.swift */,
 			);
 			path = TLRequests;
 			sourceTree = "<group>";
@@ -1629,6 +1638,7 @@
 				7E8821F12BB69AAB00B32747 /* Analytics+ViewParameterExtensions.swift in Sources */,
 				7E85E7CE2BAE985100432BA9 /* AllEvents.swift in Sources */,
 				7E85E7B22BAE985100432BA9 /* SideMenu.swift in Sources */,
+				7E1BA64F2C30FAEB006DAAA0 /* TLRequests+ProcessPasswordChange.swift in Sources */,
 				7E85E73F2BAE985100432BA9 /* TLRequests+SearchGooglePlaces.swift in Sources */,
 				7E85E7B62BAE985100432BA9 /* FlightsHomeView.swift in Sources */,
 				7E85E7CF2BAE985100432BA9 /* AvionEdgeModels.swift in Sources */,
@@ -1661,6 +1671,7 @@
 				7E85E7D12BAE985100432BA9 /* CalendarModals.swift in Sources */,
 				7E8822112BD0F4B100B32747 /* GP+SearchPlaceByKeyword.swift in Sources */,
 				7E8821F52BB7BC0600B32747 /* AlertBoxMessage.swift in Sources */,
+				7E1BA64D2C30953A006DAAA0 /* __ChangePasswordFooterViewModel.swift in Sources */,
 				7E85E7C82BAE985100432BA9 /* NavigationToolbar.swift in Sources */,
 				7E85E79E2BAE985100432BA9 /* ViewHelpers.swift in Sources */,
 				7EF82EBB2C0018EB00DFB53A /* _FacebookLoginViewModel.swift in Sources */,
@@ -1703,6 +1714,7 @@
 				7EC183E12BB53DDC007B2602 /* TLModels.swift in Sources */,
 				7E8821EB2BB68A6A00B32747 /* AnalyticsManager.swift in Sources */,
 				7EEAAA802C038CEC00A46BC5 /* TLRequests+ValidateToken.swift in Sources */,
+				7E1BA64B2C3094E0006DAAA0 /* ChangePasswordFooterView.swift in Sources */,
 				7EF82EB52BFD20F800DFB53A /* BookingScreenViewModel.swift in Sources */,
 				7E8821F32BB7419C00B32747 /* ImageToFlightViewModel.swift in Sources */,
 				7E85E4292BAE8CE700432BA9 /* TripLogixApp.swift in Sources */,
