@@ -12,7 +12,7 @@ struct ChangePasswordFooterView: View {
     @State var newPasswordConfirm: String = ""
 
     private func readyForSubmit() -> Bool {
-        return sessionViewModel.readyForPasswordChangeSubmit(password: newPassword, passwordConfirm: newPasswordConfirm)
+        return sessionViewModel.readyForPasswordChangeSubmit(oldPassword: oldPassword, password: newPassword, passwordConfirm: newPasswordConfirm)
     }
 
     @StateObject private var viewModel = ChangePasswordFooterViewModel()
@@ -41,26 +41,68 @@ struct ChangePasswordFooterView: View {
                 .padding(.bottom, 16)
 
             if let user = sessionManager.currentUser {
-                TextField("Current Password", text: $oldPassword)
-                    .padding()
-                    .frame(height: 44)
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(12)
-                    .padding(.top, 6)
+                VStack {
+                    HStack {
+                        SecureField("Current Password", text: $oldPassword)
+                        
+                        if sessionViewModel.isValidLength(name: oldPassword) {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.teal)
+                        }
+                    }
+                }
+                .padding()
+                .background(.white)
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray8, lineWidth: 1)
+                )
+                .padding(.horizontal, 10)
+                .padding(.vertical, 4)
                 
-                TextField("New Password", text: $newPassword)
-                    .padding()
-                    .frame(height: 44)
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(12)
-                    .padding(.top, 6)
+                VStack {
+                    HStack {
+                        SecureField("New Password", text: $newPassword)
+                        
+                        if sessionViewModel.isValidPassword(newPassword) {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.teal)
+                        }
+                    }
+                }
+                .padding()
+                .background(.white)
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray8, lineWidth: 1)
+                )
+                .padding(.horizontal, 10)
+                .padding(.vertical, 4)
                 
-                TextField("Verify New Password", text: $newPasswordConfirm)
-                    .padding()
-                    .frame(height: 44)
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(12)
-                    .padding(.top, 6)
+                VStack {
+                    HStack {
+                        SecureField("Verify New Password", text: $newPasswordConfirm)
+                        
+                        if sessionViewModel.passwordsMatch(
+                            password: newPassword,
+                            passwordConfirm: newPasswordConfirm
+                        ) {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.teal)
+                        }
+                    }
+                }
+                .padding()
+                .background(.white)
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray8, lineWidth: 1)
+                )
+                .padding(.horizontal, 10)
+                .padding(.vertical, 4)
                 
                 if let response = viewModel.actionResponse {
                     Text(response.message)
