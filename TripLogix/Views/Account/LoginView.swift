@@ -144,6 +144,15 @@ struct LoginView: View {
             }
         }
         .padding(.top, 30)
+        .popup(isPresented: $viewModel.isMarkedForDeletion) {
+            FloatAlertView(response: TLResponse(message: "This account is marked for deletion.", success: false))
+        } customize: {
+            $0
+                .type(.floater())
+                .position(.top)
+                .animation(.spring())
+                .autohideIn(3)
+        }
         .popup(isPresented: $viewModel.invalidLogin) {
             ToastTopFirst()
         } customize: {

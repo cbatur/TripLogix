@@ -10,7 +10,7 @@ struct DestinationIconDataView: View {
         if let iconData = iconData, let uiImage = UIImage(data: iconData) {
             return Image(uiImage: uiImage)
         } else {
-            return Image("avatar")
+            return Image("destination_placeholder")
         }
     }
     

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E04AB582C7CA6A500C95A90 /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E04AB572C7CA6A500C95A90 /* DeleteAccountView.swift */; };
+		7E04AB5A2C7CA70900C95A90 /* ___DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E04AB592C7CA70900C95A90 /* ___DeleteAccountViewModel.swift */; };
+		7E04AB5C2C7DDD4F00C95A90 /* TLRequests+AccountDeletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E04AB5B2C7DDD4F00C95A90 /* TLRequests+AccountDeletion.swift */; };
 		7E1BA6492C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1BA6482C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift */; };
 		7E1BA64B2C3094E0006DAAA0 /* ChangePasswordFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1BA64A2C3094E0006DAAA0 /* ChangePasswordFooterView.swift */; };
 		7E1BA64D2C30953A006DAAA0 /* __ChangePasswordFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1BA64C2C30953A006DAAA0 /* __ChangePasswordFooterViewModel.swift */; };
@@ -15,6 +18,8 @@
 		7E1D30E72C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E62C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift */; };
 		7E1D30E92C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E82C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift */; };
 		7E5913312BAF99DD00529823 /* FlightListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5913302BAF99DD00529823 /* FlightListView.swift */; };
+		7E674C892C6B805D00232246 /* hotel-booking.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E674C882C6B805D00232246 /* hotel-booking.json */; };
+		7E674C8B2C6B80D800232246 /* Hotels+SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E674C8A2C6B80D800232246 /* Hotels+SwiftData.swift */; };
 		7E85E4292BAE8CE700432BA9 /* TripLogixApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E4282BAE8CE700432BA9 /* TripLogixApp.swift */; };
 		7E85E42D2BAE8CE800432BA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E85E42C2BAE8CE800432BA9 /* Assets.xcassets */; };
 		7E85E4302BAE8CE800432BA9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E85E42F2BAE8CE800432BA9 /* Preview Assets.xcassets */; };
@@ -293,6 +298,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E04AB572C7CA6A500C95A90 /* DeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountView.swift; sourceTree = "<group>"; };
+		7E04AB592C7CA70900C95A90 /* ___DeleteAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "___DeleteAccountViewModel.swift"; sourceTree = "<group>"; };
+		7E04AB5B2C7DDD4F00C95A90 /* TLRequests+AccountDeletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+AccountDeletion.swift"; sourceTree = "<group>"; };
 		7E1BA6482C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+VerifyUser.swift"; sourceTree = "<group>"; };
 		7E1BA64A2C3094E0006DAAA0 /* ChangePasswordFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordFooterView.swift; sourceTree = "<group>"; };
 		7E1BA64C2C30953A006DAAA0 /* __ChangePasswordFooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __ChangePasswordFooterViewModel.swift; sourceTree = "<group>"; };
@@ -302,6 +310,8 @@
 		7E1D30E82C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+UpdateColumn.swift"; sourceTree = "<group>"; };
 		7E59132F2BAEA44700529823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7E5913302BAF99DD00529823 /* FlightListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightListView.swift; sourceTree = "<group>"; };
+		7E674C882C6B805D00232246 /* hotel-booking.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "hotel-booking.json"; sourceTree = "<group>"; };
+		7E674C8A2C6B80D800232246 /* Hotels+SwiftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Hotels+SwiftData.swift"; sourceTree = "<group>"; };
 		7E85E4252BAE8CE700432BA9 /* TripLogix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TripLogix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E85E4282BAE8CE700432BA9 /* TripLogixApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripLogixApp.swift; sourceTree = "<group>"; };
 		7E85E42C2BAE8CE800432BA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -598,6 +608,8 @@
 				7EB1DABF2C29127500C58846 /* __EmailVerificationFooterViewModel.swift */,
 				7E1BA64A2C3094E0006DAAA0 /* ChangePasswordFooterView.swift */,
 				7E1BA64C2C30953A006DAAA0 /* __ChangePasswordFooterViewModel.swift */,
+				7E04AB572C7CA6A500C95A90 /* DeleteAccountView.swift */,
+				7E04AB592C7CA70900C95A90 /* ___DeleteAccountViewModel.swift */,
 			);
 			path = "Edit Information";
 			sourceTree = "<group>";
@@ -885,6 +897,7 @@
 				7E85E6E42BAE985000432BA9 /* itinerary.json */,
 				7EC183DA2BB511F9007B2602 /* AE_FutureFlight.json */,
 				7E8822372BE2EDF700B32747 /* SS_FlightSearchResults.json */,
+				7E674C882C6B805D00232246 /* hotel-booking.json */,
 			);
 			path = "Sample Responses";
 			sourceTree = "<group>";
@@ -1062,6 +1075,7 @@
 				7E88223B2BE9EF3800B32747 /* Destination+AvionEdge.swift */,
 				7E88223D2BE9EFD900B32747 /* Destination+TripModels.swift */,
 				7E8822432BEBF9C000B32747 /* Destination+SkyScrapper.swift */,
+				7E674C8A2C6B80D800232246 /* Hotels+SwiftData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1304,6 +1318,7 @@
 				7EFF98372C2AA0A100AE0387 /* TLRequests+SetVerificationCode.swift */,
 				7E1BA6482C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift */,
 				7E1BA64E2C30FAEB006DAAA0 /* TLRequests+ProcessPasswordChange.swift */,
+				7E04AB5B2C7DDD4F00C95A90 /* TLRequests+AccountDeletion.swift */,
 			);
 			path = TLRequests;
 			sourceTree = "<group>";
@@ -1573,6 +1588,7 @@
 				7E85E7622BAE985100432BA9 /* Bevellier-Semibold.otf in Resources */,
 				7E85E78A2BAE985100432BA9 /* Gilroy-UltraLight.ttf in Resources */,
 				7E85E7632BAE985100432BA9 /* Bevellier-SemiboldItalic.otf in Resources */,
+				7E674C892C6B805D00232246 /* hotel-booking.json in Resources */,
 				7E8821ED2BB6968D00B32747 /* GoogleService-Info.plist in Resources */,
 				7E85E7652BAE985100432BA9 /* Bevellier-ThinItalic.otf in Resources */,
 				7E85E7832BAE985100432BA9 /* Gilroy-MediumItalic.ttf in Resources */,
@@ -1606,9 +1622,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E04AB5A2C7CA70900C95A90 /* ___DeleteAccountViewModel.swift in Sources */,
 				7EFF98382C2AA0A100AE0387 /* TLRequests+SetVerificationCode.swift in Sources */,
 				7E85E7C12BAE985100432BA9 /* _PlacesViewModel.swift in Sources */,
 				7E85E7D42BAE985100432BA9 /* GPTResponseModels.swift in Sources */,
+				7E674C8B2C6B80D800232246 /* Hotels+SwiftData.swift in Sources */,
 				7E5913312BAF99DD00529823 /* FlightListView.swift in Sources */,
 				7EC183D72BB3E5E7007B2602 /* UIView+ImagePicker.swift in Sources */,
 				7E88221B2BD7444A00B32747 /* __CacheViewModel.swift in Sources */,
@@ -1722,6 +1740,7 @@
 				7EC183CF2BB295C4007B2602 /* Request+Extension.swift in Sources */,
 				7E85E7D72BAE985100432BA9 /* AirportType.swift in Sources */,
 				7E85E7A82BAE985100432BA9 /* FlightCards.swift in Sources */,
+				7E04AB5C2C7DDD4F00C95A90 /* TLRequests+AccountDeletion.swift in Sources */,
 				7EEAAA932C11770500A46BC5 /* Utils.swift in Sources */,
 				7E85E7BB2BAE985100432BA9 /* UpdateDestinationIcon.swift in Sources */,
 				7E8822442BEBF9C000B32747 /* Destination+SkyScrapper.swift in Sources */,
@@ -1736,6 +1755,7 @@
 				7E85E7A72BAE985100432BA9 /* LaunchScreenView.swift in Sources */,
 				7E85E7C42BAE985100432BA9 /* TripPlanEventCustomizeView.swift in Sources */,
 				7E85E7D02BAE985100432BA9 /* AvionModels.swift in Sources */,
+				7E04AB582C7CA6A500C95A90 /* DeleteAccountView.swift in Sources */,
 				7E8822302BE0D45000B32747 /* SS+AirportSearch.swift in Sources */,
 				7E85E7CB2BAE985100432BA9 /* TripDetailsView.swift in Sources */,
 				7E85E73D2BAE985100432BA9 /* AviationEdgeAPIServices.swift in Sources */,

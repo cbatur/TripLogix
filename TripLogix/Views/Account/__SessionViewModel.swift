@@ -14,6 +14,7 @@ class SessionViewModel: ObservableObject {
     @Published var message: String = ""
     
     @Published var invalidLogin: Bool = false
+    @Published var isMarkedForDeletion: Bool = false
     @Published var fetchingResponse: Bool = false
     @Published var errorMessage: String?
     
@@ -97,12 +98,34 @@ class SessionViewModel: ObservableObject {
     }
     
     func validateToken(jwt: String) {
+        isMarkedForDeletion = false
+        
         self.apiService.validateToken(jwt: jwt)
-            .catch {_ in Just(UserResponse(message: "", data: User(id: 0, firstname: "", lastname: "", email: "", username: "", emailVerified: 0))) }
+            .catch {
+                _ in Just(
+                    UserResponse(
+                        message: "",
+                        data: User(
+                            id: 0,
+                            firstname: "",
+                            lastname: "",
+                            email: "",
+                            username: "",
+                            emailVerified: 0,
+                            markedForDeletion: 0
+                        )
+                    )
+                )
+            }
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] response in
                 if let user = response.data {
-                    SessionManager.shared.createSession(for: user)
-                    self?.message = "Login Successful"
+                    if user.markedForDeletion == 1 {
+                        self?.isMarkedForDeletion = true
+                        self?.message = "This account is marked for deletion. "
+                    } else {
+                        SessionManager.shared.createSession(for: user)
+                        self?.message = "Login Successful"
+                    }
                 } else {
                     self?.message = "Login Failed"
                 }

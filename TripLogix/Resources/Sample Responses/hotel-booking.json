@@ -1,0 +1,65 @@
+{
+  "reservationId": "12345ABC",
+  "reservationType": "hotel", 
+  "guest": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "johndoe@example.com",
+    "phone": "+1-123-456-7890"
+  },
+  "property": {
+    "name": "Oceanview Hotel",
+    "address": {
+      "street": "123 Ocean Drive",
+      "city": "Miami Beach",
+      "state": "FL",
+      "postalCode": "33139",
+      "country": "USA"
+    },
+    "type": "hotel",
+    "rooms": [
+      {
+        "roomId": "101",
+        "type": "Deluxe Suite",
+        "beds": [
+          {
+            "bedType": "King",
+            "quantity": 1
+          },
+          {
+            "bedType": "Sofa Bed",
+            "quantity": 1
+          }
+        ],
+        "amenities": [
+          "Wi-Fi",
+          "Air Conditioning",
+          "Ocean View",
+          "Balcony"
+        ]
+      }
+    ]
+  },
+  "checkIn": {
+    "date": "2024-08-20",
+    "time": "15:00"
+  },
+  "checkOut": {
+    "date": "2024-08-25",
+    "time": "11:00"
+  },
+  "totalPrice": {
+    "amount": 1500.00,
+    "currency": "USD"
+  },
+  "paymentStatus": "paid",  // can be "pending", "canceled"
+  "specialRequests": [
+    "High floor",
+    "Late check-out"
+  ],
+  "cancellationPolicy": {
+    "type": "flexible",  // can be "moderate", "strict"
+    "details": "Full refund if canceled 48 hours before check-in."
+  }
+}
+

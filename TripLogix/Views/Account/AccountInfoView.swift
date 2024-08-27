@@ -12,6 +12,7 @@ struct AccountInfoView: View {
     @State private var launchVerificationFooter: Bool = false
     @State private var verificationCode: String = ""
     @State private var launchPasswordChangeFooter: Bool = false
+    @State private var launchAccountDeletion: Bool = false
     @State private var showLoginSheet = false
 
     func reloadUser(_ user: User) {
@@ -78,6 +79,20 @@ struct AccountInfoView: View {
         }
         .popup(isPresented: $launchPasswordChangeFooter) {
             ChangePasswordFooterView(isShowing: $launchPasswordChangeFooter, reloadParent: reloadUser)
+        } customize: {
+            $0
+                .position(.bottom)
+                .closeOnTap(false)
+                .backgroundColor(.black.opacity(0.4))
+                .isOpaque(true)
+                .useKeyboardSafeArea(true)
+        }
+        .popup(isPresented: $launchAccountDeletion) {
+            DeleteAccountView(
+                email: $user.email,
+                isShowing: $launchAccountDeletion,
+                reloadParent: reloadUser
+            )
         } customize: {
             $0
                 .position(.bottom)
@@ -230,7 +245,9 @@ struct AccountInfoView: View {
             HStack {
                 Text("Delete Account ")
                 Spacer()
-                
+            }
+            .onTapGesture {
+                launchAccountDeletion = true
             }
         }
     }
