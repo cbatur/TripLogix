@@ -1,16 +1,6 @@
 import SwiftUI
 import PopupView
 
-struct ToastTopFirst: View {
-    var body: some View {
-        Text("Invalid Login - Check your login credentials and try again.")
-            .foregroundColor(.white)
-            .padding(EdgeInsets(top: 60, leading: 32, bottom: 16, trailing: 32))
-            .frame(maxWidth: .infinity)
-            .background(Color.red)
-    }
-}
-
 struct LoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
@@ -51,7 +41,6 @@ struct LoginView: View {
                 .autohideIn(3)
         }
         .popup(isPresented: $viewModel.invalidLogin) {
-            //ToastTopFirst()
             FloatAlertView(response: TLResponse(message: "Invalid Login - Check your login credentials and try again.", success: false))
         } customize: {
             $0
@@ -145,6 +134,7 @@ struct LoginView: View {
             .padding()
             
             Button {
+                hideKeyboard()
                 viewModel.login(
                     email: self.email,
                     password: self.password

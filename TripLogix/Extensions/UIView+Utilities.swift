@@ -62,3 +62,9 @@ extension View {
             .shadow(color: .black.opacity(0.16), radius: 24, x: 0, y: 0)
     }
 }
+
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
