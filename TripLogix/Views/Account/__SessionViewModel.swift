@@ -170,7 +170,7 @@ extension SessionViewModel {
     
     func getSignInEmailValidationMessage(_ email: String) -> String {
         if email.isEmpty {
-            return "Your registered email"
+            return "Enter your email."
         } else if !isValidEmail(email) {
             return "Not a valid email"
         } else {

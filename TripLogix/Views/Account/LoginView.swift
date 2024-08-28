@@ -36,41 +36,65 @@ struct LoginView: View {
     var body: some View {
         
         VStack {
-            VStack {
-                HStack {
-                    Text("Log ")
-                        .font(.custom("Gilroy-Bold", size: 25))
-                        .foregroundColor(.black) +
-                    Text("In")
-                        .font(.custom("Gilroy-Regular", size: 25))
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        viewModel.login(
-                            email: self.email,
-                            password: self.password
-                        )
-                    }) {
-                        Image(systemName: "arrow.right.circle")
-                            .font(.largeTitle).bold()
-                            .foregroundColor(readyForLogin() ? Color.tlGreen : .gray8)
-                            .cornerRadius(5)
-                    }
-                    .disabled(!readyForLogin())
+            loginPageBanner
+            loginForm
+            socialMediaLogin
+        }
+        .padding(.top, 30)
+        .popup(isPresented: $viewModel.isMarkedForDeletion) {
+            FloatAlertView(response: TLResponse(message: "This account is marked for deletion.", success: false))
+        } customize: {
+            $0
+                .type(.floater())
+                .position(.top)
+                .animation(.spring())
+                .autohideIn(3)
+        }
+        .popup(isPresented: $viewModel.invalidLogin) {
+            //ToastTopFirst()
+            FloatAlertView(response: TLResponse(message: "Invalid Login - Check your login credentials and try again.", success: false))
+        } customize: {
+            $0
+                .type(.floater())
+                .position(.top)
+                .animation(.spring())
+                .closeOnTapOutside(true)
+                .autohideIn(3)
+                .dismissCallback {
+                    print("did", $0)
                 }
-                
-                HStack {
-                    Text("Sign-in to an existing account")
-                        .font(.system(size: 16))
-                        .foregroundColor(.gray3)
-                    Spacer()
+                .willDismissCallback {
+                    print("will", $0)
                 }
+        }
+    }
+    
+    private var loginPageBanner: some View {
+        VStack {
+            HStack {
+                Text("Log ")
+                    .font(.custom("Gilroy-Bold", size: 25))
+                    .foregroundColor(.black) +
+                Text("In")
+                    .font(.custom("Gilroy-Regular", size: 25))
                 
-                Divider()
+                Spacer()
             }
-            .padding()
             
+            HStack {
+                Text("Enter your credentials to sign in")
+                    .font(.system(size: 16))
+                    .foregroundColor(.gray3)
+                Spacer()
+            }
+            
+            Divider()
+        }
+        .padding()
+    }
+    
+    private var loginForm: some View {
+        VStack {
             VStack {
                 HStack {
                     Text(viewModel.getSignInEmailValidationMessage(self.email))
@@ -95,9 +119,8 @@ struct LoginView: View {
             .cornerRadius(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray8, lineWidth: 1)
+                    .stroke(Color.gray6, lineWidth: 1)
             )
-            .padding(.horizontal, 20)
             
             SecureField("Password", text: $password)
                 .padding()
@@ -105,69 +128,66 @@ struct LoginView: View {
                 .cornerRadius(10)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.gray8, lineWidth: 1)
+                        .stroke(Color.gray6, lineWidth: 1)
                 )
-                .padding(.horizontal, 20)
             
             HStack {
                 Spacer()
                 Button(action: {
                     // Handle forgot password action
                 }) {
-                    Text("Forgot Password?")
-                        .font(.system(size: 15))
+                    Text("Forgot Your Password?")
+                        .font(.system(size: 16)).bold()
                         .foregroundColor(.blue)
                 }
+                Spacer()
             }
             .padding()
             
-            Spacer()
-            
-            VStack {
-                if let user = googleSignInViewModel.user {
-                    Button(action: googleSignInViewModel.signOut) {
-                        Text("Logout \(user)")
+            Button {
+                viewModel.login(
+                    email: self.email,
+                    password: self.password
+                )
+            } label: {
+                Text("Login")
+                    .buttonStyle(.plain)
+                    .font(.system(size: 20)).bold()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 56)
+                    .background {
+                        RoundedRectangle(cornerRadius: 9)
+                            .fill(Color.tlOrange)
                     }
-                } else {
-                    buttonLoginGoogle
-                        .isHidden(Configuration.googleLoginDisabled)
-                }
-
-                if facebookLoginViewModel.isLoggedIn {
-                    Button(action: facebookLoginViewModel.logout) {
-                        Text("Logout \(facebookLoginViewModel.userName ?? "User")")
-                    }
-                } else {
-                    buttonLoginFacebook
-                        .isHidden(Configuration.facebookLoginDisabled)
-                }
             }
+            .disabled(!readyForLogin())
+            .buttonStyle(.plain)
+            .foregroundColor(.white)
+            .padding(.top, 12)
+            
         }
-        .padding(.top, 30)
-        .popup(isPresented: $viewModel.isMarkedForDeletion) {
-            FloatAlertView(response: TLResponse(message: "This account is marked for deletion.", success: false))
-        } customize: {
-            $0
-                .type(.floater())
-                .position(.top)
-                .animation(.spring())
-                .autohideIn(3)
-        }
-        .popup(isPresented: $viewModel.invalidLogin) {
-            ToastTopFirst()
-        } customize: {
-            $0
-                .type(.floater())
-                .position(.top)
-                .animation(.spring())
-                .closeOnTapOutside(true)
-                .autohideIn(3)
-                .dismissCallback {
-                    print("did", $0)
+        .padding()
+    }
+    
+    private var socialMediaLogin: some View {
+        VStack {
+            if let user = googleSignInViewModel.user {
+                Button(action: googleSignInViewModel.signOut) {
+                    Text("Logout \(user)")
                 }
-                .willDismissCallback {
-                    print("will", $0)
+            } else {
+                buttonLoginGoogle
+                    .isHidden(Configuration.googleLoginDisabled)
+            }
+
+            if facebookLoginViewModel.isLoggedIn {
+                Button(action: facebookLoginViewModel.logout) {
+                    Text("Logout \(facebookLoginViewModel.userName ?? "User")")
                 }
+            } else {
+                buttonLoginFacebook
+                    .isHidden(Configuration.facebookLoginDisabled)
+            }
         }
     }
     

@@ -58,14 +58,14 @@ struct DeleteAccountView: View {
             HStack {
                 Text("Are You Sure You Want to Delete Your Account?")
                     .foregroundColor(.black)
-                    .font(.system(size: 22, weight: .bold))
+                    .font(.system(size: 20, weight: .bold))
                     .kerning(0.38)
             }
             .padding(.top, 15)
             .padding(.bottom, 7)
             
             Text("Please confirm your password to proceed with account deletion.")
-                .font(.system(size: 18))
+                .font(.system(size: 16))
                 .foregroundStyle(.gray)
             
             VStack {
@@ -85,7 +85,7 @@ struct DeleteAccountView: View {
                     .font(.system(size: 17)).bold()
                     .foregroundColor(Color.warningRedColor)
             }
-            .padding(.vertical, 20)
+            .padding(.vertical, 14)
         }
     }
     

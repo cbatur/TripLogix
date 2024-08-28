@@ -58,7 +58,7 @@ struct UserNeedsSessionView: View {
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
-                .opacity(0.08)
+                .opacity(0.05)
         )
     }
 }
