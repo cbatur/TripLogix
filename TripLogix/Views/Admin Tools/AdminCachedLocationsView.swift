@@ -2,6 +2,7 @@
 import SwiftUI
 
 struct AdminViewCachedLocations: View {
+    @Binding var selectedView: Int
     @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: TripPlanViewModel = TripPlanViewModel()
     @StateObject var cacheViewModel: CacheViewModel = CacheViewModel()

@@ -42,9 +42,9 @@ struct TripPlanView: View {
         .sheet(isPresented: $launchAllEvents) {
             TripPlanEventCustomizeView(destination: destination)
         }
-        .sheet(isPresented: $launchAdminTools) {
-            AdminViewCachedLocations()
-        }
+//        .sheet(isPresented: $launchAdminTools) {
+//            AdminViewCachedLocations()
+//        }
     }
     
     private var alertSection: some View {

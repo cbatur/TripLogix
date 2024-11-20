@@ -34,7 +34,7 @@ struct TripDetailsView: View {
                 case 4:
                     DocumentsView()
                 default:
-                    TripsView()
+                    TripPlanView(destination: destination)
                 }
             }
             .tabViewStyle(PageTabViewStyle())

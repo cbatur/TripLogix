@@ -1,11 +1,28 @@
 
 import SwiftUI
 import PopupView
+import ScrollKit
 
 struct AccountInfoView: View {
     @State var user: User
+    
+    var heroBanner: Image = Image("account-hero-1")
+    var body: some View {
+        AccountInfoViewFeed(user: user, headerHeight: 150) {
+            ZStack {
+                ScrollViewHeaderImage(heroBanner)
+                StripedPattern()
+                    .opacity(0.2)
+                ScrollViewHeaderGradient(.black.opacity(0.4), .black.opacity(0.8))
+            }
+        }
+    }
+}
+
+struct AccountInfoViewFeed<HeaderView: View>: View {
+    @State var user: User
     @StateObject private var viewModel = SessionViewModel()
-    @Environment(\.presentationMode) var presentationMode
+
     @State private var privacyPolicyLaunch: Bool = false
     @State private var termsAgreementsLaunch: Bool = false
     @State private var editNameModal: Bool = false
@@ -14,25 +31,57 @@ struct AccountInfoView: View {
     @State private var launchPasswordChangeFooter: Bool = false
     @State private var launchAccountDeletion: Bool = false
     @State private var showLoginSheet = false
+    
+    let headerHeight: CGFloat
+
+    @ViewBuilder
+    let headerView: () -> HeaderView
+
+    @State
+    private var headerVisibleRatio: CGFloat = 1
+
+    @State
+    private var scrollOffset: CGPoint = .zero
+    
+    func handleScrollOffset(_ offset: CGPoint, headerVisibleRatio: CGFloat) {
+        self.scrollOffset = offset
+        self.headerVisibleRatio = headerVisibleRatio
+    }
 
     func reloadUser(_ user: User) {
         self.user = user
     }
     
     var body: some View {
-        VStack {
-            if user.emailVerified == 0 {
-                EmptyView()
-            } else {
-                navigationView
-                Form {
-                    avatarView
-                    personalInfoView
-                    userConsentView
-                    logoutView
+        ScrollViewWithStickyHeader(
+            header: header,
+            headerHeight: 80,
+            onScroll: handleScrollOffset
+        ) {
+            VStack {
+                if user.emailVerified == 0 {
+                    VStack {
+                        Text("Username: \(user.username)")
+                        Text("email: \(user.email)")
+                        Text("emailVerified: \(user.emailVerified)")
+                    }
+                } else {
+                    VStack {
+                        avatarView
+                        personalInfoView
+                        userConsentView
+                            .padding(.top, 20)
+                        logoutView
+                    }
+                    .padding()
                 }
             }
         }
+        .background(Color.slBack1)
+        .padding(.bottom, 1)
+        .toolbarBackground(.hidden)
+        .statusBarHidden(scrollOffset.y > -3)
+        .toolbarColorScheme(.dark, for: .navigationBar)
         .onAppear {
             if user.emailVerified == 0 {
                 launchVerificationFooter = true
@@ -101,6 +150,11 @@ struct AccountInfoView: View {
                 .isOpaque(true)
                 .useKeyboardSafeArea(true)
         }
+        .onAppear {
+            if user.email.isEmpty {
+                viewModel.logout()
+            }
+        }
         .actionSheet(isPresented: $showLoginSheet) {
             ActionSheet(
                 title: Text("Logout?"),
@@ -115,25 +169,29 @@ struct AccountInfoView: View {
         }
     }
     
-    private var navigationView: some View {
-        HStack {
-            Text("Account")
-                .font(.system(size: 27)).bold()
-                .padding(.leading, 33)
-            Spacer()
-            Image(systemName: "x.circle")
-                .font(.largeTitle)
-                .foregroundColor(.gray)
-                .onTapGesture {
-                    presentationMode.wrappedValue.dismiss()
-                }
-                .padding()
+    func header() -> some View {
+        ZStack(alignment: .bottomLeading) {
+            headerView()
+            ScrollViewHeaderGradient()
+            headerContent.previewHeaderContent()
         }
-        .padding(.top, 20)
+    }
+
+    var headerContent: some View {
+        VStack {
+            HStack {
+                Text("Account")
+                    .font(.custom("Gilroy-Bold", size: 25))
+                    .foregroundStyle(Color.gray7)
+            }
+        }
+        .padding(.top, 30)
+        .padding()
+        .opacity(headerVisibleRatio)
     }
     
     private var avatarView: some View {
-        Section(header: Text("")) {
+        VStack {
             HStack {
                 DestinationIconDataView(iconData: nil, size: 65)
                     .opacity(0.7)
@@ -141,58 +199,98 @@ struct AccountInfoView: View {
                     HStack {
                         Text("\(user.username)")
                             .font(.system(size: 23)).bold()
+                            .foregroundStyle(.gray)
                         Spacer()
                     }
+                                        
                     HStack {
                         Text("Free Member")
+                            .foregroundStyle(.gray)
+                            .font(.system(size: 16))
                         Spacer()
                     }
                 }
                 .padding(.leading, 9)
             }
             
+            Divider()
+
             HStack {
                 Text("Avatar ")
+                    .foregroundStyle(.gray)
+                    .font(.system(size: 16))
                 Spacer()
                 Image(systemName: "chevron.right")
                     .foregroundColor(.gray)
             }
         }
+        .padding()
+        .cardStyle(.white)
     }
     
     private var personalInfoView: some View {
-        Section(header: Text("Personal Information")) {
+        
+        VStack {
             HStack {
-                Text("Name: ")
+                Text("Personal Information".uppercased())
+                    .font(.caption)
+                    .foregroundStyle(Color.slSofiColor)
                 Spacer()
-                if user.firstname.isEmpty {
-                    Image(systemName: "plus.circle.fill")
-                        .foregroundColor(.tlGreen)
-                        .font(.system(size: 25))
-                } else {
-                    Text("\(user.firstname)")
+            }
+        
+            VStack {
+                HStack {
+                    Text("Name ")
+                        .foregroundStyle(.black)
+                        .font(.system(size: 16))
+                    Spacer()
+                    if user.firstname.isEmpty {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(.tlGreen)
+                            .font(.system(size: 25))
+                    } else {
+                        Text("\(user.firstname)")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 16))
+                    }
+                }
+                .padding(.vertical, 4)
+                .onTapGesture {
+                    editNameModal = true
+                }
+                Divider()
+                
+                HStack {
+                    Text("Email ")
+                        .foregroundStyle(.black)
+                        .font(.system(size: 16))
+                    Spacer()
+                    Text("\(user.email)")
                         .foregroundColor(.gray)
+                        .font(.system(size: 16))
+                }
+                .padding(.vertical, 4)
+                Divider()
+                
+                HStack {
+                    Text("Change Password ")
+                        .foregroundStyle(.black)
+                        .font(.system(size: 16))
+                    Spacer()
+                    Image(systemName: "lock")
+                        .foregroundColor(.gray)
+                        .font(.system(size: 16))
+                }
+                .padding(.vertical, 4)
+                .onTapGesture {
+                    launchPasswordChangeFooter = true
                 }
             }
-            .onTapGesture {
-                editNameModal = true
-            }
-            HStack {
-                Text("Email: ")
-                Spacer()
-                Text("\(user.email)")
-                    .foregroundColor(.gray)
-            }
-            HStack {
-                Text("Change Password ")
-                Spacer()
-                Image(systemName: "lock")
-                    .foregroundColor(.gray)
-            }
-            .onTapGesture {
-                launchPasswordChangeFooter = true
-            }
+            .padding(10)
+            .cardStyle(.white)
+            .transition(.opacity)
         }
+        .padding(.top, 20)
     }
     
     private var unverifiedUserView: some View {
@@ -221,35 +319,54 @@ struct AccountInfoView: View {
     }
     
     private var userConsentView: some View {
-        Section(header: Text("")) {
-            HStack {
-                Text("Privacy Policy ")
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.gray)
-            }
-            .onTapGesture {
-                privacyPolicyLaunch = true
-            }
+        VStack {
             
-            HStack {
-                Text("Terms and Agreements ")
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.gray)
-            }
-            .onTapGesture {
-                termsAgreementsLaunch = true
-            }
-            
-            HStack {
-                Text("Delete Account ")
-                Spacer()
-            }
-            .onTapGesture {
-                launchAccountDeletion = true
+            VStack {
+                HStack {
+                    Text("Privacy Policy ")
+                        .foregroundStyle(.black)
+                        .font(.system(size: 16))
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.gray)
+                }
+                .padding(.vertical, 4)
+                .onTapGesture {
+                    privacyPolicyLaunch = true
+                }
+                
+                Divider()
+                
+                HStack {
+                    Text("Terms and Agreements ")
+                        .foregroundStyle(.black)
+                        .font(.system(size: 16))
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.gray)
+                }
+                .padding(.vertical, 4)
+                .onTapGesture {
+                    termsAgreementsLaunch = true
+                }
+                
+                Divider()
+                
+                HStack {
+                    Text("Delete Account ")
+                        .foregroundStyle(.black)
+                        .font(.system(size: 16))
+                    Spacer()
+                }
+                .padding(.vertical, 4)
+                .onTapGesture {
+                    launchAccountDeletion = true
+                }
             }
         }
+        .padding(10)
+        .cardStyle(.white)
+        .transition(.opacity)
     }
     
     private var logoutView: some View {
@@ -260,8 +377,8 @@ struct AccountInfoView: View {
                 .onTapGesture {
                     showLoginSheet = true
                 }
-            Spacer()
         }
+        .padding()
     }
     
     func scrollViewHeader() -> some View {

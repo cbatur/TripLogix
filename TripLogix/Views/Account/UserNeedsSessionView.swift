@@ -3,14 +3,19 @@ import SwiftUI
 
 struct UserNeedsSessionView: View {
     @State private var isLogin: Bool = true
-
+    let reloadParent: () -> Void
+    
+    func reload() {
+        //reloadParent()
+    }
+    
     var body: some View {
         VStack(spacing: 20) {
             
             if isLogin {
                 LoginView()                
             } else {
-                CreateAccountView()
+                CreateAccountView(reloadParent: reload)
             }
 
             Spacer()

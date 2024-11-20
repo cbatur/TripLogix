@@ -63,7 +63,7 @@ struct TripLogixApp: App {
                         }
                     }
             } else {
-                TripsView()
+                TLTabView()
                     .environmentObject(SessionManager.shared)
             }
         }

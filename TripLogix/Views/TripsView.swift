@@ -37,7 +37,7 @@ struct MainTabbedView: View {
 }
 
 struct TripsView: View {
-    //@Binding var presentSideMenu: Bool
+    @Binding var selectedView: Int
     
     @Environment(\.modelContext) var modelContext
     @State private var path = [Destination]()
@@ -82,9 +82,9 @@ struct TripsView: View {
             )
         }
         .analyticsScreen(name: "TripsView")
-        .sheet(isPresented: $launchLoginView) {
-            SessionCheckView()
-        }
+//        .sheet(isPresented: $launchLoginView) {
+//            SessionCheckView()
+//        }
         .onAppear{
             let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? "TL12345"
             AnalyticsManager.shared.logEvent(name: "TripsView_Appear")
@@ -101,7 +101,8 @@ struct TripsView: View {
             Image(systemName: "person.circle")
                 .font(.system(size: 27))
                 .onTapGesture {
-                    launchLoginView = true
+                    //launchLoginView = true
+                    selectedView = 3
                 }
         }
     }

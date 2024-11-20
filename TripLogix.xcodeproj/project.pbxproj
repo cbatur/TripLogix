@@ -10,6 +10,8 @@
 		7E04AB582C7CA6A500C95A90 /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E04AB572C7CA6A500C95A90 /* DeleteAccountView.swift */; };
 		7E04AB5A2C7CA70900C95A90 /* ___DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E04AB592C7CA70900C95A90 /* ___DeleteAccountViewModel.swift */; };
 		7E04AB5C2C7DDD4F00C95A90 /* TLRequests+AccountDeletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E04AB5B2C7DDD4F00C95A90 /* TLRequests+AccountDeletion.swift */; };
+		7E04ABF12C81AD1100C95A90 /* __CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E04ABF02C81AD1100C95A90 /* __CreateAccountViewModel.swift */; };
+		7E04ABF42C81B9F000C95A90 /* TLTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E04ABF32C81B9F000C95A90 /* TLTabView.swift */; };
 		7E1BA6492C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1BA6482C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift */; };
 		7E1BA64B2C3094E0006DAAA0 /* ChangePasswordFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1BA64A2C3094E0006DAAA0 /* ChangePasswordFooterView.swift */; };
 		7E1BA64D2C30953A006DAAA0 /* __ChangePasswordFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1BA64C2C30953A006DAAA0 /* __ChangePasswordFooterViewModel.swift */; };
@@ -226,6 +228,9 @@
 		7E8822402BE9F08D00B32747 /* SSSearchAirportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E88223F2BE9F08D00B32747 /* SSSearchAirportView.swift */; };
 		7E8822422BE9F11200B32747 /* __SSSearchAirportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822412BE9F11200B32747 /* __SSSearchAirportViewModel.swift */; };
 		7E8822442BEBF9C000B32747 /* Destination+SkyScrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8822432BEBF9C000B32747 /* Destination+SkyScrapper.swift */; };
+		7E8DD1422CEDB58E006C4529 /* ScrollKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E8DD1412CEDB58E006C4529 /* ScrollKit */; };
+		7E8DD1442CEDB72B006C4529 /* StripedPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8DD1432CEDB72B006C4529 /* StripedPattern.swift */; };
+		7E8DD1462CEDB859006C4529 /* UIView+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8DD1452CEDB859006C4529 /* UIView+ScrollView.swift */; };
 		7EA98D0B2BB149DE00AE39A9 /* ImageToFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */; };
 		7EB1DABE2C29123200C58846 /* EmailVerificationFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB1DABD2C29123200C58846 /* EmailVerificationFooterView.swift */; };
 		7EB1DAC02C29127500C58846 /* __EmailVerificationFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB1DABF2C29127500C58846 /* __EmailVerificationFooterViewModel.swift */; };
@@ -301,6 +306,8 @@
 		7E04AB572C7CA6A500C95A90 /* DeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountView.swift; sourceTree = "<group>"; };
 		7E04AB592C7CA70900C95A90 /* ___DeleteAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "___DeleteAccountViewModel.swift"; sourceTree = "<group>"; };
 		7E04AB5B2C7DDD4F00C95A90 /* TLRequests+AccountDeletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+AccountDeletion.swift"; sourceTree = "<group>"; };
+		7E04ABF02C81AD1100C95A90 /* __CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __CreateAccountViewModel.swift; sourceTree = "<group>"; };
+		7E04ABF32C81B9F000C95A90 /* TLTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLTabView.swift; sourceTree = "<group>"; };
 		7E1BA6482C2BDDC7006DAAA0 /* TLRequests+VerifyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+VerifyUser.swift"; sourceTree = "<group>"; };
 		7E1BA64A2C3094E0006DAAA0 /* ChangePasswordFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordFooterView.swift; sourceTree = "<group>"; };
 		7E1BA64C2C30953A006DAAA0 /* __ChangePasswordFooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __ChangePasswordFooterViewModel.swift; sourceTree = "<group>"; };
@@ -513,6 +520,8 @@
 		7E88223F2BE9F08D00B32747 /* SSSearchAirportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSSearchAirportView.swift; sourceTree = "<group>"; };
 		7E8822412BE9F11200B32747 /* __SSSearchAirportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __SSSearchAirportViewModel.swift; sourceTree = "<group>"; };
 		7E8822432BEBF9C000B32747 /* Destination+SkyScrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Destination+SkyScrapper.swift"; sourceTree = "<group>"; };
+		7E8DD1432CEDB72B006C4529 /* StripedPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripedPattern.swift; sourceTree = "<group>"; };
+		7E8DD1452CEDB859006C4529 /* UIView+ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ScrollView.swift"; sourceTree = "<group>"; };
 		7EA98D0A2BB149DE00AE39A9 /* ImageToFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToFlightView.swift; sourceTree = "<group>"; };
 		7EB1DABD2C29123200C58846 /* EmailVerificationFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationFooterView.swift; sourceTree = "<group>"; };
 		7EB1DABF2C29127500C58846 /* __EmailVerificationFooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __EmailVerificationFooterViewModel.swift; sourceTree = "<group>"; };
@@ -575,6 +584,7 @@
 				7EF82EC12C001C4F00DFB53A /* FacebookBasics in Frameworks */,
 				7EF82EC32C001C4F00DFB53A /* FacebookCore in Frameworks */,
 				7EF82EBF2C001C4F00DFB53A /* FacebookAEM in Frameworks */,
+				7E8DD1422CEDB58E006C4529 /* ScrollKit in Frameworks */,
 				7E85E7DE2BAE98D100432BA9 /* CryptoSwift in Frameworks */,
 				7E8821E42BB689FB00B32747 /* FirebaseAnalyticsSwift in Frameworks */,
 				7E8821E82BB68A1F00B32747 /* AdSupport.framework in Frameworks */,
@@ -599,6 +609,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E04ABF22C81B9D900C95A90 /* TabView */ = {
+			isa = PBXGroup;
+			children = (
+				7E04ABF32C81B9F000C95A90 /* TLTabView.swift */,
+			);
+			path = TabView;
+			sourceTree = "<group>";
+		};
 		7E1D30E52C19855900B6ED5D /* Edit Information */ = {
 			isa = PBXGroup;
 			children = (
@@ -694,6 +712,7 @@
 			isa = PBXGroup;
 			children = (
 				7E85E6742BAE985000432BA9 /* ColorKit.swift */,
+				7E8DD1432CEDB72B006C4529 /* StripedPattern.swift */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -940,6 +959,7 @@
 				7E85E6F12BAE985100432BA9 /* Strings+Extensions.swift */,
 				7E85E6F22BAE985100432BA9 /* UIView+Utilities.swift */,
 				7EC183D62BB3E5E7007B2602 /* UIView+ImagePicker.swift */,
+				7E8DD1452CEDB859006C4529 /* UIView+ScrollView.swift */,
 				7EC183CE2BB295C4007B2602 /* Request+Extension.swift */,
 			);
 			path = Extensions;
@@ -956,8 +976,9 @@
 				7EEAAA7D2C038C2800A46BC5 /* __SessionManager.swift */,
 				7EF82EBA2C0018EB00DFB53A /* _FacebookLoginViewModel.swift */,
 				7EF82ECB2C00317C00DFB53A /* _GoogleSignInViewModel.swift */,
-				7EEAAA872C0C04F000A46BC5 /* CreateAccountView.swift */,
 				7EEAAA8D2C10275400A46BC5 /* LoginView.swift */,
+				7EEAAA872C0C04F000A46BC5 /* CreateAccountView.swift */,
+				7E04ABF02C81AD1100C95A90 /* __CreateAccountViewModel.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -1040,6 +1061,7 @@
 		7E85E7252BAE985100432BA9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7E04ABF22C81B9D900C95A90 /* TabView */,
 				7EF82EB62BFD228400DFB53A /* Reference Frameworks */,
 				7E85E6FA2BAE985100432BA9 /* ContentView.swift */,
 				7E8822212BDF128D00B32747 /* Trip Details */,
@@ -1399,6 +1421,7 @@
 				7EF82EC72C0030A200DFB53A /* GoogleSignIn */,
 				7EF82EC92C0030A200DFB53A /* GoogleSignInSwift */,
 				7EEAAA902C11722F00A46BC5 /* PopupView */,
+				7E8DD1412CEDB58E006C4529 /* ScrollKit */,
 			);
 			productName = TripLogix;
 			productReference = 7E85E4252BAE8CE700432BA9 /* TripLogix.app */;
@@ -1481,6 +1504,7 @@
 				7EF82EB92C00177C00DFB53A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				7EF82EC62C00308800DFB53A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				7EEAAA8F2C1171FF00A46BC5 /* XCRemoteSwiftPackageReference "PopupView" */,
+				7E8DD1402CEDB556006C4529 /* XCRemoteSwiftPackageReference "ScrollKit" */,
 			);
 			productRefGroup = 7E85E4262BAE8CE700432BA9 /* Products */;
 			projectDirPath = "";
@@ -1642,6 +1666,7 @@
 				7E85E7BC2BAE985100432BA9 /* _AviationEdgeViewModel.swift in Sources */,
 				7E88221D2BD9F77900B32747 /* TripSharedViews.swift in Sources */,
 				7EF82E9E2BF98C2500DFB53A /* ProfileScreen.swift in Sources */,
+				7E8DD1462CEDB859006C4529 /* UIView+ScrollView.swift in Sources */,
 				7E85E7A32BAE985100432BA9 /* String+DateUtilities.swift in Sources */,
 				7E85E7392BAE985100432BA9 /* AE+Autocomplete.swift in Sources */,
 				7EA98D0B2BB149DE00AE39A9 /* ImageToFlightView.swift in Sources */,
@@ -1651,6 +1676,7 @@
 				7E88223A2BE9ECAC00B32747 /* SSFlights_Cards_Alerts.swift in Sources */,
 				7E85E7382BAE985100432BA9 /* ColorKit.swift in Sources */,
 				7E8822042BBE587400B32747 /* __AddNewDestinationViewModel.swift in Sources */,
+				7E8DD1442CEDB72B006C4529 /* StripedPattern.swift in Sources */,
 				7E85E73E2BAE985100432BA9 /* TLAPIService.swift in Sources */,
 				7E85E7C02BAE985100432BA9 /* _MockServicesViewModel.swift in Sources */,
 				7E8821F12BB69AAB00B32747 /* Analytics+ViewParameterExtensions.swift in Sources */,
@@ -1665,6 +1691,7 @@
 				7E85E7DB2BAE985100432BA9 /* TripGroup.swift in Sources */,
 				7E85E7AE2BAE985100432BA9 /* DestinationIconView.swift in Sources */,
 				7E85E7A42BAE985100432BA9 /* Strings+Extensions.swift in Sources */,
+				7E04ABF12C81AD1100C95A90 /* __CreateAccountViewModel.swift in Sources */,
 				7EF82EA92BFD207E00DFB53A /* BankingService.swift in Sources */,
 				7E8822362BE20E4A00B32747 /* SS+FlightSearch.swift in Sources */,
 				7E85E7DA2BAE985100432BA9 /* TabViews.swift in Sources */,
@@ -1723,6 +1750,7 @@
 				7E85E7A52BAE985100432BA9 /* UIView+Utilities.swift in Sources */,
 				7E85E7A02BAE985100432BA9 /* Calendar+Utilities.swift in Sources */,
 				7E8822022BBD09FA00B32747 /* __TripPlanViewModel.swift in Sources */,
+				7E04ABF42C81B9F000C95A90 /* TLTabView.swift in Sources */,
 				7EEAAA8C2C0CBCBD00A46BC5 /* TLRequests+CheckEmailExists.swift in Sources */,
 				7E8822262BDF137100B32747 /* HotelsHomeView.swift in Sources */,
 				7EEAAA8A2C0C243F00A46BC5 /* TLRequests+CheckUsername.swift in Sources */,
@@ -2153,6 +2181,14 @@
 				minimumVersion = 10.23.1;
 			};
 		};
+		7E8DD1402CEDB556006C4529 /* XCRemoteSwiftPackageReference "ScrollKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielsaidi/ScrollKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.0;
+			};
+		};
 		7EEAAA8F2C1171FF00A46BC5 /* XCRemoteSwiftPackageReference "PopupView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/exyte/PopupView.git";
@@ -2217,6 +2253,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E8821E02BB689CB00B32747 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		7E8DD1412CEDB58E006C4529 /* ScrollKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E8DD1402CEDB556006C4529 /* XCRemoteSwiftPackageReference "ScrollKit" */;
+			productName = ScrollKit;
 		};
 		7EEAAA902C11722F00A46BC5 /* PopupView */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -59,5 +59,9 @@ extension Color {
     static let tlAccentYellow = Color(red: 245 / 255, green: 240 / 255, blue: 230 / 255)
 
     static let warningRedColor = Color(red: 0.8, green: 0.22, blue: 0.21)
+    
+    static let slSofiColor = Color(red: 0/255, green: 162/255, blue: 199/255)
+    static let slOrange = Color(red: 238/255, green: 96/255, blue: 0/255)
+    static let slBack1 = Color(red: 249/255, green: 248/255, blue: 244/255)
 
 }
