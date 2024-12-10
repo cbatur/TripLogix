@@ -33,7 +33,7 @@ struct CityTitleHeader: View {
                         
             Text(cityName.split(separator: ",").map(String.init).first ?? "")
                 .font(.system(size: 22)).bold()
-                .foregroundColor(.black) +
+                .foregroundColor(.yellow) +
             Text(cityName.split(separator: ",").map(String.init).last ?? "")
                 .font(.system(size: 22))
         }

@@ -24,10 +24,15 @@ struct EventCardView: View {
     }
     
     var body: some View {
-        Section(header: Text("\(viewModel.displayDailyDate(day.date)) - \(day.title)".uppercased())
-            .foregroundColor(Color.wbPinkMediumAlt)
-            .font(.custom("Satoshi-Bold", size: 14))) {
-                
+        VStack {
+            HStack {
+                Text("\(viewModel.displayDailyDate(day.date)) - \(day.title)".uppercased())
+                    .font(.system(size: 14)).bold()
+                    .foregroundStyle(Color.slOrange)
+                Spacer()
+            }
+            .padding(.top, 20)
+            
                 ForEach(day.activities.sorted(by: { $0.index < $1.index }), id: \.self) { activity in
                     
                     if let place = viewModel.cachedGoogleLocations.filter({ place in
@@ -49,6 +54,7 @@ struct EventCardView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .multilineTextAlignment(.leading)
                         }
+                        .padding(.vertical, 8)
                     }
                 }
         }
@@ -86,15 +92,17 @@ struct GooglePlaceCard: View {
                 
                 VStack {
                     Text("\(place.result.name)")
-                        .font(.headline)
+                        .font(.system(size: 15))
+                        .foregroundStyle(.black)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Text("\(place.result.formattedAddress)")
-                        .font(.subheadline)
+                        .font(.system(size: 13))
                         .foregroundColor(.gray)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 Spacer()
             }
+            Divider()
         }
     }
 }

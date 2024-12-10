@@ -17,12 +17,7 @@ struct TripPlanView: View {
     var body: some View {
         VStack {
             alertSection
-            mainContent
-        }
-        .background(Color(UIColor.systemGroupedBackground))
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            navigationBarItems
+            contentView
         }
         .onAppear {
             viewModel.fetchEventCategoriesIfNeeded(destination)
@@ -56,39 +51,31 @@ struct TripPlanView: View {
         }
     }
     
-    private var mainContent: some View {
+    private var contentView: some View {
         VStack {
-            //tripDetails
-            itineraryDetails
-                .isHidden(viewModel.activeAlertBox != nil)
-        }
-    }
-    
-    private var tripDetails: some View {
-        VStack {
-            Divider()
-            //LocationDateHeader(destination: destination)
-            VStack {
-                Divider()
-                //TripLinks()
-                Divider()
-            }
-            .isHidden(viewModel.activeAlertBox != nil)
-        }
-    }
-    
-    private var eventGrid: some View {
-        Group {
             if destination.itinerary.count == 0 {
-                VStack {
-                    createTripButton
-                    personalizeButton
-                }
-                .padding(.leading, 35)
-                .padding(.trailing, 35)
-                .padding(.top, 20)
-                .isHidden(viewModel.activeAlertBox != nil)
+                noEventsView
+            } else {
+                eventListView
             }
+        }
+    }
+
+    private var eventListView: some View {
+        VStack {
+            HStack {
+                Text("Events and Activities".uppercased())
+                    .font(.system(size: 15)).bold()
+                    .foregroundStyle(Color.slSofiColor)
+                Spacer()
+            }
+            
+            VStack {
+                eventsAndActivitiesView
+                    .isHidden(viewModel.activeAlertBox != nil)
+            }
+            .padding()
+            .cardStyle(.white)
         }
     }
     
@@ -108,7 +95,7 @@ struct TripPlanView: View {
     }
 
     private var personalizeButton: some View {
-        Group {
+        VStack {
             if destination.allEventTags.count > 0 {
                 Button(action: { launchAllEvents = true }) {
                     if destination.itinerary.count == 0 {
@@ -128,85 +115,101 @@ struct TripPlanView: View {
         }
     }
     
-    private var itineraryDetails: some View {
+//    private var itineraryDetails: some View {
+//        VStack {
+//            eventsAndActivitiesView
+//        }
+//    }
+    
+//    private var navigationBarItems: some ToolbarContent {
+//        ToolbarItemGroup(placement: .navigationBarTrailing) {
+//            NavigationBarIconView(onAction: {
+//                shareButtonTapped()
+//            }, icon: "square.and.arrow.up")
+//        }
+//    }
+//    
+//    private func shareButtonTapped() {
+//        launchAdminTools = true
+//        print("Share button tapped \(destination.id)")
+//    }
+    
+    private var noEventsView: some View {
         VStack {
-            if destination.itinerary.count > 0 {
-                eventGrid
-                eventsAndActivitiesView
-            } else {
-                noPlanView
-                    .padding(.top, 30)
-            }
-        }
-    }
-    
-    private var navigationBarItems: some ToolbarContent {
-        ToolbarItemGroup(placement: .navigationBarTrailing) {
-            NavigationBarIconView(onAction: {
-                shareButtonTapped()
-            }, icon: "square.and.arrow.up")
-        }
-    }
-    
-    private func shareButtonTapped() {
-        launchAdminTools = true
-        print("Share button tapped \(destination.id)")
-    }
-    
-    private var noPlanView: some View {
-        GeometryReader { geometry in
+            Image("hero_create_trip")
+                .resizable()
+                .scaledToFit()
+                .background(Color.clear)
+                .edgesIgnoringSafeArea(.all)
+                .frame(width: 120, height: 120) // Make dynamic based on screenSize later
+            
+            Text("Create a trip plan")
+                .font(.custom("Gilroy-Bold", size: 23))
+                .foregroundColor(Color.black)
+                .padding(.bottom, 10)
+            
+            Text("A trip itinerary will be created for the dates you selected.")
+                .font(.custom("Gilroy-Regular", size: 18))
+                .foregroundColor(Color.gray3)
+                .frame(alignment: .center)
+            
             VStack {
-                Image("hero_create_trip")
-                    .resizable()
-                    .scaledToFit()
-                    .background(Color.clear)
-                    .edgesIgnoringSafeArea(.all)
-                    .padding(.leading, geometry.size.width / 4)
-                    .padding(.trailing, geometry.size.width / 4)
-                Text("Create a trip plan")
-                    .font(.custom("Gilroy-Bold", size: 23))
-                    .foregroundColor(Color.black)
-                    .padding(.bottom, 10)
-                Text("A trip itinerary will be created for the dates you selected.")
-                    .font(.custom("Gilroy-Regular", size: 18))
-                    .foregroundColor(Color.gray3)
-                    .frame(alignment: .center)
-                
-                eventGrid
+                createTripButton
+                personalizeButton
             }
-            .padding(.leading, 15)
-            .padding(.trailing, 15)
-            .padding(.top, 15)
+            .padding(.leading, 35)
+            .padding(.trailing, 35)
+            .padding(.top, 20)
+            .isHidden(viewModel.activeAlertBox != nil)
         }
+        .padding(.top, 40)
     }
     
     private var eventsAndActivitiesView: some View {
         VStack {
             HStack {
-                HeaderView(title: "Events and Activities")
                 Spacer()
-                Templates.Menu {
-                    Templates.MenuButton(title: "Personalize", systemImage: "person.fill.viewfinder") {
+                Text("Personalize")
+                    .font(.system(size: 15))
+                    .fontWeight(.regular)
+                    .foregroundStyle(Color.accentColor)
+                    .onTapGesture {
                         launchAllEvents = true
                     }
-                    Templates.MenuButton(title: "Create New", systemImage: "arrow.clockwise") {
+                
+                Divider()
+                
+                Text("Create New")
+                    .font(.system(size: 15))
+                    .fontWeight(.regular)
+                    .foregroundStyle(Color.accentColor)
+                    .onTapGesture {
                         viewModel.updateTrip(destination)
                     }
                     
-                } label: { fadeEvents in
-                    VStack {
-                        Image(systemName: "ellipsis")
-                            .aspectRatio(contentMode: .fit)
-                            .font(.system(size: 21)).bold()
-                            .background(.clear)
-                            .padding(8)
-                            .buttonStylePrimary(.plain)
-                    }
-                    .opacity(fadeEvents ? 0.5 : 1)
-                }
-                .padding(.trailing, 10)
+//                Templates.Menu {
+//                    Templates.MenuButton(title: "Personalize", systemImage: "person.fill.viewfinder") {
+//                        launchAllEvents = true
+//                    }
+//                    Templates.MenuButton(title: "Create New", systemImage: "arrow.clockwise") {
+//                        viewModel.updateTrip(destination)
+//                    }
+//                    
+//                } label: { fadeEvents in
+//                    VStack {
+//                        Image(systemName: "ellipsis")
+//                            .aspectRatio(contentMode: .fit)
+//                            .font(.system(size: 21)).bold()
+//                            .background(.clear)
+//                            .padding(8)
+//                            .buttonStylePrimary(.plain)
+//                    }
+//                    .opacity(fadeEvents ? 0.5 : 1)
+//                }
+//                .padding(.trailing, 10)
             }
-            Form {
+            
+            VStack {
                 ForEach(destination.itinerary.sorted(by: { $0.index < $1.index }), id: \.self) { day in
                     EventCardView(day: day, city: destination.name)
                 }

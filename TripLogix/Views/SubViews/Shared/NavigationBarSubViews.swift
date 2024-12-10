@@ -39,7 +39,7 @@ struct NavigationBarIconView: View {
                     .aspectRatio(contentMode: .fit)
                     .font(.system(size: 21)).bold()
                     .background(.clear)
-                    .foregroundColor(Color.black)
+                    .foregroundColor(Color.white)
             }
             Spacer()
         }

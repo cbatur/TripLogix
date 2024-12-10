@@ -29,7 +29,7 @@ struct LocationDateHeader: View {
     
     var body: some View {
         HStack {
-            DestinationIconDataView(iconData: destination.icon, size: 70)
+            DestinationIconDataView(iconData: destination.icon, size: 57)
                 .onTapGesture { passIconClick() }
             
             VStack {
@@ -39,9 +39,9 @@ struct LocationDateHeader: View {
                 HStack {
                     Text("\(destination.startDate.formatted(date: .abbreviated, time: .omitted)) - \(destination.endDate.formatted(date: .abbreviated, time: .omitted))")
                         .font(.system(size: 14))
-                        .foregroundColor(.gray3) +
+                        .foregroundColor(.white) +
                     Text(dayDiffLabel())
-                        .foregroundColor(.gray)
+                        .foregroundColor(.yellow)
                     
                 }
                 .onTapGesture { passDateClick() }
@@ -100,29 +100,32 @@ struct TripLinks: View {
     
     var body: some View {
         VStack {
-            HStack {
-                ForEach(tripLinks.indices, id: \.self) { index in
-                    VStack {
-                        Image(systemName: tripLinks[index].icon)
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .padding(.bottom, 3)
-                        
-                        Text(tripLinks[index].title.uppercased())
-                            .font(.custom("Satoshi-Bold", size: 13))
-                            .foregroundColor(
-                                self.selectedLink == tripLinks[index] ? Color.wbPinkMedium : Color.gray
-                            )
-                    }
-                    .padding(6)
-                    .onTapGesture {
-                        self.selectedLink = tripLinks[index]
-                        self.passSelectedIndex(index)
+            VStack {
+                HStack {
+                    ForEach(tripLinks.indices, id: \.self) { index in
+                        VStack {
+                            Image(systemName: tripLinks[index].icon)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                                .padding(.bottom, 3)
+                            
+                            Text(tripLinks[index].title.uppercased())
+                                .font(.custom("Satoshi-Bold", size: 13))
+                                .foregroundColor(
+                                    self.selectedLink == tripLinks[index] ? Color.wbPinkMedium : Color.gray
+                                )
+                        }
+                        .padding(6)
+                        .onTapGesture {
+                            self.selectedLink = tripLinks[index]
+                            self.passSelectedIndex(index)
+                        }
                     }
                 }
             }
-            .frame(maxWidth: .infinity, alignment: .center)
+            Divider()
         }
+        .frame(maxWidth: .infinity, alignment: .center)
     }
 }
 
