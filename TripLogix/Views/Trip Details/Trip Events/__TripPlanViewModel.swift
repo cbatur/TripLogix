@@ -6,6 +6,7 @@ import SwiftUI
 final class TripPlanViewModel: ObservableObject {
     
     @Published var cachedGoogleLocations: [GooglePlace] = []
+    @Published var googlePlace: GooglePlace?
     @Published var allEvents: [EventCategory] = []
     @Published var itineraries: [DayItinerary] = []
     @Published var activeAlertBox: AlertBoxMessage?
@@ -16,6 +17,7 @@ final class TripPlanViewModel: ObservableObject {
     private var cancellableSet: Set<AnyCancellable> = []
     private let openAIAPIService = OpenAIAPIService()
     private let googleAPIService = GooglePlacesAPIService()
+    private let tlAPIService = GooglePlacesAPIService()
     
     func generateAllEvents(qType: QCategory) {
         if case .getDailyPlan(let city, _, _) = qType {
@@ -119,7 +121,7 @@ final class TripPlanViewModel: ObservableObject {
                         .sink(receiveCompletion: { _ in }, receiveValue: { place in
                             
                             let googlePlaceId = self.googlePlaceIdNeeded(activity) ? place.places.first?.id ?? "" : ""
-                            
+                                                        
                             DispatchQueue.main.async {
                                 newActivities.append(Activity(
                                     index: activity.index,
@@ -149,6 +151,16 @@ final class TripPlanViewModel: ObservableObject {
     }
     
     // MARK - Persisting Google Places
+    // cache single Place by PlaceId - from location details
+    func cacheSingleGoogleLocation(_ googlePlaceId: String) {
+        completeGooglePlaces(googlePlaceId)
+            .sink(receiveCompletion: { _ in }, receiveValue: { place in
+                self.googlePlace = place
+                self.manageGooglePlaceCache(place)
+            })
+            .store(in: &cancellableSet)
+    }
+
     // Loop through the itineraries to cache Place by PlaceId
     func loopItineraries(_ e: [DayItinerary]) {
         let group = DispatchGroup()
@@ -185,8 +197,18 @@ final class TripPlanViewModel: ObservableObject {
     
     
     // API Call to Get the Google Place
-    func completeGooglePlaces(_ placeId: String) -> AnyPublisher<GooglePlace, Error> {
+    func completeGooglePlacesOld(_ placeId: String) -> AnyPublisher<GooglePlace, Error> {
         googleAPIService.searchGooglePlaceId(placeId: placeId)
+            .map { response in
+                response
+            }
+            .mapError { $0 as Error }
+            .eraseToAnyPublisher()
+    }
+    
+    func completeGooglePlaces(_ placeId: String) -> AnyPublisher<GooglePlace, Error> {
+        tlAPIService.searchGooglePlaceId(placeId: placeId)
+            .print("[Debug]")
             .map { response in
                 response
             }

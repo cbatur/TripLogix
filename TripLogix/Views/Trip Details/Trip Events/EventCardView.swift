@@ -4,7 +4,10 @@ import SwiftUI
 struct EventCardView: View {
     let day: Itinerary
     let city: String
+    
     @StateObject var viewModel: TripPlanViewModel = TripPlanViewModel()
+    @State var showLocationDetailsModal = false
+    @State var googlePlaceId: String = ""
     
     init(day: Itinerary, city: String) {
         self.day = day
@@ -39,6 +42,10 @@ struct EventCardView: View {
                         place.result.place_id == activity.googlePlaceId
                     }).first {
                         GooglePlaceCard(place)
+                            .onTapGesture {
+                                showLocationDetailsModal = true
+                                googlePlaceId = place.result.place_id
+                            }
                     } else {
 
                         HStack(alignment: .center) {
@@ -61,6 +68,9 @@ struct EventCardView: View {
         .onAppear {
             self.loadPlaces()
         }
+        .sheet(isPresented: $showLocationDetailsModal) {
+            PlaceDetailsView(googlePlaceId: $googlePlaceId)
+        }
     }
 }
 
@@ -74,7 +84,7 @@ struct GooglePlaceCard: View {
     
     var body: some View {
         VStack {
-            HStack {
+            HStack(alignment: .top) { // Align to the top to handle multiple lines
                 VStack {
                     if let photoReference = place.result.photos.first?.photoReference {
                         let photoUrl = viewModel.urlForPhoto(reference: photoReference)
@@ -82,7 +92,6 @@ struct GooglePlaceCard: View {
                         RemoteIcon(with: photoUrl)
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 60, height: 60)
-                            .edgesIgnoringSafeArea(.all)
                             .clipShape(RoundedRectangle(cornerRadius: 7))
                             .padding(4)
                     }
@@ -90,17 +99,22 @@ struct GooglePlaceCard: View {
                     Spacer()
                 }
                 
-                VStack {
+                VStack(alignment: .leading) {
                     Text("\(place.result.name)")
                         .font(.system(size: 15))
                         .foregroundStyle(.black)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
                     Text("\(place.result.formattedAddress)")
                         .font(.system(size: 13))
                         .foregroundColor(.gray)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
-                Spacer()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Spacer() 
             }
             Divider()
         }

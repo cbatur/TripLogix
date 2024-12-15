@@ -41,6 +41,7 @@ final class AddNewDestinationViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     private let gpAPIService = GooglePlacesAPIService()
+    private let tlAPIService = TLAPIService()
     
     init() {
         $query
@@ -78,8 +79,16 @@ final class AddNewDestinationViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    func searchLocation(with placeId: String) {
+    func searchLocationOld(with placeId: String) {
         gpAPIService.searchGooglePlaceId(placeId: placeId)
+            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] place in
+                self?.cachePlace(place, catalog: .recentSearches)
+            })
+            .store(in: &cancellables)
+    }
+    
+    func searchLocation(with placeId: String) {
+        tlAPIService.searchGooglePlaceId(placeId: placeId)
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] place in
                 self?.cachePlace(place, catalog: .recentSearches)
             })

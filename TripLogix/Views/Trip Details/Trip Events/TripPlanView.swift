@@ -172,7 +172,7 @@ struct TripPlanView: View {
                 Text("Personalize")
                     .font(.system(size: 15))
                     .fontWeight(.regular)
-                    .foregroundStyle(Color.accentColor)
+                    .foregroundStyle(Color.appBookingBlue)
                     .onTapGesture {
                         launchAllEvents = true
                     }
@@ -182,7 +182,7 @@ struct TripPlanView: View {
                 Text("Create New")
                     .font(.system(size: 15))
                     .fontWeight(.regular)
-                    .foregroundStyle(Color.accentColor)
+                    .foregroundStyle(Color.appBookingBlue)
                     .onTapGesture {
                         viewModel.updateTrip(destination)
                     }

@@ -24,6 +24,7 @@ protocol ServiceProvider {
     func setVerificationCode(email: String) -> AnyPublisher<TLResponse, TLError>
     func verifyUser(email: String, access_code: String) -> AnyPublisher<TLResponse, TLError>
     func processPasswordChange(email: String, oldPassword: String, password: String) -> AnyPublisher<TLResponse, TLError>
+    func searchGooglePlaceId(placeId: String) -> AnyPublisher<GooglePlace, TLError>
 
 }
 
@@ -81,6 +82,10 @@ class TLAPIService: ServiceProvider {
     
     func processPasswordChange(email: String, oldPassword: String, password: String) -> AnyPublisher<TLResponse, TLError> {
         return self.apiCall(TLRequests.ProcessPasswordChange(email: email, oldPassword: oldPassword, password: password).request)
+    }
+    
+    func searchGooglePlaceId(placeId: String) -> AnyPublisher<GooglePlace, TLError> {
+        return self.apiCall(TLRequests.GooglePlace(googlePlaceId: placeId).request)
     }
 }
 

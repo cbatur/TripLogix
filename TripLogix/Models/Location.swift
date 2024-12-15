@@ -37,6 +37,9 @@ struct GooglePlace: Codable, Identifiable, Equatable, Hashable {
 struct PlaceResult: Decodable, Encodable, Identifiable, Equatable {
     var id = UUID() // Excluded from Codable
     let formattedAddress: String
+    let formattedPhoneNumber: String
+    let userRatingsTotal: Int
+    let rating: Double
     let geometry: PlaceGeometry
     let icon: String
     let iconBackgroundColor: String
@@ -47,7 +50,9 @@ struct PlaceResult: Decodable, Encodable, Identifiable, Equatable {
     
     enum CodingKeys: String, CodingKey {
         case formattedAddress = "formatted_address"
-        case geometry, icon, name, place_id, photos, vicinity
+        case formattedPhoneNumber = "formatted_phone_number"
+        case userRatingsTotal = "user_ratings_total"
+        case geometry, icon, name, place_id, photos, vicinity, rating
         case iconBackgroundColor = "icon_background_color"
         // Notice `id` is not listed here, so it's excluded from Codable
     }

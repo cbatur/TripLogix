@@ -22,6 +22,8 @@
 		7E5913312BAF99DD00529823 /* FlightListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5913302BAF99DD00529823 /* FlightListView.swift */; };
 		7E674C892C6B805D00232246 /* hotel-booking.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E674C882C6B805D00232246 /* hotel-booking.json */; };
 		7E674C8B2C6B80D800232246 /* Hotels+SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E674C8A2C6B80D800232246 /* Hotels+SwiftData.swift */; };
+		7E8270FD2D0D58D900A023FD /* TLRequests+GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8270FC2D0D58CD00A023FD /* TLRequests+GooglePlace.swift */; };
+		7E8270FF2D0D6A3100A023FD /* PlaceDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8270FE2D0D6A2800A023FD /* PlaceDetailsView.swift */; };
 		7E85E4292BAE8CE700432BA9 /* TripLogixApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E4282BAE8CE700432BA9 /* TripLogixApp.swift */; };
 		7E85E42D2BAE8CE800432BA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E85E42C2BAE8CE800432BA9 /* Assets.xcassets */; };
 		7E85E4302BAE8CE800432BA9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E85E42F2BAE8CE800432BA9 /* Preview Assets.xcassets */; };
@@ -319,6 +321,8 @@
 		7E5913302BAF99DD00529823 /* FlightListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightListView.swift; sourceTree = "<group>"; };
 		7E674C882C6B805D00232246 /* hotel-booking.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "hotel-booking.json"; sourceTree = "<group>"; };
 		7E674C8A2C6B80D800232246 /* Hotels+SwiftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Hotels+SwiftData.swift"; sourceTree = "<group>"; };
+		7E8270FC2D0D58CD00A023FD /* TLRequests+GooglePlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+GooglePlace.swift"; sourceTree = "<group>"; };
+		7E8270FE2D0D6A2800A023FD /* PlaceDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsView.swift; sourceTree = "<group>"; };
 		7E85E4252BAE8CE700432BA9 /* TripLogix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TripLogix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E85E4282BAE8CE700432BA9 /* TripLogixApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripLogixApp.swift; sourceTree = "<group>"; };
 		7E85E42C2BAE8CE800432BA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1195,6 +1199,7 @@
 		7E88220D2BD0D36200B32747 /* Trip Events */ = {
 			isa = PBXGroup;
 			children = (
+				7E8270FE2D0D6A2800A023FD /* PlaceDetailsView.swift */,
 				7E88220E2BD0D37E00B32747 /* TripPlanView.swift */,
 				7E85E70D2BAE985100432BA9 /* EventCardView.swift */,
 				7E8822012BBD09FA00B32747 /* __TripPlanViewModel.swift */,
@@ -1329,6 +1334,7 @@
 		7EC183D02BB2960F007B2602 /* TLRequests */ = {
 			isa = PBXGroup;
 			children = (
+				7E8270FC2D0D58CD00A023FD /* TLRequests+GooglePlace.swift */,
 				7E85E67E2BAE985000432BA9 /* TLRequests+SearchGooglePlaces.swift */,
 				7EC183DC2BB53285007B2602 /* TLRequests+FlightImageUpload.swift */,
 				7EEAAA792C03890300A46BC5 /* TLRequests+Login.swift */,
@@ -1728,6 +1734,7 @@
 				7EEAAA7C2C03891400A46BC5 /* TLRequests+CreateAccount.swift in Sources */,
 				7EEAAA7A2C03890300A46BC5 /* TLRequests+Login.swift in Sources */,
 				7E8822422BE9F11200B32747 /* __SSSearchAirportViewModel.swift in Sources */,
+				7E8270FD2D0D58D900A023FD /* TLRequests+GooglePlace.swift in Sources */,
 				7E8821FE2BB908F800B32747 /* TLFlightModels.swift in Sources */,
 				7EF82EA32BF98CCD00DFB53A /* CommonHelpers.swift in Sources */,
 				7E85E7BD2BAE985100432BA9 /* _AvionEdgeAutocompleteViewModel.swift in Sources */,
@@ -1788,6 +1795,7 @@
 				7E85E7CB2BAE985100432BA9 /* TripDetailsView.swift in Sources */,
 				7E85E73D2BAE985100432BA9 /* AviationEdgeAPIServices.swift in Sources */,
 				7E85E7A12BAE985100432BA9 /* Color+Extensions.swift in Sources */,
+				7E8270FF2D0D6A3100A023FD /* PlaceDetailsView.swift in Sources */,
 				7E8822092BBE6F4800B32747 /* GooglePlacesAPIService.swift in Sources */,
 				7EF82EAA2BFD207E00DFB53A /* BankingScreen.swift in Sources */,
 				7EC183CC2BB28CAB007B2602 /* OpenAI+ImageCreate.swift in Sources */,
@@ -1965,7 +1973,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 129;
+				CURRENT_PROJECT_VERSION = 130;
 				DEVELOPMENT_ASSET_PATHS = "\"TripLogix/Preview Content\"";
 				DEVELOPMENT_TEAM = ZLA3S7L9MF;
 				ENABLE_PREVIEWS = YES;
@@ -2002,7 +2010,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 129;
+				CURRENT_PROJECT_VERSION = 130;
 				DEVELOPMENT_ASSET_PATHS = "\"TripLogix/Preview Content\"";
 				DEVELOPMENT_TEAM = ZLA3S7L9MF;
 				ENABLE_PREVIEWS = YES;
