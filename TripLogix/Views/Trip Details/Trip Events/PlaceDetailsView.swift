@@ -109,7 +109,7 @@ struct PlaceDetailsContentView: View {
                             HStack(spacing: 10) {
                                 ForEach(place.result.photos.enumerated().filter { $0.offset % 2 == 0 }.map { $0.element }, id: \.photoReference) { photo in
                                     AsyncImage(
-                                        url: URL(string: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(photo.photoReference)&key=D2YUct4ewe7M")
+                                        url: URL(string: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(photo.photoReference)&key=\(decryptAPIKey(.googlePlaces) ?? "")")
                                     ) { phase in
                                         switch phase {
                                         case .empty:
@@ -139,7 +139,7 @@ struct PlaceDetailsContentView: View {
                             HStack(spacing: 10) {
                                 ForEach(place.result.photos.enumerated().filter { $0.offset % 2 != 0 }.map { $0.element }, id: \.photoReference) { photo in
                                     AsyncImage(
-                                        url: URL(string: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(photo.photoReference)&key=D2YUct4ewe7M")
+                                        url: URL(string: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(photo.photoReference)&key=\(decryptAPIKey(.googlePlaces) ?? "")")
                                     ) { phase in
                                         switch phase {
                                         case .empty:
