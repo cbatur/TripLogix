@@ -43,7 +43,7 @@ class CreateAccountViewModel: ObservableObject {
             let responseObject = try decoder.decode(LoginResponse.self, from: data)
             
 //            guard let content = chatGPTResponse.choices.first?.message.content else {
-//                throw NSError(domain: "com.yourapp.error", code: 1, userInfo: [NSLocalizedDescriptionKey: "Invalid response format"])
+//                throw NSError(domain: "com.yourapp.error", code: 1, userInfo: [NSLocalizedDescriptionKey: "Invalid response format"]) 
 //            }
             if let jwt = responseObject.jwt {
                 await self.validateToken(jwt: jwt)

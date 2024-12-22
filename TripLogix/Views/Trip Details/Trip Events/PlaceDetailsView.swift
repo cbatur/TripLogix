@@ -74,92 +74,83 @@ struct PlaceDetailsContentView: View {
                         openGoogleMaps(latitude: place.result.geometry.location.lat, longitude: place.result.geometry.location.lng)
                     }
 
-                Text("\(place.result.formattedPhoneNumber)")
-                    .font(.subheadline)
-                    .foregroundColor(.accentColor)
-                    .onTapGesture {
-                        callPhoneNumber(phoneNumber: "\(place.result.formattedPhoneNumber)")
-                    }
+                if let phoneNumber = place.result.formattedPhoneNumber {
+                    Text("\(phoneNumber)")
+                        .font(.subheadline)
+                        .foregroundColor(.accentColor)
+                        .onTapGesture {
+                            callPhoneNumber(phoneNumber: phoneNumber)
+                        }
+                }
 
-                // Rating and Reviews
-                HStack {
-                    Text("\(String(format: "%.1f", place.result.rating)) ⭐⭐⭐⭐⭐ (\(place.result.userRatingsTotal))")
+                if let rating = place.result.rating {
+                    Text("\(String(format: "%.1f", rating)) ⭐⭐⭐⭐⭐ (\(place.result.userRatingsTotal ?? 0))")
                         .foregroundStyle(.black)
                         .font(.system(size: 13))
                 }
 
-                // Opening Hours
-//                if let weekdayText = place.currentOpeningHours?.weekdayText {
-//                    VStack(alignment: .leading) {
-//                        Text("🕒 Opening Hours:")
-//                            .font(.headline)
-//                        ForEach(weekdayText, id: \.self) { day in
-//                            Text(day)
-//                                .font(.subheadline)
-//                                .foregroundColor(.secondary)
-//                        }
-//                    }
-//                }
-
-                // Photos
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 10) {
                         VStack(spacing: 10) {
                             // First row
-                            HStack(spacing: 10) {
-                                ForEach(place.result.photos.enumerated().filter { $0.offset % 2 == 0 }.map { $0.element }, id: \.photoReference) { photo in
-                                    AsyncImage(
-                                        url: URL(string: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(photo.photoReference)&key=\(decryptAPIKey(.googlePlaces) ?? "")")
-                                    ) { phase in
-                                        switch phase {
-                                        case .empty:
-                                            ProgressView()
-                                                .frame(width: 200, height: 150)
-                                        case .success(let image):
-                                            image
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 200, height: 150)
-                                                .clipped()
-                                                .cornerRadius(8)
-                                        case .failure:
-                                            Image(systemName: "photo.fill")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 200, height: 150)
-                                                .foregroundColor(.gray)
-                                        @unknown default:
-                                            EmptyView()
+                            if let photos = place.result.photos?.enumerated().filter({ $0.offset % 2 == 0 }).map({ $0.element }) {
+                                HStack(spacing: 10) {
+                                    ForEach(photos, id: \.photoReference) { photo in
+                                        AsyncImage(
+                                            url: URL(string: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(photo.photoReference)&key=\(decryptAPIKey(.googlePlaces) ?? "")")
+                                        ) { phase in
+                                            switch phase {
+                                            case .empty:
+                                                ProgressView()
+                                                    .frame(width: 200, height: 150)
+                                            case .success(let image):
+                                                image
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 200, height: 150)
+                                                    .clipped()
+                                                    .cornerRadius(8)
+                                            case .failure:
+                                                Image(systemName: "photo.fill")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 200, height: 150)
+                                                    .foregroundColor(.gray)
+                                            @unknown default:
+                                                EmptyView()
+                                            }
                                         }
                                     }
                                 }
                             }
-                            
+
                             // Second row
-                            HStack(spacing: 10) {
-                                ForEach(place.result.photos.enumerated().filter { $0.offset % 2 != 0 }.map { $0.element }, id: \.photoReference) { photo in
-                                    AsyncImage(
-                                        url: URL(string: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(photo.photoReference)&key=\(decryptAPIKey(.googlePlaces) ?? "")")
-                                    ) { phase in
-                                        switch phase {
-                                        case .empty:
-                                            ProgressView()
-                                                .frame(width: 200, height: 150)
-                                        case .success(let image):
-                                            image
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 200, height: 150)
-                                                .clipped()
-                                                .cornerRadius(8)
-                                        case .failure:
-                                            Image(systemName: "photo.fill")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 200, height: 150)
-                                                .foregroundColor(.gray)
-                                        @unknown default:
-                                            EmptyView()
+                            if let photos = place.result.photos?.enumerated().filter({ $0.offset % 2 != 0 }).map({ $0.element }) {
+                                HStack(spacing: 10) {
+                                    ForEach(photos, id: \.photoReference) { photo in
+                                        AsyncImage(
+                                            url: URL(string: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(photo.photoReference)&key=\(decryptAPIKey(.googlePlaces) ?? "")")
+                                        ) { phase in
+                                            switch phase {
+                                            case .empty:
+                                                ProgressView()
+                                                    .frame(width: 200, height: 150)
+                                            case .success(let image):
+                                                image
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 200, height: 150)
+                                                    .clipped()
+                                                    .cornerRadius(8)
+                                            case .failure:
+                                                Image(systemName: "photo.fill")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 200, height: 150)
+                                                    .foregroundColor(.gray)
+                                            @unknown default:
+                                                EmptyView()
+                                            }
                                         }
                                     }
                                 }
@@ -168,7 +159,7 @@ struct PlaceDetailsContentView: View {
                     }
                 }
                 
-                Text("Sala Gold Málaga is more than just a nightclub—it’s an immersive nightlife experience that pulses with the soul of Málaga. Nestled in the city’s vibrant core, this hotspot is where the rhythm of the coast meets the energy of a cosmopolitan crowd. From the moment you step inside, you’re swept into a world of shimmering gold decor, cutting-edge light displays, and a palpable buzz that feels like the heartbeat of the city itself. \n\nThe ambiance is magnetic, effortlessly blending sophistication with an edge of playfulness. Picture a dance floor that glows under a kaleidoscope of lights, where beats shift seamlessly from sultry Latin grooves to electrifying house anthems. The music isn’t just heard—it’s felt, reverberating through the walls and into your chest, pulling you deeper into the moment. Local and international DJs curate sets that tell stories, transforming the night into something unforgettable./n/nWhat truly sets Sala Gold apart is its personal touch. The bartenders aren’t just mixing drinks—they’re crafting experiences, serving signature cocktails with a flair that mirrors the energy of the room. Whether you’re perched at the bar sipping a custom creation or tucked away in a VIP booth surrounded by your crew, every corner of Sala Gold is designed to make you feel like you’ve stepped into a night that belongs only to you./n/nIt’s not just a place to party—it’s a place to connect, to revel in the spontaneity of the night, and to let loose without inhibition. Sala Gold isn’t just part of Málaga’s nightlife scene—it defines it. For those who crave the extraordinary, this is where the night comes alive, glittering with the promise of stories to tell the next day.")
+                Text("The extra description text will come here from ChatGPT API")
                     .font(.system(size: 14))
                     .foregroundStyle(.gray)
                 //}

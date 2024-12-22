@@ -76,7 +76,9 @@ struct AddNewDestinationView: View {
                         .onTapGesture {
                             self.searchCity = suggestion.description
                             isInputActive = false
-                            viewModel.selectSuggestion(suggestion)
+                            Task {
+                                await viewModel.selectSuggestion(suggestion)
+                            }
                         }
                         Divider()
                     }
@@ -102,6 +104,24 @@ struct AddNewDestinationView: View {
                     }
                     .isHidden(isInputActive == true)
                 }
+                
+                // Get Popular Places
+                if !viewModel.popularLocations.isEmpty {
+                    VStack {
+                        HeaderHero(headline: "Popular Destinations")
+                            .padding(.leading, 13)
+                        //LazyVGrid(columns: columns) {
+                            ForEach(viewModel.popularLocations) { f in
+                                LocationCardRecentSearch(f: f)
+                                    .onTapGesture {
+                                        self.selectedCity = f
+                                        showMenu.toggle()
+                                    }
+                            }
+                        //}
+                    }
+                    .isHidden(isInputActive == true)
+                }
                     
                 // Cached Recent Searched Places
                 if !viewModel.cachedTilesRecentSearches.isEmpty {
@@ -118,6 +138,7 @@ struct AddNewDestinationView: View {
                             }
                         }
                     }
+                    .padding(.top, 30)
                     .isHidden(isInputActive == true)
                 }
             }
@@ -125,6 +146,9 @@ struct AddNewDestinationView: View {
             .onAppear{
                 viewModel.getCachedSearchedPlaces()
                 viewModel.getCachedWishlistPlaces()
+                Task {
+                    await viewModel.getPopularPlaces()
+                }
             }
             .sheet(isPresented: $showMenu) {
                 if let city = selectedCity {

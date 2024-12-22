@@ -31,11 +31,13 @@ struct EventCardView: View {
             HStack {
                 Text("\(viewModel.displayDailyDate(day.date)) - \(day.title)".uppercased())
                     .font(.system(size: 14)).bold()
-                    .foregroundStyle(Color.slOrange)
+                    .foregroundStyle(Color.slSofiColor)
+                    .padding(.leading, 4)
                 Spacer()
             }
             .padding(.top, 20)
             
+            VStack {
                 ForEach(day.activities.sorted(by: { $0.index < $1.index }), id: \.self) { activity in
                     
                     if let place = viewModel.cachedGoogleLocations.filter({ place in
@@ -46,8 +48,9 @@ struct EventCardView: View {
                                 showLocationDetailsModal = true
                                 googlePlaceId = place.result.place_id
                             }
+                        Divider()
                     } else {
-
+                        
                         HStack(alignment: .center) {
                             Image(systemName: activity.categories.count > 0 ?
                                   Icon(rawValue: activity.categories.first ?? "dot.square")?.system ?? "dot.square" :
@@ -62,8 +65,13 @@ struct EventCardView: View {
                                 .multilineTextAlignment(.leading)
                         }
                         .padding(.vertical, 8)
+                        Divider()
                     }
                 }
+                
+            }
+            .padding()
+            .cardStyle(.white)
         }
         .onAppear {
             self.loadPlaces()
@@ -86,7 +94,7 @@ struct GooglePlaceCard: View {
         VStack {
             HStack(alignment: .top) { // Align to the top to handle multiple lines
                 VStack {
-                    if let photoReference = place.result.photos.first?.photoReference {
+                    if let photoReference = place.result.photos?.first?.photoReference {
                         let photoUrl = viewModel.urlForPhoto(reference: photoReference)
                         
                         RemoteIcon(with: photoUrl)
@@ -105,6 +113,7 @@ struct GooglePlaceCard: View {
                         .foregroundStyle(.black)
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
+                        .padding(.vertical, 1)
                     
                     Text("\(place.result.formattedAddress)")
                         .font(.system(size: 13))
@@ -116,7 +125,6 @@ struct GooglePlaceCard: View {
                 
                 Spacer() 
             }
-            Divider()
         }
     }
 }

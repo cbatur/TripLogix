@@ -95,34 +95,35 @@ struct TripLinks: View {
     
     let tripLinks: [TripLink] = [.events, .flights, .hotels, .rentals, .docs]
     @State private var selectedLink: TripLink = .events
-    let columns: [GridItem] = [GridItem(.flexible())]
     let passSelectedIndex: (Int) -> Void
     
     var body: some View {
         VStack {
-            VStack {
-                HStack {
-                    ForEach(tripLinks.indices, id: \.self) { index in
-                        VStack {
-                            Image(systemName: tripLinks[index].icon)
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                                .padding(.bottom, 3)
-                            
+            HStack {
+                ForEach(tripLinks.indices, id: \.self) { index in
+                    VStack(spacing: 5) {
+                        Image(systemName: tripLinks[index].icon)
+                            .font(.system(size: self.selectedLink == tripLinks[index] ? 22 : 20))
+                            .foregroundColor(
+                                self.selectedLink == tripLinks[index] ? Color.wbPinkMedium : Color.gray
+                            )
+                        //if self.selectedLink != tripLinks[index] {
                             Text(tripLinks[index].title.uppercased())
                                 .font(.custom("Satoshi-Bold", size: 13))
                                 .foregroundColor(
                                     self.selectedLink == tripLinks[index] ? Color.wbPinkMedium : Color.gray
                                 )
-                        }
-                        .padding(6)
-                        .onTapGesture {
-                            self.selectedLink = tripLinks[index]
-                            self.passSelectedIndex(index)
-                        }
+                        //}
+                    }
+                    .frame(maxWidth: .infinity) // Ensures equal spacing for all items
+                    .contentShape(Rectangle()) // Makes the whole area tappable
+                    .onTapGesture {
+                        self.selectedLink = tripLinks[index]
+                        self.passSelectedIndex(index)
                     }
                 }
             }
+            .frame(height: 70)
             Divider()
         }
         .frame(maxWidth: .infinity, alignment: .center)

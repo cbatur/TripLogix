@@ -28,6 +28,8 @@ final class AddNewDestinationViewModel: ObservableObject {
     @Published var query = ""
     @Published private(set) var suggestions: [GooglePlacesResponse.Prediction] = []
     @Published var selectedLocation: PlaceWithPhoto?
+    @Published var popularLocations = [PlaceWithPhoto]()
+    
     // Recent Searches
     var cachedRecentSearches = [GooglePlace]()
     @Published var cachedTilesRecentSearches = [PlaceWithPhoto]()
@@ -79,20 +81,37 @@ final class AddNewDestinationViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    func searchLocationOld(with placeId: String) {
-        gpAPIService.searchGooglePlaceId(placeId: placeId)
-            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] place in
-                self?.cachePlace(place, catalog: .recentSearches)
-            })
-            .store(in: &cancellables)
+    func searchLocation(with placeId: String) async {
+        do {
+            let place = try await fetchPlaceDetails(placeId: placeId)
+            
+            // Cache the place on the main thread
+            await MainActor.run {
+                self.cachePlace(place, catalog: .recentSearches)
+            }
+        } catch {
+            await MainActor.run {
+                // Handle error (e.g., update error state in the UI)
+                print("[Debug] Failed to fetch place details: \(error.localizedDescription)")
+            }
+        }
     }
-    
-    func searchLocation(with placeId: String) {
-        tlAPIService.searchGooglePlaceId(placeId: placeId)
-            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] place in
-                self?.cachePlace(place, catalog: .recentSearches)
-            })
-            .store(in: &cancellables)
+
+    func fetchPlaceDetails(placeId: String) async throws -> GooglePlace {
+        let request = TLRequests.GooglePlace(googlePlaceId: placeId).request
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
+        }
+        
+        // Log the raw response data
+        if let jsonString = String(data: data, encoding: .utf8) {
+            print("[Debug] Raw API Response: \(jsonString)")
+        }
+        
+        let decoder = JSONDecoder()
+        return try decoder.decode(GooglePlace.self, from: data)
     }
     
     // -----------------------------------
@@ -176,6 +195,55 @@ final class AddNewDestinationViewModel: ObservableObject {
         } else { return }
     }
     
+    func getPopularPlaces() async {
+        do {
+            let places = try await popularPlacesAPI()
+            
+            // Cache the place on the main thread
+            await MainActor.run {
+                for place in places {
+                    self.createSinglePlace(place)
+                }
+            }
+        } catch {
+            await MainActor.run {
+                // Handle error (e.g., update error state in the UI)
+                print("[Debug] Failed to fetch place details: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    func popularPlacesAPI() async throws -> [GooglePlace] {
+        let request = TLRequests.GetPopularGooglePlaces().request
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
+        }
+        
+        // Log the raw response data
+        if let jsonString = String(data: data, encoding: .utf8) {
+            print("[Debug] Raw API Response: popularPlacesAPI() \(jsonString)")
+        }
+        
+        let decoder = JSONDecoder()
+        return try decoder.decode([GooglePlace].self, from: data)
+    }
+    
+    // Converts GooglePlace into PlaceWithPhoto to be used in cards
+    func createSinglePlace(_ place: GooglePlace) {
+        let group = DispatchGroup()
+        group.enter()
+        loadImage(place) { placeWithPhoto in
+            if let photo = placeWithPhoto {
+                DispatchQueue.main.async {
+                    self.popularLocations.append(photo)
+                }
+            }
+            group.leave()
+        }
+    }
+
     func convertSinglePlace(_ place: GooglePlace) {
         let group = DispatchGroup()
         group.enter()
@@ -233,7 +301,7 @@ final class AddNewDestinationViewModel: ObservableObject {
     // -----------------------------------
     
     func loadImage(_ googlePlace: GooglePlace, completion: @escaping (PlaceWithPhoto?) -> Void) {
-        guard let photoReference = googlePlace.result.photos.first?.photoReference else {
+        guard let photoReference = googlePlace.result.photos?.first?.photoReference else {
             completion(nil)
             return
         }
@@ -261,10 +329,19 @@ final class AddNewDestinationViewModel: ObservableObject {
         }.resume()
     }
 
-    func selectSuggestion(_ suggestion: GooglePlacesResponse.Prediction) {
-        searchLocation(with: suggestion.place_id)
-        self.query = suggestion.description
-        self.suggestions = []
+//    func selectSuggestion(_ suggestion: GooglePlacesResponse.Prediction) async {
+//        await self.searchLocation(with: suggestion.place_id)
+//        self.query = suggestion.description
+//        self.suggestions = []
+//    }
+    
+    func selectSuggestion(_ suggestion: GooglePlacesResponse.Prediction) async {
+        await MainActor.run {
+            self.query = suggestion.description
+            self.suggestions = []
+        }
+        
+        await searchLocation(with: suggestion.place_id)
     }
     
     func resetSearch() {

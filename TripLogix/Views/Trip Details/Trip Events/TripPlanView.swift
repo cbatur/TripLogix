@@ -3,6 +3,7 @@ import SwiftUI
 import Popovers
 
 struct TripPlanView: View {
+    @State private var selectedView = 0
     @Bindable var destination: Destination
     @StateObject var viewModel: TripPlanViewModel = TripPlanViewModel()
     @StateObject var cacheViewModel: CacheViewModel = CacheViewModel()
@@ -37,9 +38,12 @@ struct TripPlanView: View {
         .sheet(isPresented: $launchAllEvents) {
             TripPlanEventCustomizeView(destination: destination)
         }
-//        .sheet(isPresented: $launchAdminTools) {
-//            AdminViewCachedLocations()
-//        }
+        .sheet(isPresented: $launchAdminTools) {
+            AdminViewCachedLocations(selectedView: $selectedView)
+        }
+        .toolbar {
+            navigationBarItems
+        }
     }
     
     private var alertSection: some View {
@@ -65,17 +69,18 @@ struct TripPlanView: View {
         VStack {
             HStack {
                 Text("Events and Activities".uppercased())
-                    .font(.system(size: 15)).bold()
-                    .foregroundStyle(Color.slSofiColor)
+                    .font(.system(size: 17)).bold()
+                    .foregroundStyle(Color.wbPinkMedium)
                 Spacer()
             }
+            .padding(.bottom, 10)
+            
+            buttonSetView
             
             VStack {
                 eventsAndActivitiesView
                     .isHidden(viewModel.activeAlertBox != nil)
             }
-            .padding()
-            .cardStyle(.white)
         }
     }
     
@@ -115,24 +120,65 @@ struct TripPlanView: View {
         }
     }
     
-//    private var itineraryDetails: some View {
-//        VStack {
-//            eventsAndActivitiesView
-//        }
-//    }
+    private var buttonSetView: some View {
+        VStack {
+            HStack(spacing: 7) {
+                Spacer()
+                Button(action: {
+                    launchAllEvents = true
+                }) {
+                    HStack {
+                        Image(systemName: "wand.and.stars")
+                        Text("Personalize".uppercased())
+                            .foregroundStyle(Color.gray4)
+                            .font(.system(size: 14))
+                            .fontWeight(.bold)
+                    }
+                    .foregroundColor(.gray)
+                    .padding(6)
+                    .background(.white)
+                    .cornerRadius(6)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 6)
+                            .stroke(Color.gray8, lineWidth: 1)
+                    )
+                }
+
+                Button(action: {
+                    viewModel.updateTrip(destination)
+                }) {
+                    HStack {
+                        Image(systemName: "plus.circle")
+                        Text("Create New".uppercased())
+                            .foregroundStyle(Color.gray4)
+                            .font(.system(size: 14))
+                            .fontWeight(.regular)
+                    }
+                    .foregroundColor(.gray)
+                    .padding(6)
+                    .background(.white)
+                    .cornerRadius(6)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 6)
+                            .stroke(Color.gray8, lineWidth: 1)
+                    )
+                }
+            }
+        }
+    }
     
-//    private var navigationBarItems: some ToolbarContent {
-//        ToolbarItemGroup(placement: .navigationBarTrailing) {
-//            NavigationBarIconView(onAction: {
-//                shareButtonTapped()
-//            }, icon: "square.and.arrow.up")
-//        }
-//    }
-//    
-//    private func shareButtonTapped() {
-//        launchAdminTools = true
-//        print("Share button tapped \(destination.id)")
-//    }
+    private var navigationBarItems: some ToolbarContent {
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
+            NavigationBarIconView(onAction: {
+                shareButtonTapped()
+            }, icon: "square.and.arrow.up")
+        }
+    }
+    
+    private func shareButtonTapped() {
+        launchAdminTools = true
+        print("Share button tapped \(destination.id)")
+    }
     
     private var noEventsView: some View {
         VStack {
@@ -167,52 +213,8 @@ struct TripPlanView: View {
     
     private var eventsAndActivitiesView: some View {
         VStack {
-            HStack {
-                Spacer()
-                Text("Personalize")
-                    .font(.system(size: 15))
-                    .fontWeight(.regular)
-                    .foregroundStyle(Color.appBookingBlue)
-                    .onTapGesture {
-                        launchAllEvents = true
-                    }
-                
-                Divider()
-                
-                Text("Create New")
-                    .font(.system(size: 15))
-                    .fontWeight(.regular)
-                    .foregroundStyle(Color.appBookingBlue)
-                    .onTapGesture {
-                        viewModel.updateTrip(destination)
-                    }
-                    
-//                Templates.Menu {
-//                    Templates.MenuButton(title: "Personalize", systemImage: "person.fill.viewfinder") {
-//                        launchAllEvents = true
-//                    }
-//                    Templates.MenuButton(title: "Create New", systemImage: "arrow.clockwise") {
-//                        viewModel.updateTrip(destination)
-//                    }
-//                    
-//                } label: { fadeEvents in
-//                    VStack {
-//                        Image(systemName: "ellipsis")
-//                            .aspectRatio(contentMode: .fit)
-//                            .font(.system(size: 21)).bold()
-//                            .background(.clear)
-//                            .padding(8)
-//                            .buttonStylePrimary(.plain)
-//                    }
-//                    .opacity(fadeEvents ? 0.5 : 1)
-//                }
-//                .padding(.trailing, 10)
-            }
-            
-            VStack {
-                ForEach(destination.itinerary.sorted(by: { $0.index < $1.index }), id: \.self) { day in
-                    EventCardView(day: day, city: destination.name)
-                }
+            ForEach(destination.itinerary.sorted(by: { $0.index < $1.index }), id: \.self) { day in
+                EventCardView(day: day, city: destination.name)
             }
         }
     }

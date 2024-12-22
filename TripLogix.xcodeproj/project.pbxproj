@@ -20,6 +20,7 @@
 		7E1D30E72C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E62C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift */; };
 		7E1D30E92C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E82C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift */; };
 		7E5913312BAF99DD00529823 /* FlightListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5913302BAF99DD00529823 /* FlightListView.swift */; };
+		7E604A7D2D17CBD200B8ECD5 /* TLRequests+GetPopularGooglePlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E604A7C2D17CBBF00B8ECD5 /* TLRequests+GetPopularGooglePlaces.swift */; };
 		7E674C892C6B805D00232246 /* hotel-booking.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E674C882C6B805D00232246 /* hotel-booking.json */; };
 		7E674C8B2C6B80D800232246 /* Hotels+SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E674C8A2C6B80D800232246 /* Hotels+SwiftData.swift */; };
 		7E8270FD2D0D58D900A023FD /* TLRequests+GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8270FC2D0D58CD00A023FD /* TLRequests+GooglePlace.swift */; };
@@ -319,6 +320,7 @@
 		7E1D30E82C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+UpdateColumn.swift"; sourceTree = "<group>"; };
 		7E59132F2BAEA44700529823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7E5913302BAF99DD00529823 /* FlightListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightListView.swift; sourceTree = "<group>"; };
+		7E604A7C2D17CBBF00B8ECD5 /* TLRequests+GetPopularGooglePlaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+GetPopularGooglePlaces.swift"; sourceTree = "<group>"; };
 		7E674C882C6B805D00232246 /* hotel-booking.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "hotel-booking.json"; sourceTree = "<group>"; };
 		7E674C8A2C6B80D800232246 /* Hotels+SwiftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Hotels+SwiftData.swift"; sourceTree = "<group>"; };
 		7E8270FC2D0D58CD00A023FD /* TLRequests+GooglePlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+GooglePlace.swift"; sourceTree = "<group>"; };
@@ -1334,6 +1336,7 @@
 		7EC183D02BB2960F007B2602 /* TLRequests */ = {
 			isa = PBXGroup;
 			children = (
+				7E604A7C2D17CBBF00B8ECD5 /* TLRequests+GetPopularGooglePlaces.swift */,
 				7E8270FC2D0D58CD00A023FD /* TLRequests+GooglePlace.swift */,
 				7E85E67E2BAE985000432BA9 /* TLRequests+SearchGooglePlaces.swift */,
 				7EC183DC2BB53285007B2602 /* TLRequests+FlightImageUpload.swift */,
@@ -1667,6 +1670,7 @@
 				7EC183DD2BB53285007B2602 /* TLRequests+FlightImageUpload.swift in Sources */,
 				7E85E7A92BAE985100432BA9 /* ContentView.swift in Sources */,
 				7EF82EAB2BFD207E00DFB53A /* TransactionView.swift in Sources */,
+				7E604A7D2D17CBD200B8ECD5 /* TLRequests+GetPopularGooglePlaces.swift in Sources */,
 				7E85E7B32BAE985100432BA9 /* SideMenuView.swift in Sources */,
 				7E85E7BF2BAE985100432BA9 /* _GooglePlacesViewModel.swift in Sources */,
 				7E85E7BC2BAE985100432BA9 /* _AviationEdgeViewModel.swift in Sources */,
@@ -1973,7 +1977,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 130;
+				CURRENT_PROJECT_VERSION = 131;
 				DEVELOPMENT_ASSET_PATHS = "\"TripLogix/Preview Content\"";
 				DEVELOPMENT_TEAM = ZLA3S7L9MF;
 				ENABLE_PREVIEWS = YES;
@@ -2010,7 +2014,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 130;
+				CURRENT_PROJECT_VERSION = 131;
 				DEVELOPMENT_ASSET_PATHS = "\"TripLogix/Preview Content\"";
 				DEVELOPMENT_TEAM = ZLA3S7L9MF;
 				ENABLE_PREVIEWS = YES;

@@ -13,76 +13,161 @@ struct Location: Codable, Hashable, Identifiable {
     //let place_saved: Bool
 }
 
-struct GooglePlace: Codable, Identifiable, Equatable, Hashable {
+//struct GooglePlace: Codable, Identifiable, Equatable, Hashable {
+//    var id = UUID()
+//    let htmlAttributions: [String]
+//    let result: PlaceResult
+//    let status: String
+//    
+//    enum CodingKeys: String, CodingKey {
+//        case htmlAttributions = "html_attributions"
+//        case result, status
+//    }
+//    
+//    static func == (lhs: GooglePlace, rhs: GooglePlace) -> Bool {
+//        return lhs.id == rhs.id && lhs.id == rhs.id
+//    }
+//
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(id)
+//    }
+//}
+//
+//// Define the structure of the result object
+//struct PlaceResult: Decodable, Encodable, Identifiable, Equatable {
+//    var id = UUID() // Excluded from Codable
+//    let formattedAddress: String
+//    let formattedPhoneNumber: String
+//    let userRatingsTotal: Int
+//    let rating: Double
+//    let geometry: PlaceGeometry
+//    let icon: String
+//    let iconBackgroundColor: String
+//    let name: String
+//    let photos: [PlacePhoto]
+//    let place_id: String
+//    let vicinity: String
+//    
+//    enum CodingKeys: String, CodingKey {
+//        case formattedAddress = "formatted_address"
+//        case formattedPhoneNumber = "formatted_phone_number"
+//        case userRatingsTotal = "user_ratings_total"
+//        case geometry, icon, name, place_id, photos, vicinity, rating
+//        case iconBackgroundColor = "icon_background_color"
+//        // Notice `id` is not listed here, so it's excluded from Codable
+//    }
+//    
+//    static func == (lhs: PlaceResult, rhs: PlaceResult) -> Bool {
+//        return lhs.place_id == rhs.place_id
+//    }
+//    
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(place_id)
+//    }
+//}
+//
+//// Define the geometry structure
+//struct PlaceGeometry: Codable {
+//    let location: PlaceLocation
+//}
+//
+//// Define the location structure
+//struct PlaceLocation: Codable {
+//    let lat: Double
+//    let lng: Double
+//}
+//
+//// Define the photos structure
+//struct PlacePhoto: Codable {
+//    let photoReference: String
+//    let width: Int
+//    
+//    enum CodingKeys: String, CodingKey {
+//        case photoReference = "photo_reference"
+//        case width
+//    }
+//}
+
+struct GooglePlace: Codable, Identifiable, Hashable {
     var id = UUID()
     let htmlAttributions: [String]
     let result: PlaceResult
     let status: String
-    
+
     enum CodingKeys: String, CodingKey {
         case htmlAttributions = "html_attributions"
         case result, status
     }
-    
+
     static func == (lhs: GooglePlace, rhs: GooglePlace) -> Bool {
-        return lhs.id == rhs.id && lhs.id == rhs.id
+        lhs.result.place_id == rhs.result.place_id
     }
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+        hasher.combine(result)
+        hasher.combine(status)
     }
 }
 
-// Define the structure of the result object
-struct PlaceResult: Decodable, Encodable, Identifiable, Equatable {
-    var id = UUID() // Excluded from Codable
+struct PlaceResult: Codable, Identifiable, Hashable {
+    var id = UUID()
     let formattedAddress: String
-    let formattedPhoneNumber: String
-    let userRatingsTotal: Int
-    let rating: Double
+    let formattedPhoneNumber: String? // Now optional
+    let userRatingsTotal: Int?
+    let rating: Double? // Now optional
     let geometry: PlaceGeometry
     let icon: String
-    let iconBackgroundColor: String
+    let iconBackgroundColor: String?
     let name: String
-    let photos: [PlacePhoto]
+    let photos: [PlacePhoto]?
     let place_id: String
-    let vicinity: String
-    
+    let vicinity: String?
+
     enum CodingKeys: String, CodingKey {
         case formattedAddress = "formatted_address"
         case formattedPhoneNumber = "formatted_phone_number"
         case userRatingsTotal = "user_ratings_total"
-        case geometry, icon, name, place_id, photos, vicinity, rating
-        case iconBackgroundColor = "icon_background_color"
-        // Notice `id` is not listed here, so it's excluded from Codable
-    }
-    
-    static func == (lhs: PlaceResult, rhs: PlaceResult) -> Bool {
-        return lhs.place_id == rhs.place_id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(place_id)
+        case rating, geometry, icon, iconBackgroundColor, name, photos, place_id, vicinity
     }
 }
 
-// Define the geometry structure
-struct PlaceGeometry: Codable {
+struct AddressComponent: Codable, Hashable {
+    let longName: String
+    let shortName: String
+    let types: [String]
+
+    enum CodingKeys: String, CodingKey {
+        case longName = "long_name"
+        case shortName = "short_name"
+        case types
+    }
+}
+
+struct PlaceGeometry: Codable, Hashable {
     let location: PlaceLocation
+    let viewport: Viewport
 }
 
-// Define the location structure
-struct PlaceLocation: Codable {
+struct PlaceLocation: Codable, Hashable {
     let lat: Double
     let lng: Double
 }
 
-// Define the photos structure
-struct PlacePhoto: Codable {
+struct Viewport: Codable, Hashable {
+    let northeast: PlaceLocation
+    let southwest: PlaceLocation
+}
+
+struct PlacePhoto: Codable, Hashable {
+    let height: Int
+    let htmlAttributions: [String]
     let photoReference: String
     let width: Int
-    
+
     enum CodingKeys: String, CodingKey {
+        case height
+        case htmlAttributions = "html_attributions"
         case photoReference = "photo_reference"
         case width
     }
