@@ -111,7 +111,7 @@ struct TripsView: View {
         let destination = Destination(name: place.result.formattedAddress.sanitizeLocation())
         destination.googlePlaceId = place.result.place_id
         destination.startDate = Date.daysFromToday(1)
-        destination.endDate = Date.daysFromToday(1)
+        destination.endDate = Date.daysFromToday(3)
         modelContext.insert(destination)
         //path = [destination]
     }

@@ -3,10 +3,10 @@ import SwiftData
 
 @Model
 class Itinerary: Hashable {
-    let index: Int
-    let title: String
+    var index: Int
+    var title: String
     var date: String
-    let activities: [EventItem]
+    var activities: [EventItem]
 
     init(
         index: Int,
@@ -32,9 +32,9 @@ class Itinerary: Hashable {
 
 @Model
 class EventItem: Hashable {
-    let index: Int
-    let title: String
-    let categories: [String]
+    var index: Int
+    var title: String
+    var categories: [String]
     var googlePlaceId: String
     
     init(index: Int, title: String, categories: [String], googlePlaceId: String) {
@@ -55,13 +55,11 @@ class EventItem: Hashable {
 
 @Model
 class AllEventsSD: Hashable {
-    let index: Int
-    //let title: String
-    let categories: [EventCategorySD]
+    var index: Int
+    var categories: [EventCategorySD]
 
     init(index: Int, categories: [EventCategorySD]) {
         self.index = index
-        //self.title = title
         self.categories = categories
     }
 
@@ -71,15 +69,14 @@ class AllEventsSD: Hashable {
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(index)
-        //hasher.combine(title)
     }
 }
 
 @Model
 class EventCategorySD: Hashable {
-    let index: Int
-    let category: String
-    let events: [String]
+    var index: Int
+    var category: String
+    var events: [String]
     
     init(index: Int, category: String, events: [String]) {
         self.index = index

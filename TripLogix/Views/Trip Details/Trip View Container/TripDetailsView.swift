@@ -32,9 +32,9 @@ struct TripDetailsView: View {
                 launchDateSelection = true
             }
             
-            if destination.icon == nil {
-                self.googlePlacesViewModel.fetchPlaceDetails(placeId: destination.googlePlaceId)
-            }
+//            if destination.icon == nil {
+//                self.googlePlacesViewModel.fetchPlaceDetails(placeId: destination.googlePlaceId)
+//            }
             
             ssFlightsViewModel.queryAirport(destination.baseCity)
         }
@@ -96,7 +96,7 @@ struct TripDetailsViewFeed<HeaderView: View>: View {
                     
                     switch selectedIndex {
                     case 0:
-                        TripPlanView(destination: destination)
+                        EventView(destination: destination)
                             .padding()
                     case 1:
                         FlightsHomeView(destination: destination)
@@ -107,7 +107,7 @@ struct TripDetailsViewFeed<HeaderView: View>: View {
                     case 4:
                         DocumentsView()
                     default:
-                        TripPlanView(destination: destination)
+                        EventView(destination: destination)
                     }
                 }
                 .padding(.bottom, 1)

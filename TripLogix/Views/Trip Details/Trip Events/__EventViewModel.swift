@@ -3,9 +3,11 @@ import Foundation
 import UIKit
 import SwiftUI
 
-final class TripPlanViewModel: ObservableObject {
+@MainActor
+final class EventViewModel: ObservableObject {
     
     @Published var cachedGoogleLocations: [GooglePlace] = []
+    @Published var photosFromDatabase: PhotosResponse?
     @Published var googlePlace: GooglePlace?
     @Published var allEvents: [EventCategory] = []
     @Published var itineraries: [DayItinerary] = []
@@ -17,7 +19,7 @@ final class TripPlanViewModel: ObservableObject {
     private var cancellableSet: Set<AnyCancellable> = []
     private let openAIAPIService = OpenAIAPIService()
     private let googleAPIService = GooglePlacesAPIService()
-    private let tlAPIService = GooglePlacesAPIService()
+    private let tlAPIService = TLAPIService()
     
     func generateAllEvents(qType: QCategory) {
         if case .getDailyPlan(let city, _, _) = qType {
@@ -81,12 +83,6 @@ final class TripPlanViewModel: ObservableObject {
             .store(in: &cancellableSet)
     }
     
-    // Get the photo URL from Google Place Object
-    func urlForPhoto(reference: String) -> String {
-        guard let googleAPIKey = decryptAPIKey(.googlePlaces) else { return "" }
-        return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(reference)&key=\(googleAPIKey)"
-    }
-    
     func serviceGooglePlaces(textQuery: String) -> AnyPublisher<GooglePlaceMaskedResponse, Error> {
         googleAPIService.placeSearchText(fieldMask: "*", textQuery: "\(textQuery) \(self.city)")
             .map { response in
@@ -105,50 +101,97 @@ final class TripPlanViewModel: ObservableObject {
     }
     
     func addGooglePlaceId(_ e: [DayItinerary]) {
+        let group = DispatchGroup()
         var newItineraries = [DayItinerary]()
         
-        let group = DispatchGroup()
-        
         for day in e {
-            var newActivities = [Activity]()
-            
-            for activity in day.activities {
-                
-                if !activity.title.isEmpty {
-                    
-                    group.enter()
-                    serviceGooglePlaces(textQuery: activity.title)
-                        .sink(receiveCompletion: { _ in }, receiveValue: { place in
-                            
-                            let googlePlaceId = self.googlePlaceIdNeeded(activity) ? place.places.first?.id ?? "" : ""
-                                                        
-                            DispatchQueue.main.async {
-                                newActivities.append(Activity(
-                                    index: activity.index,
-                                    title: activity.title,
-                                    googlePlaceId: googlePlaceId,
-                                    googlePlace: activity.googlePlace,
-                                    categories: activity.categories
-                                ))
-                                group.leave()
-                            }
-                        })
-                        .store(in: &cancellableSet)
-                }
-            }
+            let updatedActivities = addGooglePlaceIdToActivities(day.activities, group: group)
             
             group.notify(queue: .main) {
                 let newDay = DayItinerary(
                     index: day.index,
                     title: day.title,
                     date: day.date,
-                    activities: newActivities
+                    activities: updatedActivities
                 )
                 newItineraries.append(newDay)
-                self.loopItineraries(newItineraries)
+                self.itineraries = newItineraries
             }
         }
     }
+
+    private func addGooglePlaceIdToActivities(_ activities: [Activity], group: DispatchGroup) -> [Activity] {
+        var updatedActivities = [Activity]()
+        
+        for activity in activities {
+            if !activity.title.isEmpty {
+                group.enter()
+                serviceGooglePlaces(textQuery: activity.title)
+                    .sink(receiveCompletion: { _ in }, receiveValue: { place in
+                        let googlePlaceId = self.googlePlaceIdNeeded(activity) ? place.places.first?.id ?? "" : ""
+                        DispatchQueue.main.async {
+                            updatedActivities.append(Activity(
+                                index: activity.index,
+                                title: activity.title,
+                                googlePlaceId: googlePlaceId,
+                                googlePlace: activity.googlePlace,
+                                categories: activity.categories
+                            ))
+                            group.leave()
+                        }
+                    })
+                    .store(in: &cancellableSet)
+            }
+        }
+        
+        return updatedActivities
+    }
+    
+//    func addGooglePlaceId(_ e: [DayItinerary]) {
+//        var newItineraries = [DayItinerary]()
+//        
+//        let group = DispatchGroup()
+//        
+//        for day in e {
+//            var newActivities = [Activity]()
+//            
+//            for activity in day.activities {
+//                
+//                if !activity.title.isEmpty {
+//                    
+//                    group.enter()
+//                    serviceGooglePlaces(textQuery: activity.title)
+//                        .sink(receiveCompletion: { _ in }, receiveValue: { place in
+//                            
+//                            let googlePlaceId = self.googlePlaceIdNeeded(activity) ? place.places.first?.id ?? "" : ""
+//                                                        
+//                            DispatchQueue.main.async {
+//                                newActivities.append(Activity(
+//                                    index: activity.index,
+//                                    title: activity.title,
+//                                    googlePlaceId: googlePlaceId,
+//                                    googlePlace: activity.googlePlace,
+//                                    categories: activity.categories
+//                                ))
+//                                group.leave()
+//                            }
+//                        })
+//                        .store(in: &cancellableSet)
+//                }
+//            }
+//            
+//            group.notify(queue: .main) {
+//                let newDay = DayItinerary(
+//                    index: day.index,
+//                    title: day.title,
+//                    date: day.date,
+//                    activities: newActivities
+//                )
+//                newItineraries.append(newDay)
+//                self.loopItineraries(newItineraries)
+//            }
+//        }
+//    }
     
     // MARK - Persisting Google Places
     // cache single Place by PlaceId - from location details
@@ -165,7 +208,7 @@ final class TripPlanViewModel: ObservableObject {
     func loopItineraries(_ e: [DayItinerary]) {
         let group = DispatchGroup()
         
-        for day in e {            
+        for day in e {
             for activity in day.activities {
                 group.enter()
                 completeGooglePlaces(activity.googlePlaceId)
@@ -179,8 +222,30 @@ final class TripPlanViewModel: ObservableObject {
             }
         }
         
-        self.itineraries = e
+        group.notify(queue: .main) {
+            self.itineraries = e
+        }
     }
+    
+//    func loopItineraries(_ e: [DayItinerary]) {
+//        let group = DispatchGroup()
+//        
+//        for day in e {            
+//            for activity in day.activities {
+//                group.enter()
+//                completeGooglePlaces(activity.googlePlaceId)
+//                    .sink(receiveCompletion: { _ in }, receiveValue: { place in
+//                        DispatchQueue.main.async {
+//                            self.manageGooglePlaceCache(place)
+//                            group.leave()
+//                        }
+//                    })
+//                    .store(in: &cancellableSet)
+//            }
+//        }
+//        
+//        self.itineraries = e
+//    }
     
     func addSingleGooglePlace(_ googlePlaceId: String) {
         let group = DispatchGroup()
@@ -197,18 +262,17 @@ final class TripPlanViewModel: ObservableObject {
     
     
     // API Call to Get the Google Place
-    func completeGooglePlacesOld(_ placeId: String) -> AnyPublisher<GooglePlace, Error> {
-        googleAPIService.searchGooglePlaceId(placeId: placeId)
-            .map { response in
-                response
-            }
-            .mapError { $0 as Error }
-            .eraseToAnyPublisher()
-    }
+//    func completeGooglePlacesOld(_ placeId: String) -> AnyPublisher<GooglePlace, Error> {
+//        googleAPIService.searchGooglePlaceId(placeId: placeId)
+//            .map { response in
+//                response
+//            }
+//            .mapError { $0 as Error }
+//            .eraseToAnyPublisher()
+//    }
     
     func completeGooglePlaces(_ placeId: String) -> AnyPublisher<GooglePlace, Error> {
         tlAPIService.searchGooglePlaceId(placeId: placeId)
-            .print("[Debug]")
             .map { response in
                 response
             }
@@ -230,7 +294,7 @@ final class TripPlanViewModel: ObservableObject {
     func removeOlderGooglePlaces() {
         // Keeps the last 100 records, removes the older ones.
         let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(Array(self.cachedGoogleLocations.prefix(50))) {
+        if let encoded = try? encoder.encode(Array(self.cachedGoogleLocations.prefix(500))) {
             UserDefaults.standard.set(encoded, forKey: "savedGooglePlaces")
         }
     }
@@ -242,6 +306,7 @@ final class TripPlanViewModel: ObservableObject {
         if !self.cachedGoogleLocations.contains(where: {
             $0.result.place_id == p.result.place_id
         }) {
+            print("[Debug] doesnt exist: \(p.result.place_id)")
             self.cachedGoogleLocations.append(p)
         }
 
@@ -308,8 +373,134 @@ final class TripPlanViewModel: ObservableObject {
     }
 }
 
+// Methods for Photos
+extension EventViewModel {
+    
+//    func fetchPhotosById(placeId: String) async {
+//        do {
+//            // Check for cached photos from the backend
+//            if let cachedPhotos = try await fetchCachedPhotos(placeId: placeId), !cachedPhotos.isEmpty {
+//                DispatchQueue.main.async {
+//                    self.photosFromDatabase = PhotosResponse(photos: cachedPhotos)
+//                }
+//                return
+//            }
+//
+//            // If no cached photos, call manageGooglePlaces.php
+//            let manageRequest = TLRequests.GooglePlace(googlePlaceId: placeId).request
+//            let (data, response) = try await URLSession.shared.data(for: manageRequest)
+//
+//            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+//                throw URLError(.badServerResponse)
+//            }
+//
+//            // Decode the full response, process photos, and cache them
+//            let apiResponse = try JSONDecoder().decode(GooglePlace.self, from: data)
+//
+//            if let photos = apiResponse.result.photos {
+//                await cachePhotosToDatabase(photos, placeId: placeId)
+//            }
+//        } catch {
+//            print("Error fetching photos: \(error)")
+//        }
+//    }
+    
+    func fetchPhotosById(placeId: String) async {
+        do {
+            // Attempt to fetch cached photos
+            let cachedPhotos = try await fetchCachedPhotos(placeId: placeId)
+            if !cachedPhotos.isEmpty {
+                DispatchQueue.main.async {
+                    self.photosFromDatabase = PhotosResponse(photos: cachedPhotos)
+                }
+                return
+            }
+
+            // If no cached photos, fetch new ones and cache
+            let apiResponse = try await fetchGooglePlace(placeId: placeId)
+            if let photos = apiResponse.result.photos {
+                let mappedPhotos = photos.map { placePhoto in
+                    Photo(
+                        imageUrl: placePhoto.imageUrl ?? "",
+                        localFilePath: nil
+                    )
+                }
+                await cachePhotosToDatabase(mappedPhotos, placeId: placeId)
+            }
+        } catch {
+            print("Error fetching photos: \(error)")
+        }
+    }
+
+    private func fetchGooglePlace(placeId: String) async throws -> GooglePlace {
+        let request = TLRequests.GooglePlace(googlePlaceId: placeId).request
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
+        }
+        
+        return try JSONDecoder().decode(GooglePlace.self, from: data)
+    }
+
+    private func fetchCachedPhotos(placeId: String) async throws -> [Photo] {
+        let fetchRequest = TLRequests.FetchPhotos(googlePlaceId: placeId).request
+        let (data, response) = try await URLSession.shared.data(for: fetchRequest)
+
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            return []
+        }
+
+        let cachedPhotosResponse = try JSONDecoder().decode(PhotosResponse.self, from: data)
+        return cachedPhotosResponse.photos
+    }
+
+    private func cachePhotosToDatabase(_ photos: [Photo], placeId: String) async {
+        for photo in photos {
+            if let localPath = await downloadAndCachePhoto(photo.imageUrl, googlePlaceId: placeId) {
+                DispatchQueue.main.async {
+                    var updatedPhotos = self.photosFromDatabase?.photos ?? []
+                    updatedPhotos.append(Photo(imageUrl: photo.imageUrl, localFilePath: localPath))
+                    self.photosFromDatabase = PhotosResponse(photos: updatedPhotos)
+                }
+            }
+        }
+    }
+
+    private func downloadAndCachePhoto(_ imageUrl: String, googlePlaceId: String) async -> String? {
+        guard let url = URL(string: imageUrl) else { return nil }
+
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+
+            // Save to local temp directory
+            let localPath = saveToTempDirectory(data)
+
+            return localPath
+        } catch {
+            print("Failed to download photo: \(error)")
+            return nil
+        }
+    }
+
+    private func saveToTempDirectory(_ data: Data) -> String {
+        let fileName = UUID().uuidString
+        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
+
+        do {
+            try data.write(to: fileURL)
+            return fileURL.path
+        } catch {
+            print("Failed to save photo to temp directory: \(error)")
+            return ""
+        }
+    }
+    
+
+}
+
 // Methods that require Destination
-extension TripPlanViewModel {
+extension EventViewModel {
     
     // Get all initial categories for first time locations.
     func fetchEventCategoriesIfNeeded(_ destination: Destination) {

@@ -22,7 +22,7 @@ enum LocationCatalog {
     case wishlist
     case visited
 }
-//
+
 final class AddNewDestinationViewModel: ObservableObject {
     
     @Published var query = ""
@@ -221,11 +221,6 @@ final class AddNewDestinationViewModel: ObservableObject {
             throw URLError(.badServerResponse)
         }
         
-        // Log the raw response data
-        if let jsonString = String(data: data, encoding: .utf8) {
-            print("[Debug] Raw API Response: popularPlacesAPI() \(jsonString)")
-        }
-        
         let decoder = JSONDecoder()
         return try decoder.decode([GooglePlace].self, from: data)
     }
@@ -309,7 +304,7 @@ final class AddNewDestinationViewModel: ObservableObject {
             preconditionFailure("Bad API Key")
         }
         let maxWidth = 400
-        let urlString = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=\(maxWidth)&photoreference=\(photoReference)&key=\(apiKey)"
+        let urlString = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=\(maxWidth)&photoreference=\(photoReference)&key=12345"
         
         guard let url = URL(string: urlString) else {
             completion(nil)

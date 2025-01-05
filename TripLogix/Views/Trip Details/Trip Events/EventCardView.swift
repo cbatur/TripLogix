@@ -5,7 +5,7 @@ struct EventCardView: View {
     let day: Itinerary
     let city: String
     
-    @StateObject var viewModel: TripPlanViewModel = TripPlanViewModel()
+    @StateObject var viewModel: EventViewModel = EventViewModel()
     @State var showLocationDetailsModal = false
     @State var googlePlaceId: String = ""
     
@@ -15,15 +15,16 @@ struct EventCardView: View {
     }
     
     func loadPlaces() {
+        // Get all cached Google Places
+        viewModel.getCachedGooglelocations()
+        
         // Add to Google place cache If it doesn't exist.
         for activity in day.activities {
             if !viewModel.cachedGoogleLocations.contains(where: { $0.result.place_id == activity.googlePlaceId }) {
-                viewModel.addSingleGooglePlace(activity.googlePlaceId)
+                if !activity.googlePlaceId.isEmpty { viewModel.addSingleGooglePlace(activity.googlePlaceId)
+                }
             }
         }
-        
-        // Get all cached Google Places
-        viewModel.getCachedGooglelocations()
     }
     
     var body: some View {
@@ -78,53 +79,6 @@ struct EventCardView: View {
         }
         .sheet(isPresented: $showLocationDetailsModal) {
             PlaceDetailsView(googlePlaceId: $googlePlaceId)
-        }
-    }
-}
-
-struct GooglePlaceCard: View {
-    @StateObject var viewModel: TripPlanViewModel = TripPlanViewModel()
-    let place: GooglePlace
-    
-    init(_ place: GooglePlace) {
-        self.place = place
-    }
-    
-    var body: some View {
-        VStack {
-            HStack(alignment: .top) { // Align to the top to handle multiple lines
-                VStack {
-                    if let photoReference = place.result.photos?.first?.photoReference {
-                        let photoUrl = viewModel.urlForPhoto(reference: photoReference)
-                        
-                        RemoteIcon(with: photoUrl)
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 60, height: 60)
-                            .clipShape(RoundedRectangle(cornerRadius: 7))
-                            .padding(4)
-                    }
-                    
-                    Spacer()
-                }
-                
-                VStack(alignment: .leading) {
-                    Text("\(place.result.name)")
-                        .font(.system(size: 15))
-                        .foregroundStyle(.black)
-                        .multilineTextAlignment(.leading)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.vertical, 1)
-                    
-                    Text("\(place.result.formattedAddress)")
-                        .font(.system(size: 13))
-                        .foregroundColor(.gray)
-                        .multilineTextAlignment(.leading)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Spacer() 
-            }
         }
     }
 }

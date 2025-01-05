@@ -4,9 +4,9 @@ import SwiftData
 // ---------------- Aviation Edge Data ------------------
 @Model
 class DSelectedFlight: Hashable {
-    let id: String = "\(Int(Date().timeIntervalSince1970))"
+    var id: String = "\(Int(Date().timeIntervalSince1970))"
     var date: Date = Date()
-    let flight: DFutureFlight
+    var flight: DFutureFlight
     
     init(date: Date, flight: DFutureFlight) {
         self.date = date

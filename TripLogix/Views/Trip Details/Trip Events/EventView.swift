@@ -2,10 +2,10 @@
 import SwiftUI
 import Popovers
 
-struct TripPlanView: View {
+struct EventView: View {
     @State private var selectedView = 0
     @Bindable var destination: Destination
-    @StateObject var viewModel: TripPlanViewModel = TripPlanViewModel()
+    @StateObject var viewModel: EventViewModel = EventViewModel()
     @StateObject var cacheViewModel: CacheViewModel = CacheViewModel()
 
     @State private var launchAllEvents = false

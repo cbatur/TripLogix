@@ -36,7 +36,6 @@ struct ProfileScreen: View {
                             
                         }
                     }
-                    .navigationDestination(for: Destination.self, destination: EventsView.init)
                     .sheet(isPresented: $launchNewDestination) {
                         AddNewDestinationView { data in
                             self.dataFromChild = data

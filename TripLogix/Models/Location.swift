@@ -162,13 +162,15 @@ struct Viewport: Codable, Hashable {
 struct PlacePhoto: Codable, Hashable {
     let height: Int
     let htmlAttributions: [String]
-    let photoReference: String
+    let photoReference: String?
+    let imageUrl: String?
     let width: Int
 
     enum CodingKeys: String, CodingKey {
         case height
         case htmlAttributions = "html_attributions"
         case photoReference = "photo_reference"
+        case imageUrl = "image_url"
         case width
     }
 }

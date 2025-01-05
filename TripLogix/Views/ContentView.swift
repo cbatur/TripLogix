@@ -4,7 +4,7 @@ import SwiftData
 import ScalingHeaderScrollView
 
 struct ContentView: View {
-    @StateObject var viewModel: TripPlanViewModel = TripPlanViewModel()
+    @StateObject var viewModel: EventViewModel = EventViewModel()
 
     func loadPlaces() {
         viewModel.getCachedGooglelocations()
@@ -22,7 +22,7 @@ struct ContentView: View {
     }
     
     func loadPhotodByGooglePlacesId() {
-        self.googlePlacesViewModel.fetchPlaceDetails(placeId: destination.googlePlaceId)
+        //self.googlePlacesViewModel.fetchPlaceDetails(placeId: destination.googlePlaceId)
     }
 
     var body: some View {

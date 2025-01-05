@@ -4,7 +4,7 @@ import SwiftUI
 struct AdminViewCachedLocations: View {
     @Binding var selectedView: Int
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var viewModel: TripPlanViewModel = TripPlanViewModel()
+    @StateObject var viewModel: EventViewModel = EventViewModel()
     @StateObject var cacheViewModel: CacheViewModel = CacheViewModel()
     let tabLinkItems: [String] = ["Locations", "Items"]
     @State private var selectedLink: String = "Locations"
