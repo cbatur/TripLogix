@@ -240,7 +240,35 @@ public func stringToDate(_ dateString: String) -> Date? {
     dateFormatter.dateFormat = "yyyy-MM-dd"
     dateFormatter.locale = Locale(identifier: "en_US_POSIX")
     dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-    return dateFormatter.date(from: dateString)
+    let output = dateFormatter.date(from: dateString)
+    return output
+}
+
+// Most up top date Date display functions
+enum DateFormat: String {
+    case fullDate = "EEEE, MMM d, yyyy"
+    case shortDate = "MMM d, yyyy"
+    case timeWithPadding = "h:mm a"
+    case isoDateTime = "yyyy-MM-dd'T'HH:mm:ss"
+    case basicDateTime = "yyyy-MM-dd h:mm a"
+}
+
+// Takes a string date and converts it to a string date 
+func formatDateString(_ dateString: String, toFormat format: DateFormat) -> String {
+    let inputFormatter = DateFormatter()
+    inputFormatter.dateFormat = DateFormat.isoDateTime.rawValue
+    inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+    inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+
+    let outputFormatter = DateFormatter()
+    outputFormatter.dateFormat = format.rawValue
+    outputFormatter.locale = Locale.current
+
+    if let date = inputFormatter.date(from: dateString) {
+        return outputFormatter.string(from: date)
+    } else {
+        return "_" // Return if the input string cannot be parsed
+    }
 }
 
 // Needed for Sky Scrapper date formats

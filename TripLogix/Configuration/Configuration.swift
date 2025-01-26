@@ -12,6 +12,7 @@ enum Configuration {
     enum TripLogix {
         static let baseUrlTemp = "https://palamana.com/TripLogix/"
         static let baseURL = "https://triplogix.app/api/"
+        static let baseAdminURL = "https://triplogix.app/admin/php_hooks/"
     }
 
     enum openAI {

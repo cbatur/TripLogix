@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,26 @@
 		7E1D30E42C19854600B6ED5D /* EditNameFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E32C19854600B6ED5D /* EditNameFooterView.swift */; };
 		7E1D30E72C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E62C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift */; };
 		7E1D30E92C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D30E82C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift */; };
+		7E3ABC252D2A9A4D0071D80F /* QCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7322BAE985100432BA9 /* QCategory.swift */; };
+		7E3ABC272D2A9D890071D80F /* RequestNameSpaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C72BB28669007B2602 /* RequestNameSpaces.swift */; };
+		7E3ABC282D2A9DCE0071D80F /* OpenAI+TexCommand4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E88221E2BDA1F8200B32747 /* OpenAI+TexCommand4.swift */; };
+		7E3ABC292D2A9E1F0071D80F /* AllEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7262BAE985100432BA9 /* AllEvents.swift */; };
+		7E3ABC2A2D2A9E6F0071D80F /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7362BAE985100432BA9 /* Configuration.swift */; };
+		7E3ABC2B2D2A9E950071D80F /* OpenAIAPIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C92BB28962007B2602 /* OpenAIAPIServices.swift */; };
+		7E3ABC2C2D2A9EDF0071D80F /* CryptoSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6E82BAE985100432BA9 /* CryptoSwift.swift */; };
+		7E3ABC2D2D42BD910071D80F /* ChatGPTResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E72A2BAE985100432BA9 /* ChatGPTResponse.swift */; };
+		7E3ABC2E2D42BE590071D80F /* OpenAI+RemoteImageToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183D12BB29780007B2602 /* OpenAI+RemoteImageToText.swift */; };
+		7E3ABC2F2D42BE740071D80F /* OpenAI+TextCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */; };
+		7E3ABC302D42BE820071D80F /* OpenAI+ImageCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183CB2BB28CAB007B2602 /* OpenAI+ImageCreate.swift */; };
+		7E3ABC322D42BEE80071D80F /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7E3ABC312D42BEE80071D80F /* CryptoSwift */; };
+		7E3ABC332D42E3080071D80F /* UIView+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6F22BAE985100432BA9 /* UIView+Utilities.swift */; };
+		7E3ABC342D42E3080071D80F /* UIView+ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183D62BB3E5E7007B2602 /* UIView+ImagePicker.swift */; };
+		7E3ABC352D42E3080071D80F /* UIView+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8DD1452CEDB859006C4529 /* UIView+ScrollView.swift */; };
+		7E3ABC362D42E3780071D80F /* TLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8821FB2BB7D69400B32747 /* TLButton.swift */; };
+		7E3ABC372D42E3960071D80F /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6EE2BAE985100432BA9 /* Color+Extensions.swift */; };
+		7E3ABC382D42E3960071D80F /* ColorKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6742BAE985000432BA9 /* ColorKit.swift */; };
+		7E3ABC392D42E3960071D80F /* Color+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82EA02BF98CC400DFB53A /* Color+hex.swift */; };
+		7E3ABC3F2D4347E10071D80F /* Request+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183CE2BB295C4007B2602 /* Request+Extension.swift */; };
 		7E5913312BAF99DD00529823 /* FlightListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5913302BAF99DD00529823 /* FlightListView.swift */; };
 		7E604A7D2D17CBD200B8ECD5 /* TLRequests+GetPopularGooglePlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E604A7C2D17CBBF00B8ECD5 /* TLRequests+GetPopularGooglePlaces.swift */; };
 		7E604A7F2D1B63C500B8ECD5 /* GooglePlaceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E604A7E2D1B63C100B8ECD5 /* GooglePlaceCard.swift */; };
@@ -250,6 +270,7 @@
 		7EC183DB2BB511F9007B2602 /* AE_FutureFlight.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EC183DA2BB511F9007B2602 /* AE_FutureFlight.json */; };
 		7EC183DD2BB53285007B2602 /* TLRequests+FlightImageUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183DC2BB53285007B2602 /* TLRequests+FlightImageUpload.swift */; };
 		7EC183E12BB53DDC007B2602 /* TLModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183E02BB53DDC007B2602 /* TLModels.swift */; };
+		7ECF8A172D46BFAA00B480F6 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E6EF2BAE985100432BA9 /* Date+Extensions.swift */; };
 		7EEAAA7A2C03890300A46BC5 /* TLRequests+Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA792C03890300A46BC5 /* TLRequests+Login.swift */; };
 		7EEAAA7C2C03891400A46BC5 /* TLRequests+CreateAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA7B2C03891400A46BC5 /* TLRequests+CreateAccount.swift */; };
 		7EEAAA7E2C038C2800A46BC5 /* __SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA7D2C038C2800A46BC5 /* __SessionManager.swift */; };
@@ -291,6 +312,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7E3ABC022D2A952F0071D80F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E85E41D2BAE8CE700432BA9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7E3ABBF12D2A952D0071D80F;
+			remoteInfo = TriplogixCockpit;
+		};
+		7E3ABC0C2D2A952F0071D80F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E85E41D2BAE8CE700432BA9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7E3ABBF12D2A952D0071D80F;
+			remoteInfo = TriplogixCockpit;
+		};
 		7E85E4362BAE8CE800432BA9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7E85E41D2BAE8CE700432BA9 /* Project object */;
@@ -320,6 +355,9 @@
 		7E1D30E32C19854600B6ED5D /* EditNameFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNameFooterView.swift; sourceTree = "<group>"; };
 		7E1D30E62C1AA8F700B6ED5D /* __EditNameFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __EditNameFieldViewModel.swift; sourceTree = "<group>"; };
 		7E1D30E82C1B4C2E00B6ED5D /* TLRequests+UpdateColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+UpdateColumn.swift"; sourceTree = "<group>"; };
+		7E3ABBF22D2A952D0071D80F /* TriplogixCockpit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TriplogixCockpit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E3ABC012D2A952F0071D80F /* TriplogixCockpitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TriplogixCockpitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E3ABC0B2D2A952F0071D80F /* TriplogixCockpitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TriplogixCockpitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E59132F2BAEA44700529823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7E5913302BAF99DD00529823 /* FlightListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightListView.swift; sourceTree = "<group>"; };
 		7E604A7C2D17CBBF00B8ECD5 /* TLRequests+GetPopularGooglePlaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+GetPopularGooglePlaces.swift"; sourceTree = "<group>"; };
@@ -577,7 +615,45 @@
 		7EFF98372C2AA0A100AE0387 /* TLRequests+SetVerificationCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+SetVerificationCode.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		7E3ABC422D43506C0071D80F /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 7E3ABBF12D2A952D0071D80F /* TriplogixCockpit */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		7E3ABBF32D2A952D0071D80F /* TriplogixCockpit */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (7E3ABC422D43506C0071D80F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = TriplogixCockpit; sourceTree = "<group>"; };
+		7E3ABC042D2A952F0071D80F /* TriplogixCockpitTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TriplogixCockpitTests; sourceTree = "<group>"; };
+		7E3ABC0E2D2A952F0071D80F /* TriplogixCockpitUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TriplogixCockpitUITests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		7E3ABBEF2D2A952D0071D80F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E3ABC322D42BEE80071D80F /* CryptoSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E3ABBFE2D2A952F0071D80F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E3ABC082D2A952F0071D80F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7E85E4222BAE8CE700432BA9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -648,6 +724,9 @@
 				7E85E4272BAE8CE700432BA9 /* TripLogix */,
 				7E85E4382BAE8CE800432BA9 /* TripLogixTests */,
 				7E85E4422BAE8CE800432BA9 /* TripLogixUITests */,
+				7E3ABBF32D2A952D0071D80F /* TriplogixCockpit */,
+				7E3ABC042D2A952F0071D80F /* TriplogixCockpitTests */,
+				7E3ABC0E2D2A952F0071D80F /* TriplogixCockpitUITests */,
 				7E85E4262BAE8CE700432BA9 /* Products */,
 				7E85E66D2BAE966700432BA9 /* Frameworks */,
 			);
@@ -659,6 +738,9 @@
 				7E85E4252BAE8CE700432BA9 /* TripLogix.app */,
 				7E85E4352BAE8CE800432BA9 /* TripLogixTests.xctest */,
 				7E85E43F2BAE8CE800432BA9 /* TripLogixUITests.xctest */,
+				7E3ABBF22D2A952D0071D80F /* TriplogixCockpit.app */,
+				7E3ABC012D2A952F0071D80F /* TriplogixCockpitTests.xctest */,
+				7E3ABC0B2D2A952F0071D80F /* TriplogixCockpitUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1407,6 +1489,75 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7E3ABBF12D2A952D0071D80F /* TriplogixCockpit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E3ABC192D2A952F0071D80F /* Build configuration list for PBXNativeTarget "TriplogixCockpit" */;
+			buildPhases = (
+				7E3ABBEE2D2A952D0071D80F /* Sources */,
+				7E3ABBEF2D2A952D0071D80F /* Frameworks */,
+				7E3ABBF02D2A952D0071D80F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				7E3ABBF32D2A952D0071D80F /* TriplogixCockpit */,
+			);
+			name = TriplogixCockpit;
+			packageProductDependencies = (
+				7E3ABC312D42BEE80071D80F /* CryptoSwift */,
+			);
+			productName = TriplogixCockpit;
+			productReference = 7E3ABBF22D2A952D0071D80F /* TriplogixCockpit.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7E3ABC002D2A952F0071D80F /* TriplogixCockpitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E3ABC1A2D2A952F0071D80F /* Build configuration list for PBXNativeTarget "TriplogixCockpitTests" */;
+			buildPhases = (
+				7E3ABBFD2D2A952F0071D80F /* Sources */,
+				7E3ABBFE2D2A952F0071D80F /* Frameworks */,
+				7E3ABBFF2D2A952F0071D80F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7E3ABC032D2A952F0071D80F /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				7E3ABC042D2A952F0071D80F /* TriplogixCockpitTests */,
+			);
+			name = TriplogixCockpitTests;
+			packageProductDependencies = (
+			);
+			productName = TriplogixCockpitTests;
+			productReference = 7E3ABC012D2A952F0071D80F /* TriplogixCockpitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7E3ABC0A2D2A952F0071D80F /* TriplogixCockpitUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E3ABC1B2D2A952F0071D80F /* Build configuration list for PBXNativeTarget "TriplogixCockpitUITests" */;
+			buildPhases = (
+				7E3ABC072D2A952F0071D80F /* Sources */,
+				7E3ABC082D2A952F0071D80F /* Frameworks */,
+				7E3ABC092D2A952F0071D80F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7E3ABC0D2D2A952F0071D80F /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				7E3ABC0E2D2A952F0071D80F /* TriplogixCockpitUITests */,
+			);
+			name = TriplogixCockpitUITests;
+			packageProductDependencies = (
+			);
+			productName = TriplogixCockpitUITests;
+			productReference = 7E3ABC0B2D2A952F0071D80F /* TriplogixCockpitUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		7E85E4242BAE8CE700432BA9 /* TripLogix */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7E85E4492BAE8CE800432BA9 /* Build configuration list for PBXNativeTarget "TripLogix" */;
@@ -1485,9 +1636,20 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1530;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
+					7E3ABBF12D2A952D0071D80F = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					7E3ABC002D2A952F0071D80F = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 7E3ABBF12D2A952D0071D80F;
+					};
+					7E3ABC0A2D2A952F0071D80F = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 7E3ABBF12D2A952D0071D80F;
+					};
 					7E85E4242BAE8CE700432BA9 = {
 						CreatedOnToolsVersion = 15.3;
 					};
@@ -1528,11 +1690,35 @@
 				7E85E4242BAE8CE700432BA9 /* TripLogix */,
 				7E85E4342BAE8CE800432BA9 /* TripLogixTests */,
 				7E85E43E2BAE8CE800432BA9 /* TripLogixUITests */,
+				7E3ABBF12D2A952D0071D80F /* TriplogixCockpit */,
+				7E3ABC002D2A952F0071D80F /* TriplogixCockpitTests */,
+				7E3ABC0A2D2A952F0071D80F /* TriplogixCockpitUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7E3ABBF02D2A952D0071D80F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E3ABBFF2D2A952F0071D80F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E3ABC092D2A952F0071D80F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7E85E4232BAE8CE700432BA9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1657,6 +1843,47 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7E3ABBEE2D2A952D0071D80F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7ECF8A172D46BFAA00B480F6 /* Date+Extensions.swift in Sources */,
+				7E3ABC3F2D4347E10071D80F /* Request+Extension.swift in Sources */,
+				7E3ABC372D42E3960071D80F /* Color+Extensions.swift in Sources */,
+				7E3ABC382D42E3960071D80F /* ColorKit.swift in Sources */,
+				7E3ABC392D42E3960071D80F /* Color+hex.swift in Sources */,
+				7E3ABC362D42E3780071D80F /* TLButton.swift in Sources */,
+				7E3ABC332D42E3080071D80F /* UIView+Utilities.swift in Sources */,
+				7E3ABC342D42E3080071D80F /* UIView+ImagePicker.swift in Sources */,
+				7E3ABC352D42E3080071D80F /* UIView+ScrollView.swift in Sources */,
+				7E3ABC302D42BE820071D80F /* OpenAI+ImageCreate.swift in Sources */,
+				7E3ABC2F2D42BE740071D80F /* OpenAI+TextCommand.swift in Sources */,
+				7E3ABC2E2D42BE590071D80F /* OpenAI+RemoteImageToText.swift in Sources */,
+				7E3ABC2D2D42BD910071D80F /* ChatGPTResponse.swift in Sources */,
+				7E3ABC2C2D2A9EDF0071D80F /* CryptoSwift.swift in Sources */,
+				7E3ABC2B2D2A9E950071D80F /* OpenAIAPIServices.swift in Sources */,
+				7E3ABC2A2D2A9E6F0071D80F /* Configuration.swift in Sources */,
+				7E3ABC292D2A9E1F0071D80F /* AllEvents.swift in Sources */,
+				7E3ABC282D2A9DCE0071D80F /* OpenAI+TexCommand4.swift in Sources */,
+				7E3ABC272D2A9D890071D80F /* RequestNameSpaces.swift in Sources */,
+				7E3ABC252D2A9A4D0071D80F /* QCategory.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E3ABBFD2D2A952F0071D80F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E3ABC072D2A952F0071D80F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7E85E4212BAE8CE700432BA9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1845,6 +2072,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		7E3ABC032D2A952F0071D80F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7E3ABBF12D2A952D0071D80F /* TriplogixCockpit */;
+			targetProxy = 7E3ABC022D2A952F0071D80F /* PBXContainerItemProxy */;
+		};
+		7E3ABC0D2D2A952F0071D80F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7E3ABBF12D2A952D0071D80F /* TriplogixCockpit */;
+			targetProxy = 7E3ABC0C2D2A952F0071D80F /* PBXContainerItemProxy */;
+		};
 		7E85E4372BAE8CE800432BA9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7E85E4242BAE8CE700432BA9 /* TripLogix */;
@@ -1858,6 +2095,142 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		7E3ABC132D2A952F0071D80F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TriplogixCockpit/Preview Content\"";
+				DEVELOPMENT_TEAM = ZLA3S7L9MF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TriplogixCockpit/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.13apps.TriplogixCockpit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7E3ABC142D2A952F0071D80F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TriplogixCockpit/Preview Content\"";
+				DEVELOPMENT_TEAM = ZLA3S7L9MF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TriplogixCockpit/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.13apps.TriplogixCockpit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7E3ABC152D2A952F0071D80F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZLA3S7L9MF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.13apps.TriplogixCockpitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TriplogixCockpit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TriplogixCockpit";
+			};
+			name = Debug;
+		};
+		7E3ABC162D2A952F0071D80F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZLA3S7L9MF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.13apps.TriplogixCockpitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TriplogixCockpit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TriplogixCockpit";
+			};
+			name = Release;
+		};
+		7E3ABC172D2A952F0071D80F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZLA3S7L9MF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.13apps.TriplogixCockpitUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TriplogixCockpit;
+			};
+			name = Debug;
+		};
+		7E3ABC182D2A952F0071D80F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZLA3S7L9MF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.13apps.TriplogixCockpitUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TriplogixCockpit;
+			};
+			name = Release;
+		};
 		7E85E4472BAE8CE800432BA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2130,6 +2503,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7E3ABC192D2A952F0071D80F /* Build configuration list for PBXNativeTarget "TriplogixCockpit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E3ABC132D2A952F0071D80F /* Debug */,
+				7E3ABC142D2A952F0071D80F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E3ABC1A2D2A952F0071D80F /* Build configuration list for PBXNativeTarget "TriplogixCockpitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E3ABC152D2A952F0071D80F /* Debug */,
+				7E3ABC162D2A952F0071D80F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E3ABC1B2D2A952F0071D80F /* Build configuration list for PBXNativeTarget "TriplogixCockpitUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E3ABC172D2A952F0071D80F /* Debug */,
+				7E3ABC182D2A952F0071D80F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7E85E4202BAE8CE700432BA9 /* Build configuration list for PBXProject "TripLogix" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2244,6 +2644,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7E3ABC312D42BEE80071D80F /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E85E6682BAE907D00432BA9 /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
+		};
 		7E85E66E2BAE966700432BA9 /* LonginusSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7E85E6692BAE908B00432BA9 /* XCRemoteSwiftPackageReference "Longinus" */;
