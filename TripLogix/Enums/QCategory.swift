@@ -7,6 +7,7 @@ enum QCategory {
     case getAllEvents(city: String, dateRange: String)
     case textFromImageUrl(imageUrl: String)
     case getEventCategories(city: String)
+    case getFlightDetails(query: String)
 
     var title: String {
         switch self {
@@ -20,6 +21,8 @@ enum QCategory {
             return "Flight info from \(imageUrl)"
         case .getEventCategories(let city):
             return "Event Categories for \(city)"
+        case .getFlightDetails(let query):
+            return "Flight info from \(query)"
         }
     }
     
@@ -35,6 +38,8 @@ enum QCategory {
             return createFlightParametersFromImage
         case .getEventCategories(let city):
             return "List 20 activity categories that apply to \(city), return in an array format as [String]"
+        case .getFlightDetails(let query):
+            return query + " " + flightInfoModel
         }
     }
     
@@ -67,3 +72,89 @@ public let dailyPlanExtension = "return in an array of json object of title with
 public let venueInformationExtension = "return as a json object of keys venueName and venueDescription as string, also city, country as Strings and locationName in a format to be searched for geolocation."
 
 public let createFlightParametersFromImage = "Analyze this image and return the list of flight infos in a json format to be serialized as an array of the following object. Please provide the flight information as a plain array of objects, without the 'json' keyword, backticks, or any additional formatting. Just the raw array is needed. -> a key named iataCode as String as the 3 letter departure airport iata code, a key named type as String to be hardcoded to departure, a key named date as String as the departure date formatted 2024-01-01, a key named destinationIataCode as String as the 3 letter arrival airport iata code"
+
+let flightInfoModel = "Provide the response in the following JSON format: {\"flight_number\": \"SA322\", \"airline\": \"Saudi Arabian Airlines\", \"departure_airport\": {\"name\": \"King Abdulaziz International Airport\", \"iata_code\": \"JED\", \"city\": \"Jeddah\", \"country\": \"Saudi Arabia\"}, \"arrival_airport\": {\"name\": \"Heathrow Airport\", \"iata_code\": \"LHR\", \"city\": \"London\", \"country\": \"United Kingdom\"}, \"scheduled_departure\": \"2025-05-30T01:44:00+00:00\", \"scheduled_arrival\": \"2025-05-30T06:00:00+00:00\", \"flight_duration\": \"5h 16m\", \"aircraft\": {\"model\": \"Boeing 787-9\"}}"
+
+let flightInfoModel2 = """
+{
+  \"flight_number\": \"[Flight_Number_1]\",
+  \"airline\": \"[Airline_Name]\",
+  \"departure_airport\": {
+    \"name\": \"[Departure_Airport_Name]\",
+    \"iata_code\": \"[IATA_Code]\",
+    \"city\": \"[City]\",
+    \"country\": \"[Country]\"
+  },
+  \"arrival_airport\": {
+    \"name\": \"[Arrival_Airport_Name]\",
+    \"iata_code\": \"[IATA_Code]\",
+    \"city\": \"[City]\",
+    \"country\": \"[Country]\"
+  },
+  \"scheduled_departure\": \"[YYYY-MM-DDTHH:MM:SS±TZ:00]\",
+  \"scheduled_arrival\": \"[YYYY-MM-DDTHH:MM:SS±TZ:00]\",
+  \"flight_duration\": \"[Xh Ym]\",
+  \"aircraft\": {
+    \"model\": \"[Aircraft_Model]\"
+  }
+}
+"""
+
+let flightInfoModels = """
+{
+  "flights": [
+    {
+      "flight_number": "[Flight_Number_1]",
+      "airline": "[Airline_Name]",
+      "departure_airport": {
+        "name": "[Departure_Airport_Name]",
+        "iata_code": "[IATA_Code]",
+        "city": "[City]",
+        "country": "[Country]"
+      },
+      "arrival_airport": {
+        "name": "[Arrival_Airport_Name]",
+        "iata_code": "[IATA_Code]",
+        "city": "[City]",
+        "country": "[Country]"
+      },
+      "scheduled_departure": "[YYYY-MM-DDTHH:MM:SS±TZ:00]",
+      "scheduled_arrival": "[YYYY-MM-DDTHH:MM:SS±TZ:00]",
+      "flight_duration": "[Xh Ym]",
+      "aircraft": {
+        "model": "[Aircraft_Model]"
+      }
+    },
+    {
+      "layover": {
+        "location": "[Airport_Name] ([IATA_Code])",
+        "duration": "[Xh Ym]"
+      }
+    },
+    {
+      "flight_number": "[Flight_Number_2]",
+      "airline": "[Airline_Name]",
+      "departure_airport": {
+        "name": "[Departure_Airport_Name]",
+        "iata_code": "[IATA_Code]",
+        "city": "[City]",
+        "country": "[Country]"
+      },
+      "arrival_airport": {
+        "name": "[Arrival_Airport_Name]",
+        "iata_code": "[IATA_Code]",
+        "city": "[City]",
+        "country": "[Country]"
+      },
+      "scheduled_departure": "[YYYY-MM-DDTHH:MM:SS±TZ:00]",
+      "scheduled_arrival": "[YYYY-MM-DDTHH:MM:SS±TZ:00]",
+      "flight_duration": "[Xh Ym]",
+      "aircraft": {
+        "model": "[Aircraft_Model]"
+      }
+    }
+  ]
+}
+"""
+
+

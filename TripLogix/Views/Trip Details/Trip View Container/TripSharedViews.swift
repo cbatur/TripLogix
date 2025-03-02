@@ -105,13 +105,13 @@ struct TripLinks: View {
                         Image(systemName: tripLinks[index].icon)
                             .font(.system(size: self.selectedLink == tripLinks[index] ? 22 : 20))
                             .foregroundColor(
-                                self.selectedLink == tripLinks[index] ? Color.wbPinkMedium : Color.gray
+                                self.selectedLink == tripLinks[index] ? Color.slSofiColor : Color.gray
                             )
                         //if self.selectedLink != tripLinks[index] {
                             Text(tripLinks[index].title.uppercased())
                                 .font(.custom("Satoshi-Bold", size: 13))
                                 .foregroundColor(
-                                    self.selectedLink == tripLinks[index] ? Color.wbPinkMedium : Color.gray
+                                    self.selectedLink == tripLinks[index] ? Color.slSofiColor : Color.gray
                                 )
                         //}
                     }
@@ -124,8 +124,8 @@ struct TripLinks: View {
                 }
             }
             .frame(height: 70)
-            Divider()
         }
+        .padding(.top, 10)
         .frame(maxWidth: .infinity, alignment: .center)
     }
 }

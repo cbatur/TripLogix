@@ -32,14 +32,17 @@ final class ChatAPIViewModel: ObservableObject {
                 executeService(qType: qType, city: city)
             }
             
-        case .getVenueDetails(let location):
-            self.executeVenueService(qType: qType, location: location)
-        case .textFromImageUrl(let imageUrl):
-            //Do Nothing
-            print("\(imageUrl)")
-        case .getEventCategories(city: let city):
-            // Do Nothing
-            print("\(city)")
+            case .getVenueDetails(let location):
+                self.executeVenueService(qType: qType, location: location)
+            case .textFromImageUrl(let imageUrl):
+                //Do Nothing
+                print("\(imageUrl)")
+            case .getEventCategories(city: let city):
+                // Do Nothing
+                print("\(city)")
+            case .getFlightDetails(query: let query):
+                // Do Nothing
+                print("\(query)")
         }
     }
     

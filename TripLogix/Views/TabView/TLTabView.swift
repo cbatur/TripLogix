@@ -24,7 +24,7 @@ struct TLTabView: View {
                 EmptyView()
                     .tabItem {
                         Image(systemName: "book")
-                        Text("Stories")
+                        Text("Test")
                     }
                     .tag(2)
 

@@ -6,7 +6,6 @@ import ScrollKit
 struct TripDetailsView: View {
     var defaultBanner: Image = Image("destination_placeholder")
     @StateObject var googlePlacesViewModel: GooglePlacesViewModel = GooglePlacesViewModel()
-    @StateObject var ssFlightsViewModel: SSFlightsViewModel = SSFlightsViewModel()
     @State private var launchDateSelection = false
     
     @Bindable var destination: Destination
@@ -36,7 +35,7 @@ struct TripDetailsView: View {
 //                self.googlePlacesViewModel.fetchPlaceDetails(placeId: destination.googlePlaceId)
 //            }
             
-            ssFlightsViewModel.queryAirport(destination.baseCity)
+            //ssFlightsViewModel.queryAirport(destination.baseCity)
         }
         .sheet(isPresented: $launchDateSelection) {
             DateSelectionAlertView(

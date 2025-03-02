@@ -50,12 +50,43 @@ extension AERequests {
         var request: URLRequest {
             var components = URLComponents(string: "https://aviation-edge.com/v2/public/flightsFuture")
             
-            guard let apiKey = decryptAPIKey(.avionEdge) else { preconditionFailure("Bad API Key") }
+            //guard let apiKey = decryptAPIKey(.avionEdge) else { preconditionFailure("Bad API Key") }
+            let apiKey = Configuration.AvionEdge.apiKey
             
             var queryItems: [URLQueryItem] = [URLQueryItem(name: "key", value: apiKey)]
-            queryItems.append(URLQueryItem(name: "iataCode", value: self.futureFlightParams.iataCode))
+            queryItems.append(URLQueryItem(name: "iataCode", value: "BER"))
             queryItems.append(URLQueryItem(name: "type", value: self.futureFlightParams.type))
             queryItems.append(URLQueryItem(name: "date", value: self.futureFlightParams.date))
+            queryItems.append(URLQueryItem(name: "flight_num", value: self.futureFlightParams.iataCode))
+            
+            components?.queryItems = queryItems
+            
+            guard let url = components?.url else { preconditionFailure("Bad URL") }
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "accept")
+
+            return request
+        }
+    }
+}
+
+extension AERequests {
+    struct FlightSchedules {
+        //var futureFlightParams: AEFutureFlightParams
+        
+        var request: URLRequest {
+            var components = URLComponents(string: "https://aviation-edge.com/v2/public/timetable")
+            
+            //guard let apiKey = decryptAPIKey(.avionEdge) else { preconditionFailure("Bad API Key") }
+            let apiKey = Configuration.AvionEdge.apiKey
+            
+            var queryItems: [URLQueryItem] = [URLQueryItem(name: "key", value: apiKey)]
+            queryItems.append(URLQueryItem(name: "dep_estRunway", value: "2025-05-15T10:00:00.000"))
+            queryItems.append(URLQueryItem(name: "type", value: "arrival"))
+            //queryItems.append(URLQueryItem(name: "date", value: self.futureFlightParams.date))
+            queryItems.append(URLQueryItem(name: "iataCode", value: "CDG"))
             
             components?.queryItems = queryItems
             

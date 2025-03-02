@@ -22,6 +22,7 @@ enum Configuration {
     }
     
     enum AvionEdge {
+        static let apiKey = "ba7baa-a8f425"
         static let keyHex = "07add357ad093ca49427d5d921b54a285d06dccdfadf037c6f68c6161ee00eda"
         static let ivHex = "580f515623c9ca31553b37b1012f7197"
         static let encryptedBase64 = "hOmzigNnj3CtjR6ilKN1rg=="

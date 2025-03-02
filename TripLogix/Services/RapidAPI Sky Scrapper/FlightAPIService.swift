@@ -6,7 +6,7 @@ struct SSError: Codable, Error {
 }
 
 protocol FlightServiceProvider {
-    func airportSearch(city: String) async throws -> SSAirportResponse
+    func airportSearch(city: String) async throws -> AirportResponse
     func flightSearch(date: String, d: String, a: String) async throws -> [SSItinerary]
 }
 
@@ -27,12 +27,12 @@ class FlightAPIService: FlightServiceProvider {
         }
     }
     
-    func airportSearch(city: String) async throws -> SSAirportResponse {
+    func airportSearch(city: String) async throws -> AirportResponse {
         return try await apiCall(SkyScrapperRequests.CitySearch(city: city).request)
     }
     
     func flightSearch(date: String, d: String, a: String) async throws -> [SSItinerary] {
-        let response: SSFlightResponse = try await apiCall(SkyScrapperRequests.FlightSearch(date: date, d: d, a: a).request)
+        let response: FlightResponse = try await apiCall(SkyScrapperRequests.FlightSearch(date: date, d: d, a: a).request)
         return response.data.itineraries
     }
 }

@@ -53,7 +53,7 @@ class GooglePlacesViewModel: ObservableObject {
             guard let apiKey = decryptAPIKey(.googlePlaces) else { preconditionFailure("Bad API Key") }
             
             return photos.compactMap {
-                "https://111maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=\($0["photo_reference"] ?? "")&key=12345"
+                "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=\($0["photo_reference"] ?? "")&key=\(apiKey)"
 
                 //$0["photo_reference"] as? String
             }

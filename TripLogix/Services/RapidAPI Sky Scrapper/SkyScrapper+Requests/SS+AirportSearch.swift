@@ -18,7 +18,7 @@ extension SkyScrapperRequests {
             components?.queryItems = queryItems
             
             guard let url = components?.url else { preconditionFailure("Bad URL") }
-
+ 
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.addValue(Configuration.SkyScrapper.apiHost, forHTTPHeaderField: "X-RapidAPI-Host")
@@ -27,24 +27,4 @@ extension SkyScrapperRequests {
             return request
         }
     }
-}
-
-struct SSAirportResponse: Codable, Hashable {
-    let data: [SSAirport]
-}
-
-struct SSAirport: Codable, Hashable {
-    let presentation: SSAirportPresentation
-    
-    struct SSAirportPresentation: Codable, Hashable {
-        let id: String
-        let title: String
-        let suggestionTitle: String
-        let subtitle: String
-    }
-//    "presentation": {
-//      "title": "Toronto Pearson International",
-//      "suggestionTitle": "Toronto Pearson International (YYZ)",
-//      "subtitle": "Canada"
-//    },
 }
