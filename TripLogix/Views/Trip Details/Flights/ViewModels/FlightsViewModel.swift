@@ -2,42 +2,31 @@ import Foundation
 
 @MainActor
 final class FlightsViewModel: ObservableObject {
-    private let flightService: FlightAPIService
+    private let flightService: FlightServices
     @Published var errorMessage: String?
     @Published var isFlightSearchLoading: Bool = false
     @Published var flightResults: [SSItinerary] = []
     
-    init(flightService: FlightAPIService = FlightAPIService()) {
+    init(flightService: FlightServices = FlightServices()) {
         self.flightService = flightService
     }
 }
 
 extension FlightsViewModel {
-    
     /// Fetch flights from API
     func searchFlights(date: String, origin: String, destination: String) async {
-        await MainActor.run {
-            isFlightSearchLoading = true
+        isFlightSearchLoading = true
             errorMessage = nil
-        }
-        
-        defer {
-            Task { @MainActor in
-                isFlightSearchLoading = false
+
+            do {
+                flightResults = try await flightService.searchFlights(date: date, d: origin, a: destination)
+            } catch let error as NetworkError {
+                errorMessage = error.localizedDescription
+            } catch {
+                errorMessage = "An unknown error occurred."
             }
-        }
-        
-        do {
-            let flightsResponse = try await flightService.flightSearch(date: date, d: origin, a: destination)
-            
-            await MainActor.run {
-                self.flightResults = flightsResponse //flightsResponse.data.itineraries
-            }
-        } catch {
-            await MainActor.run {
-                self.errorMessage = error.localizedDescription
-            }
-        }
+
+        isFlightSearchLoading = false
     }
 }
 

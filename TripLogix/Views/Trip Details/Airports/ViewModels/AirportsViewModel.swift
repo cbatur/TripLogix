@@ -8,7 +8,7 @@ enum AirportSearchMode {
 
 @MainActor
 final class AirportsViewModel: ObservableObject {
-    private let flightService: FlightAPIService
+    private let flightServices: FlightServices
     @Published var errorMessage: String?
     @Published var isLoading: Bool = false
     @Published var searchQuery: String = ""
@@ -24,8 +24,8 @@ final class AirportsViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let mode: AirportSearchMode
     
-    init(mode: AirportSearchMode, flightService: FlightAPIService = FlightAPIService()) {
-        self.flightService = flightService
+    init(mode: AirportSearchMode, flightServices: FlightServices = FlightServices()) {
+        self.flightServices = flightServices
         self.mode = mode
         setupSearchListener()
     }
@@ -34,32 +34,35 @@ final class AirportsViewModel: ObservableObject {
         $searchQuery
             .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
             .removeDuplicates()
-            .flatMap { (queryString) -> AnyPublisher<[Airport], Never> in
+            .flatMap { [weak self] queryString -> AnyPublisher<[Airport], Never> in
+                guard let self = self else { return Just([]).eraseToAnyPublisher() }
+                
                 if queryString.count < 3 {
                     self.isLoading = false
                     return Just([]).eraseToAnyPublisher()
                 }
                 
                 self.isLoading = true
-                let request = SkyScrapperRequests.CitySearch(city: queryString).request
                 
-                return self.fetchAutocomplete(request: request)
-                    .handleEvents(receiveCompletion: { _ in self.isLoading = false })
-                    .replaceError(with: [])
-                    .eraseToAnyPublisher()
+                return Future { promise in
+                    Task {
+                        do {
+                            let airports = try await self.flightServices.searchAirports(city: queryString)
+                            await MainActor.run {
+                                promise(.success(airports.data))
+                            }
+                        } catch {
+                            await MainActor.run {
+                                self.errorMessage = error.localizedDescription
+                                promise(.success([]))
+                            }
+                        }
+                        self.isLoading = false
+                    }
+                }
+                .eraseToAnyPublisher()
             }
             .assign(to: &$suggestions)
-    }
-
-    private func fetchAutocomplete(request: URLRequest) -> AnyPublisher<[Airport], Error> {
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .map(\.data)
-            .decode(type: AirportResponse.self, decoder: JSONDecoder())
-            .map { response in response.data.filter {
-                $0.navigation.entityType == "AIRPORT"
-            } }
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
     }
 
     func selectAirport(_ suggestion: Airport) {
@@ -91,13 +94,8 @@ extension AirportsViewModel {
     func pullAirportFromCache(_ destination: Destination) {
         getCachedSSAirports()
         
-        fromAirport = cachedSSAirports.filter({ airport in
-            airport.suggestionTitle.contains("Toronto")
-        }).first
-
-        toAirport = cachedSSAirports.filter({ airport in
-            airport.suggestionTitle.contains(destination.name.components(separatedBy: ",").first ?? "-*-")
-        }).first
+        fromAirport = cachedSSAirports.first(where: { $0.suggestionTitle.contains("Toronto") })
+        toAirport = cachedSSAirports.first(where: { $0.suggestionTitle.contains(destination.name.components(separatedBy: ",").first ?? "-*-") })
     }
     
     func getCachedSSAirports() {
@@ -107,8 +105,8 @@ extension AirportsViewModel {
             if let loadedObjects = try? decoder.decode([Airport.AirportPresentation].self, from: savedObjects) {
                 self.cachedSSAirports = loadedObjects
                 removeOlderCachedAirports()
-            } else { return }
-        } else { return }
+            }
+        }
     }
     
     func removeOlderCachedAirports() {
@@ -123,9 +121,7 @@ extension AirportsViewModel {
     func manageSSAirporteCache(_ p: Airport.AirportPresentation) {
         getCachedSSAirports()
         
-        if !self.cachedSSAirports.contains(where: {
-            $0.id == p.id
-        }) {
+        if !self.cachedSSAirports.contains(where: { $0.id == p.id }) {
             self.cachedSSAirports.append(p)
         }
 
