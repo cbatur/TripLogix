@@ -61,5 +61,5 @@ struct SkeletonView: View {
 
 struct PlaceholderItem: Identifiable {
     let id = UUID()
-    static let placeholders = Array(repeating: PlaceholderItem(), count: 10)
+    static let placeholders = (0..<8).map { _ in PlaceholderItem() }
 }

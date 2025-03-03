@@ -174,10 +174,8 @@
 		7E85E7D32BAE985100432BA9 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E72B2BAE985100432BA9 /* Destination.swift */; };
 		7E85E7D42BAE985100432BA9 /* GPTResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E72C2BAE985100432BA9 /* GPTResponseModels.swift */; };
 		7E85E7D52BAE985100432BA9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E72D2BAE985100432BA9 /* Location.swift */; };
-		7E85E7D72BAE985100432BA9 /* AirportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7302BAE985100432BA9 /* AirportType.swift */; };
 		7E85E7D82BAE985100432BA9 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7312BAE985100432BA9 /* Icons.swift */; };
 		7E85E7D92BAE985100432BA9 /* QCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7322BAE985100432BA9 /* QCategory.swift */; };
-		7E85E7DA2BAE985100432BA9 /* TabViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7332BAE985100432BA9 /* TabViews.swift */; };
 		7E85E7DB2BAE985100432BA9 /* TripGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7342BAE985100432BA9 /* TripGroup.swift */; };
 		7E85E7DC2BAE985100432BA9 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85E7362BAE985100432BA9 /* Configuration.swift */; };
 		7E85E7DE2BAE98D100432BA9 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7E85E7DD2BAE98D100432BA9 /* CryptoSwift */; };
@@ -222,10 +220,10 @@
 		7EADCB3E2D74506F00AE8AD8 /* FlightResultsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EADCB3D2D74506800AE8AD8 /* FlightResultsCardView.swift */; };
 		7EADCB402D74510400AE8AD8 /* NoFlightsFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EADCB3F2D7450FF00AE8AD8 /* NoFlightsFoundView.swift */; };
 		7EADCB422D74521B00AE8AD8 /* FlightSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EADCB412D74521300AE8AD8 /* FlightSkeletonView.swift */; };
+		7EADCB782D75432400AE8AD8 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EADCB772D75432100AE8AD8 /* Logger.swift */; };
 		7EB1DABE2C29123200C58846 /* EmailVerificationFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB1DABD2C29123200C58846 /* EmailVerificationFooterView.swift */; };
 		7EB1DAC02C29127500C58846 /* __EmailVerificationFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB1DABF2C29127500C58846 /* __EmailVerificationFooterViewModel.swift */; };
 		7EC183C62BB2860C007B2602 /* OpenAI+TextCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */; };
-		7EC183C82BB28669007B2602 /* RequestNameSpaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C72BB28669007B2602 /* RequestNameSpaces.swift */; };
 		7EC183CA2BB28962007B2602 /* OpenAIAPIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183C92BB28962007B2602 /* OpenAIAPIServices.swift */; };
 		7EC183CC2BB28CAB007B2602 /* OpenAI+ImageCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183CB2BB28CAB007B2602 /* OpenAI+ImageCreate.swift */; };
 		7EC183CF2BB295C4007B2602 /* Request+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC183CE2BB295C4007B2602 /* Request+Extension.swift */; };
@@ -248,7 +246,7 @@
 		7EEAAA8C2C0CBCBD00A46BC5 /* TLRequests+CheckEmailExists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA8B2C0CBCBD00A46BC5 /* TLRequests+CheckEmailExists.swift */; };
 		7EEAAA8E2C10275400A46BC5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA8D2C10275400A46BC5 /* LoginView.swift */; };
 		7EEAAA912C11722F00A46BC5 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 7EEAAA902C11722F00A46BC5 /* PopupView */; };
-		7EEAAA932C11770500A46BC5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA922C11770500A46BC5 /* Utils.swift */; };
+		7EEAAA932C11770500A46BC5 /* PrivacyPolicyContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAA922C11770500A46BC5 /* PrivacyPolicyContext.swift */; };
 		7EF82E952BF43DE600DFB53A /* SessionCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82E942BF43DE600DFB53A /* SessionCheckView.swift */; };
 		7EF82E982BF97B9100DFB53A /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 7EF82E972BF97B9100DFB53A /* ScalingHeaderScrollView */; };
 		7EF82E9D2BF98C2500DFB53A /* ProfileHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82E992BF98C2500DFB53A /* ProfileHelpers.swift */; };
@@ -470,10 +468,8 @@
 		7E85E72B2BAE985100432BA9 /* Destination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		7E85E72C2BAE985100432BA9 /* GPTResponseModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPTResponseModels.swift; sourceTree = "<group>"; };
 		7E85E72D2BAE985100432BA9 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		7E85E7302BAE985100432BA9 /* AirportType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirportType.swift; sourceTree = "<group>"; };
 		7E85E7312BAE985100432BA9 /* Icons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		7E85E7322BAE985100432BA9 /* QCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QCategory.swift; sourceTree = "<group>"; };
-		7E85E7332BAE985100432BA9 /* TabViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViews.swift; sourceTree = "<group>"; };
 		7E85E7342BAE985100432BA9 /* TripGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripGroup.swift; sourceTree = "<group>"; };
 		7E85E7362BAE985100432BA9 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		7E8821E72BB68A1F00B32747 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -511,10 +507,10 @@
 		7EADCB3D2D74506800AE8AD8 /* FlightResultsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightResultsCardView.swift; sourceTree = "<group>"; };
 		7EADCB3F2D7450FF00AE8AD8 /* NoFlightsFoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoFlightsFoundView.swift; sourceTree = "<group>"; };
 		7EADCB412D74521300AE8AD8 /* FlightSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightSkeletonView.swift; sourceTree = "<group>"; };
+		7EADCB772D75432100AE8AD8 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		7EB1DABD2C29123200C58846 /* EmailVerificationFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationFooterView.swift; sourceTree = "<group>"; };
 		7EB1DABF2C29127500C58846 /* __EmailVerificationFooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __EmailVerificationFooterViewModel.swift; sourceTree = "<group>"; };
 		7EC183C52BB2860C007B2602 /* OpenAI+TextCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenAI+TextCommand.swift"; sourceTree = "<group>"; };
-		7EC183C72BB28669007B2602 /* RequestNameSpaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNameSpaces.swift; sourceTree = "<group>"; };
 		7EC183C92BB28962007B2602 /* OpenAIAPIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIAPIServices.swift; sourceTree = "<group>"; };
 		7EC183CB2BB28CAB007B2602 /* OpenAI+ImageCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenAI+ImageCreate.swift"; sourceTree = "<group>"; };
 		7EC183CE2BB295C4007B2602 /* Request+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+Extension.swift"; sourceTree = "<group>"; };
@@ -536,7 +532,7 @@
 		7EEAAA892C0C243F00A46BC5 /* TLRequests+CheckUsername.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+CheckUsername.swift"; sourceTree = "<group>"; };
 		7EEAAA8B2C0CBCBD00A46BC5 /* TLRequests+CheckEmailExists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLRequests+CheckEmailExists.swift"; sourceTree = "<group>"; };
 		7EEAAA8D2C10275400A46BC5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		7EEAAA922C11770500A46BC5 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		7EEAAA922C11770500A46BC5 /* PrivacyPolicyContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyContext.swift; sourceTree = "<group>"; };
 		7EF82E942BF43DE600DFB53A /* SessionCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCheckView.swift; sourceTree = "<group>"; };
 		7EF82E992BF98C2500DFB53A /* ProfileHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHelpers.swift; sourceTree = "<group>"; };
 		7EF82E9A2BF98C2500DFB53A /* ProfileScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
@@ -657,12 +653,11 @@
 		7E85E4272BAE8CE700432BA9 /* TripLogix */ = {
 			isa = PBXGroup;
 			children = (
+				7EADCB752D7540DE00AE8AD8 /* Utilities */,
+				7EADCB742D75408300AE8AD8 /* Features */,
 				7EADCB432D74D34A00AE8AD8 /* Networking */,
 				7E8821EC2BB6968D00B32747 /* GoogleService-Info.plist */,
 				7E59132F2BAEA44700529823 /* Info.plist */,
-				7E85E7372BAE985100432BA9 /* Configuration */,
-				7E85E7352BAE985100432BA9 /* Enums */,
-				7E85E6F32BAE985100432BA9 /* Extensions */,
 				7E85E72E2BAE985100432BA9 /* Models */,
 				7E85E6E62BAE985000432BA9 /* Resources */,
 				7E85E6E92BAE985100432BA9 /* Security */,
@@ -726,7 +721,6 @@
 				7E8822072BBE6F2100B32747 /* Google Places Requests */,
 				7EC183CD2BB29565007B2602 /* TripLogix Services */,
 				7EC183C32BB2851B007B2602 /* Open AI */,
-				7EC183C72BB28669007B2602 /* RequestNameSpaces.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1062,27 +1056,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		7E85E7352BAE985100432BA9 /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-				7E85E7302BAE985100432BA9 /* AirportType.swift */,
-				7E85E7312BAE985100432BA9 /* Icons.swift */,
-				7E85E7322BAE985100432BA9 /* QCategory.swift */,
-				7E85E7332BAE985100432BA9 /* TabViews.swift */,
-				7E85E7342BAE985100432BA9 /* TripGroup.swift */,
-			);
-			path = Enums;
-			sourceTree = "<group>";
-		};
-		7E85E7372BAE985100432BA9 /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				7EEAAA922C11770500A46BC5 /* Utils.swift */,
-				7E85E7362BAE985100432BA9 /* Configuration.swift */,
-			);
-			path = Configuration;
-			sourceTree = "<group>";
-		};
 		7E8821E92BB68A3A00B32747 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -1182,8 +1155,6 @@
 			children = (
 				7E8822202BDEFEF700B32747 /* Trip View Container */,
 				7E88220D2BD0D36200B32747 /* Trip Events */,
-				7EFC8E3B2D73A71500CE01D5 /* Airports */,
-				7EDA893A2D4DD5A5000BE315 /* Flights */,
 				7E8822222BDF131000B32747 /* Hotels */,
 				7E8822232BDF131C00B32747 /* Rentals */,
 				7E8822242BDF132800B32747 /* Documents */,
@@ -1256,6 +1227,37 @@
 				7EADCB3D2D74506800AE8AD8 /* FlightResultsCardView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		7EADCB742D75408300AE8AD8 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				7EFC8E3B2D73A71500CE01D5 /* Airports */,
+				7EDA893A2D4DD5A5000BE315 /* Flights */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		7EADCB752D7540DE00AE8AD8 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7EADCB772D75432100AE8AD8 /* Logger.swift */,
+				7EADCB762D7541DA00AE8AD8 /* Constants */,
+				7E85E6F32BAE985100432BA9 /* Extensions */,
+				7E85E7362BAE985100432BA9 /* Configuration.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		7EADCB762D7541DA00AE8AD8 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				7EEAAA922C11770500A46BC5 /* PrivacyPolicyContext.swift */,
+				7E85E7312BAE985100432BA9 /* Icons.swift */,
+				7E85E7342BAE985100432BA9 /* TripGroup.swift */,
+				7E85E7322BAE985100432BA9 /* QCategory.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		7EC183C32BB2851B007B2602 /* Open AI */ = {
@@ -1681,7 +1683,6 @@
 				7E674C8B2C6B80D800232246 /* Hotels+SwiftData.swift in Sources */,
 				7EC183D72BB3E5E7007B2602 /* UIView+ImagePicker.swift in Sources */,
 				7E88221B2BD7444A00B32747 /* __CacheViewModel.swift in Sources */,
-				7EC183C82BB28669007B2602 /* RequestNameSpaces.swift in Sources */,
 				7E8821FC2BB7D69400B32747 /* TLButton.swift in Sources */,
 				7E85E79D2BAE985100432BA9 /* CryptoSwift.swift in Sources */,
 				7EC183D22BB29780007B2602 /* OpenAI+RemoteImageToText.swift in Sources */,
@@ -1718,7 +1719,6 @@
 				7E85E7A42BAE985100432BA9 /* Strings+Extensions.swift in Sources */,
 				7E04ABF12C81AD1100C95A90 /* __CreateAccountViewModel.swift in Sources */,
 				7EF82EA92BFD207E00DFB53A /* BankingService.swift in Sources */,
-				7E85E7DA2BAE985100432BA9 /* TabViews.swift in Sources */,
 				7E88220C2BCA3A4C00B32747 /* LocationCards.swift in Sources */,
 				7E85E7B52BAE985100432BA9 /* _TabOverviewView.swift in Sources */,
 				7E85E7AC2BAE985100432BA9 /* BannerWithDismiss.swift in Sources */,
@@ -1793,15 +1793,15 @@
 				7E85E4292BAE8CE700432BA9 /* TripLogixApp.swift in Sources */,
 				7E85E7D32BAE985100432BA9 /* Destination.swift in Sources */,
 				7EC183CF2BB295C4007B2602 /* Request+Extension.swift in Sources */,
-				7E85E7D72BAE985100432BA9 /* AirportType.swift in Sources */,
 				7E04AB5C2C7DDD4F00C95A90 /* TLRequests+AccountDeletion.swift in Sources */,
-				7EEAAA932C11770500A46BC5 /* Utils.swift in Sources */,
+				7EEAAA932C11770500A46BC5 /* PrivacyPolicyContext.swift in Sources */,
 				7E85E7BB2BAE985100432BA9 /* UpdateDestinationIcon.swift in Sources */,
 				7E8822442BEBF9C000B32747 /* Destination+SkyScrapper.swift in Sources */,
 				7E85E7BA2BAE985100432BA9 /* NavigationBarSubViews.swift in Sources */,
 				7E88222A2BDF13AC00B32747 /* DocumentsView.swift in Sources */,
 				7E8822062BBE6CC500B32747 /* GP+SearchByPlaceId.swift in Sources */,
 				7EF82EB32BFD20F800DFB53A /* BookingScreen.swift in Sources */,
+				7EADCB782D75432400AE8AD8 /* Logger.swift in Sources */,
 				7E85E7B92BAE985100432BA9 /* EventCardView.swift in Sources */,
 				7E88223E2BE9EFD900B32747 /* Destination+TripModels.swift in Sources */,
 				7EEAAA842C05658100A46BC5 /* UserNeedsSessionView.swift in Sources */,

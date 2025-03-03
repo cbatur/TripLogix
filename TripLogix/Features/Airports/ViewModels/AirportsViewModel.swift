@@ -49,7 +49,9 @@ final class AirportsViewModel: ObservableObject {
                         do {
                             let airports = try await self.flightServices.searchAirports(city: queryString)
                             await MainActor.run {
-                                promise(.success(airports.data))
+                                promise(.success(airports.data.filter({
+                                    $0.navigation.entityType == "AIRPORT"
+                                })))
                             }
                         } catch {
                             await MainActor.run {

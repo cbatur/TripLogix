@@ -9,6 +9,20 @@ struct FlightSearchView: View {
     @State private var selectedFlight: Leg?
     var passSelectedFlight: (Leg) -> Void
     
+    /// Determines if the submit button should be enabled
+    func submitEnabled() -> Bool {
+        guard let _ = departureViewModel.selectedAirport,
+              let _ = arrivalViewModel.selectedAirport else {
+            return false
+        }
+        
+        let today = Calendar.current.startOfDay(for: Date())
+        let selectedDay = Calendar.current.startOfDay(for: selectedDate)
+        let difference = Calendar.current.dateComponents([.day], from: today, to: selectedDay).day ?? 0
+
+        return difference >= 4 && difference != 0
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             
@@ -26,10 +40,10 @@ struct FlightSearchView: View {
                     Image(systemName: "arrow.up.arrow.down")
                         .font(.system(size: 18, weight: .bold))
                         .padding(10)
-                        .background(Color.blue.opacity(departureViewModel.selectedAirport == nil || arrivalViewModel.selectedAirport == nil ? 0.1 : 0.8))
+                        .background(Color.blue.opacity(submitEnabled() ? 0.8 : 0.1))
                         .clipShape(Circle())
                 }
-                .disabled(departureViewModel.selectedAirport == nil || arrivalViewModel.selectedAirport == nil)
+                .disabled(!submitEnabled())
                 Spacer()
             }
 
@@ -43,11 +57,7 @@ struct FlightSearchView: View {
                 Text("Search Flights")
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(
-                        Color.blue.opacity(
-                            departureViewModel.selectedAirport == nil || arrivalViewModel.selectedAirport == nil ? 0.1 : 0.8
-                        )
-                    )
+                    .background(Color.blue.opacity(submitEnabled() ? 0.8 : 0.1))
                     .foregroundColor(.white)
                     .font(.headline)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -57,7 +67,7 @@ struct FlightSearchView: View {
                     self.passSelectedFlight(flight)
                 }
             }
-            .disabled(departureViewModel.selectedAirport == nil || arrivalViewModel.selectedAirport == nil)
+            .disabled(!submitEnabled())
             .sheet(isPresented: $showingFlightResults) {
                 if let departureAirport = departureViewModel.selectedAirport,
                    let arrivalAirport = arrivalViewModel.selectedAirport {

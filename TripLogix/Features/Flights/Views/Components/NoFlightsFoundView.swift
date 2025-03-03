@@ -3,7 +3,7 @@ import SwiftUI
 struct NoFlightsFoundView: View {
     var body: some View {
         VStack(spacing: 12) {
-            Image(systemName: "airplane.slash")
+            Image(systemName: "airplayaudio.badge.exclamationmark")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 80, height: 80)

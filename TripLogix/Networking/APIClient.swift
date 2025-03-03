@@ -20,10 +20,14 @@ final class APIClient {
 
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-
+            
             guard let httpResponse = response as? HTTPURLResponse else {
+                Logger.networkRequest(url: request.url, method: request.httpMethod ?? "Unknown", responseCode: nil, error: NetworkError.invalidResponse)
                 throw NetworkError.invalidResponse
             }
+
+            Logger.networkRequest(url: request.url, method: request.httpMethod ?? "Unknown", responseCode: httpResponse.statusCode, error: nil)
+
 
             if !(200...299).contains(httpResponse.statusCode) {
                 if let errorType = errorType {
